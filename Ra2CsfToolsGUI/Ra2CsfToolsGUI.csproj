@@ -54,8 +54,8 @@
     <Reference Include="ModernWpf.Controls, Version=0.9.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ModernWpfUI.0.9.4\lib\net45\ModernWpf.Controls.dll</HintPath>
     </Reference>
-    <Reference Include="SadPencil.Ra2CsfFile, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SadPencil.Ra2CsfFile.1.1.1\lib\net40\SadPencil.Ra2CsfFile.dll</HintPath>
+    <Reference Include="SadPencil.Ra2CsfFile, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SadPencil.Ra2CsfFile.1.2.0\lib\net40\SadPencil.Ra2CsfFile.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
