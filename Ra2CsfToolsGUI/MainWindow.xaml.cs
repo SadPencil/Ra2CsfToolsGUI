@@ -438,7 +438,7 @@ namespace Ra2CsfToolsGUI
                     {
                         if (hasDifference)
                         {
-                            foreach ((var iLine, var value) in upstreamNew[labelName])
+                            foreach ((var iLine, var value) in upstreamOld[labelName])
                             {
                                 _ = labelSection.Keys.Add(GetIniLabelCustomKeyName("UpstreamOld", iLine), value);
                             }
