@@ -30,6 +30,14 @@ namespace Ra2CsfToolsGUI
         public string TranslationNeededPlaceholder { get; } = "TODO_Translation_Needed";
         public string TranslationDeleteNeededPlaceholder { get; } = "TODO_Translation_Delete_Needed";
 
+        public bool Encoding1252ReadWorkaround { get; set; } = true;
+        public bool Encoding1252WriteWorkaround { get; set; } = true;
+
+        private CsfFileOptions GetCsfFileOptions() => new CsfFileOptions()
+        {
+            Encoding1252ReadWorkaround = Encoding1252ReadWorkaround,
+            Encoding1252WriteWorkaround = Encoding1252WriteWorkaround,
+        };
 
         private static IniParserConfiguration IniParserConfiguration { get; } = new IniParserConfiguration()
         {
@@ -94,13 +102,13 @@ namespace Ra2CsfToolsGUI
                     case ".csf":
                         using (var fs = File.Open(filename, FileMode.Open))
                         {
-                            csf = CsfFile.LoadFromCsfFile(fs);
+                            csf = CsfFile.LoadFromCsfFile(fs, GetCsfFileOptions());
                         };
                         break;
                     case ".ini":
                         using (var fs = File.Open(filename, FileMode.Open))
                         {
-                            csf = CsfFileIniHelper.LoadFromIniFile(fs);
+                            csf = CsfFileIniHelper.LoadFromIniFile(fs, GetCsfFileOptions());
                         }
                         break;
                     default:
@@ -513,7 +521,7 @@ namespace Ra2CsfToolsGUI
                 var newDict = TranslationOverride_TranslatedFile.Labels;
                 var labelKeys = oldDict.Keys.Union(newDict.Keys);
 
-                var newCsf = new CsfFile()
+                var newCsf = new CsfFile(GetCsfFileOptions())
                 {
                     Language = TranslationOverride_TranslatedFile.Language,
                     Version = TranslationOverride_TranslatedFile.Version,
@@ -627,7 +635,7 @@ namespace Ra2CsfToolsGUI
                 var transLabelKeys = oldTransDict.Keys.Union(newTransDict.Keys);
                 var allLabelKeys = transLabelKeys.Union(upstreamLabelKeys);
 
-                var newCsf = new CsfFile()
+                var newCsf = new CsfFile(GetCsfFileOptions())
                 {
                     Language = TranslationUpdateCheck_NewTranslatedFile.Language,
                     Version = TranslationUpdateCheck_NewTranslatedFile.Version,

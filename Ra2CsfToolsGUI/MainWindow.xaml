@@ -48,6 +48,28 @@
 
 
         </TabItem>
+        <TabItem Header="Setting">
+            <ui:TabItemHelper.Icon>
+                <ui:SymbolIcon Symbol="Setting" />
+            </ui:TabItemHelper.Icon>
+            <ui:SimpleStackPanel Spacing="12" Margin="10">
+                <GroupBox Header="Encoding 1252 Workaround Options">
+                    <ui:SimpleStackPanel Spacing="12">
+                        <TextBlock TextWrapping="Wrap" FontSize="16">
+                            For code points 128-159 (0x80-0x9F), the original font file of RA2 mistakenly treat these characters as Windows-1252, instead of Unicode (ISO-8859-1).
+                        In some mod and some editors, such characters will be saved as Windows-1252 encoding. This behavior is wrong.
+                            <LineBreak />
+                            However, users may need to proceed with these files. You can decide whether to treat 128-159 as Windows-1252 (to be compatible with original RA2 font file) or as Unicode (this is the correct way, but modders must supply a correct font file).
+                            Checking the boxes below means the former, and un-checking the boxes below means the latter.
+                        </TextBlock>
+                        <CheckBox FontSize="16" Content="Enable Windows-1252 workaround when loading the .csf file." IsChecked="{Binding Encoding1252ReadWorkaround}" />
+                        <CheckBox FontSize="16" Content="Enable Windows-1252 workaround when writing the .csf file." IsChecked="{Binding Encoding1252WriteWorkaround}" />
+                    </ui:SimpleStackPanel>
+
+
+                </GroupBox>
+            </ui:SimpleStackPanel>
+        </TabItem>
         <TabItem Header="Format Converter">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Edit" />
