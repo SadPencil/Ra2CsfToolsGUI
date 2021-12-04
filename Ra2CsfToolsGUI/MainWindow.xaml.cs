@@ -635,9 +635,9 @@ namespace Ra2CsfToolsGUI
                     //bool newUpstreamExist = newUpstreamDict.TryGetValue(labelName, out var newUpstreamValue);
 
                     bool skipLabel = false;
-                    if (upstreamLabelKeys.Contains(labelName))
+                    string value;
+                    if (newUpstreamDict.Keys.Contains(labelName))
                     {
-                        string value;
                         if (diffDict.ContainsKey(labelName))
                         {
                             if (!newTransExist)
@@ -656,31 +656,35 @@ namespace Ra2CsfToolsGUI
                                 }
                             }
                         }
-                        else if (newTransDict.ContainsKey(labelName))
+                        else
                         {
-                            value = newTransDict[labelName];
-                        }
-                        else if (oldTransDict.ContainsKey(labelName))
-                        {
-                            if (newTransExist)
+                            if (newTransDict.ContainsKey(labelName))
                             {
-                                value = TranslationDeleteNeededPlaceholder;
+                                value = newTransDict[labelName];
                             }
                             else
                             {
-                                value = null;
-                                skipLabel = true;
+                                value = TranslationNeededPlaceholder;
                             }
                         }
-                        else
+
+                    }
+                    else
+                    { 
+                        if (newTransExist)
                         {
                             value = TranslationDeleteNeededPlaceholder;
                         }
-
-                        if (!skipLabel)
+                        else
                         {
-                            newCsf.Labels.Add(labelName, value);
+                            value = null;
+                            skipLabel = true;
                         }
+                    }
+
+                    if (!skipLabel)
+                    {
+                        newCsf.Labels.Add(labelName, value);
                     }
                 }
 
@@ -767,15 +771,21 @@ namespace Ra2CsfToolsGUI
                         bool oldTransExist = oldTransDict.TryGetValue(labelName, out var oldTransValue);
                         bool newTransExist = newTransDict.TryGetValue(labelName, out var newTransValue);
 
-                        if ((!newTransExist) || (!(((oldTransExist && oldTransValue != newTransValue) || (!oldTransExist)))))
+                        if (newUpstreamDict.Keys.Contains(labelName))
                         {
-                            Debug.Assert(newCsf.Labels[labelName] == TranslationNeededPlaceholder);
-
-                            foreach ((var iLine, var value) in transOld[labelName])
+                            if ((!newTransExist) || (!(((oldTransExist && oldTransValue != newTransValue) || (!oldTransExist)))))
                             {
-                                _ = labelSection.Keys.Add(GetIniLabelCustomKeyName("TranslationOld", iLine), value);
+                                Debug.Assert(newCsf.Labels.ContainsKey(labelName));
+                                Debug.Assert(newCsf.Labels[labelName] == TranslationNeededPlaceholder);
+
+                                Debug.Assert(transOld.ContainsKey(labelName));
+                                foreach ((var iLine, var value) in transOld[labelName])
+                                {
+                                    _ = labelSection.Keys.Add(GetIniLabelCustomKeyName("TranslationOld", iLine), value);
+                                }
                             }
                         }
+                            
                     }
                 }
 
