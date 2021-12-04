@@ -3,18 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.IO;
 using Microsoft.Win32;
 using SadPencil.Ra2CsfFile;
-using MadMilkman.Ini;
 using System.Diagnostics;
+using IniParser;
+using IniParser.Model;
+using IniParser.Model.Configuration;
+using IniParser.Parser;
 
 namespace Ra2CsfToolsGUI
 {
@@ -29,13 +25,50 @@ namespace Ra2CsfToolsGUI
 
             this.DataContext = this;
         }
-        public string Version { get; } = "v1.1.0-alpha";
+        public string Version { get; } = "v1.2.0-alpha";
 
         public string TranslationNeededPlaceholder { get; } = "TODO_Translation_Needed";
         public string TranslationDeleteNeededPlaceholder { get; } = "TODO_Translation_Delete_Needed";
 
-        private CsfFile Convert_CsfFile = null;
 
+        private static IniParserConfiguration IniParserConfiguration { get; } = new IniParserConfiguration()
+        {
+            AllowDuplicateKeys = false,
+            AllowDuplicateSections = false,
+            AllowKeysWithoutSection = false,
+            CommentRegex = new System.Text.RegularExpressions.Regex("a^"), // match nothing
+            CaseInsensitive = true,
+        };
+
+        private static IniData GetIniData() => new IniData() { Configuration = IniParserConfiguration, };
+
+        private static IniData ParseIni(Stream stream)
+        {
+            var parser = new IniDataParser(IniParserConfiguration);
+
+            using (var sr = new StreamReader(stream, new UTF8Encoding(false)))
+            {
+                return parser.Parse(sr.ReadToEnd());
+            }
+        }
+
+        private static Dictionary<string, List<(int iLine, string value)>> LoadIniValuesFromCsfFile(CsfFile csf)
+        {
+            var dict = new Dictionary<string, List<(int iLine, string value)>>();
+
+            _ = GeneralProceedWithCsfIniLabels(csf, (sectionName, keyName, value, iLine) =>
+            {
+                if (!dict.ContainsKey(sectionName))
+                {
+                    dict.Add(sectionName, new List<(int iLine, string value)>());
+                }
+                dict[sectionName].Add((iLine, value));
+            });
+
+            return dict;
+        }
+
+        private CsfFile Convert_CsfFile = null;
 
         private void Convert_LoadFile_Click(object sender, RoutedEventArgs e)
         {
@@ -129,13 +162,13 @@ namespace Ra2CsfToolsGUI
 
         }
 
-        private void GeneralSaveIniFileGUI(IniFile ini)
+        private void GeneralSaveIniFileGUI(IniData ini)
         {
             GeneralSaveFileGUI(fs =>
             {
                 using (var sw = new StreamWriter(fs, new UTF8Encoding(false)))
                 {
-                    ini.Save(sw);
+                    sw.Write(ini.ToString());
                 }
             }, "SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini");
         }
@@ -178,50 +211,57 @@ namespace Ra2CsfToolsGUI
             });
         }
 
-        private IniFile GetNewIniFileFromCsfFile(CsfFile csf)
+        private static IniData GetNewIniFileFromCsfFile(CsfFile csf)
         {
-            IniFile ini = new IniFile();
             using (var ms = new MemoryStream())
             {
                 CsfFileIniHelper.WriteIniFile(csf, ms);
                 using (var msCopy = new MemoryStream(ms.GetBuffer()))
                 {
-                    using (var sr = new StreamReader(msCopy, new UTF8Encoding(false)))
-                    {
-                        ini.Load(sr);
-                    }
+                    return ParseIni(msCopy);
                 }
-
-                return ini;
             }
         }
 
 
         private static string GetIniLabelValueKeyName(int lineIndex) => "Value" + ((lineIndex == 1) ? String.Empty : $"Line{lineIndex}");
 
-        private IniFile GeneralProceedWithCsfIniLabels(CsfFile csf, Action<IniSection, IniKey, int> action)
+        private static IniData GeneralProceedWithCsfIniLabels(CsfFile csf, Action<string, string, string, int> valueAction = null, Action<string, KeyDataCollection> sectionAction = null)
         {
 
             var ini = GetNewIniFileFromCsfFile(csf);
 
             // proceed with ini
             const string INI_FILE_HEADER_SECTION_NAME = "SadPencil.Ra2CsfFile.Ini";
-            var labelSections = ini.Sections.Where(section => section.Name != INI_FILE_HEADER_SECTION_NAME);
-            foreach (var labelSection in labelSections)
+            // load all labels
+            var labelSections = new Dictionary<string, KeyDataCollection>();
+            foreach (var (k, v) in ini.Sections.Where(section => section.SectionName != INI_FILE_HEADER_SECTION_NAME)
+                .Select(section => (section.SectionName, ini.Sections[section.SectionName])))
             {
-                string labelName = labelSection.Name;
+                labelSections.Add(k, v);
+            }
+
+            foreach (var keyValuePair in labelSections)
+            {
+                string labelName = keyValuePair.Key;
+                var key = keyValuePair.Value;
+
                 for (int iLine = 1; ; iLine++)
                 {
                     string keyName = GetIniLabelValueKeyName(iLine);
-                    var value = labelSection.Keys.FirstOrDefault(key => key.Name == keyName);
 
-                    if (value == null)
+                    if (!key.ContainsKey(keyName))
                     {
                         break;
                     }
 
-                    action.Invoke(labelSection, value, iLine);
+                    string value = key[keyName];
+
+                    valueAction?.Invoke(labelName, keyName, value, iLine);
+
                 }
+
+                sectionAction?.Invoke(labelName, key);
             }
             return ini;
         }
@@ -237,10 +277,15 @@ namespace Ra2CsfToolsGUI
                     throw new Exception("Please load a string table file first.");
                 }
 
-                var ini = GeneralProceedWithCsfIniLabels(TranslationNew_File, (section, value, iLine) =>
+                var upstream = LoadIniValuesFromCsfFile(TranslationNew_File);
+                var ini = GeneralProceedWithCsfIniLabels(TranslationNew_File, null, (labelName, key) =>
                 {
-                    _ = section.Keys.Add(GetIniLabelCustomKeyName("Upstream", iLine), value.Value);
-                    value.Value = TranslationNeededPlaceholder;
+                    foreach ((var iLine, var value) in upstream[labelName])
+                    {
+                        _ = key.AddKey(GetIniLabelCustomKeyName("Upstream", iLine), value);
+                        Debug.Assert(key.ContainsKey(GetIniLabelValueKeyName(iLine)));
+                        key[GetIniLabelValueKeyName(iLine)] = TranslationNeededPlaceholder;
+                    }
                 });
 
                 // save ini file
@@ -275,41 +320,29 @@ namespace Ra2CsfToolsGUI
                     throw new Exception("Please load the string table files first.");
                 }
 
-                var upstream = new Dictionary<string, List<(int iLine, string value)>>();
-
-                _ = GeneralProceedWithCsfIniLabels(TranslationTile_UpstreamFile, (section, value, iLine) =>
-                 {
-                     if (!upstream.ContainsKey(section.Name))
-                     {
-                         upstream.Add(section.Name, new List<(int iLine, string value)>());
-                     }
-                     upstream[section.Name].Add((iLine, value.Value));
-                 });
+                var upstream = LoadIniValuesFromCsfFile(TranslationTile_UpstreamFile);
 
                 var ini = GetNewIniFileFromCsfFile(TranslationTile_TranslatedFile);
                 foreach (var keyValuePair in upstream)
                 {
                     var labelName = keyValuePair.Key;
-                    IniSection labelSection;
-                    bool translationExist = ini.Sections.Contains(labelName);
-                    if (translationExist)
+                    bool translationExist = ini.Sections.ContainsSection(labelName);
+                    if (!translationExist)
                     {
-                        labelSection = ini.Sections[labelName];
+                        _ = ini.Sections.AddSection(labelName);
                     }
-                    else
-                    {
-                        labelSection = ini.Sections.Add(labelName);
-                    }
+
+                    var labelSection = ini.Sections[labelName];
 
                     foreach ((var iLine, var value) in keyValuePair.Value)
                     {
-                        _ = labelSection.Keys.Add(GetIniLabelCustomKeyName("Upstream", iLine), value);
+                        _ = labelSection.AddKey(GetIniLabelCustomKeyName("Upstream", iLine), value);
                     }
                     foreach ((var iLine, var value) in keyValuePair.Value)
                     {
                         if (!translationExist)
                         {
-                            _ = labelSection.Keys.Add(GetIniLabelValueKeyName(iLine), TranslationNeededPlaceholder);
+                            _ = labelSection.AddKey(GetIniLabelValueKeyName(iLine), TranslationNeededPlaceholder);
                         }
                     }
                 }
@@ -386,36 +419,15 @@ namespace Ra2CsfToolsGUI
 
                 // -------
 
-                var upstreamOld = new Dictionary<string, List<(int iLine, string value)>>();
-
-                _ = GeneralProceedWithCsfIniLabels(TranslationUpdate_OldUpstreamFile, (section, value, iLine) =>
-                {
-                    if (!upstreamOld.ContainsKey(section.Name))
-                    {
-                        upstreamOld.Add(section.Name, new List<(int iLine, string value)>());
-                    }
-                    upstreamOld[section.Name].Add((iLine, value.Value));
-                });
-
-                // -------
-
-                var upstreamNew = new Dictionary<string, List<(int iLine, string value)>>();
-
-                _ = GeneralProceedWithCsfIniLabels(TranslationUpdate_NewUpstreamFile, (section, value, iLine) =>
-                {
-                    if (!upstreamNew.ContainsKey(section.Name))
-                    {
-                        upstreamNew.Add(section.Name, new List<(int iLine, string value)>());
-                    }
-                    upstreamNew[section.Name].Add((iLine, value.Value));
-                });
+                var upstreamOld = LoadIniValuesFromCsfFile(TranslationUpdate_OldUpstreamFile);
+                var upstreamNew = LoadIniValuesFromCsfFile(TranslationUpdate_NewUpstreamFile);
 
                 // ------- 
                 // delete items that needs updates
                 var ini = GetNewIniFileFromCsfFile(TranslationUpdate_OldTranslatedFile);
                 foreach (var labelName in diffDict.Keys)
                 {
-                    _ = ini.Sections.Remove(labelName);
+                    _ = ini.Sections.RemoveSection(labelName);
                 }
 
                 // -------
@@ -423,16 +435,12 @@ namespace Ra2CsfToolsGUI
 
                 foreach (var labelName in labelKeys)
                 {
-                    IniSection labelSection;
-                    bool translationExist = ini.Sections.Contains(labelName);
-                    if (translationExist)
+                    bool translationExist = ini.Sections.ContainsSection(labelName);
+                    if (!translationExist)
                     {
-                        labelSection = ini.Sections[labelName];
+                        _ = ini.Sections.AddSection(labelName);
                     }
-                    else
-                    {
-                        labelSection = ini.Sections.Add(labelName);
-                    }
+                    var labelSection = ini.Sections[labelName];
 
                     bool hasDifference = diffDict.ContainsKey(labelName);
 
@@ -442,7 +450,7 @@ namespace Ra2CsfToolsGUI
                         {
                             foreach ((var iLine, var value) in upstreamOld[labelName])
                             {
-                                _ = labelSection.Keys.Add(GetIniLabelCustomKeyName("UpstreamOld", iLine), value);
+                                _ = labelSection.AddKey(GetIniLabelCustomKeyName("UpstreamOld", iLine), value);
                             }
                         }
                     }
@@ -451,22 +459,20 @@ namespace Ra2CsfToolsGUI
                     {
                         foreach ((var iLine, var value) in upstreamNew[labelName])
                         {
-                            _ = labelSection.Keys.Add(GetIniLabelCustomKeyName("Upstream", iLine), value);
+                            _ = labelSection.AddKey(GetIniLabelCustomKeyName("Upstream", iLine), value);
                         }
                         foreach ((var iLine, var value) in upstreamNew[labelName])
                         {
                             if (!translationExist)
                             {
-                                _ = labelSection.Keys.Add(GetIniLabelValueKeyName(iLine), TranslationNeededPlaceholder);
+                                _ = labelSection.AddKey(GetIniLabelValueKeyName(iLine), TranslationNeededPlaceholder);
                             }
                         }
-                        Debug.Assert(labelSection.Keys.Contains(GetIniLabelValueKeyName(1)));
+                        Debug.Assert(labelSection.ContainsKey(GetIniLabelValueKeyName(1)));
                     }
 
 
                 }
-
-                Debug.Assert(TranslationUpdate_NewUpstreamFile.Labels.Keys.ToList().TrueForAll(labelName => ini.Sections[labelName].Keys.Contains(GetIniLabelValueKeyName(1))));
 
                 // TODO: for those keys exist in translated files but not in the upstream files, mark them up
 
@@ -530,7 +536,7 @@ namespace Ra2CsfToolsGUI
                         value = oldValue;
                     }
 
-                    newCsf.Labels.Add(labelName, value);
+                    newCsf.AddLabel(labelName, value);
                 }
 
                 // save ini
@@ -684,62 +690,17 @@ namespace Ra2CsfToolsGUI
 
                     if (!skipLabel)
                     {
-                        newCsf.Labels.Add(labelName, value);
+                        newCsf.AddLabel(labelName, value);
                     }
                 }
 
 
                 // -------
 
-                var upstreamOld = new Dictionary<string, List<(int iLine, string value)>>();
-
-                _ = GeneralProceedWithCsfIniLabels(TranslationUpdateCheck_OldUpstreamFile, (section, value, iLine) =>
-                {
-                    if (!upstreamOld.ContainsKey(section.Name))
-                    {
-                        upstreamOld.Add(section.Name, new List<(int iLine, string value)>());
-                    }
-                    upstreamOld[section.Name].Add((iLine, value.Value));
-                });
-
-                // -------
-
-                var upstreamNew = new Dictionary<string, List<(int iLine, string value)>>();
-
-                _ = GeneralProceedWithCsfIniLabels(TranslationUpdateCheck_NewUpstreamFile, (section, value, iLine) =>
-                {
-                    if (!upstreamNew.ContainsKey(section.Name))
-                    {
-                        upstreamNew.Add(section.Name, new List<(int iLine, string value)>());
-                    }
-                    upstreamNew[section.Name].Add((iLine, value.Value));
-                });
-
-                // -------
-
-                var transOld = new Dictionary<string, List<(int iLine, string value)>>();
-
-                _ = GeneralProceedWithCsfIniLabels(TranslationUpdateCheck_OldTranslatedFile, (section, value, iLine) =>
-                {
-                    if (!transOld.ContainsKey(section.Name))
-                    {
-                        transOld.Add(section.Name, new List<(int iLine, string value)>());
-                    }
-                    transOld[section.Name].Add((iLine, value.Value));
-                });
-
-                // -------
-
-                var transNew = new Dictionary<string, List<(int iLine, string value)>>();
-
-                _ = GeneralProceedWithCsfIniLabels(TranslationUpdateCheck_OldTranslatedFile, (section, value, iLine) =>
-                {
-                    if (!transNew.ContainsKey(section.Name))
-                    {
-                        transNew.Add(section.Name, new List<(int iLine, string value)>());
-                    }
-                    transNew[section.Name].Add((iLine, value.Value));
-                });
+                var upstreamOld = LoadIniValuesFromCsfFile(TranslationUpdateCheck_OldUpstreamFile);
+                var upstreamNew = LoadIniValuesFromCsfFile(TranslationUpdateCheck_NewUpstreamFile);
+                var transOld = LoadIniValuesFromCsfFile(TranslationUpdateCheck_OldTranslatedFile);
+                var transNew = LoadIniValuesFromCsfFile(TranslationUpdateCheck_NewTranslatedFile);
 
                 // -------
                 // add upstream info to .ini
@@ -747,16 +708,12 @@ namespace Ra2CsfToolsGUI
 
                 foreach (var labelName in upstreamLabelKeys)
                 {
-                    IniSection labelSection;
-                    bool translationExist = ini.Sections.Contains(labelName);
-                    if (translationExist)
+                    bool translationExist = ini.Sections.ContainsSection(labelName);
+                    if (!translationExist)
                     {
-                        labelSection = ini.Sections[labelName];
+                        _ = ini.Sections.AddSection(labelName);
                     }
-                    else
-                    {
-                        labelSection = ini.Sections.Add(labelName);
-                    }
+                    var labelSection = ini.Sections[labelName];
 
                     bool hasDifference = diffDict.ContainsKey(labelName);
 
@@ -766,7 +723,7 @@ namespace Ra2CsfToolsGUI
                         {
                             foreach ((var iLine, var value) in upstreamOld[labelName])
                             {
-                                _ = labelSection.Keys.Add(GetIniLabelCustomKeyName("UpstreamOld", iLine), value);
+                                _ = labelSection.AddKey(GetIniLabelCustomKeyName("UpstreamOld", iLine), value);
                             }
                         }
                     }
@@ -775,7 +732,7 @@ namespace Ra2CsfToolsGUI
                     {
                         foreach ((var iLine, var value) in upstreamNew[labelName])
                         {
-                            _ = labelSection.Keys.Add(GetIniLabelCustomKeyName("Upstream", iLine), value);
+                            _ = labelSection.AddKey(GetIniLabelCustomKeyName("Upstream", iLine), value);
                         }
                     }
 
@@ -796,7 +753,7 @@ namespace Ra2CsfToolsGUI
                                     Debug.Assert(transOld.ContainsKey(labelName));
                                     foreach ((var iLine, var value) in transOld[labelName])
                                     {
-                                        _ = labelSection.Keys.Add(GetIniLabelCustomKeyName("TranslationOld", iLine), value);
+                                        _ = labelSection.AddKey(GetIniLabelCustomKeyName("TranslationOld", iLine), value);
                                     }
                                 }
 
@@ -804,7 +761,7 @@ namespace Ra2CsfToolsGUI
                                 {
                                     foreach ((var iLine, var value) in transNew[labelName])
                                     {
-                                        _ = labelSection.Keys.Add(GetIniLabelCustomKeyName("Translation", iLine), value);
+                                        _ = labelSection.AddKey(GetIniLabelCustomKeyName("Translation", iLine), value);
                                     }
                                 }
                             }
@@ -819,7 +776,7 @@ namespace Ra2CsfToolsGUI
                                 Debug.Assert(transNew.ContainsKey(labelName));
                                 foreach ((var iLine, var value) in transNew[labelName])
                                 {
-                                    _ = labelSection.Keys.Add(GetIniLabelCustomKeyName("Translation", iLine), value);
+                                    _ = labelSection.AddKey(GetIniLabelCustomKeyName("Translation", iLine), value);
                                 }
                             }
                         }
