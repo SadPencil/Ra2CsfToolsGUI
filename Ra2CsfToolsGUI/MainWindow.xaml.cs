@@ -459,7 +459,7 @@ namespace Ra2CsfToolsGUI
                     {
                         foreach ((var iLine, var value) in upstreamNew[labelName])
                         {
-                            _ = labelSection.AddKey(GetIniLabelCustomKeyName("Upstream", iLine), value);
+                            _ = labelSection.AddKey(GetIniLabelCustomKeyName("UpstreamNew", iLine), value);
                         }
                         foreach ((var iLine, var value) in upstreamNew[labelName])
                         {
@@ -732,7 +732,7 @@ namespace Ra2CsfToolsGUI
                     {
                         foreach ((var iLine, var value) in upstreamNew[labelName])
                         {
-                            _ = labelSection.AddKey(GetIniLabelCustomKeyName("Upstream", iLine), value);
+                            _ = labelSection.AddKey(GetIniLabelCustomKeyName("UpstreamNew", iLine), value);
                         }
                     }
 
@@ -761,7 +761,7 @@ namespace Ra2CsfToolsGUI
                                 {
                                     foreach ((var iLine, var value) in transNew[labelName])
                                     {
-                                        _ = labelSection.AddKey(GetIniLabelCustomKeyName("Translation", iLine), value);
+                                        _ = labelSection.AddKey(GetIniLabelCustomKeyName("TranslationNew", iLine), value);
                                     }
                                 }
                             }
@@ -776,7 +776,7 @@ namespace Ra2CsfToolsGUI
                                 Debug.Assert(transNew.ContainsKey(labelName));
                                 foreach ((var iLine, var value) in transNew[labelName])
                                 {
-                                    _ = labelSection.AddKey(GetIniLabelCustomKeyName("Translation", iLine), value);
+                                    _ = labelSection.AddKey(GetIniLabelCustomKeyName("TranslationNew", iLine), value);
                                 }
                             }
                         }
