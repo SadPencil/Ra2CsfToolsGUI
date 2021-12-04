@@ -458,11 +458,13 @@ namespace Ra2CsfToolsGUI
                                 _ = labelSection.Keys.Add(GetIniLabelValueKeyName(iLine), TranslationNeededPlaceholder);
                             }
                         }
+                        Debug.Assert(labelSection.Keys.Contains(GetIniLabelValueKeyName(1)));
                     }
 
 
                 }
 
+                Debug.Assert(TranslationUpdate_NewUpstreamFile.Labels.Keys.ToList().TrueForAll(labelName => ini.Sections[labelName].Keys.Contains(GetIniLabelValueKeyName(1))));
 
                 // TODO: for those keys exist in translated files but not in the upstream files, mark them up
 
@@ -470,5 +472,70 @@ namespace Ra2CsfToolsGUI
                 GeneralSaveIniFileGUI(ini);
             });
         }
+
+        private CsfFile TranslationOverride_UpstreamFile = null;
+        private CsfFile TranslationOverride_TranslatedFile = null;
+
+        private void TranslationOverride_LoadUpstreamFile_Click(object sender, RoutedEventArgs e)
+        {
+            GeneralTryCatchGUI(() =>
+            {
+                TranslationOverride_UpstreamFile = GeneralLoadCsfIniFileGUI();
+            });
+        }
+
+        private void TranslationOverride_LoadTranslatedFile_Click(object sender, RoutedEventArgs e)
+        {
+            GeneralTryCatchGUI(() =>
+            {
+                TranslationOverride_TranslatedFile = GeneralLoadCsfIniFileGUI();
+            });
+        }
+
+        private void TranslationOverride_SaveIniFile_Click(object sender, RoutedEventArgs e)
+        {
+            GeneralTryCatchGUI(() =>
+            {
+                if (TranslationOverride_UpstreamFile == null || TranslationOverride_TranslatedFile == null)
+                {
+                    throw new Exception("Please load the string table files first.");
+                }
+
+                var oldDict = TranslationOverride_UpstreamFile.Labels;
+                var newDict = TranslationOverride_TranslatedFile.Labels;
+                var labelKeys = oldDict.Keys.Union(newDict.Keys);
+
+                var newCsf = new CsfFile()
+                {
+                    Language = TranslationOverride_TranslatedFile.Language,
+                    Version = TranslationOverride_TranslatedFile.Version,
+                };
+
+
+                foreach (var labelName in oldDict.Keys.Union(newDict.Keys))
+                {
+                    bool found;
+                    string value;
+                    found = newDict.TryGetValue(labelName, out var newValue);
+                    if (found)
+                    {
+                        value = newValue;
+                    }
+                    else
+                    {
+                        found = oldDict.TryGetValue(labelName, out var oldValue);
+                        Debug.Assert(found);
+                        value = oldValue;
+                    }
+
+                    newCsf.Labels.Add(labelName, value);
+                }
+
+                // save ini
+                GeneralSaveCsfIniFileGUI(newCsf, ".ini");
+            });
+        }
+
+
     }
 }
