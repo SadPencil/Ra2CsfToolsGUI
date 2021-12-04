@@ -91,7 +91,7 @@
 
             <ui:SimpleStackPanel Spacing="12" Margin="10">
                 <TextBlock TextWrapping="Wrap">Select an upstream string table file and a translated string label file, and save an .ini file that once a label is shown in the translated file, the value is selected. Otherwise, the label shown in the upstream file is selected. The .ini file can be converted back to .csf file in the "Format Converter" tab.</TextBlock>
-               
+
                 <Button Content="Load an upstream string table file (.csf/.ini) ..." Click="TranslationOverride_LoadUpstreamFile_Click" />
                 <Button Content="Load a translated string table file (.csf/.ini) ..." Click="TranslationOverride_LoadTranslatedFile_Click" />
                 <Button Content="Save as an .ini file for comparison ..." Click="TranslationOverride_SaveIniFile_Click" />
@@ -117,6 +117,7 @@
             <ui:SimpleStackPanel Spacing="12" Margin="10">
                 <TextBlock TextWrapping="Wrap">Select an old-version upstream string table file, a new-version upstream string table file, an old-version translated string label file, and a new-version translated string label file, and save an .ini file that is checked for whether some labels remain the old version. The .ini file can be converted back to .csf file in the "Format Converter" tab.</TextBlock>
                 <TextBox ui:ControlHelper.Header="Note: in the generated .ini file, all values that needs translation are replaced with the following text:" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <TextBox Text="{Binding TranslationDeleteNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
                 <Button Content="Load an old-version upstream string table file (.csf/.ini) ..." Click="TranslationUpdateCheck_LoadOldUpstreamFile_Click" />
                 <Button Content="Load a new-version upstream string table file (.csf/.ini) ..." Click="TranslationUpdateCheck_LoadNewUpstreamFile_Click" />
                 <Button Content="Load an old-version translated string table file (.csf/.ini) ..." Click="TranslationUpdateCheck_LoadOldTranslatedFile_Click" />
