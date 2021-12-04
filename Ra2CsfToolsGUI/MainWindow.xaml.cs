@@ -228,7 +228,7 @@ namespace Ra2CsfToolsGUI
             using (var ms = new MemoryStream())
             {
                 CsfFileIniHelper.WriteIniFile(csf, ms);
-                using (var msCopy = new MemoryStream(ms.GetBuffer()))
+                using (var msCopy = new MemoryStream(ms.ToArray()))
                 {
                     return ParseIni(msCopy);
                 }
