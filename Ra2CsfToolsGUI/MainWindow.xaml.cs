@@ -791,10 +791,13 @@ namespace Ra2CsfToolsGUI
                                 Debug.Assert(newCsf.Labels.ContainsKey(labelName));
                                 Debug.Assert(newCsf.Labels[labelName] == TranslationNeededPlaceholder);
 
-                                Debug.Assert(transOld.ContainsKey(labelName));
-                                foreach ((var iLine, var value) in transOld[labelName])
+                                if (oldTransExist)
                                 {
-                                    _ = labelSection.Keys.Add(GetIniLabelCustomKeyName("TranslationOld", iLine), value);
+                                    Debug.Assert(transOld.ContainsKey(labelName));
+                                    foreach ((var iLine, var value) in transOld[labelName])
+                                    {
+                                        _ = labelSection.Keys.Add(GetIniLabelCustomKeyName("TranslationOld", iLine), value);
+                                    }
                                 }
 
                                 if (newTransExist)
