@@ -29,7 +29,7 @@ namespace Ra2CsfToolsGUI
 
             this.DataContext = this;
         }
-        public string Version { get; } = "v1.0.1-alpha";
+        public string Version { get; } = "v1.1.0-alpha";
 
         public string TranslationNeededPlaceholder { get; } = "TODO_Translation_Needed";
         public string TranslationDeleteNeededPlaceholder { get; } = "TODO_Translation_Delete_Needed";
