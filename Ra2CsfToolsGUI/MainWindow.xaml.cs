@@ -718,7 +718,7 @@ namespace Ra2CsfToolsGUI
                 // add upstream info to .ini
                 var ini = GetNewIniFileFromCsfFile(newCsf);
 
-                foreach (var labelName in upstreamLabelKeys)
+                foreach (var labelName in allLabelKeys)
                 {
                     bool translationExist = ini.Sections.ContainsSection(labelName);
                     if (!translationExist)
@@ -748,51 +748,21 @@ namespace Ra2CsfToolsGUI
                         }
                     }
 
-                    if (diffDict.ContainsKey(labelName))
+                    if (transOld.ContainsKey(labelName))
                     {
-                        bool oldTransExist = oldTransDict.TryGetValue(labelName, out var oldTransValue);
-                        bool newTransExist = newTransDict.TryGetValue(labelName, out var newTransValue);
-
-                        if (newUpstreamDict.Keys.Contains(labelName))
+                        Debug.Assert(transOld.ContainsKey(labelName));
+                        foreach ((var iLine, var value) in transOld[labelName])
                         {
-                            if ((!newTransExist) || (!(((oldTransExist && oldTransValue != newTransValue) || (!oldTransExist)))))
-                            {
-                                Debug.Assert(newCsf.Labels.ContainsKey(labelName));
-                                Debug.Assert(newCsf.Labels[labelName] == TranslationNeededPlaceholder);
-
-                                if (oldTransExist)
-                                {
-                                    Debug.Assert(transOld.ContainsKey(labelName));
-                                    foreach ((var iLine, var value) in transOld[labelName])
-                                    {
-                                        _ = labelSection.AddKey(GetIniLabelCustomKeyName("TranslationOld", iLine), value);
-                                    }
-                                }
-
-                                if (newTransExist)
-                                {
-                                    foreach ((var iLine, var value) in transNew[labelName])
-                                    {
-                                        _ = labelSection.AddKey(GetIniLabelCustomKeyName("TranslationNew", iLine), value);
-                                    }
-                                }
-                            }
+                            _ = labelSection.AddKey(GetIniLabelCustomKeyName("TranslationOld", iLine), value);
                         }
-                        else
+                    }
+
+                    if (transNew.ContainsKey(labelName))
+                    {
+                        foreach ((var iLine, var value) in transNew[labelName])
                         {
-                            if (newTransExist)
-                            {
-                                Debug.Assert(newCsf.Labels.ContainsKey(labelName));
-                                Debug.Assert(newCsf.Labels[labelName] == TranslationDeleteNeededPlaceholder);
-
-                                Debug.Assert(transNew.ContainsKey(labelName));
-                                foreach ((var iLine, var value) in transNew[labelName])
-                                {
-                                    _ = labelSection.AddKey(GetIniLabelCustomKeyName("TranslationNew", iLine), value);
-                                }
-                            }
+                            _ = labelSection.AddKey(GetIniLabelCustomKeyName("TranslationNew", iLine), value);
                         }
-
                     }
                 }
 
