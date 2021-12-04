@@ -51,7 +51,6 @@
                             ContentTemplate="{TemplateBinding ContentTemplate}"
                             TextElement.FontSize="{TemplateBinding FontSize}"
                             TextElement.FontFamily="{TemplateBinding FontFamily}"
-                            TextElement.FontWeight="350"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                     </Border>
