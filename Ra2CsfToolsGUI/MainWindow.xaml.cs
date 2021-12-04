@@ -11,6 +11,7 @@ using IniParser;
 using IniParser.Model;
 using IniParser.Model.Configuration;
 using IniParser.Parser;
+using System.Text.RegularExpressions;
 
 namespace Ra2CsfToolsGUI
 {
@@ -46,13 +47,16 @@ namespace Ra2CsfToolsGUI
             AllowKeysWithoutSection = false,
             CommentRegex = new System.Text.RegularExpressions.Regex("a^"), // match nothing
             CaseInsensitive = true,
+            AssigmentSpacer = String.Empty,
+            SectionRegex = new Regex("^(\\s*?)\\[{1}\\s*[\\p{L}\\p{P}\\p{M}_\\\"\\'\\{\\}\\#\\+\\;\\*\\%\\(\\)\\=\\?\\&\\$\\^\\<\\>\\`\\^|\\,\\:\\/\\.\\-\\w\\d\\s\\\\\\~]+\\s*\\](\\s*?)$"),
         };
 
+        private static IniDataParser GetIniDataParser() => new IniDataParser(IniParserConfiguration);
         private static IniData GetIniData() => new IniData() { Configuration = IniParserConfiguration, };
 
         private static IniData ParseIni(Stream stream)
         {
-            var parser = new IniDataParser(IniParserConfiguration);
+            var parser = GetIniDataParser();
 
             using (var sr = new StreamReader(stream, new UTF8Encoding(false)))
             {
