@@ -57,13 +57,11 @@
                             For code points 128-159 (0x80-0x9F), the original font file of RA2 mistakenly treat these characters as Windows-1252, instead of Unicode (ISO-8859-1).
                         In some mod and some editors, such characters will be saved as Windows-1252 encoding. This behavior is wrong.
                             <LineBreak />
-                            However, users may need to proceed with these files. When loading the .csf file, you can decide whether to treat 128-159 as Windows-1252 (as some mods mistakenly stored the wrong code point), or as Unicode (a correct font file is required).
-                            Checking the box below means the former, and un-checking the box below means the latter.
+                            However, users may need to proceed with these files. You can decide whether to treat 128-159 as Windows-1252 (to be compatible with original RA2 font file) or as Unicode (this is the correct way, but modders must supply a correct font file).
+                            Checking the boxes below means the former, and un-checking the boxes below means the latter.
                         </TextBlock>
                         <CheckBox FontSize="16" Content="Enable Windows-1252 workaround when loading the .csf file." IsChecked="{Binding Encoding1252ReadWorkaround}" />
-                        <TextBlock TextWrapping="Wrap" FontSize="16">
-                            When saving the .csf file, this tool will always save the characters as Unicode code points. The original font file of RA2 has the correct font data at these code points, except for character ™.
-                        </TextBlock>
+                        <CheckBox FontSize="16" Content="Enable Windows-1252 workaround when writing the .csf file." IsChecked="{Binding Encoding1252WriteWorkaround}" />
                     </ui:SimpleStackPanel>
                 </GroupBox>
             </ui:SimpleStackPanel>

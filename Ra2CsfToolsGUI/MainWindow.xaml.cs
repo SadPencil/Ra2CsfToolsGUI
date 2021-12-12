@@ -32,7 +32,7 @@ namespace Ra2CsfToolsGUI
         public string TranslationDeleteNeededPlaceholder { get; } = "TODO_Translation_Delete_Needed";
 
         public bool Encoding1252ReadWorkaround { get; set; } = true;
-        public bool Encoding1252WriteWorkaround { get; } = false;
+        public bool Encoding1252WriteWorkaround { get; set; } = true;
 
         private CsfFileOptions GetCsfFileOptions() => new CsfFileOptions()
         {
