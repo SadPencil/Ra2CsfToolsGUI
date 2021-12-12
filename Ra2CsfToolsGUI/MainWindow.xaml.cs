@@ -33,20 +33,16 @@ namespace Ra2CsfToolsGUI
             if (arguments.Length >= 2)
             {
                 string filename = arguments[1];
-                try
+                GeneralTryCatchGUI(() =>
                 {
                     Convert_CsfFile = GeneralLoadCsfIniFile(filename);
                     this.UI_FormatConverterTabItem.IsSelected = true;
-                }
-                catch (Exception ex)
-                {
-                    MessageBoxPanic(ex);
-                }
+                });
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public string Version { get; } = "v1.2.1-alpha";
+        public string Version { get; } = "v1.3.0";
         public string ApplicationName { get; } = "Ra2CsfToolsGUI";
         public string WindowTitle { get; } = "Ra2CsfToolsGUI (by Sad Pencil)";
 
@@ -884,6 +880,25 @@ namespace Ra2CsfToolsGUI
                 GeneralSaveIniFileGUI(ini);
 
             });
+        } 
+        private void Window_Drop(object sender, DragEventArgs e)
+        {
+            GeneralTryCatchGUI(() =>
+            {
+                if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
+                {
+                    string[] droppedFilePaths = e.Data.GetData(DataFormats.FileDrop, true) as string[];
+                    if (droppedFilePaths.Length != 1)
+                    {
+                        throw new Exception("Only one file is allowed for drag & drop.");
+                    }
+                    string filename = droppedFilePaths[0];
+
+                    Convert_CsfFile = GeneralLoadCsfIniFile(filename);
+                    this.UI_FormatConverterTabItem.IsSelected = true;
+                }
+            });
+
         }
     }
 }
