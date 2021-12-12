@@ -10,49 +10,46 @@ namespace Ra2CsfToolsGUI
 {
     public class TabablzControlEx : TabablzControl
     {
-        static TabablzControlEx()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(TabablzControlEx), new FrameworkPropertyMetadata(typeof(TabablzControlEx)));
-        }
+        static TabablzControlEx() => DefaultStyleKeyProperty.OverrideMetadata(typeof(TabablzControlEx), new FrameworkPropertyMetadata(typeof(TabablzControlEx)));
 
         public override void OnApplyTemplate()
         {
-            if (_itemsPresenter != null)
+            if (this._itemsPresenter != null)
             {
-                _itemsPresenter.SizeChanged -= OnItemsPresenterSizeChanged;
-                _itemsPresenter = null;
+                this._itemsPresenter.SizeChanged -= this.OnItemsPresenterSizeChanged;
+                this._itemsPresenter = null;
             }
 
             base.OnApplyTemplate();
 
-            _rightContentPresenter = GetTemplateChild("RightContentPresenter") as ContentPresenter;
+            this._rightContentPresenter = this.GetTemplateChild("RightContentPresenter") as ContentPresenter;
 
-            _leftContentColumn = GetTemplateChild("LeftContentColumn") as ColumnDefinition;
-            _tabColumn = GetTemplateChild("TabColumn") as ColumnDefinition;
-            _addButtonColumn = GetTemplateChild("AddButtonColumn") as ColumnDefinition;
-            _rightContentColumn = GetTemplateChild("RightContentColumn") as ColumnDefinition;
+            this._leftContentColumn = this.GetTemplateChild("LeftContentColumn") as ColumnDefinition;
+            this._tabColumn = this.GetTemplateChild("TabColumn") as ColumnDefinition;
+            this._addButtonColumn = this.GetTemplateChild("AddButtonColumn") as ColumnDefinition;
+            this._rightContentColumn = this.GetTemplateChild("RightContentColumn") as ColumnDefinition;
 
-            _tabContainerGrid = GetTemplateChild("TabContainerGrid") as Grid;
+            this._tabContainerGrid = this.GetTemplateChild("TabContainerGrid") as Grid;
 
-            _itemsControl = GetTemplateChild(HeaderItemsControlPartName) as DragablzItemsControlEx;
-            if (_itemsControl != null)
+            this._itemsControl = this.GetTemplateChild(HeaderItemsControlPartName) as DragablzItemsControlEx;
+            if (this._itemsControl != null)
             {
-                _itemsControl.ApplyTemplate();
+                _ = this._itemsControl.ApplyTemplate();
 
-                _itemsPresenter = _itemsControl.Template?.FindName("TabsItemsPresenter", _itemsControl) as ItemsPresenter;
-                if (_itemsPresenter != null)
+                this._itemsPresenter = this._itemsControl.Template?.FindName("TabsItemsPresenter", this._itemsControl) as ItemsPresenter;
+                if (this._itemsPresenter != null)
                 {
-                    _itemsPresenter.SizeChanged += OnItemsPresenterSizeChanged;
+                    this._itemsPresenter.SizeChanged += this.OnItemsPresenterSizeChanged;
                 }
             }
         }
 
         protected override Size MeasureOverride(Size constraint)
         {
-            if (_previousAvailableSize.Width != constraint.Width)
+            if (this._previousAvailableSize.Width != constraint.Width)
             {
-                _previousAvailableSize = constraint;
-                UpdateTabWidths();
+                this._previousAvailableSize = constraint;
+                this.UpdateTabWidths();
             }
 
             return base.MeasureOverride(constraint);
@@ -62,63 +59,63 @@ namespace Ra2CsfToolsGUI
         {
             base.OnItemsChanged(e);
 
-            UpdateTabWidths();
+            this.UpdateTabWidths();
         }
 
         private void OnItemsPresenterSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            UpdateTabWidths();
-            _itemsControl?.UpdateScrollViewerDecreaseAndIncreaseButtonsViewState();
+            this.UpdateTabWidths();
+            this._itemsControl?.UpdateScrollViewerDecreaseAndIncreaseButtonsViewState();
         }
 
         private void UpdateTabWidths()
         {
-            if (_tabContainerGrid != null)
+            if (this._tabContainerGrid != null)
             {
                 // Add up width taken by custom content and + button
                 double widthTaken = 0.0;
-                if (_leftContentColumn != null)
+                if (this._leftContentColumn != null)
                 {
-                    widthTaken += _leftContentColumn.ActualWidth;
+                    widthTaken += this._leftContentColumn.ActualWidth;
                 }
-                if (_addButtonColumn != null)
+                if (this._addButtonColumn != null)
                 {
-                    widthTaken += _addButtonColumn.ActualWidth;
+                    widthTaken += this._addButtonColumn.ActualWidth;
                 }
-                if (_rightContentColumn != null)
+                if (this._rightContentColumn != null)
                 {
-                    if (_rightContentPresenter != null)
+                    if (this._rightContentPresenter != null)
                     {
-                        Size rightContentSize = _rightContentPresenter.DesiredSize;
-                        _rightContentPresenter.MinWidth = rightContentSize.Width;
+                        var rightContentSize = this._rightContentPresenter.DesiredSize;
+                        this._rightContentPresenter.MinWidth = rightContentSize.Width;
                         widthTaken += rightContentSize.Width;
                     }
                 }
 
-                if (_tabColumn != null)
+                if (this._tabColumn != null)
                 {
                     // Note: can be infinite
-                    var availableWidth = _previousAvailableSize.Width - widthTaken;
+                    double availableWidth = this._previousAvailableSize.Width - widthTaken;
 
                     // Size can be 0 when window is first created; in that case, skip calculations; we'll get a new size soon
                     if (availableWidth > 0)
                     {
-                        _tabColumn.MaxWidth = availableWidth;
-                        _tabColumn.Width = GridLength.Auto;
-                        if (_itemsControl != null)
+                        this._tabColumn.MaxWidth = availableWidth;
+                        this._tabColumn.Width = GridLength.Auto;
+                        if (this._itemsControl != null)
                         {
-                            _itemsControl.MaxWidth = availableWidth;
+                            this._itemsControl.MaxWidth = availableWidth;
 
                             // Calculate if the scroll buttons should be visible.
-                            if (_itemsPresenter != null)
+                            if (this._itemsPresenter != null)
                             {
-                                var visible = _itemsPresenter.ActualWidth > availableWidth;
-                                ScrollViewer.SetHorizontalScrollBarVisibility(_itemsControl, visible
+                                bool visible = this._itemsPresenter.ActualWidth > availableWidth;
+                                ScrollViewer.SetHorizontalScrollBarVisibility(this._itemsControl, visible
                                     ? ScrollBarVisibility.Visible
                                     : ScrollBarVisibility.Hidden);
                                 if (visible)
                                 {
-                                    _itemsControl.UpdateScrollViewerDecreaseAndIncreaseButtonsViewState();
+                                    this._itemsControl.UpdateScrollViewerDecreaseAndIncreaseButtonsViewState();
                                 }
                             }
                         }

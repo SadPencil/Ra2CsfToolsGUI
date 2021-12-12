@@ -13,15 +13,9 @@ namespace Ra2CsfToolsGUI
                 typeof(object),
                 typeof(DragablzItemHelper));
 
-        public static object GetIcon(DragablzItem item)
-        {
-            return item.GetValue(IconProperty);
-        }
+        public static object GetIcon(DragablzItem item) => item.GetValue(IconProperty);
 
-        public static void SetIcon(DragablzItem item, object value)
-        {
-            item.SetValue(IconProperty, value);
-        }
+        public static void SetIcon(DragablzItem item, object value) => item.SetValue(IconProperty, value);
 
         #endregion
     }

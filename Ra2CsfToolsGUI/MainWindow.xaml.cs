@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.IO;
-using Microsoft.Win32;
-using SadPencil.Ra2CsfFile;
-using System.Diagnostics;
-using IniParser;
-using IniParser.Model;
+﻿using IniParser.Model;
 using IniParser.Model.Configuration;
 using IniParser.Parser;
-using System.Text.RegularExpressions;
-using System.Runtime.CompilerServices;
+using Microsoft.Win32;
+using SadPencil.Ra2CsfFile;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace Ra2CsfToolsGUI
 {
@@ -25,7 +23,7 @@ namespace Ra2CsfToolsGUI
     {
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             this.DataContext = this;
 
@@ -33,9 +31,9 @@ namespace Ra2CsfToolsGUI
             if (arguments.Length >= 2)
             {
                 string filename = arguments[1];
-                GeneralTryCatchGUI(() =>
+                this.GeneralTryCatchGUI(() =>
                 {
-                    Convert_CsfFile = GeneralLoadCsfIniFile(filename);
+                    this.Convert_CsfFile = this.GeneralLoadCsfIniFile(filename);
                     this.UI_FormatConverterTabItem.IsSelected = true;
                 });
             }
@@ -75,10 +73,7 @@ namespace Ra2CsfToolsGUI
         /// The CallerMemberName attribute that is applied to the optional propertyName parameter causes the property name of the caller to be substituted as an argument.  
         /// </summary>
         /// <param name="propertyName"></param>
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "") => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         private CsfFileOptions GetCsfFileOptions() => new CsfFileOptions()
         {
             Encoding1252ReadWorkaround = Encoding1252ReadWorkaround,
@@ -92,16 +87,15 @@ namespace Ra2CsfToolsGUI
             AllowKeysWithoutSection = false,
             CommentRegex = new Regex("a^"), // match nothing
             CaseInsensitive = true,
-            AssigmentSpacer = String.Empty,
+            AssigmentSpacer = string.Empty,
             SectionRegex = new Regex("^(\\s*?)\\[{1}\\s*[\\p{L}\\p{P}\\p{M}_\\\"\\'\\{\\}\\#\\+\\;\\*\\%\\(\\)\\=\\?\\&\\$\\^\\<\\>\\`\\^|\\,\\:\\/\\.\\-\\w\\d\\s\\\\\\~]+\\s*\\](\\s*?)$"),
         };
 
         private static IniDataParser GetIniDataParser() => new IniDataParser(IniParserConfiguration);
+
         private static IniData GetIniData() => new IniData() { Configuration = IniParserConfiguration, };
-        private void MessageBoxPanic(Exception ex)
-        {
-            _ = MessageBox.Show(this, ex.Message, $"Error - {ApplicationName}", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
+
+        private void MessageBoxPanic(Exception ex) => _ = MessageBox.Show(this, ex.Message, $"Error - {this.ApplicationName}", MessageBoxButton.OK, MessageBoxImage.Error);
 
         private static IniData ParseIni(Stream stream)
         {
@@ -171,29 +165,26 @@ namespace Ra2CsfToolsGUI
             }
         }
 
-        private void Convert_LoadFile_Click(object sender, RoutedEventArgs e)
+        private void Convert_LoadFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
-            {
-                Convert_CsfFile = GeneralLoadCsfIniFileGUI();
-            });
-        }
+            this.Convert_CsfFile = this.GeneralLoadCsfIniFileGUI();
+        });
 
         private CsfFile GeneralLoadCsfIniFile(string filepath)
         {
-            var fileext = Path.GetExtension(filepath);
+            string fileext = Path.GetExtension(filepath);
             switch (fileext)
             {
                 case ".csf":
                     using (var fs = File.Open(filepath, FileMode.Open))
                     {
-                        return CsfFile.LoadFromCsfFile(fs, GetCsfFileOptions());
+                        return CsfFile.LoadFromCsfFile(fs, this.GetCsfFileOptions());
                     };
                 // break;
                 case ".ini":
                     using (var fs = File.Open(filepath, FileMode.Open))
                     {
-                        return CsfFileIniHelper.LoadFromIniFile(fs, GetCsfFileOptions());
+                        return CsfFileIniHelper.LoadFromIniFile(fs, this.GetCsfFileOptions());
                     }
                 // break;
                 default:
@@ -203,14 +194,14 @@ namespace Ra2CsfToolsGUI
 
         private CsfFile GeneralLoadCsfIniFileGUI()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            var openFileDialog = new OpenFileDialog
             {
                 Filter = "String table files (*.csf;*.ini)|*.csf;*.ini|Westwood RA2 string table files (*.csf)|*.csf|SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini",
             };
             if (openFileDialog.ShowDialog(this).GetValueOrDefault())
             {
-                var filename = openFileDialog.FileName;
-                var csf = GeneralLoadCsfIniFile(filename);
+                string filename = openFileDialog.FileName;
+                var csf = this.GeneralLoadCsfIniFile(filename);
                 _ = MessageBox.Show(this, $"File loaded successfully. This string table file contains {csf.Labels.Count} labels, with language {csf.Language}.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 Debug.Assert(csf != null);
@@ -222,23 +213,23 @@ namespace Ra2CsfToolsGUI
 
         private void GeneralSaveFileGUI(Action<Stream> saveAction, string filter)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog()
+            var saveFileDialog = new SaveFileDialog()
             {
                 Filter = filter,
             };
             if (saveFileDialog.ShowDialog(this).GetValueOrDefault())
             {
-                var filename = saveFileDialog.FileName;
+                string filename = saveFileDialog.FileName;
                 using (var fs = File.Open(filename, FileMode.Create))
                 {
                     saveAction.Invoke(fs);
                 }
                 if (MessageBox.Show(this, "File saved successfully. Would you like to open the file in File Explorer?", "Success", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                 {
-                    Process process = new Process();
+                    var process = new Process();
                     process.StartInfo.FileName = "explorer.exe";
                     process.StartInfo.Arguments = $"/select, \"{filename}\"";
-                    process.Start();
+                    _ = process.Start();
                 };
             }
         }
@@ -252,7 +243,7 @@ namespace Ra2CsfToolsGUI
                 throw new Exception("Please load a string table file first.");
             }
 
-            GeneralSaveFileGUI(fs =>
+            this.GeneralSaveFileGUI(fs =>
             {
                 if (defaultExtension == ".csf")
                 {
@@ -267,16 +258,13 @@ namespace Ra2CsfToolsGUI
 
         }
 
-        private void GeneralSaveIniFileGUI(IniData ini)
+        private void GeneralSaveIniFileGUI(IniData ini) => this.GeneralSaveFileGUI(fs =>
         {
-            GeneralSaveFileGUI(fs =>
+            using (var sw = new StreamWriter(fs, new UTF8Encoding(false)))
             {
-                using (var sw = new StreamWriter(fs, new UTF8Encoding(false)))
-                {
-                    sw.Write(ini.ToString());
-                }
-            }, "SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini");
-        }
+                sw.Write(ini.ToString());
+            }
+        }, "SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini");
 
         private void GeneralTryCatchGUI(Action action)
         {
@@ -286,35 +274,26 @@ namespace Ra2CsfToolsGUI
             }
             catch (Exception ex)
             {
-                MessageBoxPanic(ex);
+                this.MessageBoxPanic(ex);
             }
         }
 
-        private void Convert_SaveAsIni_Click(object sender, RoutedEventArgs e)
+        private void Convert_SaveAsIni_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
-            {
-                GeneralSaveCsfIniFileGUI(Convert_CsfFile, ".ini");
-            });
-        }
+            this.GeneralSaveCsfIniFileGUI(this.Convert_CsfFile, ".ini");
+        });
 
-        private void Convert_SaveAsCsf_Click(object sender, RoutedEventArgs e)
+        private void Convert_SaveAsCsf_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
-            {
-                GeneralSaveCsfIniFileGUI(Convert_CsfFile, ".csf");
-            });
-        }
+            this.GeneralSaveCsfIniFileGUI(this.Convert_CsfFile, ".csf");
+        });
 
         private CsfFile TranslationNew_File = null;
 
-        private void TranslationNew_LoadFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationNew_LoadFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
-            {
-                TranslationNew_File = GeneralLoadCsfIniFileGUI();
-            });
-        }
+            this.TranslationNew_File = this.GeneralLoadCsfIniFileGUI();
+        });
 
         private static string GetIniContentFromCsfFile(CsfFile csf)
         {
@@ -343,8 +322,7 @@ namespace Ra2CsfToolsGUI
             }
         }
 
-
-        private static string GetIniLabelValueKeyName(int lineIndex) => "Value" + ((lineIndex == 1) ? String.Empty : $"Line{lineIndex}");
+        private static string GetIniLabelValueKeyName(int lineIndex) => "Value" + ((lineIndex == 1) ? string.Empty : $"Line{lineIndex}");
 
         private static IniData GeneralProceedWithCsfIniLabels(CsfFile csf, Action<string, string, string, int> valueAction = null, Action<string, KeyDataCollection> sectionAction = null)
         {
@@ -386,519 +364,458 @@ namespace Ra2CsfToolsGUI
             return ini;
         }
 
-        private static string GetIniLabelCustomKeyName(string name, int lineIndex) => name + ((lineIndex == 1) ? String.Empty : $"Line{lineIndex}");
+        private static string GetIniLabelCustomKeyName(string name, int lineIndex) => name + ((lineIndex == 1) ? string.Empty : $"Line{lineIndex}");
 
-        private void TranslationNew_SaveIniFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationNew_SaveIniFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
+            if (this.TranslationNew_File == null)
             {
-                if (TranslationNew_File == null)
+                throw new Exception("Please load a string table file first.");
+            }
+
+            var upstream = LoadIniValuesFromCsfFile(this.TranslationNew_File);
+            var ini = GeneralProceedWithCsfIniLabels(this.TranslationNew_File, null, (labelName, key) =>
+            {
+                foreach ((int iLine, string value) in upstream[labelName])
                 {
-                    throw new Exception("Please load a string table file first.");
+                    _ = key.AddKey(GetIniLabelCustomKeyName("Upstream", iLine), value);
+                    Debug.Assert(key.ContainsKey(GetIniLabelValueKeyName(iLine)));
+                    key[GetIniLabelValueKeyName(iLine)] = this.TranslationNeededPlaceholder;
                 }
-
-                var upstream = LoadIniValuesFromCsfFile(TranslationNew_File);
-                var ini = GeneralProceedWithCsfIniLabels(TranslationNew_File, null, (labelName, key) =>
-                {
-                    foreach ((var iLine, var value) in upstream[labelName])
-                    {
-                        _ = key.AddKey(GetIniLabelCustomKeyName("Upstream", iLine), value);
-                        Debug.Assert(key.ContainsKey(GetIniLabelValueKeyName(iLine)));
-                        key[GetIniLabelValueKeyName(iLine)] = TranslationNeededPlaceholder;
-                    }
-                });
-
-                // save ini file
-                GeneralSaveIniFileGUI(ini);
             });
-        }
+
+            // save ini file
+            this.GeneralSaveIniFileGUI(ini);
+        });
 
         private CsfFile TranslationTile_UpstreamFile = null;
         private CsfFile TranslationTile_TranslatedFile = null;
-        private void TranslationTile_LoadUpstreamFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationTile_LoadUpstreamFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
-            {
-                TranslationTile_UpstreamFile = GeneralLoadCsfIniFileGUI();
-            });
-        }
+            this.TranslationTile_UpstreamFile = this.GeneralLoadCsfIniFileGUI();
+        });
 
-        private void TranslationTile_LoadTranslatedFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationTile_LoadTranslatedFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
-            {
-                TranslationTile_TranslatedFile = GeneralLoadCsfIniFileGUI();
-            });
-        }
+            this.TranslationTile_TranslatedFile = this.GeneralLoadCsfIniFileGUI();
+        });
 
-        private void TranslationTile_SaveIniFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationTile_SaveIniFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
+            if (this.TranslationTile_UpstreamFile == null || this.TranslationTile_TranslatedFile == null)
             {
-                if (TranslationTile_UpstreamFile == null || TranslationTile_TranslatedFile == null)
+                throw new Exception("Please load the string table files first.");
+            }
+
+            var upstream = LoadIniValuesFromCsfFile(this.TranslationTile_UpstreamFile);
+
+            var ini = GetNewIniFileFromCsfFile(this.TranslationTile_TranslatedFile);
+            foreach (var keyValuePair in upstream)
+            {
+                string labelName = keyValuePair.Key;
+                bool translationExist = ini.Sections.ContainsSection(labelName);
+                if (!translationExist)
                 {
-                    throw new Exception("Please load the string table files first.");
+                    _ = ini.Sections.AddSection(labelName);
                 }
 
-                var upstream = LoadIniValuesFromCsfFile(TranslationTile_UpstreamFile);
+                var labelSection = ini.Sections[labelName];
 
-                var ini = GetNewIniFileFromCsfFile(TranslationTile_TranslatedFile);
-                foreach (var keyValuePair in upstream)
+                foreach ((int iLine, string value) in keyValuePair.Value)
                 {
-                    var labelName = keyValuePair.Key;
-                    bool translationExist = ini.Sections.ContainsSection(labelName);
+                    _ = labelSection.AddKey(GetIniLabelCustomKeyName("Upstream", iLine), value);
+                }
+                foreach ((int iLine, string value) in keyValuePair.Value)
+                {
                     if (!translationExist)
                     {
-                        _ = ini.Sections.AddSection(labelName);
-                    }
-
-                    var labelSection = ini.Sections[labelName];
-
-                    foreach ((var iLine, var value) in keyValuePair.Value)
-                    {
-                        _ = labelSection.AddKey(GetIniLabelCustomKeyName("Upstream", iLine), value);
-                    }
-                    foreach ((var iLine, var value) in keyValuePair.Value)
-                    {
-                        if (!translationExist)
-                        {
-                            _ = labelSection.AddKey(GetIniLabelValueKeyName(iLine), TranslationNeededPlaceholder);
-                        }
+                        _ = labelSection.AddKey(GetIniLabelValueKeyName(iLine), this.TranslationNeededPlaceholder);
                     }
                 }
+            }
 
-                // TODO: for those keys exist in translated files but not in the upstream files, mark them up
+            // TODO: for those keys exist in translated files but not in the upstream files, mark them up
 
-                // save ini file
-                GeneralSaveIniFileGUI(ini);
-            });
-        }
+            // save ini file
+            this.GeneralSaveIniFileGUI(ini);
+        });
 
         private CsfFile TranslationUpdate_OldUpstreamFile = null;
         private CsfFile TranslationUpdate_NewUpstreamFile = null;
         private CsfFile TranslationUpdate_OldTranslatedFile = null;
-        private void TranslationUpdate_LoadOldUpstreamFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationUpdate_LoadOldUpstreamFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
+            this.TranslationUpdate_OldUpstreamFile = this.GeneralLoadCsfIniFileGUI();
+        });
 
-            GeneralTryCatchGUI(() =>
-            {
-                TranslationUpdate_OldUpstreamFile = GeneralLoadCsfIniFileGUI();
-            });
-        }
-
-        private void TranslationUpdate_LoadNewUpstreamFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationUpdate_LoadNewUpstreamFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
-            {
-                TranslationUpdate_NewUpstreamFile = GeneralLoadCsfIniFileGUI();
-            });
+            this.TranslationUpdate_NewUpstreamFile = this.GeneralLoadCsfIniFileGUI();
+        });
 
-        }
-
-        private void TranslationUpdate_LoadOldTranslatedFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationUpdate_LoadOldTranslatedFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
+            this.TranslationUpdate_OldTranslatedFile = this.GeneralLoadCsfIniFileGUI();
+        });
 
-            GeneralTryCatchGUI(() =>
-            {
-                TranslationUpdate_OldTranslatedFile = GeneralLoadCsfIniFileGUI();
-            });
-        }
-
-        private void TranslationUpdate_SaveIniFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationUpdate_SaveIniFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
+            if (this.TranslationUpdate_OldUpstreamFile == null || this.TranslationUpdate_NewUpstreamFile == null || this.TranslationUpdate_OldTranslatedFile == null)
             {
-                if (TranslationUpdate_OldUpstreamFile == null || TranslationUpdate_NewUpstreamFile == null || TranslationUpdate_OldTranslatedFile == null)
+                throw new Exception("Please load the string table files first.");
+            }
+
+            var diffDict = new Dictionary<string, (string oldValue, string newValue)>();
+            var oldDict = this.TranslationUpdate_OldUpstreamFile.Labels;
+            var newDict = this.TranslationUpdate_NewUpstreamFile.Labels;
+            var labelKeys = oldDict.Keys.Union(newDict.Keys);
+            foreach (string labelName in labelKeys)
+            {
+                bool found;
+                found = oldDict.TryGetValue(labelName, out string oldValue);
+                if (!found)
                 {
-                    throw new Exception("Please load the string table files first.");
+                    oldValue = string.Empty;
+                }
+                found = newDict.TryGetValue(labelName, out string newValue);
+                if (!found)
+                {
+                    newValue = string.Empty;
                 }
 
-                var diffDict = new Dictionary<string, (string oldValue, string newValue)>();
-                var oldDict = TranslationUpdate_OldUpstreamFile.Labels;
-                var newDict = TranslationUpdate_NewUpstreamFile.Labels;
-                var labelKeys = oldDict.Keys.Union(newDict.Keys);
-                foreach (var labelName in labelKeys)
+                if (oldValue != newValue)
                 {
-                    bool found;
-                    found = oldDict.TryGetValue(labelName, out var oldValue);
-                    if (!found)
-                    {
-                        oldValue = string.Empty;
-                    }
-                    found = newDict.TryGetValue(labelName, out var newValue);
-                    if (!found)
-                    {
-                        newValue = string.Empty;
-                    }
-
-                    if (oldValue != newValue)
-                    {
-                        diffDict[labelName] = (oldValue, newValue);
-                    }
+                    diffDict[labelName] = (oldValue, newValue);
                 }
+            }
 
-                // -------
+            // -------
 
-                var upstreamOld = LoadIniValuesFromCsfFile(TranslationUpdate_OldUpstreamFile);
-                var upstreamNew = LoadIniValuesFromCsfFile(TranslationUpdate_NewUpstreamFile);
+            var upstreamOld = LoadIniValuesFromCsfFile(this.TranslationUpdate_OldUpstreamFile);
+            var upstreamNew = LoadIniValuesFromCsfFile(this.TranslationUpdate_NewUpstreamFile);
 
-                // ------- 
-                // delete items that needs updates
-                var ini = GetNewIniFileFromCsfFile(TranslationUpdate_OldTranslatedFile);
-                foreach (var labelName in diffDict.Keys)
+            // ------- 
+            // delete items that needs updates
+            var ini = GetNewIniFileFromCsfFile(this.TranslationUpdate_OldTranslatedFile);
+            foreach (string labelName in diffDict.Keys)
+            {
+                _ = ini.Sections.RemoveSection(labelName);
+            }
+
+            // -------
+            // add upstream info to .ini
+
+            foreach (string labelName in labelKeys)
+            {
+                bool translationExist = ini.Sections.ContainsSection(labelName);
+                if (!translationExist)
                 {
-                    _ = ini.Sections.RemoveSection(labelName);
+                    _ = ini.Sections.AddSection(labelName);
                 }
+                var labelSection = ini.Sections[labelName];
 
-                // -------
-                // add upstream info to .ini
+                bool hasDifference = diffDict.ContainsKey(labelName);
 
-                foreach (var labelName in labelKeys)
+                if (upstreamOld.ContainsKey(labelName))
                 {
-                    bool translationExist = ini.Sections.ContainsSection(labelName);
-                    if (!translationExist)
+                    if (hasDifference)
                     {
-                        _ = ini.Sections.AddSection(labelName);
-                    }
-                    var labelSection = ini.Sections[labelName];
-
-                    bool hasDifference = diffDict.ContainsKey(labelName);
-
-                    if (upstreamOld.ContainsKey(labelName))
-                    {
-                        if (hasDifference)
+                        foreach ((int iLine, string value) in upstreamOld[labelName])
                         {
-                            foreach ((var iLine, var value) in upstreamOld[labelName])
-                            {
-                                _ = labelSection.AddKey(GetIniLabelCustomKeyName("UpstreamOld", iLine), value);
-                            }
+                            _ = labelSection.AddKey(GetIniLabelCustomKeyName("UpstreamOld", iLine), value);
                         }
                     }
-
-                    if (upstreamNew.ContainsKey(labelName))
-                    {
-                        foreach ((var iLine, var value) in upstreamNew[labelName])
-                        {
-                            _ = labelSection.AddKey(GetIniLabelCustomKeyName("UpstreamNew", iLine), value);
-                        }
-                        foreach ((var iLine, var value) in upstreamNew[labelName])
-                        {
-                            if (!translationExist)
-                            {
-                                _ = labelSection.AddKey(GetIniLabelValueKeyName(iLine), TranslationNeededPlaceholder);
-                            }
-                        }
-                        Debug.Assert(labelSection.ContainsKey(GetIniLabelValueKeyName(1)));
-                    }
-
-
                 }
 
-                // TODO: for those keys exist in translated files but not in the upstream files, mark them up
+                if (upstreamNew.ContainsKey(labelName))
+                {
+                    foreach ((int iLine, string value) in upstreamNew[labelName])
+                    {
+                        _ = labelSection.AddKey(GetIniLabelCustomKeyName("UpstreamNew", iLine), value);
+                    }
+                    foreach ((int iLine, string value) in upstreamNew[labelName])
+                    {
+                        if (!translationExist)
+                        {
+                            _ = labelSection.AddKey(GetIniLabelValueKeyName(iLine), this.TranslationNeededPlaceholder);
+                        }
+                    }
+                    Debug.Assert(labelSection.ContainsKey(GetIniLabelValueKeyName(1)));
+                }
 
-                // save ini
-                GeneralSaveIniFileGUI(ini);
-            });
-        }
+            }
+
+            // TODO: for those keys exist in translated files but not in the upstream files, mark them up
+
+            // save ini
+            this.GeneralSaveIniFileGUI(ini);
+        });
 
         private CsfFile TranslationOverride_UpstreamFile = null;
         private CsfFile TranslationOverride_TranslatedFile = null;
 
-        private void TranslationOverride_LoadUpstreamFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationOverride_LoadUpstreamFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
-            {
-                TranslationOverride_UpstreamFile = GeneralLoadCsfIniFileGUI();
-            });
-        }
+            this.TranslationOverride_UpstreamFile = this.GeneralLoadCsfIniFileGUI();
+        });
 
-        private void TranslationOverride_LoadTranslatedFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationOverride_LoadTranslatedFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
-            {
-                TranslationOverride_TranslatedFile = GeneralLoadCsfIniFileGUI();
-            });
-        }
+            this.TranslationOverride_TranslatedFile = this.GeneralLoadCsfIniFileGUI();
+        });
 
-        private void TranslationOverride_SaveIniFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationOverride_SaveIniFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
+            if (this.TranslationOverride_UpstreamFile == null || this.TranslationOverride_TranslatedFile == null)
             {
-                if (TranslationOverride_UpstreamFile == null || TranslationOverride_TranslatedFile == null)
+                throw new Exception("Please load the string table files first.");
+            }
+
+            var oldDict = this.TranslationOverride_UpstreamFile.Labels;
+            var newDict = this.TranslationOverride_TranslatedFile.Labels;
+            var labelKeys = oldDict.Keys.Union(newDict.Keys);
+
+            var newCsf = new CsfFile(this.GetCsfFileOptions())
+            {
+                Language = this.TranslationOverride_TranslatedFile.Language,
+                Version = this.TranslationOverride_TranslatedFile.Version,
+            };
+
+            foreach (string labelName in labelKeys)
+            {
+                bool found;
+                string value;
+                found = newDict.TryGetValue(labelName, out string newValue);
+                if (found)
                 {
-                    throw new Exception("Please load the string table files first.");
+                    value = newValue;
+                }
+                else
+                {
+                    found = oldDict.TryGetValue(labelName, out string oldValue);
+                    Debug.Assert(found);
+                    value = oldValue;
                 }
 
-                var oldDict = TranslationOverride_UpstreamFile.Labels;
-                var newDict = TranslationOverride_TranslatedFile.Labels;
-                var labelKeys = oldDict.Keys.Union(newDict.Keys);
+                _ = newCsf.AddLabel(labelName, value);
+            }
 
-                var newCsf = new CsfFile(GetCsfFileOptions())
-                {
-                    Language = TranslationOverride_TranslatedFile.Language,
-                    Version = TranslationOverride_TranslatedFile.Version,
-                };
-
-
-                foreach (var labelName in labelKeys)
-                {
-                    bool found;
-                    string value;
-                    found = newDict.TryGetValue(labelName, out var newValue);
-                    if (found)
-                    {
-                        value = newValue;
-                    }
-                    else
-                    {
-                        found = oldDict.TryGetValue(labelName, out var oldValue);
-                        Debug.Assert(found);
-                        value = oldValue;
-                    }
-
-                    newCsf.AddLabel(labelName, value);
-                }
-
-                // save ini
-                GeneralSaveCsfIniFileGUI(newCsf, ".ini");
-            });
-        }
+            // save ini
+            this.GeneralSaveCsfIniFileGUI(newCsf, ".ini");
+        });
 
         private CsfFile TranslationUpdateCheck_OldUpstreamFile = null;
         private CsfFile TranslationUpdateCheck_NewUpstreamFile = null;
         private CsfFile TranslationUpdateCheck_OldTranslatedFile = null;
         private CsfFile TranslationUpdateCheck_NewTranslatedFile = null;
 
-        private void TranslationUpdateCheck_LoadOldUpstreamFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationUpdateCheck_LoadOldUpstreamFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
-            {
-                TranslationUpdateCheck_OldUpstreamFile = GeneralLoadCsfIniFileGUI();
-            });
+            this.TranslationUpdateCheck_OldUpstreamFile = this.GeneralLoadCsfIniFileGUI();
+        });
 
-        }
-
-        private void TranslationUpdateCheck_LoadNewUpstreamFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationUpdateCheck_LoadNewUpstreamFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
-            {
-                TranslationUpdateCheck_NewUpstreamFile = GeneralLoadCsfIniFileGUI();
-            });
-        }
+            this.TranslationUpdateCheck_NewUpstreamFile = this.GeneralLoadCsfIniFileGUI();
+        });
 
-        private void TranslationUpdateCheck_LoadOldTranslatedFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationUpdateCheck_LoadOldTranslatedFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
-            {
-                TranslationUpdateCheck_OldTranslatedFile = GeneralLoadCsfIniFileGUI();
-            });
-        }
+            this.TranslationUpdateCheck_OldTranslatedFile = this.GeneralLoadCsfIniFileGUI();
+        });
 
-        private void TranslationUpdateCheck_LoadNewTranslatedFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationUpdateCheck_LoadNewTranslatedFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            GeneralTryCatchGUI(() =>
-            {
-                TranslationUpdateCheck_NewTranslatedFile = GeneralLoadCsfIniFileGUI();
-            });
-        }
+            this.TranslationUpdateCheck_NewTranslatedFile = this.GeneralLoadCsfIniFileGUI();
+        });
 
-        private void TranslationUpdateCheck_SaveIniFile_Click(object sender, RoutedEventArgs e)
+        private void TranslationUpdateCheck_SaveIniFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-
-            GeneralTryCatchGUI(() =>
+            if (this.TranslationUpdateCheck_OldUpstreamFile == null ||
+            this.TranslationUpdateCheck_NewUpstreamFile == null ||
+            this.TranslationUpdateCheck_OldTranslatedFile == null ||
+            this.TranslationUpdateCheck_NewTranslatedFile == null)
             {
-                if (TranslationUpdateCheck_OldUpstreamFile == null ||
-                TranslationUpdateCheck_NewUpstreamFile == null ||
-                TranslationUpdateCheck_OldTranslatedFile == null ||
-                TranslationUpdateCheck_NewTranslatedFile == null)
+                throw new Exception("Please load the string table files first.");
+            }
+
+            var diffDict = new Dictionary<string, (string oldValue, string newValue)>();
+            var oldUpstreamDict = this.TranslationUpdateCheck_OldUpstreamFile.Labels;
+            var newUpstreamDict = this.TranslationUpdateCheck_NewUpstreamFile.Labels;
+            var upstreamLabelKeys = oldUpstreamDict.Keys.Union(newUpstreamDict.Keys);
+            foreach (string labelName in upstreamLabelKeys)
+            {
+                bool found;
+                found = oldUpstreamDict.TryGetValue(labelName, out string oldValue);
+                if (!found)
                 {
-                    throw new Exception("Please load the string table files first.");
+                    oldValue = string.Empty;
+                }
+                found = newUpstreamDict.TryGetValue(labelName, out string newValue);
+                if (!found)
+                {
+                    newValue = string.Empty;
                 }
 
-
-                var diffDict = new Dictionary<string, (string oldValue, string newValue)>();
-                var oldUpstreamDict = TranslationUpdateCheck_OldUpstreamFile.Labels;
-                var newUpstreamDict = TranslationUpdateCheck_NewUpstreamFile.Labels;
-                var upstreamLabelKeys = oldUpstreamDict.Keys.Union(newUpstreamDict.Keys);
-                foreach (var labelName in upstreamLabelKeys)
+                if (oldValue != newValue)
                 {
-                    bool found;
-                    found = oldUpstreamDict.TryGetValue(labelName, out var oldValue);
-                    if (!found)
-                    {
-                        oldValue = string.Empty;
-                    }
-                    found = newUpstreamDict.TryGetValue(labelName, out var newValue);
-                    if (!found)
-                    {
-                        newValue = string.Empty;
-                    }
-
-                    if (oldValue != newValue)
-                    {
-                        diffDict[labelName] = (oldValue, newValue);
-                    }
+                    diffDict[labelName] = (oldValue, newValue);
                 }
+            }
 
-                // -------
+            // -------
 
-                var oldTransDict = TranslationUpdateCheck_OldTranslatedFile.Labels;
-                var newTransDict = TranslationUpdateCheck_NewTranslatedFile.Labels;
-                var transLabelKeys = oldTransDict.Keys.Union(newTransDict.Keys);
-                var allLabelKeys = transLabelKeys.Union(upstreamLabelKeys);
+            var oldTransDict = this.TranslationUpdateCheck_OldTranslatedFile.Labels;
+            var newTransDict = this.TranslationUpdateCheck_NewTranslatedFile.Labels;
+            var transLabelKeys = oldTransDict.Keys.Union(newTransDict.Keys);
+            var allLabelKeys = transLabelKeys.Union(upstreamLabelKeys);
 
-                var newCsf = new CsfFile(GetCsfFileOptions())
+            var newCsf = new CsfFile(this.GetCsfFileOptions())
+            {
+                Language = this.TranslationUpdateCheck_NewTranslatedFile.Language,
+                Version = this.TranslationUpdateCheck_NewTranslatedFile.Version,
+            };
+
+            foreach (string labelName in allLabelKeys)
+            {
+                bool oldTransExist = oldTransDict.TryGetValue(labelName, out string oldTransValue);
+                bool newTransExist = newTransDict.TryGetValue(labelName, out string newTransValue);
+                //bool oldUpstreamExist = oldUpstreamDict.TryGetValue(labelName, out var oldUpstreamValue);
+                //bool newUpstreamExist = newUpstreamDict.TryGetValue(labelName, out var newUpstreamValue);
+
+                bool skipLabel = false;
+                string value;
+                if (newUpstreamDict.Keys.Contains(labelName))
                 {
-                    Language = TranslationUpdateCheck_NewTranslatedFile.Language,
-                    Version = TranslationUpdateCheck_NewTranslatedFile.Version,
-                };
-
-                foreach (var labelName in allLabelKeys)
-                {
-                    bool oldTransExist = oldTransDict.TryGetValue(labelName, out var oldTransValue);
-                    bool newTransExist = newTransDict.TryGetValue(labelName, out var newTransValue);
-                    //bool oldUpstreamExist = oldUpstreamDict.TryGetValue(labelName, out var oldUpstreamValue);
-                    //bool newUpstreamExist = newUpstreamDict.TryGetValue(labelName, out var newUpstreamValue);
-
-                    bool skipLabel = false;
-                    string value;
-                    if (newUpstreamDict.Keys.Contains(labelName))
+                    if (diffDict.ContainsKey(labelName))
                     {
-                        if (diffDict.ContainsKey(labelName))
+                        if (!newTransExist)
                         {
-                            if (!newTransExist)
-                            {
-                                value = TranslationNeededPlaceholder;
-                            }
-                            else
-                            {
-                                if ((oldTransExist && oldTransValue != newTransValue) || (!oldTransExist))
-                                {
-                                    value = newTransValue;
-                                }
-                                else
-                                {
-                                    value = TranslationNeededPlaceholder;
-                                }
-                            }
+                            value = this.TranslationNeededPlaceholder;
                         }
                         else
                         {
-                            if (newTransDict.ContainsKey(labelName))
+                            if ((oldTransExist && oldTransValue != newTransValue) || (!oldTransExist))
                             {
-                                value = newTransDict[labelName];
+                                value = newTransValue;
                             }
                             else
                             {
-                                value = TranslationNeededPlaceholder;
+                                value = this.TranslationNeededPlaceholder;
                             }
                         }
-
                     }
                     else
                     {
-                        if (newTransExist)
+                        if (newTransDict.ContainsKey(labelName))
                         {
-                            value = TranslationDeleteNeededPlaceholder;
+                            value = newTransDict[labelName];
                         }
                         else
                         {
-                            value = null;
-                            skipLabel = true;
+                            value = this.TranslationNeededPlaceholder;
                         }
                     }
 
-                    if (!skipLabel)
-                    {
-                        newCsf.AddLabel(labelName, value);
-                    }
                 }
-
-
-                // -------
-
-                var upstreamOld = LoadIniValuesFromCsfFile(TranslationUpdateCheck_OldUpstreamFile);
-                var upstreamNew = LoadIniValuesFromCsfFile(TranslationUpdateCheck_NewUpstreamFile);
-                var transOld = LoadIniValuesFromCsfFile(TranslationUpdateCheck_OldTranslatedFile);
-                var transNew = LoadIniValuesFromCsfFile(TranslationUpdateCheck_NewTranslatedFile);
-
-                // -------
-                // add upstream info to .ini
-                var ini = GetNewIniFileFromCsfFile(newCsf);
-
-                foreach (var labelName in allLabelKeys)
+                else
                 {
-                    bool translationExist = ini.Sections.ContainsSection(labelName);
-                    if (!translationExist)
+                    if (newTransExist)
                     {
-                        _ = ini.Sections.AddSection(labelName);
+                        value = this.TranslationDeleteNeededPlaceholder;
                     }
-                    var labelSection = ini.Sections[labelName];
-
-                    bool hasDifference = diffDict.ContainsKey(labelName);
-
-                    if (upstreamOld.ContainsKey(labelName))
+                    else
                     {
-                        if (hasDifference)
-                        {
-                            foreach ((var iLine, var value) in upstreamOld[labelName])
-                            {
-                                _ = labelSection.AddKey(GetIniLabelCustomKeyName("UpstreamOld", iLine), value);
-                            }
-                        }
-                    }
-
-                    if (upstreamNew.ContainsKey(labelName))
-                    {
-                        foreach ((var iLine, var value) in upstreamNew[labelName])
-                        {
-                            _ = labelSection.AddKey(GetIniLabelCustomKeyName("UpstreamNew", iLine), value);
-                        }
-                    }
-
-                    if (transOld.ContainsKey(labelName))
-                    {
-                        Debug.Assert(transOld.ContainsKey(labelName));
-                        foreach ((var iLine, var value) in transOld[labelName])
-                        {
-                            _ = labelSection.AddKey(GetIniLabelCustomKeyName("TranslationOld", iLine), value);
-                        }
-                    }
-
-                    if (transNew.ContainsKey(labelName))
-                    {
-                        foreach ((var iLine, var value) in transNew[labelName])
-                        {
-                            _ = labelSection.AddKey(GetIniLabelCustomKeyName("TranslationNew", iLine), value);
-                        }
+                        value = null;
+                        skipLabel = true;
                     }
                 }
 
-                // TODO: for those keys exist in translated files but not in the upstream files, mark them up
+                if (!skipLabel)
+                {
+                    _ = newCsf.AddLabel(labelName, value);
+                }
+            }
 
-                // save ini
-                GeneralSaveIniFileGUI(ini);
+            // -------
 
-            });
-        } 
-        private void Window_Drop(object sender, DragEventArgs e)
-        {
-            GeneralTryCatchGUI(() =>
+            var upstreamOld = LoadIniValuesFromCsfFile(this.TranslationUpdateCheck_OldUpstreamFile);
+            var upstreamNew = LoadIniValuesFromCsfFile(this.TranslationUpdateCheck_NewUpstreamFile);
+            var transOld = LoadIniValuesFromCsfFile(this.TranslationUpdateCheck_OldTranslatedFile);
+            var transNew = LoadIniValuesFromCsfFile(this.TranslationUpdateCheck_NewTranslatedFile);
+
+            // -------
+            // add upstream info to .ini
+            var ini = GetNewIniFileFromCsfFile(newCsf);
+
+            foreach (string labelName in allLabelKeys)
             {
-                if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
+                bool translationExist = ini.Sections.ContainsSection(labelName);
+                if (!translationExist)
                 {
-                    string[] droppedFilePaths = e.Data.GetData(DataFormats.FileDrop, true) as string[];
-                    if (droppedFilePaths.Length != 1)
-                    {
-                        throw new Exception("Only one file is allowed for drag & drop.");
-                    }
-                    string filename = droppedFilePaths[0];
-
-                    Convert_CsfFile = GeneralLoadCsfIniFile(filename);
-                    this.UI_FormatConverterTabItem.IsSelected = true;
+                    _ = ini.Sections.AddSection(labelName);
                 }
-            });
+                var labelSection = ini.Sections[labelName];
 
-        }
+                bool hasDifference = diffDict.ContainsKey(labelName);
+
+                if (upstreamOld.ContainsKey(labelName))
+                {
+                    if (hasDifference)
+                    {
+                        foreach ((int iLine, string value) in upstreamOld[labelName])
+                        {
+                            _ = labelSection.AddKey(GetIniLabelCustomKeyName("UpstreamOld", iLine), value);
+                        }
+                    }
+                }
+
+                if (upstreamNew.ContainsKey(labelName))
+                {
+                    foreach ((int iLine, string value) in upstreamNew[labelName])
+                    {
+                        _ = labelSection.AddKey(GetIniLabelCustomKeyName("UpstreamNew", iLine), value);
+                    }
+                }
+
+                if (transOld.ContainsKey(labelName))
+                {
+                    Debug.Assert(transOld.ContainsKey(labelName));
+                    foreach ((int iLine, string value) in transOld[labelName])
+                    {
+                        _ = labelSection.AddKey(GetIniLabelCustomKeyName("TranslationOld", iLine), value);
+                    }
+                }
+
+                if (transNew.ContainsKey(labelName))
+                {
+                    foreach ((int iLine, string value) in transNew[labelName])
+                    {
+                        _ = labelSection.AddKey(GetIniLabelCustomKeyName("TranslationNew", iLine), value);
+                    }
+                }
+            }
+
+            // TODO: for those keys exist in translated files but not in the upstream files, mark them up
+
+            // save ini
+            this.GeneralSaveIniFileGUI(ini);
+
+        });
+        private void Window_Drop(object sender, DragEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
+            {
+                string[] droppedFilePaths = e.Data.GetData(DataFormats.FileDrop, true) as string[];
+                if (droppedFilePaths.Length != 1)
+                {
+                    throw new Exception("Only one file is allowed for drag & drop.");
+                }
+                string filename = droppedFilePaths[0];
+
+                this.Convert_CsfFile = this.GeneralLoadCsfIniFile(filename);
+                this.UI_FormatConverterTabItem.IsSelected = true;
+            }
+        });
     }
 }

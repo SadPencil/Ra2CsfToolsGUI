@@ -16,50 +16,47 @@ namespace Ra2CsfToolsGUI
     {
         private const double c_scrollAmount = 50.0;
 
-        static DragablzItemsControlEx()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(DragablzItemsControlEx), new FrameworkPropertyMetadata(typeof(DragablzItemsControlEx)));
-        }
+        static DragablzItemsControlEx() => DefaultStyleKeyProperty.OverrideMetadata(typeof(DragablzItemsControlEx), new FrameworkPropertyMetadata(typeof(DragablzItemsControlEx)));
 
         public override void OnApplyTemplate()
         {
-            if (_scrollViewer != null)
+            if (this._scrollViewer != null)
             {
-                _scrollViewer.ScrollChanged -= OnScrollViewerScrollChanged;
+                this._scrollViewer.ScrollChanged -= this.OnScrollViewerScrollChanged;
             }
 
-            if (_scrollDecreaseButton != null)
+            if (this._scrollDecreaseButton != null)
             {
-                _scrollDecreaseButton.IsVisibleChanged -= OnScrollButtonIsVisibleChanged;
-                _scrollDecreaseButton.Click -= OnScrollDecreaseClick;
+                this._scrollDecreaseButton.IsVisibleChanged -= this.OnScrollButtonIsVisibleChanged;
+                this._scrollDecreaseButton.Click -= this.OnScrollDecreaseClick;
             }
 
-            if (_scrollIncreaseButton != null)
+            if (this._scrollIncreaseButton != null)
             {
-                _scrollIncreaseButton.IsVisibleChanged -= OnScrollButtonIsVisibleChanged;
-                _scrollIncreaseButton.Click -= OnScrollIncreaseClick;
+                this._scrollIncreaseButton.IsVisibleChanged -= this.OnScrollButtonIsVisibleChanged;
+                this._scrollIncreaseButton.Click -= this.OnScrollIncreaseClick;
             }
 
             base.OnApplyTemplate();
 
-            _scrollViewer = GetTemplateChild("ScrollViewer") as ScrollViewer;
-            if (_scrollViewer != null)
+            this._scrollViewer = this.GetTemplateChild("ScrollViewer") as ScrollViewer;
+            if (this._scrollViewer != null)
             {
-                _scrollViewer.ApplyTemplate();
-                _scrollViewer.ScrollChanged += OnScrollViewerScrollChanged;
+                _ = this._scrollViewer.ApplyTemplate();
+                this._scrollViewer.ScrollChanged += this.OnScrollViewerScrollChanged;
 
-                _scrollDecreaseButton = _scrollViewer.Template?.FindName("ScrollDecreaseButton", _scrollViewer) as RepeatButton;
-                if (_scrollDecreaseButton != null)
+                this._scrollDecreaseButton = this._scrollViewer.Template?.FindName("ScrollDecreaseButton", this._scrollViewer) as RepeatButton;
+                if (this._scrollDecreaseButton != null)
                 {
-                    _scrollDecreaseButton.IsVisibleChanged += OnScrollButtonIsVisibleChanged;
-                    _scrollDecreaseButton.Click += OnScrollDecreaseClick;
+                    this._scrollDecreaseButton.IsVisibleChanged += this.OnScrollButtonIsVisibleChanged;
+                    this._scrollDecreaseButton.Click += this.OnScrollDecreaseClick;
                 }
 
-                _scrollIncreaseButton = _scrollViewer.Template?.FindName("ScrollIncreaseButton", _scrollViewer) as RepeatButton;
-                if (_scrollIncreaseButton != null)
+                this._scrollIncreaseButton = this._scrollViewer.Template?.FindName("ScrollIncreaseButton", this._scrollViewer) as RepeatButton;
+                if (this._scrollIncreaseButton != null)
                 {
-                    _scrollIncreaseButton.IsVisibleChanged += OnScrollButtonIsVisibleChanged;
-                    _scrollIncreaseButton.Click += OnScrollIncreaseClick;
+                    this._scrollIncreaseButton.IsVisibleChanged += this.OnScrollButtonIsVisibleChanged;
+                    this._scrollIncreaseButton.Click += this.OnScrollIncreaseClick;
                 }
             }
         }
@@ -68,19 +65,19 @@ namespace Ra2CsfToolsGUI
         {
             var desiredSize = base.MeasureOverride(constraint);
 
-            if (ItemsOrganiser != null)
+            if (this.ItemsOrganiser != null)
             {
-                var padding = Padding;
-                var width = ItemsPresenterWidth + padding.Left + padding.Right;
-                var height = ItemsPresenterHeight + padding.Top + padding.Bottom;
+                var padding = this.Padding;
+                double width = this.ItemsPresenterWidth + padding.Left + padding.Right;
+                double height = this.ItemsPresenterHeight + padding.Top + padding.Bottom;
 
-                if (_scrollDecreaseButton != null && _scrollDecreaseButton.IsVisible)
+                if (this._scrollDecreaseButton != null && this._scrollDecreaseButton.IsVisible)
                 {
-                    width += _scrollDecreaseButton.ActualWidth;
+                    width += this._scrollDecreaseButton.ActualWidth;
                 }
-                if (_scrollIncreaseButton != null && _scrollIncreaseButton.IsVisible)
+                if (this._scrollIncreaseButton != null && this._scrollIncreaseButton.IsVisible)
                 {
-                    width += _scrollIncreaseButton.ActualWidth;
+                    width += this._scrollIncreaseButton.ActualWidth;
                 }
 
                 desiredSize.Width = Math.Min(constraint.Width, width);
@@ -96,7 +93,7 @@ namespace Ra2CsfToolsGUI
 
             if (element is DragablzItem dragablzItem && item is TabItem tabItem)
             {
-                dragablzItem.SetBinding(DragablzItemHelper.IconProperty,
+                _ = dragablzItem.SetBinding(DragablzItemHelper.IconProperty,
                     new Binding { Path = new PropertyPath(TabItemHelper.IconProperty), Source = tabItem });
             }
         }
@@ -114,60 +111,57 @@ namespace Ra2CsfToolsGUI
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
         {
             base.OnItemsChanged(e);
-            InvalidateMeasure();
+            this.InvalidateMeasure();
         }
 
         private void OnScrollButtonIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (!(bool)e.NewValue)
             {
-                InvalidateMeasure();
+                this.InvalidateMeasure();
             }
         }
 
         private void OnScrollDecreaseClick(object sender, RoutedEventArgs e)
         {
-            if (_scrollViewer != null)
+            if (this._scrollViewer != null)
             {
-                _scrollViewer.ScrollToHorizontalOffset(Math.Max(0, _scrollViewer.HorizontalOffset - c_scrollAmount));
+                this._scrollViewer.ScrollToHorizontalOffset(Math.Max(0, this._scrollViewer.HorizontalOffset - c_scrollAmount));
             }
         }
 
         private void OnScrollIncreaseClick(object sender, RoutedEventArgs e)
         {
-            if (_scrollViewer != null)
+            if (this._scrollViewer != null)
             {
-                _scrollViewer.ScrollToHorizontalOffset(Math.Min(_scrollViewer.ScrollableWidth, _scrollViewer.HorizontalOffset + c_scrollAmount));
+                this._scrollViewer.ScrollToHorizontalOffset(Math.Min(this._scrollViewer.ScrollableWidth, this._scrollViewer.HorizontalOffset + c_scrollAmount));
             }
         }
 
-        private void OnScrollViewerScrollChanged(object sender, ScrollChangedEventArgs e)
-        {
-            UpdateScrollViewerDecreaseAndIncreaseButtonsViewState();
-        }
+        private void OnScrollViewerScrollChanged(object sender, ScrollChangedEventArgs e) => this.UpdateScrollViewerDecreaseAndIncreaseButtonsViewState();
 
         internal void UpdateScrollViewerDecreaseAndIncreaseButtonsViewState()
         {
-            if (_scrollViewer != null && _scrollDecreaseButton != null && _scrollIncreaseButton != null)
+            if (this._scrollViewer != null && this._scrollDecreaseButton != null && this._scrollIncreaseButton != null)
             {
                 const double minThreshold = 0.1;
-                var horizontalOffset = _scrollViewer.HorizontalOffset;
-                var scrollableWidth = _scrollViewer.ScrollableWidth;
+                double horizontalOffset = this._scrollViewer.HorizontalOffset;
+                double scrollableWidth = this._scrollViewer.ScrollableWidth;
 
                 if (Math.Abs(horizontalOffset - scrollableWidth) < minThreshold)
                 {
-                    _scrollDecreaseButton.IsEnabled = true;
-                    _scrollIncreaseButton.IsEnabled = false;
+                    this._scrollDecreaseButton.IsEnabled = true;
+                    this._scrollIncreaseButton.IsEnabled = false;
                 }
                 else if (Math.Abs(horizontalOffset) < minThreshold)
                 {
-                    _scrollDecreaseButton.IsEnabled = false;
-                    _scrollIncreaseButton.IsEnabled = true;
+                    this._scrollDecreaseButton.IsEnabled = false;
+                    this._scrollIncreaseButton.IsEnabled = true;
                 }
                 else
                 {
-                    _scrollDecreaseButton.IsEnabled = true;
-                    _scrollIncreaseButton.IsEnabled = true;
+                    this._scrollDecreaseButton.IsEnabled = true;
+                    this._scrollIncreaseButton.IsEnabled = true;
                 }
             }
         }
