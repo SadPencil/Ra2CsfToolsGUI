@@ -12,28 +12,77 @@ using IniParser.Model;
 using IniParser.Model.Configuration;
 using IniParser.Parser;
 using System.Text.RegularExpressions;
+using System.Runtime.CompilerServices;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace Ra2CsfToolsGUI
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public MainWindow()
         {
             InitializeComponent();
 
             this.DataContext = this;
+
+            string[] arguments = Environment.GetCommandLineArgs();
+            if (arguments.Length >= 2)
+            {
+                string filename = arguments[1];
+                try
+                {
+                    Convert_CsfFile = GeneralLoadCsfIniFile(filename);
+                    this.UI_FormatConverterTabItem.IsSelected = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBoxPanic(ex);
+                }
+            }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
         public string Version { get; } = "v1.2.1-alpha";
+        public string ApplicationName { get; } = "Ra2CsfToolsGUI";
+        public string WindowTitle { get; } = "Ra2CsfToolsGUI (by Sad Pencil)";
 
         public string TranslationNeededPlaceholder { get; } = "TODO_Translation_Needed";
         public string TranslationDeleteNeededPlaceholder { get; } = "TODO_Translation_Delete_Needed";
 
-        public bool Encoding1252ReadWorkaround { get; set; } = true;
-        public bool Encoding1252WriteWorkaround { get; set; } = false;
+        private bool _Encoding1252ReadWorkaround = true;
+        public bool Encoding1252ReadWorkaround
+        {
+            get => this._Encoding1252ReadWorkaround;
+            set
+            {
+                this._Encoding1252ReadWorkaround = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+        private bool _Encoding1252WriteWorkaround = false;
+        public bool Encoding1252WriteWorkaround
+        {
+            get => this._Encoding1252WriteWorkaround;
+            set
+            {
+                this._Encoding1252WriteWorkaround = value;
+                this.NotifyPropertyChanged();
+            }
+        }
 
+        /// <summary>
+        /// This method is called by the Set accessor of each property. <br/>
+        /// The CallerMemberName attribute that is applied to the optional propertyName parameter causes the property name of the caller to be substituted as an argument.  
+        /// </summary>
+        /// <param name="propertyName"></param>
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         private CsfFileOptions GetCsfFileOptions() => new CsfFileOptions()
         {
             Encoding1252ReadWorkaround = Encoding1252ReadWorkaround,
@@ -53,6 +102,10 @@ namespace Ra2CsfToolsGUI
 
         private static IniDataParser GetIniDataParser() => new IniDataParser(IniParserConfiguration);
         private static IniData GetIniData() => new IniData() { Configuration = IniParserConfiguration, };
+        private void MessageBoxPanic(Exception ex)
+        {
+            _ = MessageBox.Show(this, ex.Message, $"Error - {ApplicationName}", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
 
         private static IniData ParseIni(Stream stream)
         {
@@ -80,7 +133,47 @@ namespace Ra2CsfToolsGUI
             return dict;
         }
 
-        private CsfFile Convert_CsfFile = null;
+        private CsfFile _Convert_CsfFile = null;
+        private CsfFile Convert_CsfFile
+        {
+            get => this._Convert_CsfFile;
+            set
+            {
+                this._Convert_CsfFile = value;
+                if (value != null)
+                {
+                    this.Convert_CsfFile_Content = GetIniContentFromCsfFile(value);
+                    this.Convert_CsfFile_Tips = $"This string table file contains {value.Labels.Count} labels, with language {value.Language}.";
+                }
+                else
+                {
+                    this.Convert_CsfFile_Content = null;
+                    this.Convert_CsfFile_Tips = null;
+                }
+            }
+        }
+
+        private string _Convert_CsfFile_Content = null;
+        public string Convert_CsfFile_Content
+        {
+            get => this._Convert_CsfFile_Content;
+            private set
+            {
+                this._Convert_CsfFile_Content = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        private string _Convert_CsfFile_Tips = null;
+        public string Convert_CsfFile_Tips
+        {
+            get => this._Convert_CsfFile_Tips;
+            private set
+            {
+                this._Convert_CsfFile_Tips = value;
+                this.NotifyPropertyChanged();
+            }
+        }
 
         private void Convert_LoadFile_Click(object sender, RoutedEventArgs e)
         {
@@ -90,9 +183,30 @@ namespace Ra2CsfToolsGUI
             });
         }
 
+        private CsfFile GeneralLoadCsfIniFile(string filepath)
+        {
+            var fileext = Path.GetExtension(filepath);
+            switch (fileext)
+            {
+                case ".csf":
+                    using (var fs = File.Open(filepath, FileMode.Open))
+                    {
+                        return CsfFile.LoadFromCsfFile(fs, GetCsfFileOptions());
+                    };
+                // break;
+                case ".ini":
+                    using (var fs = File.Open(filepath, FileMode.Open))
+                    {
+                        return CsfFileIniHelper.LoadFromIniFile(fs, GetCsfFileOptions());
+                    }
+                // break;
+                default:
+                    throw new Exception("Unexpected file extension. Only .csf and .ini files are accepted.");
+            }
+        }
+
         private CsfFile GeneralLoadCsfIniFileGUI()
         {
-            CsfFile csf = null;
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 Filter = "String table files (*.csf;*.ini)|*.csf;*.ini|Westwood RA2 string table files (*.csf)|*.csf|SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini",
@@ -100,24 +214,7 @@ namespace Ra2CsfToolsGUI
             if (openFileDialog.ShowDialog(this).GetValueOrDefault())
             {
                 var filename = openFileDialog.FileName;
-                var fileext = Path.GetExtension(filename);
-                switch (fileext)
-                {
-                    case ".csf":
-                        using (var fs = File.Open(filename, FileMode.Open))
-                        {
-                            csf = CsfFile.LoadFromCsfFile(fs, GetCsfFileOptions());
-                        };
-                        break;
-                    case ".ini":
-                        using (var fs = File.Open(filename, FileMode.Open))
-                        {
-                            csf = CsfFileIniHelper.LoadFromIniFile(fs, GetCsfFileOptions());
-                        }
-                        break;
-                    default:
-                        throw new Exception("Unexpected file extension. Only .csf and .ini files are accepted.");
-                }
+                var csf = GeneralLoadCsfIniFile(filename);
                 _ = MessageBox.Show(this, $"File loaded successfully. This string table file contains {csf.Labels.Count} labels, with language {csf.Language}.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 Debug.Assert(csf != null);
@@ -193,7 +290,7 @@ namespace Ra2CsfToolsGUI
             }
             catch (Exception ex)
             {
-                _ = MessageBox.Show(this, ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBoxPanic(ex);
             }
         }
 
@@ -221,6 +318,21 @@ namespace Ra2CsfToolsGUI
             {
                 TranslationNew_File = GeneralLoadCsfIniFileGUI();
             });
+        }
+
+        private static string GetIniContentFromCsfFile(CsfFile csf)
+        {
+            using (var ms = new MemoryStream())
+            {
+                CsfFileIniHelper.WriteIniFile(csf, ms);
+                using (var msCopy = new MemoryStream(ms.ToArray()))
+                {
+                    using (var sr = new StreamReader(msCopy, new UTF8Encoding(false)))
+                    {
+                        return sr.ReadToEnd();
+                    }
+                }
+            }
         }
 
         private static IniData GetNewIniFileFromCsfFile(CsfFile csf)
