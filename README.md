@@ -2,6 +2,8 @@
 
 ## Introduction
 
+![A screenshot of the tool](image/tools.png)
+
 This is a tool helping users process with string table files (.csf) that is recognized by Red Alert 2 and Yuri's Revenge. It enables you to:
 - Edit the .csf file with your favorite text editor, by converting the .csf file to .ini file, and then back to .csf file.
 - No need to preserve the .csf file. Only store the .ini file in your Git repository as it contains everything needed to generate a .csf file.
