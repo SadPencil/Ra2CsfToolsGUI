@@ -54,11 +54,14 @@
                 <GroupBox Header="Encoding 1252 Workaround Options">
                     <ui:SimpleStackPanel Spacing="12">
                         <TextBlock TextWrapping="Wrap" FontSize="16">
-                            For code points 128-159 (0x80-0x9F), the original font file of RA2 mistakenly treat these characters as Windows-1252, instead of Unicode (ISO-8859-1).
-                        In some mod and some editors, such characters will be saved as Windows-1252 encoding. This behavior is wrong.
+                            For code points 128-159 (0x80-0x9F), the original game.fnt file of RA2 mistakenly treat these characters as Windows-1252, instead of Unicode (ISO-8859-1).
+                        In some mods and some editors, such characters will be saved as Windows-1252 encoding. This behavior is wrong.
                             <LineBreak />
-                            However, users may need to proceed with these files. You can decide whether to treat 128-159 as Windows-1252 (to be compatible with original RA2 font file) or as Unicode (this is the correct way, but modders must supply a correct font file).
-                            Checking the boxes below means the former, and un-checking the boxes below means the latter.
+                            However, users may need to proceed with these files. You can decide whether to treat 128-159 as Windows-1252 or as Unicode.
+                            <LineBreak/>
+                            Checking the two boxes below means the former, to be compatible with some mods and some editors.
+                            <LineBreak/>
+                            Un-checking the two boxes below means the latter. This is the correct way. The original game.fnt file has the correct font data at these code points, except for the trademark character ™.
                         </TextBlock>
                         <CheckBox FontSize="16" Content="Enable Windows-1252 workaround when loading the .csf file." IsChecked="{Binding Encoding1252ReadWorkaround}" />
                         <CheckBox FontSize="16" Content="Enable Windows-1252 workaround when writing the .csf file." IsChecked="{Binding Encoding1252WriteWorkaround}" />
