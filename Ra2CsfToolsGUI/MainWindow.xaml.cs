@@ -45,7 +45,7 @@ namespace Ra2CsfToolsGUI
             AllowDuplicateKeys = false,
             AllowDuplicateSections = false,
             AllowKeysWithoutSection = false,
-            CommentRegex = new System.Text.RegularExpressions.Regex("a^"), // match nothing
+            CommentRegex = new Regex("a^"), // match nothing
             CaseInsensitive = true,
             AssigmentSpacer = String.Empty,
             SectionRegex = new Regex("^(\\s*?)\\[{1}\\s*[\\p{L}\\p{P}\\p{M}_\\\"\\'\\{\\}\\#\\+\\;\\*\\%\\(\\)\\=\\?\\&\\$\\^\\<\\>\\`\\^|\\,\\:\\/\\.\\-\\w\\d\\s\\\\\\~]+\\s*\\](\\s*?)$"),
