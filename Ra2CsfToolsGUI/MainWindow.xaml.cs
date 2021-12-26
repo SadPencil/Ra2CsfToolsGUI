@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -364,7 +365,7 @@ namespace Ra2CsfToolsGUI
             return ini;
         }
 
-        private static string GetIniLabelCustomKeyName(string name, int lineIndex) => name + ((lineIndex == 1) ? string.Empty : $"Line{lineIndex}");
+        private static string GetIniLabelCustomKeyName(string name, int lineIndex) => name + ((lineIndex == 1) ? string.Empty : $"Line{lineIndex.ToString(CultureInfo.InvariantCulture)}");
 
         private void TranslationNew_SaveIniFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
