@@ -13,7 +13,7 @@
     </ui:TabItemHelper.Icon>
 
     <ui:SimpleStackPanel Spacing="12" Margin="10">
-        <TextBlock TextWrapping="Wrap" FontSize="14">Select an upstream string table file and a translated string label file, and save an .ini file that once a label is shown in the translated file, the value is selected. Otherwise, the label shown in the upstream file is selected. The .ini file can be converted back to .csf file in the "Format Converter" tab.</TextBlock>
+        <TextBlock TextWrapping="Wrap">Select an upstream string table file and a translated string label file, and save an .ini file that once a label is shown in the translated file, the value is selected. Otherwise, the label shown in the upstream file is selected. The .ini file can be converted back to .csf file in the "Format Converter" tab.</TextBlock>
 
         <Button Content="Load an upstream string table file (.csf/.ini) ..." x:Name="LoadUpstreamFileButton" />
         <Button Content="Load a translated string table file (.csf/.ini) ..." x:Name="LoadTranslatedFileButton" />

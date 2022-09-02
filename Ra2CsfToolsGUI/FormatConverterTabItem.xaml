@@ -19,15 +19,15 @@
         </Grid.RowDefinitions>
 
         <ui:SimpleStackPanel Grid.Row="0" Spacing="12" Margin="10">
-            <TextBlock TextWrapping="Wrap" FontSize="14">A string table of Red Alert 2 is presented as a .csf file, which is not friendly for editing as the csf editors are generally made decades ago. This tool enables users converting the string table from a .csf file to an .ini file that is extremely easy-editing, and also converting from an .ini file back to a .csf file that is recognized by the game.</TextBlock>
-            <TextBlock TextWrapping="Wrap" FontSize="14">Note: the text encoding of the .ini file must be UTF-8 (without BOM).</TextBlock>
+            <TextBlock TextWrapping="Wrap">Traditionally, a string table of Red Alert 2 is presented as a .csf file, which is not friendly for editing as the csf editors are generally made decades ago. This tool enables users converting the string table from a .csf file to an .ini file that is extremely easy-editing, and also converting from an .ini file back to a .csf file that is recognized by the game.</TextBlock>
+            <TextBlock TextWrapping="Wrap">Note: the text encoding of the .ini file must be UTF-8 (without BOM).</TextBlock>
             <ui:SimpleStackPanel Spacing="12" Margin="0" Orientation="Horizontal">
                 <Button Content="Load a string table file (.csf/.ini) ..." x:Name="LoadFileButton"/>
                 <!--<Label                     Content="{Binding Convert_FileLabelNum}"                       ContentStringFormat="This string table contains {0} labels."/>-->
                 <Button Content="Save as an .ini file ..."  x:Name="SaveAsIniButton"/>
                 <Button Content="Save as a .csf file ..."  x:Name="SaveAsCsfButton" />
             </ui:SimpleStackPanel>
-            <TextBlock TextWrapping="Wrap" FontSize="14">
+            <TextBlock TextWrapping="Wrap">
                         The content of the string table file is shown below for previewing. To modify it, save as an .ini file.
             </TextBlock>
 
