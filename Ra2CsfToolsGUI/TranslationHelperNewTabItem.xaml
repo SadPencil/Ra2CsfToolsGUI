@@ -12,7 +12,7 @@
         <ui:SymbolIcon Symbol="Comment" />
     </ui:TabItemHelper.Icon>
     <ui:SimpleStackPanel Spacing="12" Margin="10">
-        <TextBlock TextWrapping="Wrap">Select an upstream string table file, and save an .ini file that is friendly for translation. The .ini file can be converted back to .csf file in the "Format Converter" tab.</TextBlock>
+        <TextBlock TextWrapping="Wrap" FontSize="14">Select an upstream string table file, and save an .ini file that is friendly for translation. The .ini file can be converted back to .csf file in the "Format Converter" tab.</TextBlock>
         <TextBox ui:ControlHelper.Header="Note: in the generated .ini file, all values that needs translation are replaced with the following text:" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
         <Button Content="Load an upstream string table file (.csf/.ini) ..." x:Name="LoadFileButton" />
         <Button Content="Save as an .ini file for translation ..." x:Name="SaveIniFileButton" />

@@ -51,7 +51,7 @@
                     <ui:SymbolIcon Symbol="Forward" />
                     Start your work right away by drag &amp; drop a .csf/.ini file here.
         </TextBlock>
-        <CheckBox Margin="10" IsChecked="{Binding Path=AdvancedMode, Mode=TwoWay}">Advanced Mode</CheckBox>
+        <CheckBox FontSize="16" Margin="10" IsChecked="{Binding Path=AdvancedMode, Mode=TwoWay}">Advanced Mode</CheckBox>
     </StackPanel>
 
 </TabItem>
