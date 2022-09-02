@@ -108,14 +108,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Dragablz">
-      <Version>0.0.3.223</Version>
-    </PackageReference>
     <PackageReference Include="ini-parser-netstandard">
       <Version>2.5.2</Version>
     </PackageReference>
     <PackageReference Include="ModernWpfUI">
-      <Version>0.9.4</Version>
+      <Version>0.9.6</Version>
     </PackageReference>
     <PackageReference Include="SadPencil.Ra2CsfFile">
       <Version>2.1.2</Version>
