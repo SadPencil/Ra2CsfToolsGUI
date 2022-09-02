@@ -2,11 +2,14 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Ra2CsfToolsGUI"
-#define MyAppVersion "1.3.0"
+#define MyAppVersion "1.3.1"
 #define MyAppPublisher "Sad Pencil"
 #define MyAppURL "https://github.com/SadPencil/Ra2CsfToolsGUI"
 #define MyAppExeName "Ra2CsfToolsGUI.exe"
 #define WorkingDir "."
+#define MyExt ".csf"
+#define MyExtName "SadPencil.Ra2CsfToolsGUI.csf"
+#define MyExtDesc "RA2 String Table File"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -73,11 +76,11 @@ Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Registry]
-Root: HKA; Subkey: "Software\Classes\.csf\OpenWithProgids"; ValueType: string; ValueName: "SadPencil.Ra2CsfToolsGUI.csf"; ValueData: ""; Flags: uninsdeletevalue 
-Root: HKA; Subkey: "Software\Classes\SadPencil.Ra2CsfToolsGUI.csf"; ValueType: string; ValueName: ""; ValueData: "RA2 string table file"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\Classes\SadPencil.Ra2CsfToolsGUI.csf\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0" 
-Root: HKA; Subkey: "Software\Classes\SadPencil.Ra2CsfToolsGUI.csf\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""               
-Root: HKA; Subkey: "Software\Classes\Applications\{#MyAppExeName}\SupportedTypes"; ValueType: string; ValueName: ".csf"; ValueData: "" 
+Root: HKA; Subkey: "Software\Classes\{#MyExt}\OpenWithProgids"; ValueType: string; ValueName: "{#MyExtName}"; ValueData: ""; Flags: uninsdeletevalue 
+Root: HKA; Subkey: "Software\Classes\{#MyExtName}"; ValueType: string; ValueName: ""; ValueData: "{#MyExtDesc}"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#MyExtName}\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0" 
+Root: HKA; Subkey: "Software\Classes\{#MyExtName}\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""               
+Root: HKA; Subkey: "Software\Classes\Applications\{#MyAppExeName}\SupportedTypes"; ValueType: string; ValueName: "{#MyExt}"; ValueData: "" 
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
