@@ -45,6 +45,17 @@ namespace Ra2CsfToolsGUI
         public string ApplicationName { get; } = "Ra2CsfToolsGUI";
         public string WindowTitle { get; } = "Ra2CsfToolsGUI (by Sad Pencil)";
 
+        private bool _AdvancedMode = false;
+        public bool AdvancedMode
+        {
+            get => this._AdvancedMode;
+            set
+            {
+                this._AdvancedMode = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
         public string TranslationNeededPlaceholder { get; } = "TODO_Translation_Needed";
         public string TranslationDeleteNeededPlaceholder { get; } = "TODO_Translation_Delete_Needed";
 

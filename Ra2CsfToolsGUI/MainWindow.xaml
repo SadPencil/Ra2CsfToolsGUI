@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:local="clr-namespace:Ra2CsfToolsGUI" xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz" x:Class="Ra2CsfToolsGUI.MainWindow" ui:WindowHelper.UseModernWindowStyle="True" mc:Ignorable="d" Title="{Binding WindowTitle, Mode=OneWay}" Height="500" Width="800" AllowDrop="True" Drop="Window_Drop">
-    <local:TabablzControlEx x:Name="TabView" ShowDefaultAddButton="False" ShowDefaultCloseButton="False">
-        <!--<local:TabablzControlEx.InterTabController>
-            <dragablz:InterTabController />
-        </local:TabablzControlEx.InterTabController>-->
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:local="clr-namespace:Ra2CsfToolsGUI" xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz" x:Class="Ra2CsfToolsGUI.MainWindow" ui:WindowHelper.UseModernWindowStyle="True" mc:Ignorable="d" Title="{Binding WindowTitle, Mode=OneWay}" Height="520" Width="800" AllowDrop="True" Drop="Window_Drop">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+    </Window.Resources>
+    <TabControl>
         <TabItem Header="Home" x:Name="UI_HomeTabItem">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Home" />
@@ -49,9 +49,10 @@
                     <ui:SymbolIcon Symbol="Forward" />
                     Start your work right away by drag &amp; drop a .csf/.ini file here.
                 </TextBlock>
+                <CheckBox Margin="10" FontSize="16" IsChecked="{Binding Path=AdvancedMode, Mode=TwoWay}">Advanced Mode</CheckBox>
             </StackPanel>
         </TabItem>
-        <TabItem Header="Setting">
+        <TabItem Header="Setting" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Setting" />
             </ui:TabItemHelper.Icon>
@@ -86,7 +87,7 @@
                 </Grid.RowDefinitions>
 
                 <ui:SimpleStackPanel Grid.Row="0" Spacing="12" Margin="10">
-                    <TextBlock TextWrapping="Wrap">Traditionally, a string table of Red Alert 2 is presented as a .csf file, which is not friendly for editing as the csf editors are generally made decades ago. This tool enables users converting the string table from a .csf file to an .ini file that is extremely easy-editing, and also converting from an .ini file back to a .csf file that is recognized by the game.</TextBlock>
+                    <TextBlock TextWrapping="Wrap">The string table of Red Alert 2 is presented as a .csf file, which is not friendly for editing as the csf editors are generally made decades ago. This tool enables users converting the string table from a .csf file to an .ini file that is extremely easy-editing, and also converting from an .ini file back to a .csf file that is recognized by the game.</TextBlock>
                     <TextBlock TextWrapping="Wrap">Note: the text encoding of the .ini file must be UTF-8 (without BOM).</TextBlock>
                     <ui:SimpleStackPanel Spacing="12" Margin="0" Orientation="Horizontal">
                         <Button Content="Load a string table file (.csf/.ini) ..." Click="Convert_LoadFile_Click" />
@@ -104,7 +105,7 @@
                 <TextBlock Margin="10" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Convert_CsfFile_Tips, Mode=OneWay}" />
             </Grid>
         </TabItem>
-        <TabItem Header="Translation Helper - New">
+        <TabItem Header="Translation Helper - New" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
@@ -115,7 +116,7 @@
                 <Button Content="Save as an .ini file for translation ..." Click="TranslationNew_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="Translation Helper - Tile">
+        <TabItem Header="Translation Helper - Tile" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
@@ -127,7 +128,7 @@
                 <Button Content="Save as an .ini file for comparison ..." Click="TranslationTile_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="Translation Helper - Override">
+        <TabItem Header="Translation Helper - Override" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
@@ -140,7 +141,7 @@
                 <Button Content="Save as an .ini file for comparison ..." Click="TranslationOverride_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="Translation Helper - Update">
+        <TabItem Header="Translation Helper - Update" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
@@ -153,7 +154,7 @@
                 <Button Content="Save as an .ini file for updating the translation ..." Click="TranslationUpdate_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="Translation Helper - Update Check">
+        <TabItem Header="Translation Helper - Update Check" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
@@ -168,5 +169,5 @@
                 <Button Content="Save as an .ini file for updating the translation ..." Click="TranslationUpdateCheck_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-    </local:TabablzControlEx>
+    </TabControl>
 </Window>
