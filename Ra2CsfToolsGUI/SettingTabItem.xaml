@@ -1,0 +1,32 @@
+﻿<TabItem Header="Setting" x:Class="Ra2CsfToolsGUI.SettingTabItem"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Ra2CsfToolsGUI"
+      xmlns:ui="http://schemas.modernwpf.com/2019"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+>
+    <ui:TabItemHelper.Icon>
+        <ui:SymbolIcon Symbol="Setting" />
+    </ui:TabItemHelper.Icon>
+    <ui:SimpleStackPanel Spacing="12" Margin="10">
+        <GroupBox Header="Encoding 1252 Workaround Options">
+            <ui:SimpleStackPanel Spacing="12">
+                <TextBlock TextWrapping="Wrap" FontSize="16">
+                            For code points 128-159 (0x80-0x9F), the original game.fnt file of RA2 mistakenly treat these characters as Windows-1252, instead of Unicode (ISO-8859-1).
+                        In some mods and some editors, such characters will be saved as Windows-1252 encoding. This behavior is wrong.
+                            <LineBreak />
+                            However, users may need to proceed with these files. You can decide whether to treat 128-159 as Windows-1252 or as Unicode.
+                            <LineBreak />
+                            Checking the two boxes below means the former, to be compatible with some mods and some editors.
+                            <LineBreak />
+                            Un-checking the two boxes below means the latter. This is the correct way. The original game.fnt file has the correct font data at these code points, except for the trademark character ™.
+                </TextBlock>
+                <CheckBox FontSize="16" Content="Enable Windows-1252 workaround when loading the .csf file." IsChecked="{Binding Encoding1252ReadWorkaround}" />
+                <CheckBox FontSize="16" Content="Enable Windows-1252 workaround when writing the .csf file." IsChecked="{Binding Encoding1252WriteWorkaround}" />
+            </ui:SimpleStackPanel>
+        </GroupBox>
+    </ui:SimpleStackPanel>
+</TabItem>
