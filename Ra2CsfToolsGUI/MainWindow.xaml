@@ -2,7 +2,8 @@
 
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:local="clr-namespace:Ra2CsfToolsGUI" xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz" x:Class="Ra2CsfToolsGUI.MainWindow" ui:WindowHelper.UseModernWindowStyle="True" mc:Ignorable="d" Title="{Binding WindowTitle, Mode=OneWay}" Height="520" Width="800" AllowDrop="True" Drop="Window_Drop">
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+        <local:BooleanToVisibilityConverter  x:Key="BoolToVisConverter" />
+        <local:BooleanToVisibilityConverter  x:Key="Not_BoolToVisConverter" True="Collapsed" False="Visible" />
     </Window.Resources>
     <TabControl>
         <TabItem Header="Home" x:Name="UI_HomeTabItem">
@@ -29,7 +30,7 @@
                     </StackPanel>
                 </Grid>
 
-                <TextBlock Margin="10" FontSize="16" TextWrapping="Wrap">
+                <TextBlock Margin="10,10,10,0" FontSize="16" TextWrapping="Wrap">
                     This is a tool helping users process with string table files (.csf) that is recognized by Red Alert 2 and Yuri's Revenge. It enables you to:
                     <LineBreak />
                     <ui:SymbolIcon Symbol="Accept" />
@@ -37,11 +38,18 @@
                     <LineBreak />
                     <ui:SymbolIcon Symbol="Accept" />
                     No need to preserve the .csf file. Only store the .ini file in your Git repository as it contains everything needed to generate a .csf file.
-                    <LineBreak />
-                    <ui:SymbolIcon Symbol="Accept" />
+                </TextBlock>
+                <TextBlock Margin="10,-15,10,10" FontSize="16" TextWrapping="Wrap" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}">
+                    <LineBreak/>
+                    <ui:SymbolIcon Symbol="Accept"  />
+                    More features available in "Advanced Mode"...
+                </TextBlock>
+                <TextBlock Margin="10,-15,10,10" FontSize="16" TextWrapping="Wrap" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}"> 
+                <LineBreak />
+                    <ui:SymbolIcon Symbol="Accept"  />
                     Tile the translated file with the upstream file, so you may finish the translation without searching for the needle between two files.
                     <LineBreak />
-                    <ui:SymbolIcon Symbol="Accept" />
+                    <ui:SymbolIcon Symbol="Accept"/>
                     Highlight the translation update between old version and new versions for your old-version translation, so you may update the translation effectively.
                 </TextBlock>
 
