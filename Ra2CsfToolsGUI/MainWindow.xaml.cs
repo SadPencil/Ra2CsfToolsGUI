@@ -5,7 +5,6 @@ using Microsoft.Win32;
 using SadPencil.Ra2CsfFile;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
@@ -15,7 +14,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace Ra2CsfToolsGUI
 {
@@ -24,51 +22,11 @@ namespace Ra2CsfToolsGUI
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        private HomeTabItem HomeTabItem;
-        private SettingTabItem SettingTabItem;
-        private FormatConverterTabItem FormatConverterTabItem;
-        private TranslationHelperNewTabItem TranslationHelperNewTabItem;
-        private TranslationHelperOverrideTabItem TranslationHelperOverrideTabItem;
-        private TranslationHelperTileTabItem TranslationHelperTileTabItem;
-        private TranslationHelperUpdateTabItem TranslationHelperUpdateTabItem;
-        private TranslationHelperUpdateCheckTabItem TranslationHelperUpdateCheckTabItem;
         public MainWindow()
         {
             this.InitializeComponent();
 
-            this.HomeTabItem = new HomeTabItem() { DataContext = this };
-            this.SettingTabItem = new SettingTabItem() { DataContext = this };
-            this.FormatConverterTabItem = new FormatConverterTabItem { DataContext = this };
-            this.FormatConverterTabItem.LoadFileButton.Click += this.Convert_LoadFile_Click;
-            this.FormatConverterTabItem.SaveAsIniButton.Click += this.Convert_SaveAsIni_Click;
-            this.FormatConverterTabItem.SaveAsCsfButton.Click += this.Convert_SaveAsCsf_Click;
-            this.TranslationHelperNewTabItem = new TranslationHelperNewTabItem() { DataContext = this };
-            this.TranslationHelperNewTabItem.LoadFileButton.Click += TranslationNew_LoadFile_Click;
-            this.TranslationHelperNewTabItem.SaveIniFileButton.Click += TranslationNew_SaveIniFile_Click;
-            this.TranslationHelperTileTabItem = new TranslationHelperTileTabItem() { DataContext = this };
-            this.TranslationHelperTileTabItem.LoadUpstreamFileButton.Click += TranslationTile_LoadUpstreamFile_Click;
-            this.TranslationHelperTileTabItem.LoadTranslatedFileButton.Click += TranslationTile_LoadTranslatedFile_Click;
-            this.TranslationHelperTileTabItem.SaveIniFileButton.Click += TranslationTile_SaveIniFile_Click;
-            this.TranslationHelperOverrideTabItem = new TranslationHelperOverrideTabItem() { DataContext = this };
-            this.TranslationHelperOverrideTabItem.LoadUpstreamFileButton.Click += TranslationOverride_LoadUpstreamFile_Click;
-            this.TranslationHelperOverrideTabItem.LoadTranslatedFileButton.Click += TranslationOverride_LoadTranslatedFile_Click;
-            this.TranslationHelperOverrideTabItem.SaveIniFileButton.Click += TranslationOverride_SaveIniFile_Click;
-            this.TranslationHelperUpdateTabItem = new TranslationHelperUpdateTabItem() { DataContext = this };
-            this.TranslationHelperUpdateTabItem.LoadNewUpstreamFileButton.Click += TranslationUpdate_LoadNewUpstreamFile_Click;
-            this.TranslationHelperUpdateTabItem.LoadOldUpstreamFileButton.Click += TranslationUpdate_LoadOldUpstreamFile_Click;
-            this.TranslationHelperUpdateTabItem.LoadOldTranslatedFileButton.Click += TranslationUpdate_LoadOldTranslatedFile_Click;
-            this.TranslationHelperUpdateTabItem.SaveIniFileButton.Click += TranslationUpdate_SaveIniFile_Click;
-            this.TranslationHelperUpdateCheckTabItem = new TranslationHelperUpdateCheckTabItem() { DataContext = this };
-            this.TranslationHelperUpdateCheckTabItem.LoadOldTranslatedFileButton.Click += TranslationUpdateCheck_LoadOldTranslatedFile_Click;
-            this.TranslationHelperUpdateCheckTabItem.LoadNewTranslatedFileButton.Click += TranslationUpdateCheck_LoadNewTranslatedFile_Click;
-            this.TranslationHelperUpdateCheckTabItem.LoadOldUpstreamFileButton.Click += TranslationUpdateCheck_LoadOldUpstreamFile_Click;
-            this.TranslationHelperUpdateCheckTabItem.LoadNewUpstreamFileButton.Click += TranslationUpdateCheck_LoadNewUpstreamFile_Click;
-            this.TranslationHelperUpdateCheckTabItem.SaveIniFileButton.Click += TranslationUpdateCheck_SaveIniFile_Click;
-
             this.DataContext = this;
-
-            this.PropertyChanged += this.MainWindow_PropertyChanged;
-            this.AdvancedMode = false; // initialize the tabs by triggering the PropertyChanged event
 
             string[] arguments = Environment.GetCommandLineArgs();
             if (arguments.Length >= 2)
@@ -77,24 +35,8 @@ namespace Ra2CsfToolsGUI
                 this.GeneralTryCatchGUI(() =>
                 {
                     this.Convert_CsfFile = this.GeneralLoadCsfIniFile(filename);
-                    this.FormatConverterTabItem.IsSelected = true;
+                    this.UI_FormatConverterTabItem.IsSelected = true;
                 });
-            }
-        }
-
-        private void MainWindow_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(this.AdvancedMode))
-            {
-                if (this.AdvancedMode)
-                {
-                    this.AvailableTabs = new ObservableCollection<TabItem>() { HomeTabItem, SettingTabItem,
-                    TranslationHelperNewTabItem, TranslationHelperTileTabItem, TranslationHelperOverrideTabItem, TranslationHelperUpdateTabItem, TranslationHelperUpdateCheckTabItem};
-                }
-                else
-                {
-                    this.AvailableTabs = new ObservableCollection<TabItem>() { HomeTabItem, FormatConverterTabItem };
-                }
             }
         }
 
@@ -105,30 +47,6 @@ namespace Ra2CsfToolsGUI
 
         public string TranslationNeededPlaceholder { get; } = "TODO_Translation_Needed";
         public string TranslationDeleteNeededPlaceholder { get; } = "TODO_Translation_Delete_Needed";
-
-        private ObservableCollection<TabItem> _AvailableTabs;// initialized in constructor
-
-        public ObservableCollection<TabItem> AvailableTabs
-        {
-            get => this._AvailableTabs;
-            set
-            {
-                this._AvailableTabs = value;
-                this.NotifyPropertyChanged();
-            }
-        }
-
-        private bool _AdvancedMode; // initialized in constructor
-        public bool AdvancedMode
-        {
-            get => this._AdvancedMode;
-            set
-            {
-                this._AdvancedMode = value;
-                this.NotifyPropertyChanged();
-            }
-        }
-
 
         private bool _Encoding1252ReadWorkaround = true;
         public bool Encoding1252ReadWorkaround
@@ -897,7 +815,7 @@ namespace Ra2CsfToolsGUI
                 string filename = droppedFilePaths[0];
 
                 this.Convert_CsfFile = this.GeneralLoadCsfIniFile(filename);
-                this.FormatConverterTabItem.IsSelected = true;
+                this.UI_FormatConverterTabItem.IsSelected = true;
             }
         });
     }

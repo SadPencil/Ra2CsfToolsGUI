@@ -69,56 +69,8 @@
     </ApplicationDefinition>
     <Compile Include="DragablzItemHelper.cs" />
     <Compile Include="DragablzItemsControlEx.cs" />
-    <Compile Include="TranslationHelperUpdateCheckTabItem.xaml.cs">
-      <DependentUpon>TranslationHelperUpdateCheckTabItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TranslationHelperUpdateTabItem.xaml.cs">
-      <DependentUpon>TranslationHelperUpdateTabItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TranslationHelperOverrideTabItem.xaml.cs">
-      <DependentUpon>TranslationHelperOverrideTabItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TranslationHelperTileTabItem.xaml.cs">
-      <DependentUpon>TranslationHelperTileTabItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TranslationHelperNewTabItem.xaml.cs">
-      <DependentUpon>TranslationHelperNewTabItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HomeTabItem.xaml.cs">
-      <DependentUpon>HomeTabItem.xaml</DependentUpon>
-    </Compile>
     <Compile Include="InvertThicknessConverter.cs" />
-    <Compile Include="FormatConverterTabItem.xaml.cs">
-      <DependentUpon>FormatConverterTabItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SettingTabItem.xaml.cs">
-      <DependentUpon>SettingTabItem.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TabablzControlEx.cs" />
-    <Page Include="TranslationHelperUpdateCheckTabItem.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="TranslationHelperUpdateTabItem.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="TranslationHelperOverrideTabItem.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="TranslationHelperTileTabItem.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="TranslationHelperNewTabItem.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="HomeTabItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -131,14 +83,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="FormatConverterTabItem.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SettingTabItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
