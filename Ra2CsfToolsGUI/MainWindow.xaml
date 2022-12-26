@@ -68,12 +68,12 @@
                 <GroupBox Header="Encoding 1252 Workaround Options">
                     <ui:SimpleStackPanel Spacing="12">
                         <TextBlock TextWrapping="Wrap" FontSize="16">
-                            For code points 128-159 (0x80-0x9F), the original game.fnt file of RA2 mistakenly treat these characters as Windows-1252, instead of Unicode (ISO-8859-1).
-                        In some mods and some editors, such characters will be saved as Windows-1252 encoding. This behavior is wrong.
+                            For code points 128-159 (0x80-0x9F), the original game.fnt file of RA2 mistakenly treats these characters as Windows-1252, instead of Unicode (ISO-8859-1).
+                        In some mods and some editors, those characters may be saved as Windows-1252 encoding, which is incorrect.
                             <LineBreak />
-                            However, users may need to process these files. You can decide whether to treat 128-159 as Windows-1252 or as Unicode.
+                            However, users may still need to process these files. You can decide whether to treat 128-159 as Windows-1252 or as Unicode.
                             <LineBreak />
-                            Checking the two boxes below means the former, to be compatible with some mods and some editors.
+                            Checking the two boxes below means the former, which is compatible with some mods and some editors.
                             <LineBreak />
                             Un-checking the two boxes below means the latter. This is the correct way. The original game.fnt file has the correct font data at these code points, except for the trademark character ™.
                         </TextBlock>
@@ -95,7 +95,7 @@
                 </Grid.RowDefinitions>
 
                 <ui:SimpleStackPanel Grid.Row="0" Spacing="12" Margin="10">
-                    <TextBlock TextWrapping="Wrap">The string table of Red Alert 2 is presented as a .csf file, which is not friendly for editing as the csf editors are generally made decades ago. This tool enables users converting the string table from a .csf file to an .ini file that is extremely easy-editing, and also converting from an .ini file back to a .csf file that is recognized by the game.</TextBlock>
+                    <TextBlock TextWrapping="Wrap">The string table of Red Alert 2 is presented as a .csf file, which is not friendly for editing as most csf editors were created decades ago. This tool allows users to convert the string table from a .csf file to an .ini file and back to a .csf file that is recognized by the game.</TextBlock>
                     <TextBlock TextWrapping="Wrap">Note: the text encoding of the .ini file must be UTF-8 (without BOM).</TextBlock>
                     <ui:SimpleStackPanel Spacing="12" Margin="0" Orientation="Horizontal">
                         <Button Content="Load a string table file (.csf/.ini) ..." Click="Convert_LoadFile_Click" />
@@ -104,7 +104,7 @@
                         <Button Content="Save as a .csf file ..." Click="Convert_SaveAsCsf_Click" />
                     </ui:SimpleStackPanel>
                     <TextBlock TextWrapping="Wrap">
-                        The content of the string table file is shown below for previewing. To modify it, save as an .ini file.
+                        The content of the string table file is shown below for preview. To modify it, save it as an .ini file.
                     </TextBlock>
 
                 </ui:SimpleStackPanel>
