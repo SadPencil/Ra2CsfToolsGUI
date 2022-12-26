@@ -31,13 +31,13 @@
                 </Grid>
 
                 <TextBlock Margin="10,10,10,0" FontSize="16" TextWrapping="Wrap">
-                    This is a tool helping users process with string table files (.csf) that is recognized by Red Alert 2 and Yuri's Revenge. It enables you to:
+                    This tool helps users process string table files (.csf) that are recognized by Red Alert 2 and Yuri's Revenge. It allows you to:
                     <LineBreak />
                     <ui:SymbolIcon Symbol="Accept" />
-                    Edit the .csf file with your favorite text editor, by converting the .csf file to .ini file, and then back to .csf file.
+                    Edit the .csf file using your favorite text editor by converting it to an .ini file and then back to a .csf file.
                     <LineBreak />
                     <ui:SymbolIcon Symbol="Accept" />
-                    No need to preserve the .csf file. Only store the .ini file in your Git repository as it contains everything needed to generate a .csf file.
+                    You don't need to keep the .csf file. You can just store the .ini file in your Git repository, as it contains everything needed to generate a .csf file.
                 </TextBlock>
                 <TextBlock Margin="10,-15,10,10" FontSize="16" TextWrapping="Wrap" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}">
                     <LineBreak/>
@@ -47,15 +47,15 @@
                 <TextBlock Margin="10,-15,10,10" FontSize="16" TextWrapping="Wrap" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}"> 
                 <LineBreak />
                     <ui:SymbolIcon Symbol="Accept"  />
-                    Tile the translated file with the upstream file, so you may finish the translation without searching for the needle between two files.
+                    Tile the translated file with the upstream file, so you can complete the translation without having to compare two files side by side.
                     <LineBreak />
                     <ui:SymbolIcon Symbol="Accept"/>
-                    Highlight the translation update between old version and new versions for your old-version translation, so you may update the translation effectively.
+                    Highlight the translation updates between old and new versions of your old translation, so you can effectively update it.
                 </TextBlock>
 
                 <TextBlock Margin="10" FontSize="16" TextWrapping="Wrap">
                     <ui:SymbolIcon Symbol="Forward" />
-                    Start your work right away by drag &amp; drop a .csf/.ini file here.
+                    To get started, simply drag &amp; drop a .csf/.ini file here.
                 </TextBlock>
                 <CheckBox Margin="10" FontSize="16" IsChecked="{Binding Path=AdvancedMode, Mode=TwoWay}">Advanced Mode</CheckBox>
             </StackPanel>
