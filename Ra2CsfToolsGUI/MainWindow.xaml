@@ -71,7 +71,7 @@
                             For code points 128-159 (0x80-0x9F), the original game.fnt file of RA2 mistakenly treat these characters as Windows-1252, instead of Unicode (ISO-8859-1).
                         In some mods and some editors, such characters will be saved as Windows-1252 encoding. This behavior is wrong.
                             <LineBreak />
-                            However, users may need to proceed with these files. You can decide whether to treat 128-159 as Windows-1252 or as Unicode.
+                            However, users may need to process these files. You can decide whether to treat 128-159 as Windows-1252 or as Unicode.
                             <LineBreak />
                             Checking the two boxes below means the former, to be compatible with some mods and some editors.
                             <LineBreak />
