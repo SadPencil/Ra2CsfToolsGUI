@@ -3,7 +3,7 @@
 
 #define MyAppName "Ra2CsfToolsGUI"
 #define MyAppVersion "1.3.1"
-#define MyAppPublisher "Sad Pencil"
+#define MyAppPublisher "SadPencil"
 #define MyAppURL "https://github.com/SadPencil/Ra2CsfToolsGUI"
 #define MyAppExeName "Ra2CsfToolsGUI.exe"
 #define WorkingDir "."
