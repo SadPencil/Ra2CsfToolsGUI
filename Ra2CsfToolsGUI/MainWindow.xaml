@@ -101,6 +101,7 @@
                         <Button Content="Load a string table file (.csf/.ini) ..." Click="Convert_LoadFile_Click" />
                         <!--<Label                     Content="{Binding Convert_FileLabelNum}"                       ContentStringFormat="This string table contains {0} labels."/>-->
                         <Button Content="Save as an .ini file ..." Click="Convert_SaveAsIni_Click" />
+                        <Button Content="Save as a .yaml file ..." Click="Convert_SaveAsYaml_Click" />
                         <Button Content="Save as a .csf file ..." Click="Convert_SaveAsCsf_Click" />
                     </ui:SimpleStackPanel>
                     <TextBlock TextWrapping="Wrap">
@@ -175,6 +176,18 @@
                 <Button Content="Load an old-version translated string table file (.csf/.ini) ..." Click="TranslationUpdateCheck_LoadOldTranslatedFile_Click" />
                 <Button Content="Load a new-version translated string table file (.csf/.ini) ..." Click="TranslationUpdateCheck_LoadNewTranslatedFile_Click" />
                 <Button Content="Save as an .ini file for updating the translation ..." Click="TranslationUpdateCheck_SaveIniFile_Click" />
+            </ui:SimpleStackPanel>
+        </TabItem>
+        <TabItem Header="Watch Mode" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+            <ui:TabItemHelper.Icon>
+                <ui:SymbolIcon Symbol="Manage" />
+            </ui:TabItemHelper.Icon>
+            <ui:SimpleStackPanel Spacing="12" Margin="10">
+                <TextBlock TextWrapping="Wrap">在下方文本框中输入需要监视的ini文件和对应ini需要生成的csf文件以,隔开，多个ini文件可以换行，只要当前程序启动，ini发生变化时都会自动生成对应的csf文件</TextBlock>
+                <TextBox AcceptsReturn="True" IsReadOnly="False" Height="200" Text="{Binding WatchConfigStr, Mode=TwoWay}" >
+                </TextBox>
+                <!--<Button Content="Load an old-version upstream string table file (.csf/.ini) ..." Click="TranslationUpdateCheck_LoadOldUpstreamFile_Click" />-->
+                <Button Content="Save And Apply" Click="WatchMode_Confirm_Click"/>
             </ui:SimpleStackPanel>
         </TabItem>
     </TabControl>

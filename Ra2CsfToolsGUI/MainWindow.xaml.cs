@@ -2,6 +2,7 @@
 using IniParser.Model.Configuration;
 using IniParser.Parser;
 using Microsoft.Win32;
+using Ra2CsfToolsGUI.Util;
 using SadPencil.Ra2CsfFile;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,19 @@ namespace Ra2CsfToolsGUI
                     this.Convert_CsfFile = this.GeneralLoadCsfIniFile(filename);
                     this.UI_FormatConverterTabItem.IsSelected = true;
                 });
+            }
+
+            if(File.Exists("./watch_mode_config.txt"))
+            {
+                using (StreamReader sr = new StreamReader("./watch_mode_config.txt", Encoding.UTF8))
+                {
+                    this.WatchConfigStr = sr.ReadToEnd();
+                }
+                this.ReInitWatches();
+            }
+            else
+            {
+                this.WatchConfigStr = string.Empty;
             }
         }
 
@@ -198,9 +212,14 @@ namespace Ra2CsfToolsGUI
                     {
                         return CsfFileIniHelper.LoadFromIniFile(fs, this.GetCsfFileOptions());
                     }
+                case ".yaml":
+                    using (var fs = File.Open(filepath, FileMode.Open))
+                    {
+                        return CsfFileExtension.LoadFromYamlFile(fs, this.GetCsfFileOptions());
+                    }
                 // break;
                 default:
-                    throw new Exception("Unexpected file extension. Only .csf and .ini files are accepted.");
+                    throw new Exception("Unexpected file extension. Only .csf and .ini and .yaml files are accepted.");
             }
         }
 
@@ -208,7 +227,7 @@ namespace Ra2CsfToolsGUI
         {
             var openFileDialog = new OpenFileDialog
             {
-                Filter = "String table files (*.csf;*.ini)|*.csf;*.ini|Westwood RA2 string table files (*.csf)|*.csf|SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini",
+                Filter = "String table files (*.csf;*.ini;*.yaml)|*.csf;*.ini;*.yaml|Westwood RA2 string table files (*.csf)|*.csf|SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini|SadPencil.Ra2CsfFile.Yaml files (*.yaml)|*.yaml",
             };
             if (openFileDialog.ShowDialog(this).GetValueOrDefault())
             {
@@ -248,7 +267,7 @@ namespace Ra2CsfToolsGUI
 
         private void GeneralSaveCsfIniFileGUI(CsfFile file, string defaultExtension = ".ini")
         {
-            Debug.Assert(new List<string>() { ".ini", ".csf" }.Contains(defaultExtension));
+            Debug.Assert(new List<string>() { ".ini", ".csf" , ".yaml" }.Contains(defaultExtension));
 
             if (file == null)
             {
@@ -261,14 +280,24 @@ namespace Ra2CsfToolsGUI
                 {
                     file.WriteCsfFile(fs);
                 }
-                else
+                else if(defaultExtension == ".ini")
                 {
                     CsfFileIniHelper.WriteIniFile(file, fs);
+                }else if(defaultExtension == ".yaml")
+                {
+                    file.WriteYamlFile(fs);
                 }
 
-            }, (defaultExtension == ".csf") ? "Westwood RA2 string table files (*.csf)|*.csf" : "SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini");
-
+            }, defaultExtension switch
+            {
+                ".csf" => "Westwood RA2 string table files (*.csf)|*.csf",
+                ".ini" => "SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini",
+                ".yaml" => "SadPencil.Ra2CsfFile.Yaml files (*.yaml)|*.yaml",
+                _ => throw new Exception("Unexpected file extension."),
+            });
         }
+
+       
 
         private void GeneralSaveIniFileGUI(IniData ini) => this.GeneralSaveFileGUI(fs =>
         {
@@ -293,6 +322,11 @@ namespace Ra2CsfToolsGUI
         private void Convert_SaveAsIni_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
             this.GeneralSaveCsfIniFileGUI(this.Convert_CsfFile, ".ini");
+        });
+
+        private void Convert_SaveAsYaml_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            this.GeneralSaveCsfIniFileGUI(this.Convert_CsfFile, ".yaml");
         });
 
         private void Convert_SaveAsCsf_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
@@ -814,6 +848,85 @@ namespace Ra2CsfToolsGUI
             this.GeneralSaveIniFileGUI(ini);
 
         });
+
+        public string WatchConfigStr { get; set; }
+
+        private static List<FileSystemWatcher> Watches { get; set; } = new List<FileSystemWatcher>();
+
+        private void WatchMode_Confirm_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            foreach(var watcher in Watches)
+            {
+                watcher.EnableRaisingEvents = false;
+                watcher.Dispose();
+            }
+            Watches.Clear();
+            using (StreamWriter sw = new StreamWriter("./watch_mode_config.txt",false))
+            {
+                sw.Write(WatchConfigStr);
+            }
+
+            ReInitWatches();
+
+            _ = MessageBox.Show(this, $"Save changes successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+        });
+
+        private void ReInitWatches()
+        {
+            if (string.IsNullOrWhiteSpace(WatchConfigStr))
+                return;
+
+            var lines = WatchConfigStr.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var line in lines)
+            {
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
+
+                var items = line.Split(',');
+
+                if (items.Length < 2)
+                    throw new Exception($"Invalid watch config line: {line}");
+
+                var source = items[0].Trim();
+                var target = items[1].Trim();
+
+                FileInfo sourceFileInfo = new FileInfo(source);
+                var fname = sourceFileInfo.Name;
+                var dirName = sourceFileInfo.DirectoryName;
+                FileSystemWatcher fileSystemWatcher = new FileSystemWatcher
+                {
+                    Path = dirName,
+                    Filter = fname,
+                    NotifyFilter = NotifyFilters.LastWrite,
+                };
+                Watches.Add(fileSystemWatcher);
+                fileSystemWatcher.Changed += (s, e) =>
+                {
+                    try
+                    {
+                        var csf = GeneralLoadCsfIniFile(source);
+                        using (var fs = File.Open(target, FileMode.Create))
+                        {
+                            csf.WriteCsfFile(fs);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBoxPanic(ex);
+                    }
+                };
+                fileSystemWatcher.EnableRaisingEvents = true;
+
+            }
+        }
+
+
+
+
+
+
+
         private void Window_Drop(object sender, DragEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
