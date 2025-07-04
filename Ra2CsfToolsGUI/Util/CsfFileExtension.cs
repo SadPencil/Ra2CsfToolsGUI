@@ -104,7 +104,7 @@ namespace Ra2CsfToolsGUI.Util
             {
                 if (kvp.Key.StartsWith("SadPencil.Ra2CsfFile.Yaml"))
                     continue;
-                dic.Add(kvp.Key, kvp.Value);
+                dictionary.Add(kvp.Key, kvp.Value);
             }
 
             foreach (KeyValuePair<string, string> item in dictionary)
@@ -121,5 +121,7 @@ namespace Ra2CsfToolsGUI.Util
             }
             return csfFile;
         }
+
+
     }
 }
