@@ -40,18 +40,9 @@ namespace Ra2CsfToolsGUI
                 });
             }
 
-            if(File.Exists("./watch_mode_config.txt"))
-            {
-                using (StreamReader sr = new StreamReader("./watch_mode_config.txt", Encoding.UTF8))
-                {
-                    this.WatchConfigStr = sr.ReadToEnd();
-                }
-                this.ReInitWatches();
-            }
-            else
-            {
-                this.WatchConfigStr = string.Empty;
-            }
+            this.WatchConfigStr = LoadWatchConfig();
+            this.ReInitWatches();
+          
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -219,7 +210,7 @@ namespace Ra2CsfToolsGUI
                     }
                 // break;
                 default:
-                    throw new Exception("Unexpected file extension. Only .csf and .ini and .yaml files are accepted.");
+                    throw new Exception("Unexpected file extension. Only .csf , .ini and .yaml files are accepted.");
             }
         }
 
@@ -860,20 +851,55 @@ namespace Ra2CsfToolsGUI
                 watcher.EnableRaisingEvents = false;
                 watcher.Dispose();
             }
-            Watches.Clear();
-            using (StreamWriter sw = new StreamWriter("./watch_mode_config.txt",false))
-            {
-                sw.Write(WatchConfigStr);
-            }
+
+            SaveWatchConfig(WatchConfigStr);
 
             ReInitWatches();
 
-            _ = MessageBox.Show(this, $"Save changes successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            _ = MessageBox.Show(this, $"Your changes have been saved successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
         });
 
+        private void SaveWatchConfig(string configStr)
+        {
+            string appDataPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                $"SadPencil{Path.DirectorySeparatorChar}Ra2CsfToolsGUI");
+
+            if (!Directory.Exists(appDataPath))
+            {
+                Directory.CreateDirectory(appDataPath);
+            }
+
+            using (StreamWriter sw = new StreamWriter(Path.Combine(appDataPath, "watch_mode_config.dat"), false))
+            {
+                sw.Write(configStr);
+            }
+        }
+
+        private string LoadWatchConfig()
+        {
+            string appDataPath = Path.Combine(
+              Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+              $"SadPencil{Path.DirectorySeparatorChar}Ra2CsfToolsGUI");
+
+            string savedPath = Path.Combine(appDataPath, "watch_mode_config.dat");
+
+            if (File.Exists(savedPath))
+            {
+                using (StreamReader sr = new StreamReader(savedPath))
+                {
+                    return sr.ReadToEnd();
+                } 
+            }
+
+            return string.Empty;
+        }
+
         private void ReInitWatches()
         {
+            Watches.Clear();
+
             if (string.IsNullOrWhiteSpace(WatchConfigStr))
                 return;
 
