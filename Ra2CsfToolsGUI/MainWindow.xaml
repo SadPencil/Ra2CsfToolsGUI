@@ -187,7 +187,7 @@
                 <TextBox AcceptsReturn="True" IsReadOnly="False" Height="200" Text="{Binding WatchConfigStr, Mode=TwoWay}" >
                 </TextBox>
                 <!--<Button Content="Load an old-version upstream string table file (.csf/.ini) ..." Click="TranslationUpdateCheck_LoadOldUpstreamFile_Click" />-->
-                <Button Content="Save And Apply" Click="WatchMode_Confirm_Click"/>
+                <Button Content="Save and Apply" Click="WatchMode_Confirm_Click"/>
             </ui:SimpleStackPanel>
         </TabItem>
     </TabControl>
