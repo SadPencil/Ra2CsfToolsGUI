@@ -875,7 +875,7 @@ namespace Ra2CsfToolsGUI
 
         private void SaveWatchConfig(string configStr)
         {
-            using (StreamWriter sw = new StreamWriter(GetWatchConfigFilePath(), false))
+            using (StreamWriter sw = new StreamWriter(GetWatchConfigFilePath(), append: false))
             {
                 sw.Write(configStr);
             }
