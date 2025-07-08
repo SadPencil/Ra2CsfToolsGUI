@@ -212,7 +212,7 @@ namespace Ra2CsfToolsGUI
                     }
                 // break;
                 default:
-                    throw new Exception("Unexpected file extension. Only .csf,.ini and .yaml files are accepted.");
+                    throw new Exception("Unexpected file extension. Only .csf, .ini and .yaml files are accepted.");
             }
         }
 
