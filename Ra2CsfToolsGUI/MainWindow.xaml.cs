@@ -923,12 +923,10 @@ namespace Ra2CsfToolsGUI
                 var target = items[1].Trim();
 
                 FileInfo sourceFileInfo = new FileInfo(source);
-                var fname = sourceFileInfo.Name;
-                var dirName = sourceFileInfo.DirectoryName;
                 FileSystemWatcher fileSystemWatcher = new FileSystemWatcher
                 {
-                    Path = dirName,
-                    Filter = fname,
+                    Path = sourceFileInfo.DirectoryName,
+                    Filter = sourceFileInfo.Name,
                     NotifyFilter = NotifyFilters.LastWrite,
                 };
                 Watches.Add(fileSystemWatcher);
