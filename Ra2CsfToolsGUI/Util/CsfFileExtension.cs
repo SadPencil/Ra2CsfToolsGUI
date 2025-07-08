@@ -27,10 +27,12 @@ namespace Ra2CsfToolsGUI.Util
                 throw new ArgumentNullException(nameof(stream));
             }
 
-            var dic = new Dictionary<string, string>();
-            dic.Add("SadPencil.Ra2CsfFile.Yaml:YamlVersion", 1.ToString(CultureInfo.InvariantCulture));
-            dic.Add("SadPencil.Ra2CsfFile.Yaml:CsfVersion", csf.Version.ToString(CultureInfo.InvariantCulture));
-            dic.Add("SadPencil.Ra2CsfFile.Yaml:CsfLang", ((int)csf.Language).ToString(CultureInfo.InvariantCulture));
+            var yamlRawSections = new Dictionary<string, string>
+            {
+                { "SadPencil.Ra2CsfFile.Yaml:YamlVersion", 1.ToString(CultureInfo.InvariantCulture) },
+                { "SadPencil.Ra2CsfFile.Yaml:CsfVersion", csf.Version.ToString(CultureInfo.InvariantCulture) },
+                { "SadPencil.Ra2CsfFile.Yaml:CsfLang", ((int)csf.Language).ToString(CultureInfo.InvariantCulture) }
+            };
 
             foreach (KeyValuePair<string, string> label in csf.Labels)
             {
@@ -40,14 +42,13 @@ namespace Ra2CsfToolsGUI.Util
                 {
                     throw new Exception("Invalid characters found in label name \"" + key + "\".");
                 }
-                dic.Add(key, value);
-
+                yamlRawSections.Add(key, value);
             }
 
             var serializer = new SerializerBuilder()
                 .WithDefaultScalarStyle(YamlDotNet.Core.ScalarStyle.Literal)
                 .Build();
-            var yaml = serializer.Serialize(dic);
+            var yaml = serializer.Serialize(yamlRawSections);
 
 
             using (StreamWriter streamWriter = new StreamWriter(stream, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false)))
@@ -76,29 +77,29 @@ namespace Ra2CsfToolsGUI.Util
             using var memoryStream = new MemoryStream();
             stream.CopyTo(memoryStream);
             var yaml = Encoding.UTF8.GetString(memoryStream.ToArray());
-            var dic = deserializer.Deserialize<Dictionary<string, string>>(yaml);
+            var yamlRawSections = deserializer.Deserialize<Dictionary<string, string>>(yaml);
 
-            if (!dic.ContainsKey("SadPencil.Ra2CsfFile.Yaml:CsfVersion"))
+            if (!yamlRawSections.ContainsKey("SadPencil.Ra2CsfFile.Yaml:CsfVersion"))
             {
                 throw new Exception("Invalid SadPencil.Ra2CsfFile.Yaml file. Missing key \"CsfVersion\" in SadPencil.Ra2CsfFile.Yaml:CsfVersion.");
             }
 
-            string csfVersionValue = dic["SadPencil.Ra2CsfFile.Yaml:CsfVersion"];
+            string csfVersionValue = yamlRawSections["SadPencil.Ra2CsfFile.Yaml:CsfVersion"];
             csfFile.Version = Convert.ToInt32(csfVersionValue, CultureInfo.InvariantCulture);
-            if (!dic.ContainsKey("SadPencil.Ra2CsfFile.Yaml:CsfLang"))
+            if (!yamlRawSections.ContainsKey("SadPencil.Ra2CsfFile.Yaml:CsfLang"))
             {
                 throw new Exception("Invalid SadPencil.Ra2CsfFile.Yaml file. Missing key \"CsfLang\" in SadPencil.Ra2CsfFile.Yaml:CsfLang.");
             }
 
-            string csfLangValue = dic["SadPencil.Ra2CsfFile.Yaml:CsfLang"];
+            string csfLangValue = yamlRawSections["SadPencil.Ra2CsfFile.Yaml:CsfLang"];
             csfFile.Language = CsfLangHelper.GetCsfLang(Convert.ToInt32(csfLangValue, CultureInfo.InvariantCulture));
             Dictionary<string, string> csfKeyValueDictionary = new Dictionary<string, string>();
 
-            foreach (var kvp in dic)
+            foreach (var section in yamlRawSections)
             {
-                if (kvp.Key.StartsWith("SadPencil.Ra2CsfFile.Yaml"))
+                if (section.Key.StartsWith("SadPencil.Ra2CsfFile.Yaml"))
                     continue;
-                csfKeyValueDictionary.Add(kvp.Key, kvp.Value);
+                csfKeyValueDictionary.Add(section.Key, section.Value);
             }
 
             foreach (KeyValuePair<string, string> csfItem in csfKeyValueDictionary)
@@ -115,7 +116,5 @@ namespace Ra2CsfToolsGUI.Util
             }
             return csfFile;
         }
-
-
     }
 }
