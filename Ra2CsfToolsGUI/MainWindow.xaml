@@ -183,7 +183,7 @@
                 <ui:SymbolIcon Symbol="Manage" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap">在下方文本框中输入需要监视的ini文件和对应ini需要生成的csf文件以,隔开，多个ini文件可以换行，只要当前程序启动，ini发生变化时都会自动生成对应的csf文件</TextBlock>
+                <TextBlock TextWrapping="Wrap">In the text box below, input the pairs of ini files to monitor and the corresponding csf files to generate. Separate each pair with a comma. You can enter multiple pairs by putting each pair on a new line. Once the program starts, it will monitor the ini files. Whenever an ini file changes, the program will automatically generate the corresponding csf file.</TextBlock>
                 <TextBox AcceptsReturn="True" IsReadOnly="False" Height="200" Text="{Binding WatchConfigStr, Mode=TwoWay}" >
                 </TextBox>
                 <!--<Button Content="Load an old-version upstream string table file (.csf/.ini) ..." Click="TranslationUpdateCheck_LoadOldUpstreamFile_Click" />-->

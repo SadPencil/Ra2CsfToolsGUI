@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup.Localizer;
 using YamlDotNet.Serialization;
 
 namespace Ra2CsfToolsGUI.Util
@@ -18,12 +19,12 @@ namespace Ra2CsfToolsGUI.Util
         {
             if (csf == null)
             {
-                throw new ArgumentNullException("csf");
+                throw new ArgumentNullException(nameof(csf));
             }
 
             if (stream == null)
             {
-                throw new ArgumentNullException("stream");
+                throw new ArgumentNullException(nameof(stream));
             }
 
             var dic = new Dictionary<string, string>();
@@ -76,47 +77,40 @@ namespace Ra2CsfToolsGUI.Util
             stream.CopyTo(memoryStream);
             var yaml = Encoding.UTF8.GetString(memoryStream.ToArray());
             var dic = deserializer.Deserialize<Dictionary<string, string>>(yaml);
-
-            //if (!dic.ContainsKey(""))
-            //{
-            //    throw new Exception("Invalid SadPencil.Ra2CsfFile.Ini file. Missing section [SadPencil.Ra2CsfFile.Ini].");
-            //}
-
-           
-
+    
             if (!dic.ContainsKey("SadPencil.Ra2CsfFile.Yaml:CsfVersion"))
             {
                 throw new Exception("Invalid SadPencil.Ra2CsfFile.Yaml file. Missing key \"CsfVersion\" in SadPencil.Ra2CsfFile.Yaml:CsfVersion.");
             }
 
-            string value = dic["SadPencil.Ra2CsfFile.Yaml:CsfVersion"];
-            csfFile.Version = Convert.ToInt32(value, CultureInfo.InvariantCulture);
+            string csfVersionValue = dic["SadPencil.Ra2CsfFile.Yaml:CsfVersion"];
+            csfFile.Version = Convert.ToInt32(csfVersionValue, CultureInfo.InvariantCulture);
             if (!dic.ContainsKey("SadPencil.Ra2CsfFile.Yaml:CsfLang"))
             {
                 throw new Exception("Invalid SadPencil.Ra2CsfFile.Yaml file. Missing key \"CsfLang\" in SadPencil.Ra2CsfFile.Yaml:CsfLang.");
             }
 
-            string value2 = dic["SadPencil.Ra2CsfFile.Yaml:CsfLang"];
-            csfFile.Language = CsfLangHelper.GetCsfLang(Convert.ToInt32(value2, CultureInfo.InvariantCulture));
-            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+            string csfLangValue = dic["SadPencil.Ra2CsfFile.Yaml:CsfLang"];
+            csfFile.Language = CsfLangHelper.GetCsfLang(Convert.ToInt32(csfLangValue, CultureInfo.InvariantCulture));
+            Dictionary<string, string> csfKeyValueDictionary = new Dictionary<string, string>();
            
             foreach (var kvp in dic)
             {
                 if (kvp.Key.StartsWith("SadPencil.Ra2CsfFile.Yaml"))
                     continue;
-                dictionary.Add(kvp.Key, kvp.Value);
+                csfKeyValueDictionary.Add(kvp.Key, kvp.Value);
             }
 
-            foreach (KeyValuePair<string, string> item in dictionary)
+            foreach (KeyValuePair<string, string> csfItem in csfKeyValueDictionary)
             {
-                string key2 = item.Key;
-                if (!CsfFile.ValidateLabelName(key2))
+                string csfLabel = csfItem.Key;
+                if (!CsfFile.ValidateLabelName(csfLabel))
                 {
-                    throw new Exception("Invalid characters found in label name \"" + key2 + "\".");
+                    throw new Exception("Invalid characters found in label name \"" + csfLabel + "\".");
                 }
 
-                key2 = CsfFile.LowercaseLabelName(key2);
-                csfFile.AddLabel(key2, item.Value);
+                csfLabel = CsfFile.LowercaseLabelName(csfLabel);
+                csfFile.AddLabel(csfLabel, csfItem.Value);
                
             }
             return csfFile;

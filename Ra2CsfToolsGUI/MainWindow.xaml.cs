@@ -50,6 +50,8 @@ namespace Ra2CsfToolsGUI
         public string ApplicationName { get; } = "Ra2CsfToolsGUI";
         public string WindowTitle { get; } = "Ra2CsfToolsGUI (by SadPencil)";
 
+        private const string WatchModeConfigFile = "watch_mode_config.dat";
+
         private bool _AdvancedMode = false;
         public bool AdvancedMode
         {
@@ -210,7 +212,7 @@ namespace Ra2CsfToolsGUI
                     }
                 // break;
                 default:
-                    throw new Exception("Unexpected file extension. Only .csf , .ini and .yaml files are accepted.");
+                    throw new Exception("Unexpected file extension. Only .csf,.ini and .yaml files are accepted.");
             }
         }
 
@@ -274,7 +276,8 @@ namespace Ra2CsfToolsGUI
                 else if(defaultExtension == ".ini")
                 {
                     CsfFileIniHelper.WriteIniFile(file, fs);
-                }else if(defaultExtension == ".yaml")
+                }
+                else if(defaultExtension == ".yaml")
                 {
                     file.WriteYamlFile(fs);
                 }
@@ -860,18 +863,19 @@ namespace Ra2CsfToolsGUI
 
         });
 
-        private void SaveWatchConfig(string configStr)
+        private string GetWatchConfigFilePath()
         {
-            string appDataPath = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                $"SadPencil{Path.DirectorySeparatorChar}Ra2CsfToolsGUI");
-
+            string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SadPencil", "Ra2CsfToolsGUI");
             if (!Directory.Exists(appDataPath))
             {
                 Directory.CreateDirectory(appDataPath);
             }
+            return Path.Combine(appDataPath, WatchModeConfigFile);
+        }
 
-            using (StreamWriter sw = new StreamWriter(Path.Combine(appDataPath, "watch_mode_config.dat"), false))
+        private void SaveWatchConfig(string configStr)
+        {
+            using (StreamWriter sw = new StreamWriter(GetWatchConfigFilePath(), false))
             {
                 sw.Write(configStr);
             }
@@ -879,11 +883,7 @@ namespace Ra2CsfToolsGUI
 
         private string LoadWatchConfig()
         {
-            string appDataPath = Path.Combine(
-              Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-              $"SadPencil{Path.DirectorySeparatorChar}Ra2CsfToolsGUI");
-
-            string savedPath = Path.Combine(appDataPath, "watch_mode_config.dat");
+            string savedPath = GetWatchConfigFilePath();
 
             if (File.Exists(savedPath))
             {
@@ -898,6 +898,11 @@ namespace Ra2CsfToolsGUI
 
         private void ReInitWatches()
         {
+            foreach(var watched in Watches)
+            {
+                watched.EnableRaisingEvents = false;
+                watched.Dispose();
+            }
             Watches.Clear();
 
             if (string.IsNullOrWhiteSpace(WatchConfigStr))
