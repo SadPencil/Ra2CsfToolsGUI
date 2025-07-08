@@ -42,7 +42,7 @@ namespace Ra2CsfToolsGUI
 
             this.WatchConfigStr = LoadWatchConfig();
             this.ReInitWatches();
-          
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -260,7 +260,7 @@ namespace Ra2CsfToolsGUI
 
         private void GeneralSaveCsfIniFileGUI(CsfFile file, string defaultExtension = ".ini")
         {
-            Debug.Assert(new List<string>() { ".ini", ".csf" , ".yaml" }.Contains(defaultExtension));
+            Debug.Assert(new List<string>() { ".ini", ".csf", ".yaml" }.Contains(defaultExtension));
 
             if (file == null)
             {
@@ -273,11 +273,11 @@ namespace Ra2CsfToolsGUI
                 {
                     file.WriteCsfFile(fs);
                 }
-                else if(defaultExtension == ".ini")
+                else if (defaultExtension == ".ini")
                 {
                     CsfFileIniHelper.WriteIniFile(file, fs);
                 }
-                else if(defaultExtension == ".yaml")
+                else if (defaultExtension == ".yaml")
                 {
                     file.WriteYamlFile(fs);
                 }
@@ -291,7 +291,7 @@ namespace Ra2CsfToolsGUI
             });
         }
 
-       
+
 
         private void GeneralSaveIniFileGUI(IniData ini) => this.GeneralSaveFileGUI(fs =>
         {
@@ -849,7 +849,7 @@ namespace Ra2CsfToolsGUI
 
         private void WatchMode_Confirm_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            foreach(var watcher in Watches)
+            foreach (var watcher in Watches)
             {
                 watcher.EnableRaisingEvents = false;
                 watcher.Dispose();
@@ -890,7 +890,7 @@ namespace Ra2CsfToolsGUI
                 using (StreamReader sr = new StreamReader(savedPath))
                 {
                     return sr.ReadToEnd();
-                } 
+                }
             }
 
             return string.Empty;
@@ -898,7 +898,7 @@ namespace Ra2CsfToolsGUI
 
         private void ReInitWatches()
         {
-            foreach(var watched in Watches)
+            foreach (var watched in Watches)
             {
                 watched.EnableRaisingEvents = false;
                 watched.Dispose();

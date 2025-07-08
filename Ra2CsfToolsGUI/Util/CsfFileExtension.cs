@@ -77,7 +77,7 @@ namespace Ra2CsfToolsGUI.Util
             stream.CopyTo(memoryStream);
             var yaml = Encoding.UTF8.GetString(memoryStream.ToArray());
             var dic = deserializer.Deserialize<Dictionary<string, string>>(yaml);
-    
+
             if (!dic.ContainsKey("SadPencil.Ra2CsfFile.Yaml:CsfVersion"))
             {
                 throw new Exception("Invalid SadPencil.Ra2CsfFile.Yaml file. Missing key \"CsfVersion\" in SadPencil.Ra2CsfFile.Yaml:CsfVersion.");
@@ -93,7 +93,7 @@ namespace Ra2CsfToolsGUI.Util
             string csfLangValue = dic["SadPencil.Ra2CsfFile.Yaml:CsfLang"];
             csfFile.Language = CsfLangHelper.GetCsfLang(Convert.ToInt32(csfLangValue, CultureInfo.InvariantCulture));
             Dictionary<string, string> csfKeyValueDictionary = new Dictionary<string, string>();
-           
+
             foreach (var kvp in dic)
             {
                 if (kvp.Key.StartsWith("SadPencil.Ra2CsfFile.Yaml"))
@@ -111,7 +111,7 @@ namespace Ra2CsfToolsGUI.Util
 
                 csfLabel = CsfFile.LowercaseLabelName(csfLabel);
                 csfFile.AddLabel(csfLabel, csfItem.Value);
-               
+
             }
             return csfFile;
         }
