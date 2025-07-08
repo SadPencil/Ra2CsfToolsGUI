@@ -952,12 +952,6 @@ namespace Ra2CsfToolsGUI
             }
         }
 
-
-
-
-
-
-
         private void Window_Drop(object sender, DragEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
