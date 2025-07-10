@@ -86,10 +86,10 @@ namespace Ra2CsfToolsGUI
         /// </summary>
         /// <param name="propertyName"></param>
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "") => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        private CsfFileOptions GetCsfFileOptions() => new CsfFileOptions()
+        private CsfFileOptions GetCsfFileOptions() => new()
         {
-            Encoding1252ReadWorkaround = Encoding1252ReadWorkaround,
-            Encoding1252WriteWorkaround = Encoding1252WriteWorkaround,
+            Encoding1252ReadWorkaround = this.Encoding1252ReadWorkaround,
+            Encoding1252WriteWorkaround = this.Encoding1252WriteWorkaround,
         };
 
         private static IniParserConfiguration IniParserConfiguration { get; } = new IniParserConfiguration()
@@ -103,9 +103,9 @@ namespace Ra2CsfToolsGUI
             SectionRegex = new Regex("^(\\s*?)\\[{1}\\s*[\\p{L}\\p{P}\\p{M}_\\\"\\'\\{\\}\\#\\+\\;\\*\\%\\(\\)\\=\\?\\&\\$\\^\\<\\>\\`\\^|\\,\\:\\/\\.\\-\\w\\d\\s\\\\\\~]+\\s*\\](\\s*?)$"),
         };
 
-        private static IniDataParser GetIniDataParser() => new IniDataParser(IniParserConfiguration);
+        private static IniDataParser GetIniDataParser() => new(IniParserConfiguration);
 
-        private static IniData GetIniData() => new IniData() { Configuration = IniParserConfiguration, };
+        private static IniData GetIniData() => new() { Configuration = IniParserConfiguration, };
 
         private void MessageBoxPanic(Exception ex) => _ = MessageBox.Show(this, ex.Message, $"Error - {this.ApplicationName}", MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -127,7 +127,7 @@ namespace Ra2CsfToolsGUI
             {
                 if (!dict.ContainsKey(sectionName))
                 {
-                    dict.Add(sectionName, new List<(int iLine, string value)>());
+                    dict.Add(sectionName, []);
                 }
                 dict[sectionName].Add((iLine, value));
             });
