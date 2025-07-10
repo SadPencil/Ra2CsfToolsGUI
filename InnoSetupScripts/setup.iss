@@ -33,7 +33,7 @@ Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
 ChangesAssociations=yes
-ArchitecturesInstallIn64BitMode=x64 arm64 
+ArchitecturesInstallIn64BitMode=win64 
 ;ArchitecturesAllowed=x86 x64 arm64 
 
 [Languages]
