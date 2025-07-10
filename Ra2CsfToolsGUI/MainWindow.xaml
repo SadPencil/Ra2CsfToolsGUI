@@ -188,7 +188,6 @@
                 <TextBlock>Example: C:\path\to\stringtables\ra2.ini, D:\path\to\game\ra2.csf</TextBlock>
                 <TextBox AcceptsReturn="True" IsReadOnly="False" Height="200" Text="{Binding WatchConfigStr, Mode=TwoWay}" >
                 </TextBox>
-                <!--<Button Content="Load an old-version upstream string table file (.csf/.ini) ..." Click="TranslationUpdateCheck_LoadOldUpstreamFile_Click" />-->
                 <Button Content="Save and Apply" Click="WatchMode_Confirm_Click"/>
             </ui:SimpleStackPanel>
         </TabItem>
