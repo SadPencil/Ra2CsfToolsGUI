@@ -31,7 +31,7 @@ namespace Ra2CsfToolsGUI
 
             string[] arguments = Environment.GetCommandLineArgs();
 
-            this.WatchConfigStr = LoadWatchConfig();
+            this.WatchConfigStr = this.LoadWatchConfig();
 
             if (arguments.Length >= 2)
             {
@@ -40,7 +40,7 @@ namespace Ra2CsfToolsGUI
                 {
                     this.Convert_CsfFile = this.GeneralLoadCsfIniFile(filename);
                     this.UI_FormatConverterTabItem.IsSelected = true;
-                    startFromCsf = true;
+                    this.startFromCsf = true;
                 });
             }
         }
@@ -95,10 +95,10 @@ namespace Ra2CsfToolsGUI
         /// </summary>
         /// <param name="propertyName"></param>
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "") => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        private CsfFileOptions GetCsfFileOptions() => new CsfFileOptions()
+        private CsfFileOptions GetCsfFileOptions() => new()
         {
-            Encoding1252ReadWorkaround = Encoding1252ReadWorkaround,
-            Encoding1252WriteWorkaround = Encoding1252WriteWorkaround,
+            Encoding1252ReadWorkaround = this.Encoding1252ReadWorkaround,
+            Encoding1252WriteWorkaround = this.Encoding1252WriteWorkaround,
         };
 
         private static IniParserConfiguration IniParserConfiguration { get; } = new IniParserConfiguration()
@@ -112,9 +112,9 @@ namespace Ra2CsfToolsGUI
             SectionRegex = new Regex("^(\\s*?)\\[{1}\\s*[\\p{L}\\p{P}\\p{M}_\\\"\\'\\{\\}\\#\\+\\;\\*\\%\\(\\)\\=\\?\\&\\$\\^\\<\\>\\`\\^|\\,\\:\\/\\.\\-\\w\\d\\s\\\\\\~]+\\s*\\](\\s*?)$"),
         };
 
-        private static IniDataParser GetIniDataParser() => new IniDataParser(IniParserConfiguration);
+        private static IniDataParser GetIniDataParser() => new(IniParserConfiguration);
 
-        private static IniData GetIniData() => new IniData() { Configuration = IniParserConfiguration, };
+        private static IniData GetIniData() => new() { Configuration = IniParserConfiguration, };
 
         private void MessageBoxPanic(Exception ex) => _ = MessageBox.Show(this, ex.Message, $"Error - {this.ApplicationName}", MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -136,7 +136,7 @@ namespace Ra2CsfToolsGUI
             {
                 if (!dict.ContainsKey(sectionName))
                 {
-                    dict.Add(sectionName, new List<(int iLine, string value)>());
+                    dict.Add(sectionName, []);
                 }
                 dict[sectionName].Add((iLine, value));
             });
@@ -292,8 +292,6 @@ namespace Ra2CsfToolsGUI
                 _ => throw new Exception("Unexpected file extension."),
             });
         }
-
-
 
         private void GeneralSaveIniFileGUI(IniData ini) => this.GeneralSaveFileGUI(fs =>
         {
@@ -847,7 +845,7 @@ namespace Ra2CsfToolsGUI
 
         public string WatchConfigStr { get; set; }
 
-        private static List<FileSystemWatcher> Watches { get; set; } = new List<FileSystemWatcher>();
+        private static List<FileSystemWatcher> Watches { get; set; } = [];
 
         private void WatchMode_Confirm_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
@@ -857,9 +855,9 @@ namespace Ra2CsfToolsGUI
                 watcher.Dispose();
             }
 
-            SaveWatchConfig(WatchConfigStr);
+            this.SaveWatchConfig(this.WatchConfigStr);
 
-            ReInitWatches();
+            this.ReInitWatches();
 
             _ = MessageBox.Show(this, $"Your changes have been saved successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -870,14 +868,14 @@ namespace Ra2CsfToolsGUI
             string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SadPencil", "Ra2CsfToolsGUI");
             if (!Directory.Exists(appDataPath))
             {
-                Directory.CreateDirectory(appDataPath);
+                _ = Directory.CreateDirectory(appDataPath);
             }
             return Path.Combine(appDataPath, WatchModeConfigFile);
         }
 
         private void SaveWatchConfig(string configStr)
         {
-            using (StreamWriter sw = new StreamWriter(GetWatchConfigFilePath(), append: false))
+            using (var sw = new StreamWriter(this.GetWatchConfigFilePath(), append: false))
             {
                 sw.Write(configStr);
             }
@@ -885,11 +883,11 @@ namespace Ra2CsfToolsGUI
 
         private string LoadWatchConfig()
         {
-            string savedPath = GetWatchConfigFilePath();
+            string savedPath = this.GetWatchConfigFilePath();
 
             if (File.Exists(savedPath))
             {
-                using (StreamReader sr = new StreamReader(savedPath))
+                using (var sr = new StreamReader(savedPath))
                 {
                     return sr.ReadToEnd();
                 }
@@ -907,25 +905,31 @@ namespace Ra2CsfToolsGUI
             }
             Watches.Clear();
 
-            if (string.IsNullOrWhiteSpace(WatchConfigStr))
+            if (string.IsNullOrWhiteSpace(this.WatchConfigStr))
+            {
                 return;
+            }
 
-            var lines = WatchConfigStr.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
+            string[] lines = this.WatchConfigStr.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string line in lines)
             {
                 if (string.IsNullOrWhiteSpace(line))
+                {
                     continue;
+                }
 
-                var items = line.Split(',');
+                string[] items = line.Split(',');
 
                 if (items.Length < 2)
+                {
                     throw new Exception($"Invalid watch config line: {line}");
+                }
 
-                var source = items[0].Trim();
-                var target = items[1].Trim();
+                string source = items[0].Trim();
+                string target = items[1].Trim();
 
-                FileInfo sourceFileInfo = new FileInfo(source);
-                FileSystemWatcher fileSystemWatcher = new FileSystemWatcher
+                var sourceFileInfo = new FileInfo(source);
+                var fileSystemWatcher = new FileSystemWatcher
                 {
                     Path = sourceFileInfo.DirectoryName,
                     Filter = sourceFileInfo.Name,
@@ -936,7 +940,7 @@ namespace Ra2CsfToolsGUI
                 {
                     try
                     {
-                        var csf = GeneralLoadCsfIniFile(source);
+                        var csf = this.GeneralLoadCsfIniFile(source);
                         using (var fs = File.Open(target, FileMode.Create))
                         {
                             csf.WriteCsfFile(fs);
@@ -944,7 +948,7 @@ namespace Ra2CsfToolsGUI
                     }
                     catch (Exception ex)
                     {
-                        MessageBoxPanic(ex);
+                        this.MessageBoxPanic(ex);
                     }
                 };
                 fileSystemWatcher.EnableRaisingEvents = true;
@@ -970,13 +974,13 @@ namespace Ra2CsfToolsGUI
 
         private void Window_Content_Rendered(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(WatchConfigStr) && !this.startFromCsf)
+            if (!string.IsNullOrWhiteSpace(this.WatchConfigStr) && !this.startFromCsf)
             {
                 var result = MessageBox.Show(this, "Watch mode is configured. Do you want to start it?", "Information", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     this.ReInitWatches();
-                    AdvancedMode = true;
+                    this.AdvancedMode = true;
                 }
             }
         }
