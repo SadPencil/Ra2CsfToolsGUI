@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:local="clr-namespace:Ra2CsfToolsGUI" xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz" x:Class="Ra2CsfToolsGUI.MainWindow" ui:WindowHelper.UseModernWindowStyle="True" mc:Ignorable="d" Title="{Binding WindowTitle, Mode=OneWay}" Height="520" Width="800" AllowDrop="True" Drop="Window_Drop">
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:local="clr-namespace:Ra2CsfToolsGUI" xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz" x:Class="Ra2CsfToolsGUI.MainWindow" ui:WindowHelper.UseModernWindowStyle="True" mc:Ignorable="d" Title="{Binding WindowTitle, Mode=OneWay}" Height="520" Width="800" AllowDrop="True" Drop="Window_Drop" ContentRendered="Window_Content_Rendered">
     <Window.Resources>
         <local:BooleanToVisibilityConverter  x:Key="BoolToVisConverter" />
         <local:BooleanToVisibilityConverter  x:Key="Not_BoolToVisConverter" True="Collapsed" False="Visible" />
@@ -98,9 +98,11 @@
                     <TextBlock TextWrapping="Wrap">The string table of Red Alert 2 is presented as a .csf file, which is not friendly for editing as most csf editors were created decades ago. This tool allows users to convert the string table from a .csf file to an .ini file and back to a .csf file that is recognized by the game.</TextBlock>
                     <TextBlock TextWrapping="Wrap">Note: the text encoding of the .ini file must be UTF-8 (without BOM).</TextBlock>
                     <ui:SimpleStackPanel Spacing="12" Margin="0" Orientation="Horizontal">
-                        <Button Content="Load a string table file (.csf/.ini) ..." Click="Convert_LoadFile_Click" />
+                        <Button Content="Load a string table file (.csf/.ini) ..." Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}" />
+                        <Button Content="Load a string table file (.csf/.ini/.yaml) ..." Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
                         <!--<Label                     Content="{Binding Convert_FileLabelNum}"                       ContentStringFormat="This string table contains {0} labels."/>-->
                         <Button Content="Save as an .ini file ..." Click="Convert_SaveAsIni_Click" />
+                        <Button Content="Save as a .yaml file ..." Click="Convert_SaveAsYaml_Click"  Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
                         <Button Content="Save as a .csf file ..." Click="Convert_SaveAsCsf_Click" />
                     </ui:SimpleStackPanel>
                     <TextBlock TextWrapping="Wrap">
@@ -175,6 +177,18 @@
                 <Button Content="Load an old-version translated string table file (.csf/.ini) ..." Click="TranslationUpdateCheck_LoadOldTranslatedFile_Click" />
                 <Button Content="Load a new-version translated string table file (.csf/.ini) ..." Click="TranslationUpdateCheck_LoadNewTranslatedFile_Click" />
                 <Button Content="Save as an .ini file for updating the translation ..." Click="TranslationUpdateCheck_SaveIniFile_Click" />
+            </ui:SimpleStackPanel>
+        </TabItem>
+        <TabItem Header="Watch Mode" x:Name="UI_WatchModeTabItem" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+            <ui:TabItemHelper.Icon>
+                <ui:SymbolIcon Symbol="Manage" />
+            </ui:TabItemHelper.Icon>
+            <ui:SimpleStackPanel Spacing="12" Margin="10">
+                <TextBlock TextWrapping="Wrap">In the text box below, input the pairs of .ini files to monitor and the corresponding .csf files to generate. Separate each pair with a comma. You can enter multiple pairs by putting each pair on a new line. Once the program starts, it will monitor the .ini files. Whenever an ini file changes, the program will automatically generate the corresponding csf file.</TextBlock>
+                <TextBlock>Example: C:\path\to\stringtables\ra2.ini, D:\path\to\game\ra2.csf</TextBlock>
+                <TextBox AcceptsReturn="True" IsReadOnly="False" Height="200" Text="{Binding WatchConfigStr, Mode=TwoWay}" >
+                </TextBox>
+                <Button Content="Save and Apply" Click="WatchMode_Confirm_Click"/>
             </ui:SimpleStackPanel>
         </TabItem>
     </TabControl>
