@@ -898,61 +898,76 @@ namespace Ra2CsfToolsGUI
 
         private void ReInitWatches()
         {
-            foreach (var watched in Watches)
+            try
             {
-                watched.EnableRaisingEvents = false;
-                watched.Dispose();
-            }
-            Watches.Clear();
-
-            if (string.IsNullOrWhiteSpace(this.WatchConfigStr))
-            {
-                return;
-            }
-
-            string[] lines = this.WatchConfigStr.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string line in lines)
-            {
-                if (string.IsNullOrWhiteSpace(line))
+                foreach (var watched in Watches)
                 {
-                    continue;
+                    watched.EnableRaisingEvents = false;
+                    watched.Dispose();
+                }
+                Watches.Clear();
+
+                if (string.IsNullOrWhiteSpace(this.WatchConfigStr))
+                {
+                    return;
                 }
 
-                string[] items = line.Split(',');
-
-                if (items.Length < 2)
+                string[] lines = this.WatchConfigStr.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string line in lines)
                 {
-                    throw new Exception($"Invalid watch config line: {line}");
-                }
-
-                string source = items[0].Trim();
-                string target = items[1].Trim();
-
-                var sourceFileInfo = new FileInfo(source);
-                var fileSystemWatcher = new FileSystemWatcher
-                {
-                    Path = sourceFileInfo.DirectoryName,
-                    Filter = sourceFileInfo.Name,
-                    NotifyFilter = NotifyFilters.LastWrite,
-                };
-                Watches.Add(fileSystemWatcher);
-                fileSystemWatcher.Changed += (s, e) =>
-                {
-                    try
+                    if (string.IsNullOrWhiteSpace(line))
                     {
-                        var csf = this.GeneralLoadCsfIniFile(source);
-                        using (var fs = File.Open(target, FileMode.Create))
+                        continue;
+                    }
+
+                    string[] items = line.Split(',');
+
+                    if (items.Length < 2)
+                    {
+                        throw new Exception($"Invalid watch config line: {line}");
+                    }
+
+                    string source = items[0].Trim();
+                    string target = items[1].Trim();
+
+                    var sourceFileInfo = new FileInfo(source);
+                    var fileSystemWatcher = new FileSystemWatcher
+                    {
+                        Path = sourceFileInfo.DirectoryName,
+                        Filter = sourceFileInfo.Name,
+                        NotifyFilter = NotifyFilters.LastWrite,
+                    };
+                    Watches.Add(fileSystemWatcher);
+                    fileSystemWatcher.Changed += (s, e) =>
+                    {
+                        try
                         {
-                            csf.WriteCsfFile(fs);
+                            var csf = this.GeneralLoadCsfIniFile(source);
+                            using (var fs = File.Open(target, FileMode.Create))
+                            {
+                                csf.WriteCsfFile(fs);
+                            }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        this.MessageBoxPanic(ex);
-                    }
-                };
-                fileSystemWatcher.EnableRaisingEvents = true;
+                        catch (Exception ex)
+                        {
+                            this.MessageBoxPanic(ex);
+                        }
+                    };
+                    fileSystemWatcher.EnableRaisingEvents = true;
 
+                }
+
+            }
+            catch (Exception ex)
+            {
+                foreach (var watched in Watches)
+                {
+                    watched.EnableRaisingEvents = false;
+                    watched.Dispose();
+                }
+                Watches.Clear();
+
+                this.MessageBoxPanic(ex);
             }
         }
 
@@ -981,6 +996,7 @@ namespace Ra2CsfToolsGUI
                 {
                     this.ReInitWatches();
                     this.AdvancedMode = true;
+                    this.UI_WatchModeTabItem.IsSelected = true;
                 }
             }
         }

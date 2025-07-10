@@ -179,7 +179,7 @@
                 <Button Content="Save as an .ini file for updating the translation ..." Click="TranslationUpdateCheck_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="Watch Mode" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="Watch Mode" x:Name="UI_WatchModeTabItem" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Manage" />
             </ui:TabItemHelper.Icon>
