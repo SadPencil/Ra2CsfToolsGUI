@@ -40,7 +40,7 @@ namespace Ra2CsfToolsGUI
                 {
                     this.Convert_CsfFile = this.GeneralLoadCsfIniFile(filename);
                     this.UI_FormatConverterTabItem.IsSelected = true;
-                    this.startedFromCsf = true;
+                    this.StartedFromCsf = true;
                 });
             }
         }
@@ -52,7 +52,7 @@ namespace Ra2CsfToolsGUI
 
         private const string WatchModeConfigFile = "watch_mode_config.dat";
 
-        private bool startedFromCsf = false;
+        private bool StartedFromCsf = false;
 
         private bool _AdvancedMode = false;
         public bool AdvancedMode
@@ -989,7 +989,7 @@ namespace Ra2CsfToolsGUI
 
         private void Window_Content_Rendered(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(this.WatchConfigStr) && !this.startedFromCsf)
+            if (!string.IsNullOrWhiteSpace(this.WatchConfigStr) && !this.StartedFromCsf)
             {
                 var result = MessageBox.Show(this, "Watch mode is configured. Do you want to start it?", "Information", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
