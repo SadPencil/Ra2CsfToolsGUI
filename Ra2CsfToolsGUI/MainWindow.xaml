@@ -98,7 +98,8 @@
                     <TextBlock TextWrapping="Wrap">The string table of Red Alert 2 is presented as a .csf file, which is not friendly for editing as most csf editors were created decades ago. This tool allows users to convert the string table from a .csf file to an .ini file and back to a .csf file that is recognized by the game.</TextBlock>
                     <TextBlock TextWrapping="Wrap">Note: the text encoding of the .ini file must be UTF-8 (without BOM).</TextBlock>
                     <ui:SimpleStackPanel Spacing="12" Margin="0" Orientation="Horizontal">
-                        <Button Content="Load a string table file (.csf/.ini/.yaml) ..." Click="Convert_LoadFile_Click" />
+                        <Button Content="Load a string table file (.csf/.ini) ..." Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}" />
+                        <Button Content="Load a string table file (.csf/.ini/.yaml) ..." Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
                         <!--<Label                     Content="{Binding Convert_FileLabelNum}"                       ContentStringFormat="This string table contains {0} labels."/>-->
                         <Button Content="Save as an .ini file ..." Click="Convert_SaveAsIni_Click" />
                         <Button Content="Save as a .yaml file ..." Click="Convert_SaveAsYaml_Click"  Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
