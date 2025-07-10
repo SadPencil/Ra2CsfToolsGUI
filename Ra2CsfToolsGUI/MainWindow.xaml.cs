@@ -2,7 +2,7 @@
 using IniParser.Model.Configuration;
 using IniParser.Parser;
 using Microsoft.Win32;
-using Ra2CsfToolsGUI.Util;
+using Ra2CsfToolsGUI.YamlExtensions;
 using SadPencil.Ra2CsfFile;
 using System;
 using System.Collections.Generic;

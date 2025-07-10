@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using YamlDotNet.Serialization;
 
-namespace Ra2CsfToolsGUI.Util
+namespace Ra2CsfToolsGUI.YamlExtensions
 {
     public static class CsfFileExtension
     {
@@ -72,7 +72,7 @@ namespace Ra2CsfToolsGUI.Util
                 .IgnoreUnmatchedProperties()
                 .Build();
 
-            using var reader = new StreamReader(stream, Encoding.UTF8);
+            using var reader = new StreamReader(stream, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
             string yaml = reader.ReadToEnd();
             var yamlRawSections = deserializer.Deserialize<Dictionary<string, string>>(yaml);
 
