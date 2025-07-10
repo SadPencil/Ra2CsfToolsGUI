@@ -10,9 +10,8 @@ namespace Ra2CsfToolsGUI.Util
 {
     public static class CsfFileExtension
     {
-        private const Int32 YAML_VERSION = 1;
-        private const String YAML_TYPE_NAME = "SadPencil.Ra2CsfFile.Yaml";
-
+        private const int YAML_VERSION = 1;
+        private const string YAML_TYPE_NAME = "SadPencil.Ra2CsfFile.Yaml";
 
         public static void WriteYamlFile(this CsfFile csf, Stream stream)
         {
@@ -33,7 +32,7 @@ namespace Ra2CsfToolsGUI.Util
                 { "SadPencil.Ra2CsfFile.Yaml:CsfLang", ((int)csf.Language).ToString(CultureInfo.InvariantCulture) }
             };
 
-            foreach (KeyValuePair<string, string> label in csf.Labels)
+            foreach (var label in csf.Labels)
             {
                 string key = label.Key;
                 string value = label.Value;
@@ -47,10 +46,9 @@ namespace Ra2CsfToolsGUI.Util
             var serializer = new SerializerBuilder()
                 .WithDefaultScalarStyle(YamlDotNet.Core.ScalarStyle.Literal)
                 .Build();
-            var yaml = serializer.Serialize(yamlRawSections);
+            string yaml = serializer.Serialize(yamlRawSections);
 
-
-            using (StreamWriter streamWriter = new StreamWriter(stream, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false)))
+            using (var streamWriter = new StreamWriter(stream, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false)))
             {
                 streamWriter.Write(yaml);
             }
@@ -69,13 +67,13 @@ namespace Ra2CsfToolsGUI.Util
                 throw new ArgumentNullException("options");
             }
 
-            CsfFile csfFile = new CsfFile(options);
+            var csfFile = new CsfFile(options);
             var deserializer = new DeserializerBuilder()
                 .IgnoreUnmatchedProperties()
                 .Build();
             using var memoryStream = new MemoryStream();
             stream.CopyTo(memoryStream);
-            var yaml = Encoding.UTF8.GetString(memoryStream.ToArray());
+            string yaml = Encoding.UTF8.GetString(memoryStream.ToArray());
             var yamlRawSections = deserializer.Deserialize<Dictionary<string, string>>(yaml);
 
             if (!yamlRawSections.ContainsKey("SadPencil.Ra2CsfFile.Yaml:CsfVersion"))
@@ -104,16 +102,19 @@ namespace Ra2CsfToolsGUI.Util
 
             string csfLangValue = yamlRawSections["SadPencil.Ra2CsfFile.Yaml:CsfLang"];
             csfFile.Language = CsfLangHelper.GetCsfLang(Convert.ToInt32(csfLangValue, CultureInfo.InvariantCulture));
-            Dictionary<string, string> csfKeyValueDictionary = new Dictionary<string, string>();
+            Dictionary<string, string> csfKeyValueDictionary = [];
 
             foreach (var section in yamlRawSections)
             {
                 if (section.Key.StartsWith("SadPencil.Ra2CsfFile.Yaml"))
+                {
                     continue;
+                }
+
                 csfKeyValueDictionary.Add(section.Key, section.Value);
             }
 
-            foreach (KeyValuePair<string, string> csfItem in csfKeyValueDictionary)
+            foreach (var csfItem in csfKeyValueDictionary)
             {
                 string csfLabel = csfItem.Key;
                 if (!CsfFile.ValidateLabelName(csfLabel))
@@ -122,7 +123,7 @@ namespace Ra2CsfToolsGUI.Util
                 }
 
                 csfLabel = CsfFile.LowercaseLabelName(csfLabel);
-                csfFile.AddLabel(csfLabel, csfItem.Value);
+                _ = csfFile.AddLabel(csfLabel, csfItem.Value);
 
             }
             return csfFile;
