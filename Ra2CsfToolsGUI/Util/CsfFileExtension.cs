@@ -1,20 +1,19 @@
-﻿using IniParser.Model;
-using SadPencil.Ra2CsfFile;
+﻿using SadPencil.Ra2CsfFile;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Markup.Localizer;
 using YamlDotNet.Serialization;
 
 namespace Ra2CsfToolsGUI.Util
 {
     public static class CsfFileExtension
     {
+        private const Int32 YAML_VERSION = 1;
+        private const String YAML_TYPE_NAME = "SadPencil.Ra2CsfFile.Yaml";
+
+
         public static void WriteYamlFile(this CsfFile csf, Stream stream)
         {
             if (csf == null)
@@ -29,7 +28,7 @@ namespace Ra2CsfToolsGUI.Util
 
             var yamlRawSections = new Dictionary<string, string>
             {
-                { "SadPencil.Ra2CsfFile.Yaml:YamlVersion", 1.ToString(CultureInfo.InvariantCulture) },
+                { "SadPencil.Ra2CsfFile.Yaml:YamlVersion", YAML_VERSION.ToString(CultureInfo.InvariantCulture) },
                 { "SadPencil.Ra2CsfFile.Yaml:CsfVersion", csf.Version.ToString(CultureInfo.InvariantCulture) },
                 { "SadPencil.Ra2CsfFile.Yaml:CsfLang", ((int)csf.Language).ToString(CultureInfo.InvariantCulture) }
             };
@@ -86,6 +85,18 @@ namespace Ra2CsfToolsGUI.Util
 
             string csfVersionValue = yamlRawSections["SadPencil.Ra2CsfFile.Yaml:CsfVersion"];
             csfFile.Version = Convert.ToInt32(csfVersionValue, CultureInfo.InvariantCulture);
+
+            if (!yamlRawSections.ContainsKey("SadPencil.Ra2CsfFile.Yaml:YamlVersion"))
+            {
+                throw new Exception("Invalid SadPencil.Ra2CsfFile.Yaml file. Missing key \"YamlVersion\" in SadPencil.Ra2CsfFile.Yaml:YamlVersion.");
+            }
+
+            string yamlVersionValue = yamlRawSections["SadPencil.Ra2CsfFile.Yaml:YamlVersion"];
+            if (Convert.ToInt32(yamlVersionValue, CultureInfo.InvariantCulture) != YAML_VERSION)
+            {
+                throw new Exception($"Unknown {YAML_TYPE_NAME} file version. The version should be {YAML_VERSION}. Is this a {YAML_TYPE_NAME} file from future?");
+            }
+
             if (!yamlRawSections.ContainsKey("SadPencil.Ra2CsfFile.Yaml:CsfLang"))
             {
                 throw new Exception("Invalid SadPencil.Ra2CsfFile.Yaml file. Missing key \"CsfLang\" in SadPencil.Ra2CsfFile.Yaml:CsfLang.");

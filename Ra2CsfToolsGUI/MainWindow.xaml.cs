@@ -30,6 +30,9 @@ namespace Ra2CsfToolsGUI
             this.DataContext = this;
 
             string[] arguments = Environment.GetCommandLineArgs();
+
+            this.WatchConfigStr = LoadWatchConfig();
+
             if (arguments.Length >= 2)
             {
                 string filename = arguments[1];
@@ -37,12 +40,9 @@ namespace Ra2CsfToolsGUI
                 {
                     this.Convert_CsfFile = this.GeneralLoadCsfIniFile(filename);
                     this.UI_FormatConverterTabItem.IsSelected = true;
+                    startFromCsf = true;
                 });
             }
-
-            this.WatchConfigStr = LoadWatchConfig();
-            this.ReInitWatches();
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -51,6 +51,8 @@ namespace Ra2CsfToolsGUI
         public string WindowTitle { get; } = "Ra2CsfToolsGUI (by SadPencil)";
 
         private const string WatchModeConfigFile = "watch_mode_config.dat";
+
+        private bool startFromCsf = false;
 
         private bool _AdvancedMode = false;
         public bool AdvancedMode
@@ -973,5 +975,18 @@ namespace Ra2CsfToolsGUI
                 this.UI_FormatConverterTabItem.IsSelected = true;
             }
         });
+
+        private void Window_Content_Rendered(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(WatchConfigStr) && !this.startFromCsf)
+            {
+                var result = MessageBox.Show("Watch mode is configured. Do you want to start it?", "Information", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    this.ReInitWatches();
+                    AdvancedMode = true;
+                }
+            }
+        }
     }
 }

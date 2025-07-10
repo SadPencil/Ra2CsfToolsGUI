@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:local="clr-namespace:Ra2CsfToolsGUI" xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz" x:Class="Ra2CsfToolsGUI.MainWindow" ui:WindowHelper.UseModernWindowStyle="True" mc:Ignorable="d" Title="{Binding WindowTitle, Mode=OneWay}" Height="520" Width="800" AllowDrop="True" Drop="Window_Drop">
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:local="clr-namespace:Ra2CsfToolsGUI" xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz" x:Class="Ra2CsfToolsGUI.MainWindow" ui:WindowHelper.UseModernWindowStyle="True" mc:Ignorable="d" Title="{Binding WindowTitle, Mode=OneWay}" Height="520" Width="800" AllowDrop="True" Drop="Window_Drop" ContentRendered="Window_Content_Rendered">
     <Window.Resources>
         <local:BooleanToVisibilityConverter  x:Key="BoolToVisConverter" />
         <local:BooleanToVisibilityConverter  x:Key="Not_BoolToVisConverter" True="Collapsed" False="Visible" />
@@ -98,7 +98,7 @@
                     <TextBlock TextWrapping="Wrap">The string table of Red Alert 2 is presented as a .csf file, which is not friendly for editing as most csf editors were created decades ago. This tool allows users to convert the string table from a .csf file to an .ini file and back to a .csf file that is recognized by the game.</TextBlock>
                     <TextBlock TextWrapping="Wrap">Note: the text encoding of the .ini file must be UTF-8 (without BOM).</TextBlock>
                     <ui:SimpleStackPanel Spacing="12" Margin="0" Orientation="Horizontal">
-                        <Button Content="Load a string table file (.csf/.ini) ..." Click="Convert_LoadFile_Click" />
+                        <Button Content="Load a string table file (.csf/.ini/.yaml) ..." Click="Convert_LoadFile_Click" />
                         <!--<Label                     Content="{Binding Convert_FileLabelNum}"                       ContentStringFormat="This string table contains {0} labels."/>-->
                         <Button Content="Save as an .ini file ..." Click="Convert_SaveAsIni_Click" />
                         <Button Content="Save as a .yaml file ..." Click="Convert_SaveAsYaml_Click" />
