@@ -71,9 +71,9 @@ namespace Ra2CsfToolsGUI.Util
             var deserializer = new DeserializerBuilder()
                 .IgnoreUnmatchedProperties()
                 .Build();
-            using var memoryStream = new MemoryStream();
-            stream.CopyTo(memoryStream);
-            string yaml = Encoding.UTF8.GetString(memoryStream.ToArray());
+
+            using var reader = new StreamReader(stream, Encoding.UTF8);
+            string yaml = reader.ReadToEnd();
             var yamlRawSections = deserializer.Deserialize<Dictionary<string, string>>(yaml);
 
             if (!yamlRawSections.ContainsKey("SadPencil.Ra2CsfFile.Yaml:CsfVersion"))
