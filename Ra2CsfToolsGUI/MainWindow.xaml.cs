@@ -214,7 +214,7 @@ namespace Ra2CsfToolsGUI
                     }
                 // break;
                 default:
-                    throw new Exception("Unexpected file extension. Only .csf,.ini and .yaml files are accepted.");
+                    throw new Exception("Unexpected file extension. Only .csf, .ini and .yaml files are accepted.");
             }
         }
 
@@ -925,12 +925,10 @@ namespace Ra2CsfToolsGUI
                 var target = items[1].Trim();
 
                 FileInfo sourceFileInfo = new FileInfo(source);
-                var fname = sourceFileInfo.Name;
-                var dirName = sourceFileInfo.DirectoryName;
                 FileSystemWatcher fileSystemWatcher = new FileSystemWatcher
                 {
-                    Path = dirName,
-                    Filter = fname,
+                    Path = sourceFileInfo.DirectoryName,
+                    Filter = sourceFileInfo.Name,
                     NotifyFilter = NotifyFilters.LastWrite,
                 };
                 Watches.Add(fileSystemWatcher);
@@ -953,12 +951,6 @@ namespace Ra2CsfToolsGUI
 
             }
         }
-
-
-
-
-
-
 
         private void Window_Drop(object sender, DragEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
