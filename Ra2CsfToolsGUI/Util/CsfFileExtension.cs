@@ -59,12 +59,12 @@ namespace Ra2CsfToolsGUI.Util
 
             if (stream == null)
             {
-                throw new ArgumentNullException("stream");
+                throw new ArgumentNullException(nameof(stream));
             }
 
             if (options == null)
             {
-                throw new ArgumentNullException("options");
+                throw new ArgumentNullException(nameof(options));
             }
 
             var csfFile = new CsfFile(options);
