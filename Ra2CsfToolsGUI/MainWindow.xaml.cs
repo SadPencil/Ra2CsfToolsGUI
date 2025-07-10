@@ -972,7 +972,7 @@ namespace Ra2CsfToolsGUI
         {
             if (!string.IsNullOrWhiteSpace(WatchConfigStr) && !this.startFromCsf)
             {
-                var result = MessageBox.Show("Watch mode is configured. Do you want to start it?", "Information", MessageBoxButton.YesNo);
+                var result = MessageBox.Show(this, "Watch mode is configured. Do you want to start it?", "Information", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     this.ReInitWatches();
