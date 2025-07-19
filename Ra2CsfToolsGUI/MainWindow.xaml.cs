@@ -14,6 +14,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows;
 
 namespace Ra2CsfToolsGUI
@@ -116,7 +117,13 @@ namespace Ra2CsfToolsGUI
 
         private static IniData GetIniData() => new() { Configuration = IniParserConfiguration, };
 
-        private void MessageBoxPanic(Exception ex) => _ = MessageBox.Show(this, ex.Message, $"Error - {this.ApplicationName}", MessageBoxButton.OK, MessageBoxImage.Error);
+        private void MessageBoxPanic(Exception ex)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                _ = MessageBox.Show(this, ex.Message, $"Error - {this.ApplicationName}", MessageBoxButton.OK, MessageBoxImage.Error);
+            });
+        }
 
         private static IniData ParseIni(Stream stream)
         {
@@ -197,18 +204,18 @@ namespace Ra2CsfToolsGUI
             switch (fileext)
             {
                 case ".csf":
-                    using (var fs = File.Open(filepath, FileMode.Open))
+                    using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                     {
                         return CsfFile.LoadFromCsfFile(fs, this.GetCsfFileOptions());
                     };
                 // break;
                 case ".ini":
-                    using (var fs = File.Open(filepath, FileMode.Open))
+                    using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                     {
                         return CsfFileIniHelper.LoadFromIniFile(fs, this.GetCsfFileOptions());
                     }
                 case ".yaml":
-                    using (var fs = File.Open(filepath, FileMode.Open))
+                    using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                     {
                         return CsfFileExtension.LoadFromYamlFile(fs, this.GetCsfFileOptions());
                     }
@@ -942,10 +949,32 @@ namespace Ra2CsfToolsGUI
                     {
                         try
                         {
-                            var csf = this.GeneralLoadCsfIniFile(source);
-                            using (var fs = File.Open(target, FileMode.Create))
+                            int tryCount = 0;
+                            bool success = false;
+
+                            while (!success && tryCount <= 3)
                             {
-                                csf.WriteCsfFile(fs);
+                                try
+                                {
+                                    var csf = this.GeneralLoadCsfIniFile(source);
+                                    using (var fs = File.Open(target, FileMode.Create))
+                                    {
+                                        csf.WriteCsfFile(fs);
+                                    }
+                                    success = true;
+                                }
+                                catch (IOException)
+                                {
+                                    if (tryCount < 3)
+                                    {
+                                        tryCount++;
+                                        Thread.Sleep(1000);
+                                    }
+                                    else
+                                    {
+                                        throw; // 重试结束仍失败，抛出异常
+                                    }
+                                }
                             }
                         }
                         catch (Exception ex)
