@@ -204,18 +204,18 @@ namespace Ra2CsfToolsGUI
             switch (fileext)
             {
                 case ".csf":
-                    using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
                         return CsfFile.LoadFromCsfFile(fs, this.GetCsfFileOptions());
                     };
                 // break;
                 case ".ini":
-                    using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
                         return CsfFileIniHelper.LoadFromIniFile(fs, this.GetCsfFileOptions());
                     }
                 case ".yaml":
-                    using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
                         return CsfFileExtension.LoadFromYamlFile(fs, this.GetCsfFileOptions());
                     }
@@ -972,7 +972,7 @@ namespace Ra2CsfToolsGUI
                                     }
                                     else
                                     {
-                                        throw; // 重试结束仍失败，抛出异常
+                                        throw; // Throw an exception if all retries fail
                                     }
                                 }
                             }
