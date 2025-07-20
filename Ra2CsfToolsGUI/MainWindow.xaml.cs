@@ -202,7 +202,7 @@ namespace Ra2CsfToolsGUI
                     using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
                         return CsfFile.LoadFromCsfFile(fs, this.GetCsfFileOptions());
-                    };
+                    }
                 // break;
                 case ".ini":
                     using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.Read))
@@ -258,7 +258,7 @@ namespace Ra2CsfToolsGUI
                     process.StartInfo.FileName = "explorer.exe";
                     process.StartInfo.Arguments = $"/select, \"{filename}\"";
                     _ = process.Start();
-                };
+                }
             }
         }
 
