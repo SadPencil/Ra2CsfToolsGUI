@@ -120,13 +120,10 @@ namespace Ra2CsfToolsGUI
 
         private static IniData GetIniData() => new() { Configuration = IniParserConfiguration, };
 
-        private void MessageBoxPanic(Exception ex)
+        private void MessageBoxPanic(Exception ex) => this.Dispatcher.Invoke(() =>
         {
-            this.Dispatcher.Invoke(() =>
-            {
-                _ = MessageBox.Show(this, ex.Message, $"Error - {this.ApplicationName}", MessageBoxButton.OK, MessageBoxImage.Error);
-            });
-        }
+            _ = MessageBox.Show(this, ex.Message, $"Error - {this.ApplicationName}", MessageBoxButton.OK, MessageBoxImage.Error);
+        });
 
         private static IniData ParseIni(Stream stream)
         {
