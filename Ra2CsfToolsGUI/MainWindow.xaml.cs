@@ -4,18 +4,13 @@ using IniParser.Parser;
 using Microsoft.Win32;
 using Ra2CsfToolsGUI.YamlExtensions;
 using SadPencil.Ra2CsfFile;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Ra2CsfToolsGUI
