@@ -15,6 +15,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Ra2CsfToolsGUI
@@ -945,7 +946,7 @@ namespace Ra2CsfToolsGUI
                         NotifyFilter = NotifyFilters.LastWrite,
                     };
                     Watches.Add(fileSystemWatcher);
-                    fileSystemWatcher.Changed += (s, e) =>
+                    fileSystemWatcher.Changed += async (s, e) =>
                     {
                         try
                         {
@@ -969,7 +970,7 @@ namespace Ra2CsfToolsGUI
                                     if (tryCount < maxRetries)
                                     {
                                         tryCount++;
-                                        Thread.Sleep(1000);
+                                        await Task.Delay(1000);
                                     }
                                     else
                                     {
