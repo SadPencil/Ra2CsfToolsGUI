@@ -942,6 +942,7 @@ namespace Ra2CsfToolsGUI
                     Watches.Add(fileSystemWatcher);
                     fileSystemWatcher.Changed += async (s, e) =>
                     {
+                        Debug.WriteLine($"Event 'FileSystemWatcher.Changed' triggered. Source: {source}");
                         try
                         {
                             int tryCount = 0;
