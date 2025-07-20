@@ -950,9 +950,10 @@ namespace Ra2CsfToolsGUI
                         try
                         {
                             int tryCount = 0;
+                            int maxRetries = 3;
                             bool success = false;
 
-                            while (!success && tryCount <= 3)
+                            while (!success && tryCount <= maxRetries)
                             {
                                 try
                                 {
@@ -965,14 +966,14 @@ namespace Ra2CsfToolsGUI
                                 }
                                 catch (IOException)
                                 {
-                                    if (tryCount < 3)
+                                    if (tryCount < maxRetries)
                                     {
                                         tryCount++;
                                         Thread.Sleep(1000);
                                     }
                                     else
                                     {
-                                        throw; // Throw an exception if all retries fail
+                                        throw; // Throw IOException if all retries fail
                                     }
                                 }
                             }
