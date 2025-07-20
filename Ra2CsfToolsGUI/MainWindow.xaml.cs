@@ -966,7 +966,7 @@ namespace Ra2CsfToolsGUI
                                 }
                                 catch (IOException)
                                 {
-                                    if (tryCount < maxRetries)
+                                    if (tryCount < maxRetries - 1)
                                     {
                                         tryCount++;
                                         await Task.Delay(1000);
