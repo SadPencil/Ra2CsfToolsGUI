@@ -54,6 +54,8 @@ namespace Ra2CsfToolsGUI
 
         private const string WatchModeConfigFile = "watch_mode_config.dat";
 
+        private const int WatchModeMaxRetries = 3;
+
         private bool StartedFromCsf = false;
 
         private bool _AdvancedMode = false;
@@ -951,7 +953,7 @@ namespace Ra2CsfToolsGUI
                         try
                         {
                             int tryCount = 0;
-                            int maxRetries = 3;
+                            int maxRetries = WatchModeMaxRetries;
                             bool success = false;
 
                             while (!success && tryCount < maxRetries)
