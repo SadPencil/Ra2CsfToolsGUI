@@ -953,7 +953,7 @@ namespace Ra2CsfToolsGUI
                             int maxRetries = 3;
                             bool success = false;
 
-                            while (!success && tryCount <= maxRetries)
+                            while (!success && tryCount < maxRetries)
                             {
                                 try
                                 {
