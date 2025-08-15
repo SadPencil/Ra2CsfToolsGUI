@@ -115,6 +115,18 @@
                 <TextBlock Margin="10" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Convert_CsfFile_Tips, Mode=OneWay}" />
             </Grid>
         </TabItem>
+        <TabItem Header="Label Override" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+            <ui:TabItemHelper.Icon>
+                <ui:SymbolIcon Symbol="Comment" />
+            </ui:TabItemHelper.Icon>
+            <ui:SimpleStackPanel Spacing="12" Margin="10">
+                <TextBlock TextWrapping="Wrap">The tool can now support label names containing capital letters. Select an upstream string table file, and your current string table file. The tool will compare each label (ignoring case) and prefer the label from upstream.</TextBlock>
+                <Button Content="Load an upstream string table file (.csf/.ini) ..." Click="LabelOverride_LoadUpstreamFile_Click" />
+                <Button Content="Load the current string table file (.csf/.ini) ..." Click="LabelOverride_LoadCurrentFile_Click" />
+                <Button Content="Save as a .csf file ..." Click="LabelOverride_SaveCsfFile_Click" />
+                <Button Content="Save as an .ini file ..." Click="LabelOverride_SaveIniFile_Click" />
+            </ui:SimpleStackPanel>
+        </TabItem>
         <TabItem Header="Translation Helper - New" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />

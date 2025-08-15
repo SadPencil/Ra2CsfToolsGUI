@@ -120,9 +120,7 @@ namespace Ra2CsfToolsGUI.YamlExtensions
                     throw new Exception("Invalid characters found in label name \"" + csfLabel + "\".");
                 }
 
-                csfLabel = CsfFile.LowercaseLabelName(csfLabel);
                 _ = csfFile.AddLabel(csfLabel, csfItem.Value);
-
             }
             return csfFile;
         }

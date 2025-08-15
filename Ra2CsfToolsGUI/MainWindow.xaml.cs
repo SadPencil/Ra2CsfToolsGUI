@@ -330,6 +330,64 @@ namespace Ra2CsfToolsGUI
             this.GeneralSaveCsfIniFileGUI(this.Convert_CsfFile, ".csf");
         });
 
+        private CsfFile LabelOverride_UpstreamFile = null;
+        private void LabelOverride_LoadUpstreamFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            this.LabelOverride_UpstreamFile = this.GeneralLoadCsfIniFileGUI();
+        });
+
+        private CsfFile LabelOverride_CurrentFile = null;
+        private void LabelOverride_LoadCurrentFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            this.LabelOverride_CurrentFile = this.GeneralLoadCsfIniFileGUI();
+        });
+
+        private CsfFile LabelOverride_DoWork()
+        {
+            if (this.LabelOverride_UpstreamFile == null || this.LabelOverride_CurrentFile == null)
+            {
+                throw new Exception("Please load the string table files first.");
+            }
+
+            var upstreamFile = this.LabelOverride_UpstreamFile;
+            var currentFile = this.LabelOverride_CurrentFile.Clone() as CsfFile;
+
+            var keysCopy = currentFile.Labels.Keys.ToList();
+
+            foreach (string label in keysCopy)
+            {
+                if (string.IsNullOrEmpty(label) || !upstreamFile.Labels.ContainsKey(label))
+                {
+                    continue;
+                }
+
+                string value = currentFile.Labels[label];
+
+                string newLabel = upstreamFile.Labels.Keys.FirstOrDefault(k => string.Equals(k, label, StringComparison.InvariantCultureIgnoreCase));
+                Debug.Assert(!string.IsNullOrEmpty(newLabel));
+
+                bool existed = currentFile.RemoveLabel(label);
+                Debug.Assert(existed);
+
+                existed = currentFile.AddLabel(newLabel, value);
+                Debug.Assert(!existed);
+            }
+
+            return currentFile;
+        }
+
+        private void LabelOverride_SaveCsfFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            var outputFile = this.LabelOverride_DoWork();
+            this.GeneralSaveCsfIniFileGUI(outputFile, ".csf");
+        });
+
+        private void LabelOverride_SaveIniFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            var outputFile = this.LabelOverride_DoWork();
+            this.GeneralSaveCsfIniFileGUI(outputFile, ".ini");
+        });
+
         private CsfFile TranslationNew_File = null;
 
         private void TranslationNew_LoadFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
@@ -914,7 +972,7 @@ namespace Ra2CsfToolsGUI
                     return;
                 }
 
-                string[] lines = this.WatchConfigStr.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                string[] lines = this.WatchConfigStr.Split([Environment.NewLine], StringSplitOptions.RemoveEmptyEntries);
                 foreach (string line in lines)
                 {
                     if (string.IsNullOrWhiteSpace(line))
