@@ -133,7 +133,7 @@ namespace Ra2CsfToolsGUI
 
         private static Dictionary<string, List<(int iLine, string value)>> LoadIniValuesFromCsfFile(CsfFile csf)
         {
-            var dict = new Dictionary<string, List<(int iLine, string value)>>();
+            var dict = new Dictionary<string, List<(int iLine, string value)>>(StringComparer.InvariantCultureIgnoreCase);
 
             _ = GeneralProceedWithCsfIniLabels(csf, (sectionName, keyName, value, iLine) =>
             {
@@ -450,7 +450,7 @@ namespace Ra2CsfToolsGUI
             // proceed with ini
             const string INI_FILE_HEADER_SECTION_NAME = "SadPencil.Ra2CsfFile.Ini";
             // load all labels
-            var labelSections = new Dictionary<string, KeyDataCollection>();
+            var labelSections = new Dictionary<string, KeyDataCollection>(StringComparer.InvariantCultureIgnoreCase);
             foreach (var (k, v) in ini.Sections.Where(section => section.SectionName != INI_FILE_HEADER_SECTION_NAME)
                 .Select(section => (section.SectionName, ini.Sections[section.SectionName])))
             {
@@ -583,7 +583,7 @@ namespace Ra2CsfToolsGUI
                 throw new Exception("Please load the string table files first.");
             }
 
-            var diffDict = new Dictionary<string, (string oldValue, string newValue)>();
+            var diffDict = new Dictionary<string, (string oldValue, string newValue)>(StringComparer.InvariantCultureIgnoreCase);
             var oldDict = this.TranslationUpdate_OldUpstreamFile.Labels;
             var newDict = this.TranslationUpdate_NewUpstreamFile.Labels;
             var labelKeys = oldDict.Keys.Union(newDict.Keys);
@@ -757,7 +757,7 @@ namespace Ra2CsfToolsGUI
                 throw new Exception("Please load the string table files first.");
             }
 
-            var diffDict = new Dictionary<string, (string oldValue, string newValue)>();
+            var diffDict = new Dictionary<string, (string oldValue, string newValue)>(StringComparer.InvariantCultureIgnoreCase);
             var oldUpstreamDict = this.TranslationUpdateCheck_OldUpstreamFile.Labels;
             var newUpstreamDict = this.TranslationUpdateCheck_NewUpstreamFile.Labels;
             var upstreamLabelKeys = oldUpstreamDict.Keys.Union(newUpstreamDict.Keys);
