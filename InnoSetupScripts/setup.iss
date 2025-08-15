@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Ra2CsfToolsGUI"
-#define MyAppVersion "1.4.0-rc3"
+#define MyAppVersion "1.4.0"
 #define MyAppPublisher "SadPencil"
 #define MyAppURL "https://github.com/SadPencil/Ra2CsfToolsGUI"
 #define MyAppExeName "Ra2CsfToolsGUI.exe"
