@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:local="clr-namespace:Ra2CsfToolsGUI" xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz" x:Class="Ra2CsfToolsGUI.MainWindow" ui:WindowHelper.UseModernWindowStyle="True" mc:Ignorable="d" Title="{Binding WindowTitle, Mode=OneWay}" Height="520" Width="800" AllowDrop="True" Drop="Window_Drop" ContentRendered="Window_Content_Rendered">
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:local="clr-namespace:Ra2CsfToolsGUI" xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz" x:Class="Ra2CsfToolsGUI.MainWindow" ui:WindowHelper.UseModernWindowStyle="True" mc:Ignorable="d" Title="{Binding WindowTitle, Mode=OneWay}" Height="520" Width="850" AllowDrop="True" Drop="Window_Drop" ContentRendered="Window_Content_Rendered">
     <Window.Resources>
         <local:BooleanToVisibilityConverter  x:Key="BoolToVisConverter" />
         <local:BooleanToVisibilityConverter  x:Key="Not_BoolToVisConverter" True="Collapsed" False="Visible" />
