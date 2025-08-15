@@ -99,11 +99,14 @@
                     <TextBlock TextWrapping="Wrap">Note: the text encoding of the .ini file must be UTF-8 (without BOM).</TextBlock>
                     <ui:SimpleStackPanel Spacing="12" Margin="0" Orientation="Horizontal">
                         <Button Content="Load a string table file (.csf/.ini) ..." Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}" />
-                        <Button Content="Load a string table file (.csf/.ini/.yaml) ..." Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
+                        <Button Content="Load a string table file (.csf/.ini/.yaml/.json) ..." Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
                         <!--<Label                     Content="{Binding Convert_FileLabelNum}"                       ContentStringFormat="This string table contains {0} labels."/>-->
                         <Button Content="Save as an .ini file ..." Click="Convert_SaveAsIni_Click" />
-                        <Button Content="Save as a .yaml file ..." Click="Convert_SaveAsYaml_Click"  Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
                         <Button Content="Save as a .csf file ..." Click="Convert_SaveAsCsf_Click" />
+                    </ui:SimpleStackPanel>
+                    <ui:SimpleStackPanel Spacing="12" Margin="0" Orientation="Horizontal" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" >
+                        <Button Content="Save as a .yaml file ..." Click="Convert_SaveAsYaml_Click" />
+                        <Button Content="Save as a .json file ..." Click="Convert_SaveAsJson_Click" />
                     </ui:SimpleStackPanel>
                     <TextBlock TextWrapping="Wrap">
                         The content of the string table file is shown below for preview. To modify it, save it as an .ini file.

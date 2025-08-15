@@ -2,6 +2,7 @@
 using IniParser.Model.Configuration;
 using IniParser.Parser;
 using Microsoft.Win32;
+using Ra2CsfToolsGUI.JsonExtensions;
 using Ra2CsfToolsGUI.YamlExtensions;
 using SadPencil.Ra2CsfFile;
 using System.ComponentModel;
@@ -209,14 +210,21 @@ namespace Ra2CsfToolsGUI
                     {
                         return CsfFileIniHelper.LoadFromIniFile(fs, this.GetCsfFileOptions());
                     }
+                // break;
                 case ".yaml":
                     using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
                         return CsfFileYamlExtension.LoadFromYamlFile(fs, this.GetCsfFileOptions());
                     }
                 // break;
+                case ".json":
+                    using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+                        return CsfFileJsonExtension.LoadFromJsonFile(fs, this.GetCsfFileOptions());
+                    }
+                // break;
                 default:
-                    throw new Exception("Unexpected file extension. Only .csf, .ini and .yaml files are accepted.");
+                    throw new Exception("Unexpected file extension. Only .csf, .ini, .yaml, and .json files are accepted.");
             }
         }
 
@@ -224,7 +232,7 @@ namespace Ra2CsfToolsGUI
         {
             var openFileDialog = new OpenFileDialog
             {
-                Filter = "String table files (*.csf;*.ini;*.yaml)|*.csf;*.ini;*.yaml|Westwood RA2 string table files (*.csf)|*.csf|SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini|SadPencil.Ra2CsfFile.Yaml files (*.yaml)|*.yaml",
+                Filter = "String table files (*.csf;*.ini;*.yaml;*.json)|*.csf;*.ini;*.yaml;*.json|Westwood RA2 string table files (*.csf)|*.csf|SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini|SadPencil.Ra2CsfFile.Yaml files (*.yaml)|*.yaml|JSON files (*.json)|*.json",
             };
             if (openFileDialog.ShowDialog(this).GetValueOrDefault())
             {
@@ -264,7 +272,7 @@ namespace Ra2CsfToolsGUI
 
         private void GeneralSaveCsfIniFileGUI(CsfFile file, string defaultExtension = ".ini")
         {
-            Debug.Assert(new List<string>() { ".ini", ".csf", ".yaml" }.Contains(defaultExtension));
+            Debug.Assert(new List<string>() { ".ini", ".csf", ".yaml", ".json" }.Contains(defaultExtension));
 
             if (file == null)
             {
@@ -285,12 +293,17 @@ namespace Ra2CsfToolsGUI
                 {
                     file.WriteYamlFile(fs);
                 }
+                else if (defaultExtension == ".json")
+                {
+                    file.WriteJsonFile(fs);
+                }
 
             }, defaultExtension switch
             {
                 ".csf" => "Westwood RA2 string table files (*.csf)|*.csf",
                 ".ini" => "SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini",
                 ".yaml" => "SadPencil.Ra2CsfFile.Yaml files (*.yaml)|*.yaml",
+                ".json" => "JSON files (*.json)|*.json",
                 _ => throw new Exception("Unexpected file extension."),
             });
         }
@@ -323,6 +336,11 @@ namespace Ra2CsfToolsGUI
         private void Convert_SaveAsYaml_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
             this.GeneralSaveCsfIniFileGUI(this.Convert_CsfFile, ".yaml");
+        });
+
+        private void Convert_SaveAsJson_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            this.GeneralSaveCsfIniFileGUI(this.Convert_CsfFile, ".json");
         });
 
         private void Convert_SaveAsCsf_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
