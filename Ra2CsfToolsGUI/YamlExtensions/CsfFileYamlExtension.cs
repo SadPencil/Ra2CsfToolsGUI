@@ -6,7 +6,7 @@ using YamlDotNet.Serialization;
 
 namespace Ra2CsfToolsGUI.YamlExtensions
 {
-    public static class CsfFileExtension
+    public static class CsfFileYamlExtension
     {
         private const int YAML_VERSION = 1;
         private const string YAML_TYPE_NAME = "SadPencil.Ra2CsfFile.Yaml";

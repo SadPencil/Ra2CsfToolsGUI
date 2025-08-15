@@ -212,7 +212,7 @@ namespace Ra2CsfToolsGUI
                 case ".yaml":
                     using (var fs = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
-                        return CsfFileExtension.LoadFromYamlFile(fs, this.GetCsfFileOptions());
+                        return CsfFileYamlExtension.LoadFromYamlFile(fs, this.GetCsfFileOptions());
                     }
                 // break;
                 default:
