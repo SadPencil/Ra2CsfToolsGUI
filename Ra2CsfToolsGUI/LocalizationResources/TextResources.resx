@@ -321,4 +321,79 @@
   <data name="Xaml_Txt_WatchModeButton1" xml:space="preserve">
     <value>Save and Apply</value>
   </data>
+  <data name="Cs_Txt_Error" xml:space="preserve">
+    <value>Error - {0}</value>
+  </data>
+  <data name="Cs_Txt_FileContainsLabelsAndLanguage" xml:space="preserve">
+    <value>This string table file contains {0} labels, with language {1}.</value>
+  </data>
+  <data name="Cs_Txt_UnexpectedFileExtension" xml:space="preserve">
+    <value>Unexpected file extension. Only .csf, .ini, .yaml, and .json files are accepted.</value>
+  </data>
+  <data name="Cs_Txt_FileFilter" xml:space="preserve">
+    <value>String table files (*.csf;*.ini;*.yaml;*.json)|*.csf;*.ini;*.yaml;*.json|Westwood RA2 string table files (*.csf)|*.csf|SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini|SadPencil.Ra2CsfFile.Yaml files (*.yaml)|*.yaml|JSON files (*.json)|*.json</value>
+  </data>
+  <data name="Cs_Txt_FileLoadedSuccessfully" xml:space="preserve">
+    <value>File loaded successfully. This string table file contains {0} labels, with language {1}.</value>
+  </data>
+  <data name="Cs_Txt_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Cs_Txt_FileSavedSuccessAndOpenFolder" xml:space="preserve">
+    <value>File saved successfully. Would you like to open the file in File Explorer?</value>
+  </data>
+  <data name="Cs_Txt_LoadFileFirst" xml:space="preserve">
+    <value>Please load a string table file first.</value>
+  </data>
+  <data name="Cs_Txt_CsfFilter" xml:space="preserve">
+    <value>Westwood RA2 string table files (*.csf)|*.csf</value>
+  </data>
+  <data name="Cs_Txt_IniFilter" xml:space="preserve">
+    <value>SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini</value>
+  </data>
+  <data name="Cs_Txt_YamlFilter" xml:space="preserve">
+    <value>SadPencil.Ra2CsfFile.Yaml files (*.yaml)|*.yaml</value>
+  </data>
+  <data name="Cs_Txt_JsonFilter" xml:space="preserve">
+    <value>JSON files (*.json)|*.json</value>
+  </data>
+  <data name="Cs_Txt_LoadFilesFirst" xml:space="preserve">
+    <value>Please load the string table files first.</value>
+  </data>
+  <data name="Cs_Txt_ChangesSaved" xml:space="preserve">
+    <value>Your changes have been saved successfully</value>
+  </data>
+  <data name="Cs_Txt_InvalidWatchConfig" xml:space="preserve">
+    <value>Invalid watch config line: {0}</value>
+  </data>
+  <data name="Cs_Txt_EventTriggered" xml:space="preserve">
+    <value>Event 'FileSystemWatcher.Changed' triggered. Source: {0}</value>
+  </data>
+  <data name="Cs_Txt_DragAndDropSingleFile" xml:space="preserve">
+    <value>Only one file is allowed for drag &amp; drop.</value>
+  </data>
+  <data name="Cs_Txt_WatchModeConfirm" xml:space="preserve">
+    <value>Watch mode is configured. Do you want to start it?</value>
+  </data>
+  <data name="Cs_Txt_Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Cs_Txt_SelectMapFolderFirst" xml:space="preserve">
+    <value>Please select the map folder first.</value>
+  </data>
+  <data name="Cs_Txt_FolderDoesNotExist" xml:space="preserve">
+    <value>Folder {0} does not exist!</value>
+  </data>
+  <data name="Cs_Txt_InvalidCharactersInLabelName" xml:space="preserve">
+    <value>Invalid characters found in label name \"{0}\".</value>
+  </data>
+  <data name="Cs_Txt_FailedToReadMapFile" xml:space="preserve">
+    <value>Failed to read map file {0}: {1}</value>
+  </data>
+  <data name="Cs_Txt_MissingLabelsResult" xml:space="preserve">
+    <value>{0} labels are missing.</value>
+  </data>
+  <data name="Cs_Txt_Result" xml:space="preserve">
+    <value>Result</value>
+  </data>
 </root>

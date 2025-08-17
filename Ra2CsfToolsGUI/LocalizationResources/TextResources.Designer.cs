@@ -61,6 +61,231 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your changes have been saved successfully.
+        /// </summary>
+        public static string Cs_Txt_ChangesSaved {
+            get {
+                return ResourceManager.GetString("Cs_Txt_ChangesSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Westwood RA2 string table files (*.csf)|*.csf.
+        /// </summary>
+        public static string Cs_Txt_CsfFilter {
+            get {
+                return ResourceManager.GetString("Cs_Txt_CsfFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only one file is allowed for drag &amp; drop..
+        /// </summary>
+        public static string Cs_Txt_DragAndDropSingleFile {
+            get {
+                return ResourceManager.GetString("Cs_Txt_DragAndDropSingleFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error - {0}.
+        /// </summary>
+        public static string Cs_Txt_Error {
+            get {
+                return ResourceManager.GetString("Cs_Txt_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Event &apos;FileSystemWatcher.Changed&apos; triggered. Source: {0}.
+        /// </summary>
+        public static string Cs_Txt_EventTriggered {
+            get {
+                return ResourceManager.GetString("Cs_Txt_EventTriggered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to read map file {0}: {1}.
+        /// </summary>
+        public static string Cs_Txt_FailedToReadMapFile {
+            get {
+                return ResourceManager.GetString("Cs_Txt_FailedToReadMapFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This string table file contains {0} labels, with language {1}..
+        /// </summary>
+        public static string Cs_Txt_FileContainsLabelsAndLanguage {
+            get {
+                return ResourceManager.GetString("Cs_Txt_FileContainsLabelsAndLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to String table files (*.csf;*.ini;*.yaml;*.json)|*.csf;*.ini;*.yaml;*.json|Westwood RA2 string table files (*.csf)|*.csf|SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini|SadPencil.Ra2CsfFile.Yaml files (*.yaml)|*.yaml|JSON files (*.json)|*.json.
+        /// </summary>
+        public static string Cs_Txt_FileFilter {
+            get {
+                return ResourceManager.GetString("Cs_Txt_FileFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File loaded successfully. This string table file contains {0} labels, with language {1}..
+        /// </summary>
+        public static string Cs_Txt_FileLoadedSuccessfully {
+            get {
+                return ResourceManager.GetString("Cs_Txt_FileLoadedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File saved successfully. Would you like to open the file in File Explorer?.
+        /// </summary>
+        public static string Cs_Txt_FileSavedSuccessAndOpenFolder {
+            get {
+                return ResourceManager.GetString("Cs_Txt_FileSavedSuccessAndOpenFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder {0} does not exist!.
+        /// </summary>
+        public static string Cs_Txt_FolderDoesNotExist {
+            get {
+                return ResourceManager.GetString("Cs_Txt_FolderDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        public static string Cs_Txt_Information {
+            get {
+                return ResourceManager.GetString("Cs_Txt_Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini.
+        /// </summary>
+        public static string Cs_Txt_IniFilter {
+            get {
+                return ResourceManager.GetString("Cs_Txt_IniFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid characters found in label name \&quot;{0}\&quot;..
+        /// </summary>
+        public static string Cs_Txt_InvalidCharactersInLabelName {
+            get {
+                return ResourceManager.GetString("Cs_Txt_InvalidCharactersInLabelName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid watch config line: {0}.
+        /// </summary>
+        public static string Cs_Txt_InvalidWatchConfig {
+            get {
+                return ResourceManager.GetString("Cs_Txt_InvalidWatchConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JSON files (*.json)|*.json.
+        /// </summary>
+        public static string Cs_Txt_JsonFilter {
+            get {
+                return ResourceManager.GetString("Cs_Txt_JsonFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please load a string table file first..
+        /// </summary>
+        public static string Cs_Txt_LoadFileFirst {
+            get {
+                return ResourceManager.GetString("Cs_Txt_LoadFileFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please load the string table files first..
+        /// </summary>
+        public static string Cs_Txt_LoadFilesFirst {
+            get {
+                return ResourceManager.GetString("Cs_Txt_LoadFilesFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} labels are missing..
+        /// </summary>
+        public static string Cs_Txt_MissingLabelsResult {
+            get {
+                return ResourceManager.GetString("Cs_Txt_MissingLabelsResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result.
+        /// </summary>
+        public static string Cs_Txt_Result {
+            get {
+                return ResourceManager.GetString("Cs_Txt_Result", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select the map folder first..
+        /// </summary>
+        public static string Cs_Txt_SelectMapFolderFirst {
+            get {
+                return ResourceManager.GetString("Cs_Txt_SelectMapFolderFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        public static string Cs_Txt_Success {
+            get {
+                return ResourceManager.GetString("Cs_Txt_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected file extension. Only .csf, .ini, .yaml, and .json files are accepted..
+        /// </summary>
+        public static string Cs_Txt_UnexpectedFileExtension {
+            get {
+                return ResourceManager.GetString("Cs_Txt_UnexpectedFileExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watch mode is configured. Do you want to start it?.
+        /// </summary>
+        public static string Cs_Txt_WatchModeConfirm {
+            get {
+                return ResourceManager.GetString("Cs_Txt_WatchModeConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SadPencil.Ra2CsfFile.Yaml files (*.yaml)|*.yaml.
+        /// </summary>
+        public static string Cs_Txt_YamlFilter {
+            get {
+                return ResourceManager.GetString("Cs_Txt_YamlFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Load a string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_FormatConverterButton1_Advanced {

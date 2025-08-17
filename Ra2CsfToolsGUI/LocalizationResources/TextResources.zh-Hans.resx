@@ -321,4 +321,79 @@
   <data name="Xaml_Txt_WatchModeButton1" xml:space="preserve">
     <value>保存并应用</value>
   </data>
+  <data name="Cs_Txt_Error" xml:space="preserve">
+    <value>错误 - {0}</value>
+  </data>
+  <data name="Cs_Txt_FileContainsLabelsAndLanguage" xml:space="preserve">
+    <value>此字符串表文件包含 {0} 个标签，语言为 {1}。</value>
+  </data>
+  <data name="Cs_Txt_UnexpectedFileExtension" xml:space="preserve">
+    <value>意外的文件扩展名。仅接受 .csf、.ini、.yaml 和 .json 文件。</value>
+  </data>
+  <data name="Cs_Txt_FileFilter" xml:space="preserve">
+    <value>字符串表文件 (.csf;.ini;.yaml;.json)|.csf;.ini;.yaml;.json|Westwood RA2 字符串表文件 (.csf)|.csf|SadPencil.Ra2CsfFile.Ini 文件 (.ini)|.ini|SadPencil.Ra2CsfFile.Yaml 文件 (.yaml)|.yaml|JSON 文件 (.json)|.json</value>
+  </data>
+  <data name="Cs_Txt_FileLoadedSuccessfully" xml:space="preserve">
+    <value>文件加载成功。此字符串表文件包含 {0} 个标签，语言为 {1}。</value>
+  </data>
+  <data name="Cs_Txt_Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="Cs_Txt_FileSavedSuccessAndOpenFolder" xml:space="preserve">
+    <value>文件保存成功。您想在文件资源管理器中打开此文件吗？</value>
+  </data>
+  <data name="Cs_Txt_LoadFileFirst" xml:space="preserve">
+    <value>请先加载一个字符串表文件。</value>
+  </data>
+  <data name="Cs_Txt_CsfFilter" xml:space="preserve">
+    <value>Westwood RA2 字符串表文件 (*.csf)|*.csf</value>
+  </data>
+  <data name="Cs_Txt_IniFilter" xml:space="preserve">
+    <value>SadPencil.Ra2CsfFile.Ini 文件 (*.ini)|*.ini</value>
+  </data>
+  <data name="Cs_Txt_YamlFilter" xml:space="preserve">
+    <value>SadPencil.Ra2CsfFile.Yaml 文件 (*.yaml)|*.yaml</value>
+  </data>
+  <data name="Cs_Txt_JsonFilter" xml:space="preserve">
+    <value>JSON 文件 (*.json)|*.json</value>
+  </data>
+  <data name="Cs_Txt_LoadFilesFirst" xml:space="preserve">
+    <value>请先加载字符串表文件。</value>
+  </data>
+  <data name="Cs_Txt_ChangesSaved" xml:space="preserve">
+    <value>您的更改已成功保存</value>
+  </data>
+  <data name="Cs_Txt_InvalidWatchConfig" xml:space="preserve">
+    <value>无效的监视配置行：{0}</value>
+  </data>
+  <data name="Cs_Txt_EventTriggered" xml:space="preserve">
+    <value>触发了事件 'FileSystemWatcher.Changed'。源：{0}</value>
+  </data>
+  <data name="Cs_Txt_DragAndDropSingleFile" xml:space="preserve">
+    <value>只允许拖放一个文件。</value>
+  </data>
+  <data name="Cs_Txt_WatchModeConfirm" xml:space="preserve">
+    <value>监视模式已配置。您要启动它吗？</value>
+  </data>
+  <data name="Cs_Txt_Information" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="Cs_Txt_SelectMapFolderFirst" xml:space="preserve">
+    <value>请先选择地图文件夹。</value>
+  </data>
+  <data name="Cs_Txt_FolderDoesNotExist" xml:space="preserve">
+    <value>文件夹 {0} 不存在！</value>
+  </data>
+  <data name="Cs_Txt_InvalidCharactersInLabelName" xml:space="preserve">
+    <value>在标签名称 "{0}" 中发现无效字符。</value>
+  </data>
+  <data name="Cs_Txt_FailedToReadMapFile" xml:space="preserve">
+    <value>读取地图文件 {0} 失败：{1}</value>
+  </data>
+  <data name="Cs_Txt_MissingLabelsResult" xml:space="preserve">
+    <value>缺少 {0} 个标签。</value>
+  </data>
+  <data name="Cs_Txt_Result" xml:space="preserve">
+    <value>结果</value>
+  </data>
 </root>
