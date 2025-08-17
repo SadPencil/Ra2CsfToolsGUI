@@ -1244,7 +1244,7 @@ namespace Ra2CsfToolsGUI
 
                 if (!outputFile.Labels.ContainsKey(labelName))
                 {
-                    _ = outputFile.AddLabel(labelName, this.TranslationNeededPlaceholder);
+                    _ = outputFile.AddLabel(labelName, this.MissingLabelPlaceholder);
                     ++missingLabelCount;
                 }
             }
