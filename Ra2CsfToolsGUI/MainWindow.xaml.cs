@@ -45,7 +45,7 @@ namespace Ra2CsfToolsGUI
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public string Version { get; } = "v1.5.0-rc2";
+        public string Version { get; } = "v1.5.0-rc3";
         public string ApplicationName { get; } = "Ra2CsfToolsGUI";
         public string WindowTitle { get; } = "Ra2CsfToolsGUI (by SadPencil)";
 
