@@ -1269,5 +1269,27 @@ namespace Ra2CsfToolsGUI
             // Disable context menu
             e.Handled = true;
         }
+
+        private void SwitchLanguageButton_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: support more than two languages
+
+            bool isChinese = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.Equals("zh", StringComparison.InvariantCultureIgnoreCase);
+            if (isChinese)
+            {
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+            }
+            else
+            {
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-Hans");
+            }
+
+            // Reload the main window to apply the new language
+            var oldWindow = Application.Current.MainWindow;
+            var newWindow = new MainWindow();
+            Application.Current.MainWindow = newWindow;
+            newWindow.Show();
+            oldWindow.Close();
+        }
     }
 }
