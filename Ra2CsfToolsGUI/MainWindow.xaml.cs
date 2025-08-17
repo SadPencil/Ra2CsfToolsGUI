@@ -146,7 +146,7 @@ namespace Ra2CsfToolsGUI
         {
             var dict = new Dictionary<string, List<(int iLine, string value)>>(StringComparer.InvariantCultureIgnoreCase);
 
-            _ = GeneralProceedWithCsfIniLabels(csf, (sectionName, keyName, value, iLine) =>
+            _ = GeneralProcessCsfIniLabels(csf, (sectionName, keyName, value, iLine) =>
             {
                 if (!dict.ContainsKey(sectionName))
                 {
@@ -479,12 +479,11 @@ namespace Ra2CsfToolsGUI
 
         private static string GetIniLabelValueKeyName(int lineIndex) => "Value" + ((lineIndex == 1) ? string.Empty : $"Line{lineIndex}");
 
-        private static IniData GeneralProceedWithCsfIniLabels(CsfFile csf, Action<string, string, string, int> valueAction = null, Action<string, KeyDataCollection> sectionAction = null)
+        private static IniData GeneralProcessCsfIniLabels(CsfFile csf, Action<string, string, string, int> valueAction = null, Action<string, KeyDataCollection> sectionAction = null)
         {
-
             var ini = GetNewIniFileFromCsfFile(csf);
 
-            // proceed with ini
+            // process ini
             const string INI_FILE_HEADER_SECTION_NAME = "SadPencil.Ra2CsfFile.Ini";
             // load all labels
             var labelSections = new Dictionary<string, KeyDataCollection>(StringComparer.InvariantCultureIgnoreCase);
@@ -529,7 +528,7 @@ namespace Ra2CsfToolsGUI
             }
 
             var upstream = LoadIniValuesFromCsfFile(this.TranslationNew_File);
-            var ini = GeneralProceedWithCsfIniLabels(this.TranslationNew_File, null, (labelName, key) =>
+            var ini = GeneralProcessCsfIniLabels(this.TranslationNew_File, null, (labelName, key) =>
             {
                 foreach ((int iLine, string value) in upstream[labelName])
                 {
