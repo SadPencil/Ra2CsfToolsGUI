@@ -73,15 +73,7 @@
             <ui:SimpleStackPanel Spacing="12" Margin="10">
                 <GroupBox Header="{x:Static l10n:TextResources.SettingsGroupboxHeader}">
                     <ui:SimpleStackPanel Spacing="12">
-                        <TextBlock TextWrapping="Wrap" FontSize="16">
-                            For code points 128-159 (0x80-0x9F), the original game.fnt file of RA2 mistakenly treats these characters as Windows-1252, instead of Unicode (ISO-8859-1). In some mods and some editors, those characters may be saved as Windows-1252 encoding, which is incorrect.
-                            <LineBreak />
-                            However, users may still need to process these files. You can decide whether to treat 128-159 as Windows-1252 or as Unicode.
-                            <LineBreak />
-                            Checking the two boxes below means the former, which is compatible with some mods and some editors.
-                            <LineBreak />
-                            Un-checking the two boxes below means the latter. This is the correct way. The original game.fnt file has the correct font data at these code points, except for the trademark character ™.
-                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="16" Text="{x:Static l10n:TextResources.SettingsTextBlock1}"/>
                         <CheckBox FontSize="16" Content="{x:Static l10n:TextResources.SettingsCheckbox1}" IsChecked="{Binding Encoding1252ReadWorkaround}" />
                         <CheckBox FontSize="16" Content="{x:Static l10n:TextResources.SettingsCheckbox2}" IsChecked="{Binding Encoding1252WriteWorkaround}" />
                     </ui:SimpleStackPanel>
@@ -163,7 +155,7 @@
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
                 <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.TranslationTileTextBlock1}" />
-                <TextBox ui:ControlHelper.Header="Note: in the generated .ini file, all values that needs translation are replaced with the following text:" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.TranslationNewTextboxHeader}" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
                 <Button Content="{x:Static l10n:TextResources.TranslationTileButton1}" Click="TranslationTile_LoadUpstreamFile_Click" />
                 <Button Content="{x:Static l10n:TextResources.TranslationTileButton2}" Click="TranslationTile_LoadTranslatedFile_Click" />
                 <Button Content="{x:Static l10n:TextResources.TranslationTileButton3}" Click="TranslationTile_SaveIniFile_Click" />
@@ -188,7 +180,7 @@
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
                 <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.TranslationUpdateTextBlock1}" />
-                <TextBox ui:ControlHelper.Header="Note: in the generated .ini file, all values that needs translation are replaced with the following text:" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.TranslationNewTextboxHeader}" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
                 <Button Content="{x:Static l10n:TextResources.TranslationUpdateButton1}" Click="TranslationUpdate_LoadOldUpstreamFile_Click" />
                 <Button Content="{x:Static l10n:TextResources.TranslationUpdateButton2}" Click="TranslationUpdate_LoadNewUpstreamFile_Click" />
                 <Button Content="{x:Static l10n:TextResources.TranslationUpdateButton3}" Click="TranslationUpdate_LoadOldTranslatedFile_Click" />
@@ -201,7 +193,7 @@
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
                 <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.TranslationUpdateCheckTextBlock1}" />
-                <TextBox ui:ControlHelper.Header="Note: in the generated .ini file, all values that needs translation are replaced with the following text:" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.TranslationNewTextboxHeader}" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
                 <TextBox Text="{Binding TranslationDeleteNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
                 <Button Content="{x:Static l10n:TextResources.TranslationUpdateCheckButton1}" Click="TranslationUpdateCheck_LoadOldUpstreamFile_Click" />
                 <Button Content="{x:Static l10n:TextResources.TranslationUpdateCheckButton2}" Click="TranslationUpdateCheck_LoadNewUpstreamFile_Click" />
