@@ -151,7 +151,7 @@
     <value>编码 1252 变通方案选项</value>
   </data>
   <data name="Xaml_Txt_SettingsTextBlock1" xml:space="preserve">
-    <value>原版《红色警戒 2》的 game.fnt 文件错误地将代码点 128-159 (0x80-0x9F) 视为 Windows-1252 编码，而不是正确的 Unicode (ISO-8859-1) 编码。尽管这种处理不正确，但部分模组和编辑器会以 Windows-1252 编码保存这些字符。本工具允许您选择是将这些代码点视为 Windows-1252 还是 Unicode。勾选下方两个复选框将启用 Windows-1252 变通方案，以兼容部分模组和编辑器。取消勾选则使用正确的 Unicode 解释。除了商标符号（™），原版 game.fnt 文件在正确的 Unicode 代码点上都具有正确的字体数据。</value>
+    <value>原版《红色警戒 2》的 game.fnt 文件错误地将代码点 128-159 (0x80-0x9F) 视为 Windows-1252 编码，而不是正确的 Unicode (ISO-8859-1) 编码。尽管这种处理不正确，但部分 Mod 和编辑器会以 Windows-1252 编码保存这些字符。本工具允许您选择是将这些代码点视为 Windows-1252 还是 Unicode。勾选下方两个复选框将启用 Windows-1252 变通方案，以兼容部分 Mod 和编辑器。取消勾选则使用正确的 Unicode 解释。除了商标符号（™），原版 game.fnt 文件在正确的 Unicode 代码点上都具有正确的字体数据。</value>
   </data>
   <data name="Xaml_Txt_SettingsCheckbox1" xml:space="preserve">
     <value>在加载 .csf 文件时启用 Windows-1252 变通方案。</value>
