@@ -4,4 +4,5 @@ mkdir bin
 copy ..\Ra2CsfToolsGUI\bin\Release\net48\*.exe bin\
 copy ..\Ra2CsfToolsGUI\bin\Release\net48\*.exe.config bin\
 copy ..\Ra2CsfToolsGUI\bin\Release\net48\*.dll bin\
+copy ..\Ra2CsfToolsGUI\bin\Release\net48\*.pdb bin\
 pause
