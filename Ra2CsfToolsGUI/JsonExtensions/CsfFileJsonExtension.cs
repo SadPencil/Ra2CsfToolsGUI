@@ -17,17 +17,14 @@ namespace Ra2CsfToolsGUI.JsonExtensions
             public string Extra { get; set; } = null;
         }
 
-        private static JsonSerializerOptions GetJsonSerializerOptions()
+        private static JsonSerializerOptions GetJsonSerializerOptions() => new()
         {
-            return new JsonSerializerOptions()
-            {
-                WriteIndented = true, // 2 spaces
-                PropertyNamingPolicy = null,
-                PropertyNameCaseInsensitive = true,
-                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            };
-        }
+            WriteIndented = true, // 2 spaces
+            PropertyNamingPolicy = null,
+            PropertyNameCaseInsensitive = true,
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        };
 
         /// <summary>
         /// Serializes an object to a JSON string with a 4-space indent.
