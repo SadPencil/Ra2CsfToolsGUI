@@ -466,7 +466,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the folder containing map files (.map/.ypr) ....
+        ///   Looks up a localized string similar to Select the folder containing map files (.map/.mpr/.yrm) ....
         /// </summary>
         public static string Xaml_Txt_LabelCheckButton2 {
             get {

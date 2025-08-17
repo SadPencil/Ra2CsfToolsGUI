@@ -217,7 +217,7 @@
     <value>Load the string table file (.csf/.ini) ...</value>
   </data>
   <data name="Xaml_Txt_LabelCheckButton2" xml:space="preserve">
-    <value>Select the folder containing map files (.map/.ypr) ...</value>
+    <value>Select the folder containing map files (.map/.mpr/.yrm) ...</value>
   </data>
   <data name="Xaml_Txt_LabelCheckTextboxHeader" xml:space="preserve">
     <value>Note: In the generated .ini file, the values for all missing labels will be replaced with the following text:</value>

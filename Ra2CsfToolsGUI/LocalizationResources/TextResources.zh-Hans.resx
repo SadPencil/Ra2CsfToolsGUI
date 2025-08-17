@@ -217,7 +217,7 @@
     <value>加载字符串表文件（.csf/.ini）...</value>
   </data>
   <data name="Xaml_Txt_LabelCheckButton2" xml:space="preserve">
-    <value>选择包含地图文件（.map/.ypr）的文件夹...</value>
+    <value>选择包含地图文件（.map/.mpr/.yrm）的文件夹...</value>
   </data>
   <data name="Xaml_Txt_LabelCheckTextboxHeader" xml:space="preserve">
     <value>注意：在生成的 .ini 文件中，所有缺失标签的值都将替换为以下文本：</value>

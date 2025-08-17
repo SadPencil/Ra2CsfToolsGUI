@@ -1159,10 +1159,11 @@ namespace Ra2CsfToolsGUI
                 throw new Exception(string.Format(LocalizationResources.TextResources.Cs_Txt_FolderDoesNotExist, this.LabelCheck_MapFolder));
             }
 
-            // Enumerate all .map/.ypr files
+            // Enumerate all .map/.mpr/.yrm files
             var mapFiles = Directory.EnumerateFiles(this.LabelCheck_MapFolder, "*.*", SearchOption.AllDirectories)
                 .Where(file => file.EndsWith(".map", StringComparison.InvariantCultureIgnoreCase) ||
-                               file.EndsWith(".ypr", StringComparison.InvariantCultureIgnoreCase))
+                    file.EndsWith(".mpr", StringComparison.InvariantCultureIgnoreCase) ||
+                    file.EndsWith(".yrm", StringComparison.InvariantCultureIgnoreCase))
                 .ToList();
 
             // Save the labels
