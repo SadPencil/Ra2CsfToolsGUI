@@ -18,7 +18,7 @@ using System.Windows;
 namespace Ra2CsfToolsGUI
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
@@ -128,7 +128,7 @@ namespace Ra2CsfToolsGUI
 
         private void MessageBoxPanic(Exception ex) => this.Dispatcher.Invoke(() =>
         {
-            _ = MessageBox.Show(this, ex.Message, $"Error - {this.ApplicationName}", MessageBoxButton.OK, MessageBoxImage.Error);
+            _ = MessageBox.Show(this, ex.Message, string.Format("Error - {0}", this.ApplicationName), MessageBoxButton.OK, MessageBoxImage.Error);
         });
 
         private static IniData ParseIni(Stream stream, IniDataParser parser)
@@ -169,7 +169,7 @@ namespace Ra2CsfToolsGUI
                 if (value != null)
                 {
                     this.Convert_CsfFile_Content = GetIniContentFromCsfFile(value);
-                    this.Convert_CsfFile_Tips = $"This string table file contains {value.Labels.Count} labels, with language {value.Language}.";
+                    this.Convert_CsfFile_Tips = string.Format("This string table file contains {0} labels, with language {1}.", value.Labels.Count, value.Language);
                 }
                 else
                 {
@@ -252,7 +252,7 @@ namespace Ra2CsfToolsGUI
                 var csf = this.GeneralLoadCsfIniFile(filepath);
                 Debug.Assert(csf != null);
 
-                _ = MessageBox.Show(this, $"File loaded successfully. This string table file contains {csf.Labels.Count} labels, with language {csf.Language}.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                _ = MessageBox.Show(this, string.Format("File loaded successfully. This string table file contains {0} labels, with language {1}.", csf.Labels.Count, csf.Language), "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 string filename = Path.GetFileNameWithoutExtension(filepath);
                 // Only preserve substrings before the first dot, if there is a dot
@@ -294,7 +294,7 @@ namespace Ra2CsfToolsGUI
                 {
                     var process = new Process();
                     process.StartInfo.FileName = "explorer.exe";
-                    process.StartInfo.Arguments = $"/select, \"{filename}\"";
+                    process.StartInfo.Arguments = string.Format("/select, \"{0}\"", filename);
                     _ = process.Start();
                 }
             }
@@ -477,7 +477,7 @@ namespace Ra2CsfToolsGUI
             }
         }
 
-        private static string GetIniLabelValueKeyName(int lineIndex) => "Value" + ((lineIndex == 1) ? string.Empty : $"Line{lineIndex}");
+        private static string GetIniLabelValueKeyName(int lineIndex) => "Value" + ((lineIndex == 1) ? string.Empty : string.Format("Line{0}", lineIndex));
 
         private static IniData GeneralProcessCsfIniLabels(CsfFile csf, Action<string, string, string, int> valueAction = null, Action<string, KeyDataCollection> sectionAction = null)
         {
@@ -518,7 +518,7 @@ namespace Ra2CsfToolsGUI
             return ini;
         }
 
-        private static string GetIniLabelCustomKeyName(string name, int lineIndex) => name + ((lineIndex == 1) ? string.Empty : $"Line{lineIndex.ToString(CultureInfo.InvariantCulture)}");
+        private static string GetIniLabelCustomKeyName(string name, int lineIndex) => name + ((lineIndex == 1) ? string.Empty : string.Format("Line{0}", lineIndex.ToString(CultureInfo.InvariantCulture)));
 
         private void TranslationNew_SaveIniFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
@@ -963,7 +963,7 @@ namespace Ra2CsfToolsGUI
 
             this.ReInitWatches();
 
-            _ = MessageBox.Show(this, $"Your changes have been saved successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            _ = MessageBox.Show(this, "Your changes have been saved successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
         });
 
@@ -1028,7 +1028,7 @@ namespace Ra2CsfToolsGUI
 
                     if (items.Length < 2)
                     {
-                        throw new Exception($"Invalid watch config line: {line}");
+                        throw new Exception(string.Format("Invalid watch config line: {0}", line));
                     }
 
                     string source = items[0].Trim();
@@ -1044,7 +1044,7 @@ namespace Ra2CsfToolsGUI
                     Watches.Add(fileSystemWatcher);
                     fileSystemWatcher.Changed += async (s, e) =>
                     {
-                        Debug.WriteLine($"Event 'FileSystemWatcher.Changed' triggered. Source: {source}");
+                        Debug.WriteLine(string.Format("Event 'FileSystemWatcher.Changed' triggered. Source: {0}", source));
                         try
                         {
                             int tryCount = 0;
@@ -1156,7 +1156,7 @@ namespace Ra2CsfToolsGUI
 
             if (!Directory.Exists(this.LabelCheck_MapFolder))
             {
-                throw new Exception($"Folder ${this.LabelCheck_MapFolder} does not exist!");
+                throw new Exception(string.Format("Folder {0} does not exist!", this.LabelCheck_MapFolder));
             }
 
             // Enumerate all .map/.ypr files
@@ -1188,7 +1188,7 @@ namespace Ra2CsfToolsGUI
                             string labelName = section.Keys["UIName"];
                             if (!CsfFile.ValidateLabelName(labelName))
                             {
-                                throw new Exception($"Invalid characters found in label name \"{labelName}\".");
+                                throw new Exception(string.Format("Invalid characters found in label name \"{0}\".", labelName));
                             }
                             _ = mapLabels.Add(labelName);
                         }
@@ -1214,7 +1214,7 @@ namespace Ra2CsfToolsGUI
                                         string labelName = actionParts[i + 2];
                                         if (!CsfFile.ValidateLabelName(labelName))
                                         {
-                                            throw new Exception($"Invalid characters found in label name \"{labelName}\".");
+                                            throw new Exception(string.Format("Invalid characters found in label name \"{0}\".", labelName));
                                         }
                                         _ = mapLabels.Add(labelName);
                                     }
@@ -1225,7 +1225,7 @@ namespace Ra2CsfToolsGUI
                 }
                 catch (Exception ex)
                 {
-                    _ = MessageBox.Show(this, $"Failed to read map file {mapFile}: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    _ = MessageBox.Show(this, string.Format("Failed to read map file {0}: {1}", mapFile, ex.Message), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     continue;
                 }
             }
@@ -1238,7 +1238,7 @@ namespace Ra2CsfToolsGUI
             {
                 if (!CsfFile.ValidateLabelName(labelName))
                 {
-                    throw new Exception($"Invalid characters found in label name \"{labelName}\".");
+                    throw new Exception(string.Format("Invalid characters found in label name \"{0}\".", labelName));
                 }
 
                 if (!outputFile.Labels.ContainsKey(labelName))
@@ -1248,7 +1248,7 @@ namespace Ra2CsfToolsGUI
                 }
             }
 
-            _ = MessageBox.Show(this, $"{missingLabelCount} labels are missing.", "Result", MessageBoxButton.OK, MessageBoxImage.Information);
+            _ = MessageBox.Show(this, string.Format("{0} labels are missing.", missingLabelCount), "Result", MessageBoxButton.OK, MessageBoxImage.Information);
 
             // Okay. Save the file.
             var ini = GetNewIniFileFromCsfFile(outputFile);
