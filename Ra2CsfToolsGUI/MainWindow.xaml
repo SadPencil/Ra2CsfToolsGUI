@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:local="clr-namespace:Ra2CsfToolsGUI" xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz" x:Class="Ra2CsfToolsGUI.MainWindow" ui:WindowHelper.UseModernWindowStyle="True" mc:Ignorable="d" Title="{Binding WindowTitle, Mode=OneWay}" Height="520" Width="850" AllowDrop="True" Drop="Window_Drop" ContentRendered="Window_Content_Rendered">
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:local="clr-namespace:Ra2CsfToolsGUI" xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz" x:Class="Ra2CsfToolsGUI.MainWindow" ui:WindowHelper.UseModernWindowStyle="True" mc:Ignorable="d" Title="{Binding WindowTitle, Mode=OneWay}" Height="550" Width="850" AllowDrop="True" Drop="Window_Drop" ContentRendered="Window_Content_Rendered">
     <Window.Resources>
         <local:BooleanToVisibilityConverter  x:Key="BoolToVisConverter" />
         <local:BooleanToVisibilityConverter  x:Key="Not_BoolToVisConverter" True="Collapsed" False="Visible" />
@@ -130,6 +130,20 @@
                 <Button Content="Save as an .ini file ..." Click="LabelOverride_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
+
+        <TabItem Header="Label Check" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+            <ui:TabItemHelper.Icon>
+                <ui:SymbolIcon Symbol="Zoom" />
+            </ui:TabItemHelper.Icon>
+            <ui:SimpleStackPanel Spacing="12" Margin="10">
+                <TextBlock TextWrapping="Wrap">Checks whether there are missing CSF labels in your map files.</TextBlock>
+                <Button Content="Load the string table file (.csf/.ini) ..." Click="LabelCheck_LoadCsfFile_Click" />
+                <Button Content="Select the folder containing map files (.map/.ypr) ..." Click="LabelCheck_SelectMapFolder_Click" />
+                <TextBox ui:ControlHelper.Header="Note: in the generated .ini file, all values of missing labels are replaced with the following text:" Text="{Binding MissingLabelPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <Button Content="Save as an .ini file ..." Click="LabelCheck_SaveIniFile_Click" />
+            </ui:SimpleStackPanel>
+        </TabItem>
+        
         <TabItem Header="Translation Helper - New" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />

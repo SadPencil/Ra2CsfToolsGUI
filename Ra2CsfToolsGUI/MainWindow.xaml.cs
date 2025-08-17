@@ -2,6 +2,7 @@
 using IniParser.Model.Configuration;
 using IniParser.Parser;
 using Microsoft.Win32;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using Ra2CsfToolsGUI.JsonExtensions;
 using Ra2CsfToolsGUI.YamlExtensions;
 using SadPencil.Ra2CsfFile;
@@ -67,6 +68,7 @@ namespace Ra2CsfToolsGUI
 
         public string TranslationNeededPlaceholder { get; } = "TODO_Translation_Needed";
         public string TranslationDeleteNeededPlaceholder { get; } = "TODO_Translation_Delete_Needed";
+        public string MissingLabelPlaceholder { get; } = "TODO_Missing_Label";
 
         private bool _Encoding1252ReadWorkaround = true;
         public bool Encoding1252ReadWorkaround
@@ -101,7 +103,7 @@ namespace Ra2CsfToolsGUI
             Encoding1252WriteWorkaround = this.Encoding1252WriteWorkaround,
         };
 
-        private static IniParserConfiguration IniParserConfiguration { get; } = new IniParserConfiguration()
+        private static IniParserConfiguration SadPencilCsfToolIniParserConfiguration { get; } = new IniParserConfiguration()
         {
             AllowDuplicateKeys = false,
             AllowDuplicateSections = false,
@@ -112,24 +114,33 @@ namespace Ra2CsfToolsGUI
             SectionRegex = new Regex("^(\\s*?)\\[{1}\\s*[\\p{L}\\p{P}\\p{M}_\\\"\\'\\{\\}\\#\\+\\;\\*\\%\\(\\)\\=\\?\\&\\$\\^\\<\\>\\`\\^|\\,\\:\\/\\.\\-\\w\\d\\s\\\\\\~]+\\s*\\](\\s*?)$"),
         };
 
-        private static IniDataParser GetIniDataParser() => new(IniParserConfiguration);
+        private static IniParserConfiguration GeneralIniParserConfiguration { get; } = new IniParserConfiguration()
+        {
+            AllowDuplicateKeys = true,
+            AllowDuplicateSections = true,
+            CaseInsensitive = true,
+            AssigmentSpacer = string.Empty,
+        };
 
-        private static IniData GetIniData() => new() { Configuration = IniParserConfiguration, };
+        private static IniDataParser GetSadPencilCsfToolIniDataParser() => new(SadPencilCsfToolIniParserConfiguration);
+
+        private static IniDataParser GetGeneralIniDataParser() => new(GeneralIniParserConfiguration);
 
         private void MessageBoxPanic(Exception ex) => this.Dispatcher.Invoke(() =>
         {
             _ = MessageBox.Show(this, ex.Message, $"Error - {this.ApplicationName}", MessageBoxButton.OK, MessageBoxImage.Error);
         });
 
-        private static IniData ParseIni(Stream stream)
+        private static IniData ParseIni(Stream stream, IniDataParser parser)
         {
-            var parser = GetIniDataParser();
-
             using (var sr = new StreamReader(stream, new UTF8Encoding(false)))
             {
-                return parser.Parse(sr.ReadToEnd());
+                string iniContent = sr.ReadToEnd();
+                return parser.Parse(iniContent);
             }
         }
+
+        private static IniData ParseSadPencilCsfToolIni(Stream stream) => ParseIni(stream, GetSadPencilCsfToolIniDataParser());
 
         private static Dictionary<string, List<(int iLine, string value)>> LoadIniValuesFromCsfFile(CsfFile csf)
         {
@@ -147,6 +158,7 @@ namespace Ra2CsfToolsGUI
             return dict;
         }
 
+        private string Convert_CsfFile_FileName = null;
         private CsfFile _Convert_CsfFile = null;
         private CsfFile Convert_CsfFile
         {
@@ -191,7 +203,7 @@ namespace Ra2CsfToolsGUI
 
         private void Convert_LoadFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.Convert_CsfFile = this.GeneralLoadCsfIniFileGUI();
+            (this.Convert_CsfFile, this.Convert_CsfFile_FileName) = this.GeneralLoadCsfIniFileGUI();
         });
 
         private CsfFile GeneralLoadCsfIniFile(string filepath)
@@ -228,7 +240,7 @@ namespace Ra2CsfToolsGUI
             }
         }
 
-        private CsfFile GeneralLoadCsfIniFileGUI()
+        private (CsfFile csfFile, string fileName) GeneralLoadCsfIniFileGUI()
         {
             var openFileDialog = new OpenFileDialog
             {
@@ -236,23 +248,41 @@ namespace Ra2CsfToolsGUI
             };
             if (openFileDialog.ShowDialog(this).GetValueOrDefault())
             {
-                string filename = openFileDialog.FileName;
-                var csf = this.GeneralLoadCsfIniFile(filename);
+                string filepath = openFileDialog.FileName;
+                var csf = this.GeneralLoadCsfIniFile(filepath);
+                Debug.Assert(csf != null);
+
                 _ = MessageBox.Show(this, $"File loaded successfully. This string table file contains {csf.Labels.Count} labels, with language {csf.Language}.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                Debug.Assert(csf != null);
-                return csf;
+                string filename = Path.GetFileNameWithoutExtension(filepath);
+                // Only preserve substrings before the first dot, if there is a dot
+                filename = filename.Split('.')[0];
+
+                return (csf, filename);
             }
 
-            return null;
+            return (null, null);
         }
 
-        private void GeneralSaveFileGUI(Action<Stream> saveAction, string filter)
+        private string OpenFolderGUI()
+        {
+            // https://stackoverflow.com/a/1922230
+            var openFolderDialog = new CommonOpenFileDialog() { IsFolderPicker = true };
+            return openFolderDialog.ShowDialog(this) == CommonFileDialogResult.Ok ? openFolderDialog.FileName : null;
+        }
+
+        private void GeneralSaveFileGUI(Action<Stream> saveAction, string filter, string defaultFileName = null)
         {
             var saveFileDialog = new SaveFileDialog()
             {
                 Filter = filter,
             };
+
+            if (!string.IsNullOrEmpty(defaultFileName))
+            {
+                saveFileDialog.FileName = defaultFileName;
+            }
+
             if (saveFileDialog.ShowDialog(this).GetValueOrDefault())
             {
                 string filename = saveFileDialog.FileName;
@@ -270,7 +300,7 @@ namespace Ra2CsfToolsGUI
             }
         }
 
-        private void GeneralSaveCsfIniFileGUI(CsfFile file, string defaultExtension = ".ini")
+        private void GeneralSaveCsfIniFileGUI(CsfFile file, string defaultExtension = ".ini", string defaultFileName = null)
         {
             Debug.Assert(new List<string>() { ".ini", ".csf", ".yaml", ".json" }.Contains(defaultExtension));
 
@@ -305,59 +335,65 @@ namespace Ra2CsfToolsGUI
                 ".yaml" => "SadPencil.Ra2CsfFile.Yaml files (*.yaml)|*.yaml",
                 ".json" => "JSON files (*.json)|*.json",
                 _ => throw new Exception("Unexpected file extension."),
-            });
+            }, defaultFileName);
         }
 
-        private void GeneralSaveIniFileGUI(IniData ini) => this.GeneralSaveFileGUI(fs =>
+        private void GeneralSaveIniFileGUI(IniData ini, string defaultFileName = null) => this.GeneralSaveFileGUI(fs =>
         {
             using (var sw = new StreamWriter(fs, new UTF8Encoding(false)))
             {
                 sw.Write(ini.ToString());
             }
-        }, "SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini");
+        }, "SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini", defaultFileName);
 
         private void GeneralTryCatchGUI(Action action)
         {
+#if DEBUG
+            action.Invoke();
+#else
             try
             {
                 action.Invoke();
             }
             catch (Exception ex)
             {
+                Debugger.Break();
                 this.MessageBoxPanic(ex);
             }
+#endif
         }
 
         private void Convert_SaveAsIni_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.GeneralSaveCsfIniFileGUI(this.Convert_CsfFile, ".ini");
+            this.GeneralSaveCsfIniFileGUI(this.Convert_CsfFile, ".ini", this.Convert_CsfFile_FileName);
         });
 
         private void Convert_SaveAsYaml_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.GeneralSaveCsfIniFileGUI(this.Convert_CsfFile, ".yaml");
+            this.GeneralSaveCsfIniFileGUI(this.Convert_CsfFile, ".yaml", this.Convert_CsfFile_FileName);
         });
 
         private void Convert_SaveAsJson_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.GeneralSaveCsfIniFileGUI(this.Convert_CsfFile, ".json");
+            this.GeneralSaveCsfIniFileGUI(this.Convert_CsfFile, ".json", this.Convert_CsfFile_FileName);
         });
 
         private void Convert_SaveAsCsf_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.GeneralSaveCsfIniFileGUI(this.Convert_CsfFile, ".csf");
+            this.GeneralSaveCsfIniFileGUI(this.Convert_CsfFile, ".csf", this.Convert_CsfFile_FileName);
         });
 
         private CsfFile LabelOverride_UpstreamFile = null;
         private void LabelOverride_LoadUpstreamFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.LabelOverride_UpstreamFile = this.GeneralLoadCsfIniFileGUI();
+            (this.LabelOverride_UpstreamFile, _) = this.GeneralLoadCsfIniFileGUI();
         });
 
         private CsfFile LabelOverride_CurrentFile = null;
+        private string LabelOverride_CurrentFile_FileName = null;
         private void LabelOverride_LoadCurrentFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.LabelOverride_CurrentFile = this.GeneralLoadCsfIniFileGUI();
+            (this.LabelOverride_CurrentFile, this.LabelOverride_CurrentFile_FileName) = this.GeneralLoadCsfIniFileGUI();
         });
 
         private CsfFile LabelOverride_DoWork()
@@ -397,20 +433,21 @@ namespace Ra2CsfToolsGUI
         private void LabelOverride_SaveCsfFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
             var outputFile = this.LabelOverride_DoWork();
-            this.GeneralSaveCsfIniFileGUI(outputFile, ".csf");
+            this.GeneralSaveCsfIniFileGUI(outputFile, ".csf", this.LabelOverride_CurrentFile_FileName);
         });
 
         private void LabelOverride_SaveIniFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
             var outputFile = this.LabelOverride_DoWork();
-            this.GeneralSaveCsfIniFileGUI(outputFile, ".ini");
+            this.GeneralSaveCsfIniFileGUI(outputFile, ".ini", this.LabelOverride_CurrentFile_FileName);
         });
 
         private CsfFile TranslationNew_File = null;
+        private string TranslationNew_FileName = null;
 
         private void TranslationNew_LoadFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.TranslationNew_File = this.GeneralLoadCsfIniFileGUI();
+            (this.TranslationNew_File, this.TranslationNew_FileName) = this.GeneralLoadCsfIniFileGUI();
         });
 
         private static string GetIniContentFromCsfFile(CsfFile csf)
@@ -435,7 +472,7 @@ namespace Ra2CsfToolsGUI
                 CsfFileIniHelper.WriteIniFile(csf, ms);
                 using (var msCopy = new MemoryStream(ms.ToArray()))
                 {
-                    return ParseIni(msCopy);
+                    return ParseSadPencilCsfToolIni(msCopy);
                 }
             }
         }
@@ -503,19 +540,20 @@ namespace Ra2CsfToolsGUI
             });
 
             // save ini file
-            this.GeneralSaveIniFileGUI(ini);
+            this.GeneralSaveIniFileGUI(ini, this.TranslationNew_FileName);
         });
 
         private CsfFile TranslationTile_UpstreamFile = null;
         private CsfFile TranslationTile_TranslatedFile = null;
+        private string TranslationTile_TranslatedFile_FileName = null;
         private void TranslationTile_LoadUpstreamFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.TranslationTile_UpstreamFile = this.GeneralLoadCsfIniFileGUI();
+            (this.TranslationTile_UpstreamFile, _) = this.GeneralLoadCsfIniFileGUI();
         });
 
         private void TranslationTile_LoadTranslatedFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.TranslationTile_TranslatedFile = this.GeneralLoadCsfIniFileGUI();
+            (this.TranslationTile_TranslatedFile, this.TranslationTile_TranslatedFile_FileName) = this.GeneralLoadCsfIniFileGUI();
         });
 
         private void TranslationTile_SaveIniFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
@@ -555,25 +593,26 @@ namespace Ra2CsfToolsGUI
             // TODO: for those keys exist in translated files but not in the upstream files, mark them up
 
             // save ini file
-            this.GeneralSaveIniFileGUI(ini);
+            this.GeneralSaveIniFileGUI(ini, this.TranslationTile_TranslatedFile_FileName);
         });
 
         private CsfFile TranslationUpdate_OldUpstreamFile = null;
         private CsfFile TranslationUpdate_NewUpstreamFile = null;
         private CsfFile TranslationUpdate_OldTranslatedFile = null;
+        private string TranslationUpdate_NewUpstreamFile_FileName = null;
         private void TranslationUpdate_LoadOldUpstreamFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.TranslationUpdate_OldUpstreamFile = this.GeneralLoadCsfIniFileGUI();
+            (this.TranslationUpdate_OldUpstreamFile, _) = this.GeneralLoadCsfIniFileGUI();
         });
 
         private void TranslationUpdate_LoadNewUpstreamFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.TranslationUpdate_NewUpstreamFile = this.GeneralLoadCsfIniFileGUI();
+            (this.TranslationUpdate_NewUpstreamFile, this.TranslationUpdate_NewUpstreamFile_FileName) = this.GeneralLoadCsfIniFileGUI();
         });
 
         private void TranslationUpdate_LoadOldTranslatedFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.TranslationUpdate_OldTranslatedFile = this.GeneralLoadCsfIniFileGUI();
+            (this.TranslationUpdate_OldTranslatedFile, _) = this.GeneralLoadCsfIniFileGUI();
         });
 
         private void TranslationUpdate_SaveIniFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
@@ -666,20 +705,21 @@ namespace Ra2CsfToolsGUI
             // TODO: for those keys exist in translated files but not in the upstream files, mark them up
 
             // save ini
-            this.GeneralSaveIniFileGUI(ini);
+            this.GeneralSaveIniFileGUI(ini, this.TranslationUpdate_NewUpstreamFile_FileName);
         });
 
         private CsfFile TranslationOverride_UpstreamFile = null;
         private CsfFile TranslationOverride_TranslatedFile = null;
+        private string TranslationOverride_TranslatedFile_FileName = null;
 
         private void TranslationOverride_LoadUpstreamFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.TranslationOverride_UpstreamFile = this.GeneralLoadCsfIniFileGUI();
+            (this.TranslationOverride_UpstreamFile, _) = this.GeneralLoadCsfIniFileGUI();
         });
 
         private void TranslationOverride_LoadTranslatedFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.TranslationOverride_TranslatedFile = this.GeneralLoadCsfIniFileGUI();
+            (this.TranslationOverride_TranslatedFile, this.TranslationOverride_TranslatedFile_FileName) = this.GeneralLoadCsfIniFileGUI();
         });
 
         private void TranslationOverride_SaveIniFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
@@ -719,32 +759,33 @@ namespace Ra2CsfToolsGUI
             }
 
             // save ini
-            this.GeneralSaveCsfIniFileGUI(newCsf, ".ini");
+            this.GeneralSaveCsfIniFileGUI(newCsf, ".ini", this.TranslationOverride_TranslatedFile_FileName);
         });
 
         private CsfFile TranslationUpdateCheck_OldUpstreamFile = null;
         private CsfFile TranslationUpdateCheck_NewUpstreamFile = null;
         private CsfFile TranslationUpdateCheck_OldTranslatedFile = null;
         private CsfFile TranslationUpdateCheck_NewTranslatedFile = null;
+        private string TranslationUpdateCheck_NewTranslatedFile_FileName = null;
 
         private void TranslationUpdateCheck_LoadOldUpstreamFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.TranslationUpdateCheck_OldUpstreamFile = this.GeneralLoadCsfIniFileGUI();
+            (this.TranslationUpdateCheck_OldUpstreamFile, _) = this.GeneralLoadCsfIniFileGUI();
         });
 
         private void TranslationUpdateCheck_LoadNewUpstreamFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.TranslationUpdateCheck_NewUpstreamFile = this.GeneralLoadCsfIniFileGUI();
+            (this.TranslationUpdateCheck_NewUpstreamFile, _) = this.GeneralLoadCsfIniFileGUI();
         });
 
         private void TranslationUpdateCheck_LoadOldTranslatedFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.TranslationUpdateCheck_OldTranslatedFile = this.GeneralLoadCsfIniFileGUI();
+            (this.TranslationUpdateCheck_OldTranslatedFile, _) = this.GeneralLoadCsfIniFileGUI();
         });
 
         private void TranslationUpdateCheck_LoadNewTranslatedFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            this.TranslationUpdateCheck_NewTranslatedFile = this.GeneralLoadCsfIniFileGUI();
+            (this.TranslationUpdateCheck_NewTranslatedFile, this.TranslationUpdateCheck_NewTranslatedFile_FileName) = this.GeneralLoadCsfIniFileGUI();
         });
 
         private void TranslationUpdateCheck_SaveIniFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
@@ -813,26 +854,12 @@ namespace Ra2CsfToolsGUI
                         }
                         else
                         {
-                            if ((oldTransExist && oldTransValue != newTransValue) || (!oldTransExist))
-                            {
-                                value = newTransValue;
-                            }
-                            else
-                            {
-                                value = this.TranslationNeededPlaceholder;
-                            }
+                            value = (oldTransExist && oldTransValue != newTransValue) || (!oldTransExist) ? newTransValue : this.TranslationNeededPlaceholder;
                         }
                     }
                     else
                     {
-                        if (newTransDict.ContainsKey(labelName))
-                        {
-                            value = newTransDict[labelName];
-                        }
-                        else
-                        {
-                            value = this.TranslationNeededPlaceholder;
-                        }
+                        value = newTransDict.ContainsKey(labelName) ? newTransDict[labelName] : this.TranslationNeededPlaceholder;
                     }
 
                 }
@@ -917,7 +944,7 @@ namespace Ra2CsfToolsGUI
             // TODO: for those keys exist in translated files but not in the upstream files, mark them up
 
             // save ini
-            this.GeneralSaveIniFileGUI(ini);
+            this.GeneralSaveIniFileGUI(ini, this.TranslationUpdateCheck_NewTranslatedFile_FileName);
 
         });
 
@@ -1102,5 +1129,132 @@ namespace Ra2CsfToolsGUI
                 }
             }
         }
+
+        private CsfFile LabelCheck_CsfFile = null;
+        private string LabelCheck_CsfFile_FileName = null;
+        private void LabelCheck_LoadCsfFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            (this.LabelCheck_CsfFile, this.LabelCheck_CsfFile_FileName) = this.GeneralLoadCsfIniFileGUI();
+        });
+
+        private string LabelCheck_MapFolder = null;
+        private void LabelCheck_SelectMapFolder_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            this.LabelCheck_MapFolder = this.OpenFolderGUI();
+        });
+
+        private void LabelCheck_SaveIniFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            if (this.LabelCheck_CsfFile == null)
+            {
+                throw new Exception("Please load a string table file first.");
+            }
+
+            if (string.IsNullOrEmpty(this.LabelCheck_MapFolder))
+            {
+                throw new Exception("Please select the map folder first.");
+            }
+
+            if (!Directory.Exists(this.LabelCheck_MapFolder))
+            {
+                throw new Exception($"Folder ${this.LabelCheck_MapFolder} does not exist!");
+            }
+
+            // Enumerate all .map/.ypr files
+            var mapFiles = Directory.EnumerateFiles(this.LabelCheck_MapFolder, "*.*", SearchOption.AllDirectories)
+                .Where(file => file.EndsWith(".map", StringComparison.InvariantCultureIgnoreCase) ||
+                               file.EndsWith(".ypr", StringComparison.InvariantCultureIgnoreCase))
+                .ToList();
+
+            // Save the labels
+            var mapLabels = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
+
+            // Treat each map file as an ini file
+            foreach (string mapFile in mapFiles)
+            {
+                try
+                {
+                    // ini-parser-netstandard
+                    IniData mapIni;
+                    using (Stream mapFileStream = File.Open(mapFile, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+                        mapIni = ParseIni(mapFileStream, GetGeneralIniDataParser());
+                    }
+
+                    // 1. For all sections, check if there is a key named UIName. The value of this key is the label name.
+                    foreach (var section in mapIni.Sections)
+                    {
+                        if (section.Keys.ContainsKey("UIName"))
+                        {
+                            string labelName = section.Keys["UIName"];
+                            if (!CsfFile.ValidateLabelName(labelName))
+                            {
+                                throw new Exception($"Invalid characters found in label name \"{labelName}\".");
+                            }
+                            _ = mapLabels.Add(labelName);
+                        }
+                    }
+
+                    // 2. Get the [Actions] section. Iterate all key value pairs. For each key pair, the key is ignored, while the value can be treated as a comma-separated list of strings.
+                    // The first element is an integer representing how many actions there.
+                    // Then, for each action, there are 8 elements. The first one is an integer representing the action type. We only care about type 11.
+                    // The third element is the label name. Rest elements are ignored.
+
+                    if (mapIni.Sections.ContainsSection("Actions"))
+                    {
+                        var actionsSection = mapIni.Sections["Actions"];
+                        foreach (var key in actionsSection)
+                        {
+                            string[] actionParts = key.Value.Split(',');
+                            if (int.TryParse(actionParts[0], out int actionCount) && actionCount > 0)
+                            {
+                                for (int i = 1; i < actionCount * 8; i += 8)
+                                {
+                                    if (i + 1 < actionParts.Length && int.TryParse(actionParts[i], out int actionType) && actionType == 11)
+                                    {
+                                        string labelName = actionParts[i + 2];
+                                        if (!CsfFile.ValidateLabelName(labelName))
+                                        {
+                                            throw new Exception($"Invalid characters found in label name \"{labelName}\".");
+                                        }
+                                        _ = mapLabels.Add(labelName);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _ = MessageBox.Show(this, $"Failed to read map file {mapFile}: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    continue;
+                }
+            }
+
+            var outputFile = this.LabelCheck_CsfFile.Clone() as CsfFile;
+
+            // For each CSF label read from map files, if it's missing in the output file, add it with a placeholder value.
+            int missingLabelCount = 0;
+            foreach (string labelName in mapLabels)
+            {
+                if (!CsfFile.ValidateLabelName(labelName))
+                {
+                    throw new Exception($"Invalid characters found in label name \"{labelName}\".");
+                }
+
+                if (!outputFile.Labels.ContainsKey(labelName))
+                {
+                    _ = outputFile.AddLabel(labelName, this.TranslationNeededPlaceholder);
+                    ++missingLabelCount;
+                }
+            }
+
+            _ = MessageBox.Show(this, $"{missingLabelCount} labels are missing.", "Result", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            // Okay. Save the file.
+            var ini = GetNewIniFileFromCsfFile(outputFile);
+            this.GeneralSaveIniFileGUI(ini, this.LabelCheck_CsfFile_FileName);
+        });
+
     }
 }
