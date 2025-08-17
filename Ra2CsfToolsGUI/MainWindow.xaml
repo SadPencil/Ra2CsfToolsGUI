@@ -18,7 +18,7 @@
                 <Grid Margin="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <!-- this column will be centre aligned -->
+                        <!-- this column will be center aligned -->
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
@@ -66,16 +66,15 @@
                 <CheckBox Margin="10" FontSize="16" IsChecked="{Binding Path=AdvancedMode, Mode=TwoWay}" Content="{x:Static l10n:TextResources.HomeTabAdvancedMode}"/>
             </StackPanel>
         </TabItem>
-        <TabItem Header="Setting" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.SettingsTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Setting" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <GroupBox Header="Encoding 1252 Workaround Options">
+                <GroupBox Header="{x:Static l10n:TextResources.SettingsGroupboxHeader}">
                     <ui:SimpleStackPanel Spacing="12">
                         <TextBlock TextWrapping="Wrap" FontSize="16">
-                            For code points 128-159 (0x80-0x9F), the original game.fnt file of RA2 mistakenly treats these characters as Windows-1252, instead of Unicode (ISO-8859-1).
-                        In some mods and some editors, those characters may be saved as Windows-1252 encoding, which is incorrect.
+                            For code points 128-159 (0x80-0x9F), the original game.fnt file of RA2 mistakenly treats these characters as Windows-1252, instead of Unicode (ISO-8859-1). In some mods and some editors, those characters may be saved as Windows-1252 encoding, which is incorrect.
                             <LineBreak />
                             However, users may still need to process these files. You can decide whether to treat 128-159 as Windows-1252 or as Unicode.
                             <LineBreak />
@@ -83,13 +82,13 @@
                             <LineBreak />
                             Un-checking the two boxes below means the latter. This is the correct way. The original game.fnt file has the correct font data at these code points, except for the trademark character ™.
                         </TextBlock>
-                        <CheckBox FontSize="16" Content="Enable Windows-1252 workaround when loading the .csf file." IsChecked="{Binding Encoding1252ReadWorkaround}" />
-                        <CheckBox FontSize="16" Content="Enable Windows-1252 workaround when writing the .csf file." IsChecked="{Binding Encoding1252WriteWorkaround}" />
+                        <CheckBox FontSize="16" Content="{x:Static l10n:TextResources.SettingsCheckbox1}" IsChecked="{Binding Encoding1252ReadWorkaround}" />
+                        <CheckBox FontSize="16" Content="{x:Static l10n:TextResources.SettingsCheckbox2}" IsChecked="{Binding Encoding1252WriteWorkaround}" />
                     </ui:SimpleStackPanel>
                 </GroupBox>
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="Format Converter" x:Name="UI_FormatConverterTabItem">
+        <TabItem Header="{x:Static l10n:TextResources.FormatConverterTabHeader}" x:Name="UI_FormatConverterTabItem">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Edit" />
             </ui:TabItemHelper.Icon>
@@ -101,22 +100,19 @@
                 </Grid.RowDefinitions>
 
                 <ui:SimpleStackPanel Grid.Row="0" Spacing="12" Margin="10">
-                    <TextBlock TextWrapping="Wrap">The string table of Red Alert 2 is presented as a .csf file, which is not friendly for editing as most csf editors were created decades ago. This tool allows users to convert the string table from a .csf file to an .ini file and back to a .csf file that is recognized by the game.</TextBlock>
-                    <TextBlock TextWrapping="Wrap">Note: the text encoding of the .ini file must be UTF-8 (without BOM).</TextBlock>
+                    <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.FormatConverterTextBlock1}" />
+                    <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.FormatConverterTextBlock2}" />
                     <ui:SimpleStackPanel Spacing="12" Margin="0" Orientation="Horizontal">
-                        <Button Content="Load a string table file (.csf/.ini) ..." Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}" />
-                        <Button Content="Load a string table file (.csf/.ini/.yaml/.json) ..." Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
-                        <!--<Label                     Content="{Binding Convert_FileLabelNum}"                       ContentStringFormat="This string table contains {0} labels."/>-->
-                        <Button Content="Save as an .ini file ..." Click="Convert_SaveAsIni_Click" />
-                        <Button Content="Save as a .csf file ..." Click="Convert_SaveAsCsf_Click" />
+                        <Button Content="{x:Static l10n:TextResources.FormatConverterButton1_Basic}" Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}" />
+                        <Button Content="{x:Static l10n:TextResources.FormatConverterButton1_Advanced}" Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
+                        <Button Content="{x:Static l10n:TextResources.FormatConverterButton2}" Click="Convert_SaveAsIni_Click" />
+                        <Button Content="{x:Static l10n:TextResources.FormatConverterButton3}" Click="Convert_SaveAsCsf_Click" />
                     </ui:SimpleStackPanel>
                     <ui:SimpleStackPanel Spacing="12" Margin="0" Orientation="Horizontal" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" >
-                        <Button Content="Save as a .yaml file ..." Click="Convert_SaveAsYaml_Click" />
-                        <Button Content="Save as a .json file ..." Click="Convert_SaveAsJson_Click" />
+                        <Button Content="{x:Static l10n:TextResources.FormatConverterButton4}" Click="Convert_SaveAsYaml_Click" />
+                        <Button Content="{x:Static l10n:TextResources.FormatConverterButton5}" Click="Convert_SaveAsJson_Click" />
                     </ui:SimpleStackPanel>
-                    <TextBlock TextWrapping="Wrap">
-                        The content of the string table file is shown below for preview. To modify it, save it as an .ini file.
-                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.FormatConverterTextBlock3}" />
 
                 </ui:SimpleStackPanel>
 
@@ -124,106 +120,106 @@
                 <TextBlock Margin="10" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Convert_CsfFile_Tips, Mode=OneWay}" />
             </Grid>
         </TabItem>
-        <TabItem Header="Label Override" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.LabelOverrideTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Repair" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap">The tool can now support label names containing capital letters. Select an upstream string table file, and your current string table file. The tool will compare each label (ignoring case) and prefer the label from upstream.</TextBlock>
-                <Button Content="Load an upstream string table file (.csf/.ini) ..." Click="LabelOverride_LoadUpstreamFile_Click" />
-                <Button Content="Load the current string table file (.csf/.ini) ..." Click="LabelOverride_LoadCurrentFile_Click" />
-                <Button Content="Save as a .csf file ..." Click="LabelOverride_SaveCsfFile_Click" />
-                <Button Content="Save as an .ini file ..." Click="LabelOverride_SaveIniFile_Click" />
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.LabelOverrideTextBlock1}" />
+                <Button Content="{x:Static l10n:TextResources.LabelOverrideButton1}" Click="LabelOverride_LoadUpstreamFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.LabelOverrideButton2}" Click="LabelOverride_LoadCurrentFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.LabelOverrideButton3}" Click="LabelOverride_SaveCsfFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.LabelOverrideButton4}" Click="LabelOverride_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
 
-        <TabItem Header="Label Check" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.LabelCheckTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Zoom" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap">Checks whether there are missing CSF labels in your map files.</TextBlock>
-                <Button Content="Load the string table file (.csf/.ini) ..." Click="LabelCheck_LoadCsfFile_Click" />
-                <Button Content="Select the folder containing map files (.map/.ypr) ..." Click="LabelCheck_SelectMapFolder_Click" />
-                <TextBox ui:ControlHelper.Header="Note: in the generated .ini file, all values of missing labels are replaced with the following text:" Text="{Binding MissingLabelPlaceholder, Mode=OneWay}" IsReadOnly="True" />
-                <Button Content="Save as an .ini file ..." Click="LabelCheck_SaveIniFile_Click" />
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.LabelCheckTextBlock1}" />
+                <Button Content="{x:Static l10n:TextResources.LabelCheckButton1}" Click="LabelCheck_LoadCsfFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.LabelCheckButton2}" Click="LabelCheck_SelectMapFolder_Click" />
+                <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.LabelCheckTextboxHeader}" Text="{Binding MissingLabelPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <Button Content="{x:Static l10n:TextResources.LabelCheckButton3}" Click="LabelCheck_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
 
-        <TabItem Header="Translation Helper - New" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.TranslationNewTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap">Select an upstream string table file, and save an .ini file that is friendly for translation. The .ini file can be converted back to .csf file in the "Format Converter" tab.</TextBlock>
-                <TextBox ui:ControlHelper.Header="Note: in the generated .ini file, all values that needs translation are replaced with the following text:" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
-                <Button Content="Load an upstream string table file (.csf/.ini) ..." Click="TranslationNew_LoadFile_Click" />
-                <Button Content="Save as an .ini file for translation ..." Click="TranslationNew_SaveIniFile_Click" />
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.TranslationNewTextBlock1}" />
+                <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.TranslationNewTextboxHeader}" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <Button Content="{x:Static l10n:TextResources.TranslationNewButton1}" Click="TranslationNew_LoadFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.TranslationNewButton2}" Click="TranslationNew_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="Translation Helper - Tile" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.TranslationTileTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap">Select an upstream string table file and a translated string label file, and save an .ini file that is convenient for comparing and checking. The .ini file can be converted back to .csf file in the "Format Converter" tab.</TextBlock>
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.TranslationTileTextBlock1}" />
                 <TextBox ui:ControlHelper.Header="Note: in the generated .ini file, all values that needs translation are replaced with the following text:" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
-                <Button Content="Load an upstream string table file (.csf/.ini) ..." Click="TranslationTile_LoadUpstreamFile_Click" />
-                <Button Content="Load a translated string table file (.csf/.ini) ..." Click="TranslationTile_LoadTranslatedFile_Click" />
-                <Button Content="Save as an .ini file for comparison ..." Click="TranslationTile_SaveIniFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.TranslationTileButton1}" Click="TranslationTile_LoadUpstreamFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.TranslationTileButton2}" Click="TranslationTile_LoadTranslatedFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.TranslationTileButton3}" Click="TranslationTile_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="Translation Helper - Override" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.TranslationOverrideTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
 
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap">Select an upstream string table file and a translated string label file, and save an .ini file that once a label is shown in the translated file, the value is selected. Otherwise, the label shown in the upstream file is selected. The .ini file can be converted back to .csf file in the "Format Converter" tab.</TextBlock>
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.TranslationOverrideTextBlock1}" />
 
-                <Button Content="Load an upstream string table file (.csf/.ini) ..." Click="TranslationOverride_LoadUpstreamFile_Click" />
-                <Button Content="Load a translated string table file (.csf/.ini) ..." Click="TranslationOverride_LoadTranslatedFile_Click" />
-                <Button Content="Save as an .ini file for comparison ..." Click="TranslationOverride_SaveIniFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.TranslationOverrideButton1}" Click="TranslationOverride_LoadUpstreamFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.TranslationOverrideButton2}" Click="TranslationOverride_LoadTranslatedFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.TranslationOverrideButton3}" Click="TranslationOverride_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="Translation Helper - Update" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.TranslationUpdateTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap">Select an old-version upstream string table file, a new-version upstream string table file and an old-version translated string label file, and save an .ini file that is convenient for updating the translation. The .ini file can be converted back to .csf file in the "Format Converter" tab.</TextBlock>
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.TranslationUpdateTextBlock1}" />
                 <TextBox ui:ControlHelper.Header="Note: in the generated .ini file, all values that needs translation are replaced with the following text:" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
-                <Button Content="Load an old-version upstream string table file (.csf/.ini) ..." Click="TranslationUpdate_LoadOldUpstreamFile_Click" />
-                <Button Content="Load a new-version upstream string table file (.csf/.ini) ..." Click="TranslationUpdate_LoadNewUpstreamFile_Click" />
-                <Button Content="Load an old-version translated string table file (.csf/.ini) ..." Click="TranslationUpdate_LoadOldTranslatedFile_Click" />
-                <Button Content="Save as an .ini file for updating the translation ..." Click="TranslationUpdate_SaveIniFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.TranslationUpdateButton1}" Click="TranslationUpdate_LoadOldUpstreamFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.TranslationUpdateButton2}" Click="TranslationUpdate_LoadNewUpstreamFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.TranslationUpdateButton3}" Click="TranslationUpdate_LoadOldTranslatedFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.TranslationUpdateButton4}" Click="TranslationUpdate_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="Translation Helper - Update Check" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.TranslationUpdateCheckTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap">Select an old-version upstream string table file, a new-version upstream string table file, an old-version translated string label file, and a new-version translated string label file, and save an .ini file that is checked for whether some labels remain the old version. The .ini file can be converted back to .csf file in the "Format Converter" tab.</TextBlock>
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.TranslationUpdateCheckTextBlock1}" />
                 <TextBox ui:ControlHelper.Header="Note: in the generated .ini file, all values that needs translation are replaced with the following text:" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
                 <TextBox Text="{Binding TranslationDeleteNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
-                <Button Content="Load an old-version upstream string table file (.csf/.ini) ..." Click="TranslationUpdateCheck_LoadOldUpstreamFile_Click" />
-                <Button Content="Load a new-version upstream string table file (.csf/.ini) ..." Click="TranslationUpdateCheck_LoadNewUpstreamFile_Click" />
-                <Button Content="Load an old-version translated string table file (.csf/.ini) ..." Click="TranslationUpdateCheck_LoadOldTranslatedFile_Click" />
-                <Button Content="Load a new-version translated string table file (.csf/.ini) ..." Click="TranslationUpdateCheck_LoadNewTranslatedFile_Click" />
-                <Button Content="Save as an .ini file for updating the translation ..." Click="TranslationUpdateCheck_SaveIniFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.TranslationUpdateCheckButton1}" Click="TranslationUpdateCheck_LoadOldUpstreamFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.TranslationUpdateCheckButton2}" Click="TranslationUpdateCheck_LoadNewUpstreamFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.TranslationUpdateCheckButton3}" Click="TranslationUpdateCheck_LoadOldTranslatedFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.TranslationUpdateCheckButton4}" Click="TranslationUpdateCheck_LoadNewTranslatedFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.TranslationUpdateCheckButton5}" Click="TranslationUpdateCheck_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="Watch Mode" x:Name="UI_WatchModeTabItem" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.WatchModeTabHeader}" x:Name="UI_WatchModeTabItem" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Manage" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap">In the text box below, input the pairs of .ini files to monitor and the corresponding .csf files to generate. Separate each pair with a comma. You can enter multiple pairs by putting each pair on a new line. Once the program starts, it will monitor the .ini files. Whenever an ini file changes, the program will automatically generate the corresponding csf file.</TextBlock>
-                <TextBlock>Example: C:\path\to\stringtables\ra2.ini, D:\path\to\game\ra2.csf</TextBlock>
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.WatchModeTextBlock1}" />
+                <TextBlock Text="{x:Static l10n:TextResources.WatchModeTextBlock2}" />
                 <TextBox AcceptsReturn="True" IsReadOnly="False" Height="200" Text="{Binding WatchConfigStr, Mode=TwoWay}" >
                 </TextBox>
-                <Button Content="Save and Apply" Click="WatchMode_Confirm_Click"/>
+                <Button Content="{x:Static l10n:TextResources.WatchModeButton1}" Click="WatchMode_Confirm_Click"/>
             </ui:SimpleStackPanel>
         </TabItem>
     </TabControl>
