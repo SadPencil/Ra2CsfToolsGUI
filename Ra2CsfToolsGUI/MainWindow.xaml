@@ -7,7 +7,7 @@
         <local:BooleanToVisibilityConverter  x:Key="BoolToVisConverter" />
         <local:BooleanToVisibilityConverter  x:Key="Not_BoolToVisConverter" True="Collapsed" False="Visible" />
     </Window.Resources>
-    <!-- Localization reference (Chinese): https://www.cnblogs.com/wpinfo/p/wpf_localization.html -->
+    <!-- Localization reference (Chinese): https://www.cnblogs.com/wpinfo/p/wpf_localization.html https://web.archive.org/web/20250817155821/https://www.cnblogs.com/wpinfo/p/wpf_localization.html -->
     <TabControl>
         <TabItem Header="{x:Static l10n:TextResources.HomeTabHeader}" x:Name="UI_HomeTabItem">
             <ui:TabItemHelper.Icon>
