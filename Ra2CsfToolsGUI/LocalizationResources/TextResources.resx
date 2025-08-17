@@ -117,208 +117,208 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="HomeTabAdvancedMode" xml:space="preserve">
+  <data name="Xaml_Txt_HomeTabAdvancedMode" xml:space="preserve">
     <value>Advanced Mode</value>
   </data>
-  <data name="HomeTabHeader" xml:space="preserve">
+  <data name="Xaml_Txt_HomeTabHeader" xml:space="preserve">
     <value>Home</value>
   </data>
-  <data name="HomeTabTextBlock1" xml:space="preserve">
+  <data name="Xaml_Txt_HomeTabTextBlock1" xml:space="preserve">
     <value>This tool helps users process string table files (.csf) that are recognized by Red Alert 2 and Yuri's Revenge. It allows you to:</value>
   </data>
-  <data name="HomeTabTextBlock2" xml:space="preserve">
+  <data name="Xaml_Txt_HomeTabTextBlock2" xml:space="preserve">
     <value>Edit the .csf file using your favorite text editor by converting it to an .ini file and then back to a .csf file.</value>
   </data>
-  <data name="HomeTabTextBlock3" xml:space="preserve">
+  <data name="Xaml_Txt_HomeTabTextBlock3" xml:space="preserve">
     <value>You don't need to keep the .csf file. You can just store the .ini file in your Git repository, as it contains everything needed to generate a .csf file.</value>
   </data>
-  <data name="HomeTabTextBlock4" xml:space="preserve">
+  <data name="Xaml_Txt_HomeTabTextBlock4" xml:space="preserve">
     <value>More features available in "Advanced Mode"...</value>
   </data>
-  <data name="HomeTabTextBlock5" xml:space="preserve">
+  <data name="Xaml_Txt_HomeTabTextBlock5" xml:space="preserve">
     <value>Tile the translated file with the upstream file, so you can complete the translation without having to compare two files side by side.</value>
   </data>
-  <data name="HomeTabTextBlock6" xml:space="preserve">
+  <data name="Xaml_Txt_HomeTabTextBlock6" xml:space="preserve">
     <value>Highlight the translation updates between old and new versions of your old translation, so you can effectively update it.</value>
   </data>
-  <data name="HomeTabTextBlock7" xml:space="preserve">
+  <data name="Xaml_Txt_HomeTabTextBlock7" xml:space="preserve">
     <value>To get started, simply drag &amp; drop a .csf/.ini file here.</value>
   </data>
-  <data name="SettingsTabHeader" xml:space="preserve">
+  <data name="Xaml_Txt_SettingsTabHeader" xml:space="preserve">
     <value>Setting</value>
   </data>
-  <data name="SettingsGroupboxHeader" xml:space="preserve">
+  <data name="Xaml_Txt_SettingsGroupboxHeader" xml:space="preserve">
     <value>Encoding 1252 Workaround Options</value>
   </data>
-  <data name="SettingsTextBlock1" xml:space="preserve">
+  <data name="Xaml_Txt_SettingsTextBlock1" xml:space="preserve">
     <value>For code points 128-159 (0x80-0x9F), the original game.fnt file of RA2 mistakenly treats these characters as Windows-1252, instead of Unicode (ISO-8859-1). In some mods and some editors, those characters may be saved as Windows-1252 encoding, which is incorrect. However, users may still need to process these files. You can decide whether to treat 128-159 as Windows-1252 or as Unicode. Checking the two boxes below means the former, which is compatible with some mods and some editors. Un-checking the two boxes below means the latter. This is the correct way. The original game.fnt file has the correct font data at these code points, except for the trademark character ™.</value>
   </data>
-  <data name="SettingsCheckbox1" xml:space="preserve">
+  <data name="Xaml_Txt_SettingsCheckbox1" xml:space="preserve">
     <value>Enable Windows-1252 workaround when loading the .csf file.</value>
   </data>
-  <data name="SettingsCheckbox2" xml:space="preserve">
+  <data name="Xaml_Txt_SettingsCheckbox2" xml:space="preserve">
     <value>Enable Windows-1252 workaround when writing the .csf file.</value>
   </data>
-  <data name="FormatConverterTabHeader" xml:space="preserve">
+  <data name="Xaml_Txt_FormatConverterTabHeader" xml:space="preserve">
     <value>Format Converter</value>
   </data>
-  <data name="FormatConverterTextBlock1" xml:space="preserve">
+  <data name="Xaml_Txt_FormatConverterTextBlock1" xml:space="preserve">
     <value>The string table of Red Alert 2 is presented as a .csf file, which is not friendly for editing as most csf editors were created decades ago. This tool allows users to convert the string table from a .csf file to an .ini file and back to a .csf file that is recognized by the game.</value>
   </data>
-  <data name="FormatConverterTextBlock2" xml:space="preserve">
+  <data name="Xaml_Txt_FormatConverterTextBlock2" xml:space="preserve">
     <value>Note: the text encoding of the .ini file must be UTF-8 (without BOM).</value>
   </data>
-  <data name="FormatConverterButton1_Basic" xml:space="preserve">
+  <data name="Xaml_Txt_FormatConverterButton1_Basic" xml:space="preserve">
     <value>Load a string table file (.csf/.ini) ...</value>
   </data>
-  <data name="FormatConverterButton1_Advanced" xml:space="preserve">
+  <data name="Xaml_Txt_FormatConverterButton1_Advanced" xml:space="preserve">
     <value>Load a string table file (.csf/.ini/.yaml/.json) ...</value>
   </data>
-  <data name="FormatConverterButton2" xml:space="preserve">
+  <data name="Xaml_Txt_FormatConverterButton2" xml:space="preserve">
     <value>Save as an .ini file ...</value>
   </data>
-  <data name="FormatConverterButton3" xml:space="preserve">
+  <data name="Xaml_Txt_FormatConverterButton3" xml:space="preserve">
     <value>Save as a .csf file ...</value>
   </data>
-  <data name="FormatConverterButton4" xml:space="preserve">
+  <data name="Xaml_Txt_FormatConverterButton4" xml:space="preserve">
     <value>Save as a .yaml file ...</value>
   </data>
-  <data name="FormatConverterButton5" xml:space="preserve">
+  <data name="Xaml_Txt_FormatConverterButton5" xml:space="preserve">
     <value>Save as a .json file ...</value>
   </data>
-  <data name="FormatConverterTextBlock3" xml:space="preserve">
+  <data name="Xaml_Txt_FormatConverterTextBlock3" xml:space="preserve">
     <value>The content of the string table file is shown below for preview. To modify it, save it as an .ini file.</value>
   </data>
-  <data name="LabelOverrideTabHeader" xml:space="preserve">
+  <data name="Xaml_Txt_LabelOverrideTabHeader" xml:space="preserve">
     <value>Label Override</value>
   </data>
-  <data name="LabelOverrideTextBlock1" xml:space="preserve">
+  <data name="Xaml_Txt_LabelOverrideTextBlock1" xml:space="preserve">
     <value>The tool can now support label names containing capital letters. Select an upstream string table file, and your current string table file. The tool will compare each label (ignoring case) and prefer the label from upstream.</value>
   </data>
-  <data name="LabelOverrideButton1" xml:space="preserve">
+  <data name="Xaml_Txt_LabelOverrideButton1" xml:space="preserve">
     <value>Load an upstream string table file (.csf/.ini) ...</value>
   </data>
-  <data name="LabelOverrideButton2" xml:space="preserve">
+  <data name="Xaml_Txt_LabelOverrideButton2" xml:space="preserve">
     <value>Load the current string table file (.csf/.ini) ...</value>
   </data>
-  <data name="LabelOverrideButton3" xml:space="preserve">
+  <data name="Xaml_Txt_LabelOverrideButton3" xml:space="preserve">
     <value>Save as a .csf file ...</value>
   </data>
-  <data name="LabelOverrideButton4" xml:space="preserve">
+  <data name="Xaml_Txt_LabelOverrideButton4" xml:space="preserve">
     <value>Save as an .ini file ...</value>
   </data>
-  <data name="LabelCheckTabHeader" xml:space="preserve">
+  <data name="Xaml_Txt_LabelCheckTabHeader" xml:space="preserve">
     <value>Label Check</value>
   </data>
-  <data name="LabelCheckTextBlock1" xml:space="preserve">
+  <data name="Xaml_Txt_LabelCheckTextBlock1" xml:space="preserve">
     <value>Checks whether there are missing CSF labels in your map files.</value>
   </data>
-  <data name="LabelCheckButton1" xml:space="preserve">
+  <data name="Xaml_Txt_LabelCheckButton1" xml:space="preserve">
     <value>Load the string table file (.csf/.ini) ...</value>
   </data>
-  <data name="LabelCheckButton2" xml:space="preserve">
+  <data name="Xaml_Txt_LabelCheckButton2" xml:space="preserve">
     <value>Select the folder containing map files (.map/.ypr) ...</value>
   </data>
-  <data name="LabelCheckTextboxHeader" xml:space="preserve">
+  <data name="Xaml_Txt_LabelCheckTextboxHeader" xml:space="preserve">
     <value>Note: in the generated .ini file, all values of missing labels are replaced with the following text:</value>
   </data>
-  <data name="LabelCheckButton3" xml:space="preserve">
+  <data name="Xaml_Txt_LabelCheckButton3" xml:space="preserve">
     <value>Save as an .ini file ...</value>
   </data>
-  <data name="TranslationNewTabHeader" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationNewTabHeader" xml:space="preserve">
     <value>Translation Helper - New</value>
   </data>
-  <data name="TranslationNewTextBlock1" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationNewTextBlock1" xml:space="preserve">
     <value>Select an upstream string table file, and save an .ini file that is friendly for translation. The .ini file can be converted back to .csf file in the "Format Converter" tab.</value>
   </data>
-  <data name="TranslationNewTextboxHeader" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationNewTextboxHeader" xml:space="preserve">
     <value>Note: in the generated .ini file, all values that needs translation are replaced with the following text:</value>
   </data>
-  <data name="TranslationNewButton1" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationNewButton1" xml:space="preserve">
     <value>Load an upstream string table file (.csf/.ini) ...</value>
   </data>
-  <data name="TranslationNewButton2" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationNewButton2" xml:space="preserve">
     <value>Save as an .ini file for translation ...</value>
   </data>
-  <data name="TranslationTileTabHeader" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationTileTabHeader" xml:space="preserve">
     <value>Translation Helper - Tile</value>
   </data>
-  <data name="TranslationTileTextBlock1" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationTileTextBlock1" xml:space="preserve">
     <value>Select an upstream string table file and a translated string label file, and save an .ini file that is convenient for comparing and checking. The .ini file can be converted back to .csf file in the "Format Converter" tab.</value>
   </data>
-  <data name="TranslationTileButton1" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationTileButton1" xml:space="preserve">
     <value>Load an upstream string table file (.csf/.ini) ...</value>
   </data>
-  <data name="TranslationTileButton2" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationTileButton2" xml:space="preserve">
     <value>Load a translated string table file (.csf/.ini) ...</value>
   </data>
-  <data name="TranslationTileButton3" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationTileButton3" xml:space="preserve">
     <value>Save as an .ini file for comparison ...</value>
   </data>
-  <data name="TranslationOverrideTabHeader" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationOverrideTabHeader" xml:space="preserve">
     <value>Translation Helper - Override</value>
   </data>
-  <data name="TranslationOverrideTextBlock1" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationOverrideTextBlock1" xml:space="preserve">
     <value>Select an upstream string table file and a translated string label file, and save an .ini file that once a label is shown in the translated file, the value is selected. Otherwise, the label shown in the upstream file is selected. The .ini file can be converted back to .csf file in the "Format Converter" tab.</value>
   </data>
-  <data name="TranslationOverrideButton1" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationOverrideButton1" xml:space="preserve">
     <value>Load an upstream string table file (.csf/.ini) ...</value>
   </data>
-  <data name="TranslationOverrideButton2" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationOverrideButton2" xml:space="preserve">
     <value>Load a translated string table file (.csf/.ini) ...</value>
   </data>
-  <data name="TranslationOverrideButton3" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationOverrideButton3" xml:space="preserve">
     <value>Save as an .ini file for comparison ...</value>
   </data>
-  <data name="TranslationUpdateTabHeader" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationUpdateTabHeader" xml:space="preserve">
     <value>Translation Helper - Update</value>
   </data>
-  <data name="TranslationUpdateTextBlock1" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationUpdateTextBlock1" xml:space="preserve">
     <value>Select an old-version upstream string table file, a new-version upstream string table file and an old-version translated string label file, and save an .ini file that is convenient for updating the translation. The .ini file can be converted back to .csf file in the "Format Converter" tab.</value>
   </data>
-  <data name="TranslationUpdateButton1" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationUpdateButton1" xml:space="preserve">
     <value>Load an old-version upstream string table file (.csf/.ini) ...</value>
   </data>
-  <data name="TranslationUpdateButton2" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationUpdateButton2" xml:space="preserve">
     <value>Load a new-version upstream string table file (.csf/.ini) ...</value>
   </data>
-  <data name="TranslationUpdateButton3" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationUpdateButton3" xml:space="preserve">
     <value>Load an old-version translated string table file (.csf/.ini) ...</value>
   </data>
-  <data name="TranslationUpdateButton4" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationUpdateButton4" xml:space="preserve">
     <value>Save as an .ini file for updating the translation ...</value>
   </data>
-  <data name="TranslationUpdateCheckTabHeader" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationUpdateCheckTabHeader" xml:space="preserve">
     <value>Translation Helper - Update Check</value>
   </data>
-  <data name="TranslationUpdateCheckTextBlock1" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationUpdateCheckTextBlock1" xml:space="preserve">
     <value>Select an old-version upstream string table file, a new-version upstream string table file, an old-version translated string label file, and a new-version translated string label file, and save an .ini file that is checked for whether some labels remain the old version. The .ini file can be converted back to .csf file in the "Format Converter" tab.</value>
   </data>
-  <data name="TranslationUpdateCheckButton1" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationUpdateCheckButton1" xml:space="preserve">
     <value>Load an old-version upstream string table file (.csf/.ini) ...</value>
   </data>
-  <data name="TranslationUpdateCheckButton2" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationUpdateCheckButton2" xml:space="preserve">
     <value>Load a new-version upstream string table file (.csf/.ini) ...</value>
   </data>
-  <data name="TranslationUpdateCheckButton3" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationUpdateCheckButton3" xml:space="preserve">
     <value>Load an old-version translated string table file (.csf/.ini) ...</value>
   </data>
-  <data name="TranslationUpdateCheckButton4" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationUpdateCheckButton4" xml:space="preserve">
     <value>Load a new-version translated string table file (.csf/.ini) ...</value>
   </data>
-  <data name="TranslationUpdateCheckButton5" xml:space="preserve">
+  <data name="Xaml_Txt_TranslationUpdateCheckButton5" xml:space="preserve">
     <value>Save as an .ini file for updating the translation ...</value>
   </data>
-  <data name="WatchModeTabHeader" xml:space="preserve">
+  <data name="Xaml_Txt_WatchModeTabHeader" xml:space="preserve">
     <value>Watch Mode</value>
   </data>
-  <data name="WatchModeTextBlock1" xml:space="preserve">
+  <data name="Xaml_Txt_WatchModeTextBlock1" xml:space="preserve">
     <value>In the text box below, input the pairs of .ini files to monitor and the corresponding .csf files to generate. Separate each pair with a comma. You can enter multiple pairs by putting each pair on a new line. Once the program starts, it will monitor the .ini files. Whenever an ini file changes, the program will automatically generate the corresponding csf file.</value>
   </data>
-  <data name="WatchModeTextBlock2" xml:space="preserve">
+  <data name="Xaml_Txt_WatchModeTextBlock2" xml:space="preserve">
     <value>Example: C:\path\to\stringtables\ra2.ini, D:\path\to\game\ra2.csf</value>
   </data>
-  <data name="WatchModeButton1" xml:space="preserve">
+  <data name="Xaml_Txt_WatchModeButton1" xml:space="preserve">
     <value>Save and Apply</value>
   </data>
 </root>

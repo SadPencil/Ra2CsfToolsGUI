@@ -40,11 +40,6 @@
     <Resource Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="LocalizationResources\TextResources.zh-Hans.Designer.cs">
-      <DependentUpon>TextResources.zh-Hans.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
     <Compile Update="LocalizationResources\TextResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

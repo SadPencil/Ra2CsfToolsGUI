@@ -9,7 +9,7 @@
     </Window.Resources>
     <!-- Localization reference (Chinese): https://www.cnblogs.com/wpinfo/p/wpf_localization.html https://web.archive.org/web/20250817155821/https://www.cnblogs.com/wpinfo/p/wpf_localization.html -->
     <TabControl>
-        <TabItem Header="{x:Static l10n:TextResources.HomeTabHeader}" x:Name="UI_HomeTabItem">
+        <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_HomeTabHeader}" x:Name="UI_HomeTabItem">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Home" />
             </ui:TabItemHelper.Icon>
@@ -33,55 +33,55 @@
                     </StackPanel>
                 </Grid>
                 <StackPanel>
-                    <TextBlock Margin="10,10,10,0" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.HomeTabTextBlock1}" />
+                    <TextBlock Margin="10,10,10,0" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock1}" />
                     <StackPanel Orientation="Horizontal" Margin="10,0,10,0">
                         <ui:SymbolIcon Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
-                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.HomeTabTextBlock2}" />
+                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock2}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="10,0,10,0">
                         <ui:SymbolIcon Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
-                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.HomeTabTextBlock3}" />
+                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock3}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="10,0,10,10" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}">
                         <ui:SymbolIcon Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
-                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.HomeTabTextBlock4}" />
+                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock4}" />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="10,0,10,10" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
                         <StackPanel Orientation="Horizontal">
                             <ui:SymbolIcon Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
-                            <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.HomeTabTextBlock5}" />
+                            <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock5}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                             <ui:SymbolIcon Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
-                            <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.HomeTabTextBlock6}" />
+                            <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock6}" />
                         </StackPanel>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="10" VerticalAlignment="Center">
                         <ui:SymbolIcon Symbol="Forward" VerticalAlignment="Center" Margin="0,0,5,0" />
-                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.HomeTabTextBlock7}" />
+                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock7}" />
                     </StackPanel>
                 </StackPanel>
-                <CheckBox Margin="10" FontSize="16" IsChecked="{Binding Path=AdvancedMode, Mode=TwoWay}" Content="{x:Static l10n:TextResources.HomeTabAdvancedMode}"/>
+                <CheckBox Margin="10" FontSize="16" IsChecked="{Binding Path=AdvancedMode, Mode=TwoWay}" Content="{x:Static l10n:TextResources.Xaml_Txt_HomeTabAdvancedMode}"/>
                 <Button Margin="10" Click="SwitchLanguageButton_Click">Switch language / 切换语言</Button>
             </StackPanel>
         </TabItem>
-        <TabItem Header="{x:Static l10n:TextResources.SettingsTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_SettingsTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Setting" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <GroupBox Header="{x:Static l10n:TextResources.SettingsGroupboxHeader}">
+                <GroupBox Header="{x:Static l10n:TextResources.Xaml_Txt_SettingsGroupboxHeader}">
                     <ui:SimpleStackPanel Spacing="12">
-                        <TextBlock TextWrapping="Wrap" FontSize="16" Text="{x:Static l10n:TextResources.SettingsTextBlock1}"/>
-                        <CheckBox FontSize="16" Content="{x:Static l10n:TextResources.SettingsCheckbox1}" IsChecked="{Binding Encoding1252ReadWorkaround}" />
-                        <CheckBox FontSize="16" Content="{x:Static l10n:TextResources.SettingsCheckbox2}" IsChecked="{Binding Encoding1252WriteWorkaround}" />
+                        <TextBlock TextWrapping="Wrap" FontSize="16" Text="{x:Static l10n:TextResources.Xaml_Txt_SettingsTextBlock1}"/>
+                        <CheckBox FontSize="16" Content="{x:Static l10n:TextResources.Xaml_Txt_SettingsCheckbox1}" IsChecked="{Binding Encoding1252ReadWorkaround}" />
+                        <CheckBox FontSize="16" Content="{x:Static l10n:TextResources.Xaml_Txt_SettingsCheckbox2}" IsChecked="{Binding Encoding1252WriteWorkaround}" />
                     </ui:SimpleStackPanel>
                 </GroupBox>
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="{x:Static l10n:TextResources.FormatConverterTabHeader}" x:Name="UI_FormatConverterTabItem">
+        <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterTabHeader}" x:Name="UI_FormatConverterTabItem">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Edit" />
             </ui:TabItemHelper.Icon>
@@ -93,19 +93,19 @@
                 </Grid.RowDefinitions>
 
                 <ui:SimpleStackPanel Grid.Row="0" Spacing="12" Margin="10">
-                    <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.FormatConverterTextBlock1}" />
-                    <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.FormatConverterTextBlock2}" />
+                    <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterTextBlock1}" />
+                    <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterTextBlock2}" />
                     <ui:SimpleStackPanel Spacing="12" Margin="0" Orientation="Horizontal">
-                        <Button Content="{x:Static l10n:TextResources.FormatConverterButton1_Basic}" Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}" />
-                        <Button Content="{x:Static l10n:TextResources.FormatConverterButton1_Advanced}" Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
-                        <Button Content="{x:Static l10n:TextResources.FormatConverterButton2}" Click="Convert_SaveAsIni_Click" />
-                        <Button Content="{x:Static l10n:TextResources.FormatConverterButton3}" Click="Convert_SaveAsCsf_Click" />
+                        <Button Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton1_Basic}" Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}" />
+                        <Button Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton1_Advanced}" Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
+                        <Button Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton2}" Click="Convert_SaveAsIni_Click" />
+                        <Button Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton3}" Click="Convert_SaveAsCsf_Click" />
                     </ui:SimpleStackPanel>
                     <ui:SimpleStackPanel Spacing="12" Margin="0" Orientation="Horizontal" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" >
-                        <Button Content="{x:Static l10n:TextResources.FormatConverterButton4}" Click="Convert_SaveAsYaml_Click" />
-                        <Button Content="{x:Static l10n:TextResources.FormatConverterButton5}" Click="Convert_SaveAsJson_Click" />
+                        <Button Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton4}" Click="Convert_SaveAsYaml_Click" />
+                        <Button Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton5}" Click="Convert_SaveAsJson_Click" />
                     </ui:SimpleStackPanel>
-                    <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.FormatConverterTextBlock3}" />
+                    <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterTextBlock3}" />
 
                 </ui:SimpleStackPanel>
 
@@ -113,106 +113,106 @@
                 <TextBlock Margin="10" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Convert_CsfFile_Tips, Mode=OneWay}" />
             </Grid>
         </TabItem>
-        <TabItem Header="{x:Static l10n:TextResources.LabelOverrideTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_LabelOverrideTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Repair" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.LabelOverrideTextBlock1}" />
-                <Button Content="{x:Static l10n:TextResources.LabelOverrideButton1}" Click="LabelOverride_LoadUpstreamFile_Click" />
-                <Button Content="{x:Static l10n:TextResources.LabelOverrideButton2}" Click="LabelOverride_LoadCurrentFile_Click" />
-                <Button Content="{x:Static l10n:TextResources.LabelOverrideButton3}" Click="LabelOverride_SaveCsfFile_Click" />
-                <Button Content="{x:Static l10n:TextResources.LabelOverrideButton4}" Click="LabelOverride_SaveIniFile_Click" />
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_LabelOverrideTextBlock1}" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelOverrideButton1}" Click="LabelOverride_LoadUpstreamFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelOverrideButton2}" Click="LabelOverride_LoadCurrentFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelOverrideButton3}" Click="LabelOverride_SaveCsfFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelOverrideButton4}" Click="LabelOverride_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
 
-        <TabItem Header="{x:Static l10n:TextResources.LabelCheckTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_LabelCheckTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Zoom" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.LabelCheckTextBlock1}" />
-                <Button Content="{x:Static l10n:TextResources.LabelCheckButton1}" Click="LabelCheck_LoadCsfFile_Click" />
-                <Button Content="{x:Static l10n:TextResources.LabelCheckButton2}" Click="LabelCheck_SelectMapFolder_Click" />
-                <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.LabelCheckTextboxHeader}" Text="{Binding MissingLabelPlaceholder, Mode=OneWay}" IsReadOnly="True" />
-                <Button Content="{x:Static l10n:TextResources.LabelCheckButton3}" Click="LabelCheck_SaveIniFile_Click" />
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_LabelCheckTextBlock1}" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelCheckButton1}" Click="LabelCheck_LoadCsfFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelCheckButton2}" Click="LabelCheck_SelectMapFolder_Click" />
+                <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.Xaml_Txt_LabelCheckTextboxHeader}" Text="{Binding MissingLabelPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelCheckButton3}" Click="LabelCheck_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
 
-        <TabItem Header="{x:Static l10n:TextResources.TranslationNewTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.TranslationNewTextBlock1}" />
-                <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.TranslationNewTextboxHeader}" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
-                <Button Content="{x:Static l10n:TextResources.TranslationNewButton1}" Click="TranslationNew_LoadFile_Click" />
-                <Button Content="{x:Static l10n:TextResources.TranslationNewButton2}" Click="TranslationNew_SaveIniFile_Click" />
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewTextBlock1}" />
+                <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewTextboxHeader}" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewButton1}" Click="TranslationNew_LoadFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewButton2}" Click="TranslationNew_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="{x:Static l10n:TextResources.TranslationTileTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationTileTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.TranslationTileTextBlock1}" />
-                <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.TranslationNewTextboxHeader}" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
-                <Button Content="{x:Static l10n:TextResources.TranslationTileButton1}" Click="TranslationTile_LoadUpstreamFile_Click" />
-                <Button Content="{x:Static l10n:TextResources.TranslationTileButton2}" Click="TranslationTile_LoadTranslatedFile_Click" />
-                <Button Content="{x:Static l10n:TextResources.TranslationTileButton3}" Click="TranslationTile_SaveIniFile_Click" />
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_TranslationTileTextBlock1}" />
+                <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewTextboxHeader}" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationTileButton1}" Click="TranslationTile_LoadUpstreamFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationTileButton2}" Click="TranslationTile_LoadTranslatedFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationTileButton3}" Click="TranslationTile_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="{x:Static l10n:TextResources.TranslationOverrideTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationOverrideTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
 
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.TranslationOverrideTextBlock1}" />
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_TranslationOverrideTextBlock1}" />
 
-                <Button Content="{x:Static l10n:TextResources.TranslationOverrideButton1}" Click="TranslationOverride_LoadUpstreamFile_Click" />
-                <Button Content="{x:Static l10n:TextResources.TranslationOverrideButton2}" Click="TranslationOverride_LoadTranslatedFile_Click" />
-                <Button Content="{x:Static l10n:TextResources.TranslationOverrideButton3}" Click="TranslationOverride_SaveIniFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationOverrideButton1}" Click="TranslationOverride_LoadUpstreamFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationOverrideButton2}" Click="TranslationOverride_LoadTranslatedFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationOverrideButton3}" Click="TranslationOverride_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="{x:Static l10n:TextResources.TranslationUpdateTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.TranslationUpdateTextBlock1}" />
-                <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.TranslationNewTextboxHeader}" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
-                <Button Content="{x:Static l10n:TextResources.TranslationUpdateButton1}" Click="TranslationUpdate_LoadOldUpstreamFile_Click" />
-                <Button Content="{x:Static l10n:TextResources.TranslationUpdateButton2}" Click="TranslationUpdate_LoadNewUpstreamFile_Click" />
-                <Button Content="{x:Static l10n:TextResources.TranslationUpdateButton3}" Click="TranslationUpdate_LoadOldTranslatedFile_Click" />
-                <Button Content="{x:Static l10n:TextResources.TranslationUpdateButton4}" Click="TranslationUpdate_SaveIniFile_Click" />
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateTextBlock1}" />
+                <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewTextboxHeader}" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateButton1}" Click="TranslationUpdate_LoadOldUpstreamFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateButton2}" Click="TranslationUpdate_LoadNewUpstreamFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateButton3}" Click="TranslationUpdate_LoadOldTranslatedFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateButton4}" Click="TranslationUpdate_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="{x:Static l10n:TextResources.TranslationUpdateCheckTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateCheckTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.TranslationUpdateCheckTextBlock1}" />
-                <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.TranslationNewTextboxHeader}" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateCheckTextBlock1}" />
+                <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewTextboxHeader}" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
                 <TextBox Text="{Binding TranslationDeleteNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
-                <Button Content="{x:Static l10n:TextResources.TranslationUpdateCheckButton1}" Click="TranslationUpdateCheck_LoadOldUpstreamFile_Click" />
-                <Button Content="{x:Static l10n:TextResources.TranslationUpdateCheckButton2}" Click="TranslationUpdateCheck_LoadNewUpstreamFile_Click" />
-                <Button Content="{x:Static l10n:TextResources.TranslationUpdateCheckButton3}" Click="TranslationUpdateCheck_LoadOldTranslatedFile_Click" />
-                <Button Content="{x:Static l10n:TextResources.TranslationUpdateCheckButton4}" Click="TranslationUpdateCheck_LoadNewTranslatedFile_Click" />
-                <Button Content="{x:Static l10n:TextResources.TranslationUpdateCheckButton5}" Click="TranslationUpdateCheck_SaveIniFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateCheckButton1}" Click="TranslationUpdateCheck_LoadOldUpstreamFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateCheckButton2}" Click="TranslationUpdateCheck_LoadNewUpstreamFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateCheckButton3}" Click="TranslationUpdateCheck_LoadOldTranslatedFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateCheckButton4}" Click="TranslationUpdateCheck_LoadNewTranslatedFile_Click" />
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateCheckButton5}" Click="TranslationUpdateCheck_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-        <TabItem Header="{x:Static l10n:TextResources.WatchModeTabHeader}" x:Name="UI_WatchModeTabItem" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+        <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_WatchModeTabHeader}" x:Name="UI_WatchModeTabItem" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Manage" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.WatchModeTextBlock1}" />
-                <TextBlock Text="{x:Static l10n:TextResources.WatchModeTextBlock2}" />
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_WatchModeTextBlock1}" />
+                <TextBlock Text="{x:Static l10n:TextResources.Xaml_Txt_WatchModeTextBlock2}" />
                 <TextBox AcceptsReturn="True" IsReadOnly="False" Height="200" Text="{Binding WatchConfigStr, Mode=TwoWay}" >
                 </TextBox>
-                <Button Content="{x:Static l10n:TextResources.WatchModeButton1}" Click="WatchMode_Confirm_Click"/>
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_WatchModeButton1}" Click="WatchMode_Confirm_Click"/>
             </ui:SimpleStackPanel>
         </TabItem>
     </TabControl>

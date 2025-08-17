@@ -63,612 +63,612 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         /// <summary>
         ///   Looks up a localized string similar to Load a string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
-        public static string FormatConverterButton1_Advanced {
+        public static string Xaml_Txt_FormatConverterButton1_Advanced {
             get {
-                return ResourceManager.GetString("FormatConverterButton1_Advanced", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_FormatConverterButton1_Advanced", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Load a string table file (.csf/.ini) ....
         /// </summary>
-        public static string FormatConverterButton1_Basic {
+        public static string Xaml_Txt_FormatConverterButton1_Basic {
             get {
-                return ResourceManager.GetString("FormatConverterButton1_Basic", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_FormatConverterButton1_Basic", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Save as an .ini file ....
         /// </summary>
-        public static string FormatConverterButton2 {
+        public static string Xaml_Txt_FormatConverterButton2 {
             get {
-                return ResourceManager.GetString("FormatConverterButton2", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_FormatConverterButton2", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Save as a .csf file ....
         /// </summary>
-        public static string FormatConverterButton3 {
+        public static string Xaml_Txt_FormatConverterButton3 {
             get {
-                return ResourceManager.GetString("FormatConverterButton3", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_FormatConverterButton3", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Save as a .yaml file ....
         /// </summary>
-        public static string FormatConverterButton4 {
+        public static string Xaml_Txt_FormatConverterButton4 {
             get {
-                return ResourceManager.GetString("FormatConverterButton4", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_FormatConverterButton4", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Save as a .json file ....
         /// </summary>
-        public static string FormatConverterButton5 {
+        public static string Xaml_Txt_FormatConverterButton5 {
             get {
-                return ResourceManager.GetString("FormatConverterButton5", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_FormatConverterButton5", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Format Converter.
         /// </summary>
-        public static string FormatConverterTabHeader {
+        public static string Xaml_Txt_FormatConverterTabHeader {
             get {
-                return ResourceManager.GetString("FormatConverterTabHeader", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_FormatConverterTabHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The string table of Red Alert 2 is presented as a .csf file, which is not friendly for editing as most csf editors were created decades ago. This tool allows users to convert the string table from a .csf file to an .ini file and back to a .csf file that is recognized by the game..
         /// </summary>
-        public static string FormatConverterTextBlock1 {
+        public static string Xaml_Txt_FormatConverterTextBlock1 {
             get {
-                return ResourceManager.GetString("FormatConverterTextBlock1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_FormatConverterTextBlock1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Note: the text encoding of the .ini file must be UTF-8 (without BOM)..
         /// </summary>
-        public static string FormatConverterTextBlock2 {
+        public static string Xaml_Txt_FormatConverterTextBlock2 {
             get {
-                return ResourceManager.GetString("FormatConverterTextBlock2", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_FormatConverterTextBlock2", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The content of the string table file is shown below for preview. To modify it, save it as an .ini file..
         /// </summary>
-        public static string FormatConverterTextBlock3 {
+        public static string Xaml_Txt_FormatConverterTextBlock3 {
             get {
-                return ResourceManager.GetString("FormatConverterTextBlock3", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_FormatConverterTextBlock3", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Advanced Mode.
         /// </summary>
-        public static string HomeTabAdvancedMode {
+        public static string Xaml_Txt_HomeTabAdvancedMode {
             get {
-                return ResourceManager.GetString("HomeTabAdvancedMode", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_HomeTabAdvancedMode", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
-        public static string HomeTabHeader {
+        public static string Xaml_Txt_HomeTabHeader {
             get {
-                return ResourceManager.GetString("HomeTabHeader", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_HomeTabHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to This tool helps users process string table files (.csf) that are recognized by Red Alert 2 and Yuri&apos;s Revenge. It allows you to:.
         /// </summary>
-        public static string HomeTabTextBlock1 {
+        public static string Xaml_Txt_HomeTabTextBlock1 {
             get {
-                return ResourceManager.GetString("HomeTabTextBlock1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_HomeTabTextBlock1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Edit the .csf file using your favorite text editor by converting it to an .ini file and then back to a .csf file..
         /// </summary>
-        public static string HomeTabTextBlock2 {
+        public static string Xaml_Txt_HomeTabTextBlock2 {
             get {
-                return ResourceManager.GetString("HomeTabTextBlock2", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_HomeTabTextBlock2", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to You don&apos;t need to keep the .csf file. You can just store the .ini file in your Git repository, as it contains everything needed to generate a .csf file..
         /// </summary>
-        public static string HomeTabTextBlock3 {
+        public static string Xaml_Txt_HomeTabTextBlock3 {
             get {
-                return ResourceManager.GetString("HomeTabTextBlock3", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_HomeTabTextBlock3", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to More features available in &quot;Advanced Mode&quot;....
         /// </summary>
-        public static string HomeTabTextBlock4 {
+        public static string Xaml_Txt_HomeTabTextBlock4 {
             get {
-                return ResourceManager.GetString("HomeTabTextBlock4", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_HomeTabTextBlock4", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Tile the translated file with the upstream file, so you can complete the translation without having to compare two files side by side..
         /// </summary>
-        public static string HomeTabTextBlock5 {
+        public static string Xaml_Txt_HomeTabTextBlock5 {
             get {
-                return ResourceManager.GetString("HomeTabTextBlock5", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_HomeTabTextBlock5", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Highlight the translation updates between old and new versions of your old translation, so you can effectively update it..
         /// </summary>
-        public static string HomeTabTextBlock6 {
+        public static string Xaml_Txt_HomeTabTextBlock6 {
             get {
-                return ResourceManager.GetString("HomeTabTextBlock6", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_HomeTabTextBlock6", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to To get started, simply drag &amp; drop a .csf/.ini file here..
         /// </summary>
-        public static string HomeTabTextBlock7 {
+        public static string Xaml_Txt_HomeTabTextBlock7 {
             get {
-                return ResourceManager.GetString("HomeTabTextBlock7", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_HomeTabTextBlock7", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Load the string table file (.csf/.ini) ....
         /// </summary>
-        public static string LabelCheckButton1 {
+        public static string Xaml_Txt_LabelCheckButton1 {
             get {
-                return ResourceManager.GetString("LabelCheckButton1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_LabelCheckButton1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Select the folder containing map files (.map/.ypr) ....
         /// </summary>
-        public static string LabelCheckButton2 {
+        public static string Xaml_Txt_LabelCheckButton2 {
             get {
-                return ResourceManager.GetString("LabelCheckButton2", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_LabelCheckButton2", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Save as an .ini file ....
         /// </summary>
-        public static string LabelCheckButton3 {
+        public static string Xaml_Txt_LabelCheckButton3 {
             get {
-                return ResourceManager.GetString("LabelCheckButton3", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_LabelCheckButton3", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Label Check.
         /// </summary>
-        public static string LabelCheckTabHeader {
+        public static string Xaml_Txt_LabelCheckTabHeader {
             get {
-                return ResourceManager.GetString("LabelCheckTabHeader", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_LabelCheckTabHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Checks whether there are missing CSF labels in your map files..
         /// </summary>
-        public static string LabelCheckTextBlock1 {
+        public static string Xaml_Txt_LabelCheckTextBlock1 {
             get {
-                return ResourceManager.GetString("LabelCheckTextBlock1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_LabelCheckTextBlock1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Note: in the generated .ini file, all values of missing labels are replaced with the following text:.
         /// </summary>
-        public static string LabelCheckTextboxHeader {
+        public static string Xaml_Txt_LabelCheckTextboxHeader {
             get {
-                return ResourceManager.GetString("LabelCheckTextboxHeader", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_LabelCheckTextboxHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Load an upstream string table file (.csf/.ini) ....
         /// </summary>
-        public static string LabelOverrideButton1 {
+        public static string Xaml_Txt_LabelOverrideButton1 {
             get {
-                return ResourceManager.GetString("LabelOverrideButton1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_LabelOverrideButton1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Load the current string table file (.csf/.ini) ....
         /// </summary>
-        public static string LabelOverrideButton2 {
+        public static string Xaml_Txt_LabelOverrideButton2 {
             get {
-                return ResourceManager.GetString("LabelOverrideButton2", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_LabelOverrideButton2", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Save as a .csf file ....
         /// </summary>
-        public static string LabelOverrideButton3 {
+        public static string Xaml_Txt_LabelOverrideButton3 {
             get {
-                return ResourceManager.GetString("LabelOverrideButton3", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_LabelOverrideButton3", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Save as an .ini file ....
         /// </summary>
-        public static string LabelOverrideButton4 {
+        public static string Xaml_Txt_LabelOverrideButton4 {
             get {
-                return ResourceManager.GetString("LabelOverrideButton4", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_LabelOverrideButton4", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Label Override.
         /// </summary>
-        public static string LabelOverrideTabHeader {
+        public static string Xaml_Txt_LabelOverrideTabHeader {
             get {
-                return ResourceManager.GetString("LabelOverrideTabHeader", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_LabelOverrideTabHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The tool can now support label names containing capital letters. Select an upstream string table file, and your current string table file. The tool will compare each label (ignoring case) and prefer the label from upstream..
         /// </summary>
-        public static string LabelOverrideTextBlock1 {
+        public static string Xaml_Txt_LabelOverrideTextBlock1 {
             get {
-                return ResourceManager.GetString("LabelOverrideTextBlock1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_LabelOverrideTextBlock1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Enable Windows-1252 workaround when loading the .csf file..
         /// </summary>
-        public static string SettingsCheckbox1 {
+        public static string Xaml_Txt_SettingsCheckbox1 {
             get {
-                return ResourceManager.GetString("SettingsCheckbox1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_SettingsCheckbox1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Enable Windows-1252 workaround when writing the .csf file..
         /// </summary>
-        public static string SettingsCheckbox2 {
+        public static string Xaml_Txt_SettingsCheckbox2 {
             get {
-                return ResourceManager.GetString("SettingsCheckbox2", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_SettingsCheckbox2", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Encoding 1252 Workaround Options.
         /// </summary>
-        public static string SettingsGroupboxHeader {
+        public static string Xaml_Txt_SettingsGroupboxHeader {
             get {
-                return ResourceManager.GetString("SettingsGroupboxHeader", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_SettingsGroupboxHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Setting.
         /// </summary>
-        public static string SettingsTabHeader {
+        public static string Xaml_Txt_SettingsTabHeader {
             get {
-                return ResourceManager.GetString("SettingsTabHeader", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_SettingsTabHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to For code points 128-159 (0x80-0x9F), the original game.fnt file of RA2 mistakenly treats these characters as Windows-1252, instead of Unicode (ISO-8859-1). In some mods and some editors, those characters may be saved as Windows-1252 encoding, which is incorrect. However, users may still need to process these files. You can decide whether to treat 128-159 as Windows-1252 or as Unicode. Checking the two boxes below means the former, which is compatible with some mods and some editors. Un-checking the two boxe [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string SettingsTextBlock1 {
+        public static string Xaml_Txt_SettingsTextBlock1 {
             get {
-                return ResourceManager.GetString("SettingsTextBlock1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_SettingsTextBlock1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Load an upstream string table file (.csf/.ini) ....
         /// </summary>
-        public static string TranslationNewButton1 {
+        public static string Xaml_Txt_TranslationNewButton1 {
             get {
-                return ResourceManager.GetString("TranslationNewButton1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationNewButton1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Save as an .ini file for translation ....
         /// </summary>
-        public static string TranslationNewButton2 {
+        public static string Xaml_Txt_TranslationNewButton2 {
             get {
-                return ResourceManager.GetString("TranslationNewButton2", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationNewButton2", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Translation Helper - New.
         /// </summary>
-        public static string TranslationNewTabHeader {
+        public static string Xaml_Txt_TranslationNewTabHeader {
             get {
-                return ResourceManager.GetString("TranslationNewTabHeader", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationNewTabHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Select an upstream string table file, and save an .ini file that is friendly for translation. The .ini file can be converted back to .csf file in the &quot;Format Converter&quot; tab..
         /// </summary>
-        public static string TranslationNewTextBlock1 {
+        public static string Xaml_Txt_TranslationNewTextBlock1 {
             get {
-                return ResourceManager.GetString("TranslationNewTextBlock1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationNewTextBlock1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Note: in the generated .ini file, all values that needs translation are replaced with the following text:.
         /// </summary>
-        public static string TranslationNewTextboxHeader {
+        public static string Xaml_Txt_TranslationNewTextboxHeader {
             get {
-                return ResourceManager.GetString("TranslationNewTextboxHeader", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationNewTextboxHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Load an upstream string table file (.csf/.ini) ....
         /// </summary>
-        public static string TranslationOverrideButton1 {
+        public static string Xaml_Txt_TranslationOverrideButton1 {
             get {
-                return ResourceManager.GetString("TranslationOverrideButton1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationOverrideButton1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Load a translated string table file (.csf/.ini) ....
         /// </summary>
-        public static string TranslationOverrideButton2 {
+        public static string Xaml_Txt_TranslationOverrideButton2 {
             get {
-                return ResourceManager.GetString("TranslationOverrideButton2", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationOverrideButton2", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Save as an .ini file for comparison ....
         /// </summary>
-        public static string TranslationOverrideButton3 {
+        public static string Xaml_Txt_TranslationOverrideButton3 {
             get {
-                return ResourceManager.GetString("TranslationOverrideButton3", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationOverrideButton3", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Translation Helper - Override.
         /// </summary>
-        public static string TranslationOverrideTabHeader {
+        public static string Xaml_Txt_TranslationOverrideTabHeader {
             get {
-                return ResourceManager.GetString("TranslationOverrideTabHeader", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationOverrideTabHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Select an upstream string table file and a translated string label file, and save an .ini file that once a label is shown in the translated file, the value is selected. Otherwise, the label shown in the upstream file is selected. The .ini file can be converted back to .csf file in the &quot;Format Converter&quot; tab..
         /// </summary>
-        public static string TranslationOverrideTextBlock1 {
+        public static string Xaml_Txt_TranslationOverrideTextBlock1 {
             get {
-                return ResourceManager.GetString("TranslationOverrideTextBlock1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationOverrideTextBlock1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Load an upstream string table file (.csf/.ini) ....
         /// </summary>
-        public static string TranslationTileButton1 {
+        public static string Xaml_Txt_TranslationTileButton1 {
             get {
-                return ResourceManager.GetString("TranslationTileButton1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationTileButton1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Load a translated string table file (.csf/.ini) ....
         /// </summary>
-        public static string TranslationTileButton2 {
+        public static string Xaml_Txt_TranslationTileButton2 {
             get {
-                return ResourceManager.GetString("TranslationTileButton2", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationTileButton2", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Save as an .ini file for comparison ....
         /// </summary>
-        public static string TranslationTileButton3 {
+        public static string Xaml_Txt_TranslationTileButton3 {
             get {
-                return ResourceManager.GetString("TranslationTileButton3", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationTileButton3", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Translation Helper - Tile.
         /// </summary>
-        public static string TranslationTileTabHeader {
+        public static string Xaml_Txt_TranslationTileTabHeader {
             get {
-                return ResourceManager.GetString("TranslationTileTabHeader", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationTileTabHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Select an upstream string table file and a translated string label file, and save an .ini file that is convenient for comparing and checking. The .ini file can be converted back to .csf file in the &quot;Format Converter&quot; tab..
         /// </summary>
-        public static string TranslationTileTextBlock1 {
+        public static string Xaml_Txt_TranslationTileTextBlock1 {
             get {
-                return ResourceManager.GetString("TranslationTileTextBlock1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationTileTextBlock1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Load an old-version upstream string table file (.csf/.ini) ....
         /// </summary>
-        public static string TranslationUpdateButton1 {
+        public static string Xaml_Txt_TranslationUpdateButton1 {
             get {
-                return ResourceManager.GetString("TranslationUpdateButton1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationUpdateButton1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Load a new-version upstream string table file (.csf/.ini) ....
         /// </summary>
-        public static string TranslationUpdateButton2 {
+        public static string Xaml_Txt_TranslationUpdateButton2 {
             get {
-                return ResourceManager.GetString("TranslationUpdateButton2", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationUpdateButton2", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Load an old-version translated string table file (.csf/.ini) ....
         /// </summary>
-        public static string TranslationUpdateButton3 {
+        public static string Xaml_Txt_TranslationUpdateButton3 {
             get {
-                return ResourceManager.GetString("TranslationUpdateButton3", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationUpdateButton3", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Save as an .ini file for updating the translation ....
         /// </summary>
-        public static string TranslationUpdateButton4 {
+        public static string Xaml_Txt_TranslationUpdateButton4 {
             get {
-                return ResourceManager.GetString("TranslationUpdateButton4", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationUpdateButton4", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Load an old-version upstream string table file (.csf/.ini) ....
         /// </summary>
-        public static string TranslationUpdateCheckButton1 {
+        public static string Xaml_Txt_TranslationUpdateCheckButton1 {
             get {
-                return ResourceManager.GetString("TranslationUpdateCheckButton1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationUpdateCheckButton1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Load a new-version upstream string table file (.csf/.ini) ....
         /// </summary>
-        public static string TranslationUpdateCheckButton2 {
+        public static string Xaml_Txt_TranslationUpdateCheckButton2 {
             get {
-                return ResourceManager.GetString("TranslationUpdateCheckButton2", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationUpdateCheckButton2", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Load an old-version translated string table file (.csf/.ini) ....
         /// </summary>
-        public static string TranslationUpdateCheckButton3 {
+        public static string Xaml_Txt_TranslationUpdateCheckButton3 {
             get {
-                return ResourceManager.GetString("TranslationUpdateCheckButton3", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationUpdateCheckButton3", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Load a new-version translated string table file (.csf/.ini) ....
         /// </summary>
-        public static string TranslationUpdateCheckButton4 {
+        public static string Xaml_Txt_TranslationUpdateCheckButton4 {
             get {
-                return ResourceManager.GetString("TranslationUpdateCheckButton4", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationUpdateCheckButton4", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Save as an .ini file for updating the translation ....
         /// </summary>
-        public static string TranslationUpdateCheckButton5 {
+        public static string Xaml_Txt_TranslationUpdateCheckButton5 {
             get {
-                return ResourceManager.GetString("TranslationUpdateCheckButton5", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationUpdateCheckButton5", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Translation Helper - Update Check.
         /// </summary>
-        public static string TranslationUpdateCheckTabHeader {
+        public static string Xaml_Txt_TranslationUpdateCheckTabHeader {
             get {
-                return ResourceManager.GetString("TranslationUpdateCheckTabHeader", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationUpdateCheckTabHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Select an old-version upstream string table file, a new-version upstream string table file, an old-version translated string label file, and a new-version translated string label file, and save an .ini file that is checked for whether some labels remain the old version. The .ini file can be converted back to .csf file in the &quot;Format Converter&quot; tab..
         /// </summary>
-        public static string TranslationUpdateCheckTextBlock1 {
+        public static string Xaml_Txt_TranslationUpdateCheckTextBlock1 {
             get {
-                return ResourceManager.GetString("TranslationUpdateCheckTextBlock1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationUpdateCheckTextBlock1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Translation Helper - Update.
         /// </summary>
-        public static string TranslationUpdateTabHeader {
+        public static string Xaml_Txt_TranslationUpdateTabHeader {
             get {
-                return ResourceManager.GetString("TranslationUpdateTabHeader", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationUpdateTabHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Select an old-version upstream string table file, a new-version upstream string table file and an old-version translated string label file, and save an .ini file that is convenient for updating the translation. The .ini file can be converted back to .csf file in the &quot;Format Converter&quot; tab..
         /// </summary>
-        public static string TranslationUpdateTextBlock1 {
+        public static string Xaml_Txt_TranslationUpdateTextBlock1 {
             get {
-                return ResourceManager.GetString("TranslationUpdateTextBlock1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_TranslationUpdateTextBlock1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Save and Apply.
         /// </summary>
-        public static string WatchModeButton1 {
+        public static string Xaml_Txt_WatchModeButton1 {
             get {
-                return ResourceManager.GetString("WatchModeButton1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_WatchModeButton1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Watch Mode.
         /// </summary>
-        public static string WatchModeTabHeader {
+        public static string Xaml_Txt_WatchModeTabHeader {
             get {
-                return ResourceManager.GetString("WatchModeTabHeader", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_WatchModeTabHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to In the text box below, input the pairs of .ini files to monitor and the corresponding .csf files to generate. Separate each pair with a comma. You can enter multiple pairs by putting each pair on a new line. Once the program starts, it will monitor the .ini files. Whenever an ini file changes, the program will automatically generate the corresponding csf file..
         /// </summary>
-        public static string WatchModeTextBlock1 {
+        public static string Xaml_Txt_WatchModeTextBlock1 {
             get {
-                return ResourceManager.GetString("WatchModeTextBlock1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_WatchModeTextBlock1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Example: C:\path\to\stringtables\ra2.ini, D:\path\to\game\ra2.csf.
         /// </summary>
-        public static string WatchModeTextBlock2 {
+        public static string Xaml_Txt_WatchModeTextBlock2 {
             get {
-                return ResourceManager.GetString("WatchModeTextBlock2", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_WatchModeTextBlock2", resourceCulture);
             }
         }
     }
