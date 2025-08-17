@@ -144,4 +144,181 @@
   <data name="HomeTabTextBlock7" xml:space="preserve">
     <value>要开始使用，只需将 .csf/.ini 文件拖放到此处。</value>
   </data>
+  <data name="SettingsTabHeader" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="SettingsGroupboxHeader" xml:space="preserve">
+    <value>编码 1252 变通方案选项</value>
+  </data>
+  <data name="SettingsTextBlock1" xml:space="preserve">
+    <value>对于代码点 128-159 (0x80-0x9F)，红色警戒 2 的原始 game.fnt 文件错误地将这些字符视为 Windows-1252，而不是 Unicode (ISO-8859-1)。在某些模组和某些编辑器中，这些字符可能被保存为 Windows-1252 编码，这是不正确的。但是，用户可能仍然需要处理这些文件。您可以决定是将 128-159 视为 Windows-1252 还是 Unicode。勾选下面两个复选框意味着前者，这与某些模组和某些编辑器兼容。取消勾选下面两个复选框意味着后者，这是正确的方式。原始 game.fnt 文件在这些代码点上具有正确的字体数据，商标字符 ™ 除外。</value>
+  </data>
+  <data name="SettingsCheckbox1" xml:space="preserve">
+    <value>在加载 .csf 文件时启用 Windows-1252 变通方案。</value>
+  </data>
+  <data name="SettingsCheckbox2" xml:space="preserve">
+    <value>在写入 .csf 文件时启用 Windows-1252 变通方案。</value>
+  </data>
+  <data name="FormatConverterTabHeader" xml:space="preserve">
+    <value>格式转换器</value>
+  </data>
+  <data name="FormatConverterTextBlock1" xml:space="preserve">
+    <value>红色警戒 2 的字符串表以 .csf 文件形式呈现，由于大多数 csf 编辑器是在几十年前创建的，因此不便于编辑。本工具允许用户将字符串表从 .csf 文件转换为 .ini 文件，然后再转换回游戏可识别的 .csf 文件。</value>
+  </data>
+  <data name="FormatConverterTextBlock2" xml:space="preserve">
+    <value>注意：.ini 文件的文本编码必须为 UTF-8（无 BOM）。</value>
+  </data>
+  <data name="FormatConverterButton1_Basic" xml:space="preserve">
+    <value>加载字符串表文件（.csf/.ini）...</value>
+  </data>
+  <data name="FormatConverterButton1_Advanced" xml:space="preserve">
+    <value>加载字符串表文件（.csf/.ini/.yaml/.json）...</value>
+  </data>
+  <data name="FormatConverterButton2" xml:space="preserve">
+    <value>保存为 .ini 文件...</value>
+  </data>
+  <data name="FormatConverterButton3" xml:space="preserve">
+    <value>保存为 .csf 文件...</value>
+  </data>
+  <data name="FormatConverterButton4" xml:space="preserve">
+    <value>保存为 .yaml 文件...</value>
+  </data>
+  <data name="FormatConverterButton5" xml:space="preserve">
+    <value>保存为 .json 文件...</value>
+  </data>
+  <data name="FormatConverterTextBlock3" xml:space="preserve">
+    <value>字符串表文件的内容在下面显示以供预览。要修改它，请将其保存为 .ini 文件。</value>
+  </data>
+  <data name="LabelOverrideTabHeader" xml:space="preserve">
+    <value>标签覆盖</value>
+  </data>
+  <data name="LabelOverrideTextBlock1" xml:space="preserve">
+    <value>本工具现在支持包含大写字母的标签名称。选择一个上游字符串表文件和您当前的字符串表文件。本工具将比较每个标签（忽略大小写）并优先使用上游的标签。</value>
+  </data>
+  <data name="LabelOverrideButton1" xml:space="preserve">
+    <value>加载上游字符串表文件（.csf/.ini）...</value>
+  </data>
+  <data name="LabelOverrideButton2" xml:space="preserve">
+    <value>加载当前字符串表文件（.csf/.ini）...</value>
+  </data>
+  <data name="LabelOverrideButton3" xml:space="preserve">
+    <value>保存为 .csf 文件...</value>
+  </data>
+  <data name="LabelOverrideButton4" xml:space="preserve">
+    <value>保存为 .ini 文件...</value>
+  </data>
+  <data name="LabelCheckTabHeader" xml:space="preserve">
+    <value>标签检查</value>
+  </data>
+  <data name="LabelCheckTextBlock1" xml:space="preserve">
+    <value>检查您的地图文件中是否缺少 CSF 标签。</value>
+  </data>
+  <data name="LabelCheckButton1" xml:space="preserve">
+    <value>加载字符串表文件（.csf/.ini）...</value>
+  </data>
+  <data name="LabelCheckButton2" xml:space="preserve">
+    <value>选择包含地图文件（.map/.ypr）的文件夹...</value>
+  </data>
+  <data name="LabelCheckTextboxHeader" xml:space="preserve">
+    <value>注意：在生成的 .ini 文件中，所有缺失标签的值都将替换为以下文本：</value>
+  </data>
+  <data name="LabelCheckButton3" xml:space="preserve">
+    <value>保存为 .ini 文件...</value>
+  </data>
+  <data name="TranslationNewTabHeader" xml:space="preserve">
+    <value>翻译助手 - 新建</value>
+  </data>
+  <data name="TranslationNewTextBlock1" xml:space="preserve">
+    <value>选择一个上游字符串表文件，并保存一个便于翻译的 .ini 文件。该 .ini 文件可以在“格式转换器”选项卡中转换回 .csf 文件。</value>
+  </data>
+  <data name="TranslationNewTextboxHeader" xml:space="preserve">
+    <value>注意：在生成的 .ini 文件中，所有需要翻译的值都将替换为以下文本：</value>
+  </data>
+  <data name="TranslationNewButton1" xml:space="preserve">
+    <value>加载上游字符串表文件（.csf/.ini）...</value>
+  </data>
+  <data name="TranslationNewButton2" xml:space="preserve">
+    <value>保存为 .ini 文件以供翻译...</value>
+  </data>
+  <data name="TranslationTileTabHeader" xml:space="preserve">
+    <value>翻译助手 - 并排</value>
+  </data>
+  <data name="TranslationTileTextBlock1" xml:space="preserve">
+    <value>选择一个上游字符串表文件和一个已翻译的字符串表文件，并保存一个便于比较和检查的 .ini 文件。该 .ini 文件可以在“格式转换器”选项卡中转换回 .csf 文件。</value>
+  </data>
+  <data name="TranslationTileButton1" xml:space="preserve">
+    <value>加载上游字符串表文件（.csf/.ini）...</value>
+  </data>
+  <data name="TranslationTileButton2" xml:space="preserve">
+    <value>加载已翻译的字符串表文件（.csf/.ini）...</value>
+  </data>
+  <data name="TranslationTileButton3" xml:space="preserve">
+    <value>保存为 .ini 文件以供比较...</value>
+  </data>
+  <data name="TranslationOverrideTabHeader" xml:space="preserve">
+    <value>翻译助手 - 覆盖</value>
+  </data>
+  <data name="TranslationOverrideTextBlock1" xml:space="preserve">
+    <value>选择一个上游字符串表文件和一个已翻译的字符串表文件，并保存一个 .ini 文件，当标签在已翻译的文件中存在时，将选择其值；否则，将选择上游文件中显示的标签。该 .ini 文件可以在“格式转换器”选项卡中转换回 .csf 文件。</value>
+  </data>
+  <data name="TranslationOverrideButton1" xml:space="preserve">
+    <value>加载上游字符串表文件（.csf/.ini）...</value>
+  </data>
+  <data name="TranslationOverrideButton2" xml:space="preserve">
+    <value>加载已翻译的字符串表文件（.csf/.ini）...</value>
+  </data>
+  <data name="TranslationOverrideButton3" xml:space="preserve">
+    <value>保存为 .ini 文件以供比较...</value>
+  </data>
+  <data name="TranslationUpdateTabHeader" xml:space="preserve">
+    <value>翻译助手 - 更新</value>
+  </data>
+  <data name="TranslationUpdateTextBlock1" xml:space="preserve">
+    <value>选择一个旧版上游字符串表文件、一个新版上游字符串表文件和一个旧版已翻译的字符串表文件，并保存一个便于更新译文的 .ini 文件。该 .ini 文件可以在“格式转换器”选项卡中转换回 .csf 文件。</value>
+  </data>
+  <data name="TranslationUpdateButton1" xml:space="preserve">
+    <value>加载旧版上游字符串表文件（.csf/.ini）...</value>
+  </data>
+  <data name="TranslationUpdateButton2" xml:space="preserve">
+    <value>加载新版上游字符串表文件（.csf/.ini）...</value>
+  </data>
+  <data name="TranslationUpdateButton3" xml:space="preserve">
+    <value>加载旧版已翻译的字符串表文件（.csf/.ini）...</value>
+  </data>
+  <data name="TranslationUpdateButton4" xml:space="preserve">
+    <value>保存为 .ini 文件以供更新译文...</value>
+  </data>
+  <data name="TranslationUpdateCheckTabHeader" xml:space="preserve">
+    <value>翻译助手 - 更新检查</value>
+  </data>
+  <data name="TranslationUpdateCheckTextBlock1" xml:space="preserve">
+    <value>选择一个旧版上游字符串表文件、一个新版上游字符串表文件、一个旧版已翻译的字符串表文件和一个新版已翻译的字符串表文件，并保存一个 .ini 文件，用于检查某些标签是否仍为旧版本。该 .ini 文件可以在“格式转换器”选项卡中转换回 .csf 文件。</value>
+  </data>
+  <data name="TranslationUpdateCheckButton1" xml:space="preserve">
+    <value>加载旧版上游字符串表文件（.csf/.ini）...</value>
+  </data>
+  <data name="TranslationUpdateCheckButton2" xml:space="preserve">
+    <value>加载新版上游字符串表文件（.csf/.ini）...</value>
+  </data>
+  <data name="TranslationUpdateCheckButton3" xml:space="preserve">
+    <value>加载旧版已翻译的字符串表文件（.csf/.ini）...</value>
+  </data>
+  <data name="TranslationUpdateCheckButton4" xml:space="preserve">
+    <value>加载新版已翻译的字符串表文件（.csf/.ini）...</value>
+  </data>
+  <data name="TranslationUpdateCheckButton5" xml:space="preserve">
+    <value>保存为 .ini 文件以供更新译文...</value>
+  </data>
+  <data name="WatchModeTabHeader" xml:space="preserve">
+    <value>监视模式</value>
+  </data>
+  <data name="WatchModeTextBlock1" xml:space="preserve">
+    <value>在下面的文本框中，输入要监视的 .ini 文件和要生成的 .csf 文件的配对。每对之间用逗号分隔。您可以通过将每对放在新行上来输入多对。程序启动后，它将监视 .ini 文件。每当 .ini 文件发生更改时，程序将自动生成相应的 .csf 文件。</value>
+  </data>
+  <data name="WatchModeTextBlock2" xml:space="preserve">
+    <value>示例：C:\path\to\stringtables\ra2.ini, D:\path\to\game\ra2.csf</value>
+  </data>
+  <data name="WatchModeButton1" xml:space="preserve">
+    <value>保存并应用</value>
+  </data>
 </root>

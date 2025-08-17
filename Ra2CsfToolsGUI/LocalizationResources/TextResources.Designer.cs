@@ -61,6 +61,96 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Load a string table file (.csf/.ini/.yaml/.json) ....
+        /// </summary>
+        public static string FormatConverterButton1_Advanced {
+            get {
+                return ResourceManager.GetString("FormatConverterButton1_Advanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load a string table file (.csf/.ini) ....
+        /// </summary>
+        public static string FormatConverterButton1_Basic {
+            get {
+                return ResourceManager.GetString("FormatConverterButton1_Basic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as an .ini file ....
+        /// </summary>
+        public static string FormatConverterButton2 {
+            get {
+                return ResourceManager.GetString("FormatConverterButton2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as a .csf file ....
+        /// </summary>
+        public static string FormatConverterButton3 {
+            get {
+                return ResourceManager.GetString("FormatConverterButton3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as a .yaml file ....
+        /// </summary>
+        public static string FormatConverterButton4 {
+            get {
+                return ResourceManager.GetString("FormatConverterButton4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as a .json file ....
+        /// </summary>
+        public static string FormatConverterButton5 {
+            get {
+                return ResourceManager.GetString("FormatConverterButton5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Format Converter.
+        /// </summary>
+        public static string FormatConverterTabHeader {
+            get {
+                return ResourceManager.GetString("FormatConverterTabHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The string table of Red Alert 2 is presented as a .csf file, which is not friendly for editing as most csf editors were created decades ago. This tool allows users to convert the string table from a .csf file to an .ini file and back to a .csf file that is recognized by the game..
+        /// </summary>
+        public static string FormatConverterTextBlock1 {
+            get {
+                return ResourceManager.GetString("FormatConverterTextBlock1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note: the text encoding of the .ini file must be UTF-8 (without BOM)..
+        /// </summary>
+        public static string FormatConverterTextBlock2 {
+            get {
+                return ResourceManager.GetString("FormatConverterTextBlock2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The content of the string table file is shown below for preview. To modify it, save it as an .ini file..
+        /// </summary>
+        public static string FormatConverterTextBlock3 {
+            get {
+                return ResourceManager.GetString("FormatConverterTextBlock3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Advanced Mode.
         /// </summary>
         public static string HomeTabAdvancedMode {
@@ -138,6 +228,447 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         public static string HomeTabTextBlock7 {
             get {
                 return ResourceManager.GetString("HomeTabTextBlock7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load the string table file (.csf/.ini) ....
+        /// </summary>
+        public static string LabelCheckButton1 {
+            get {
+                return ResourceManager.GetString("LabelCheckButton1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the folder containing map files (.map/.ypr) ....
+        /// </summary>
+        public static string LabelCheckButton2 {
+            get {
+                return ResourceManager.GetString("LabelCheckButton2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as an .ini file ....
+        /// </summary>
+        public static string LabelCheckButton3 {
+            get {
+                return ResourceManager.GetString("LabelCheckButton3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Label Check.
+        /// </summary>
+        public static string LabelCheckTabHeader {
+            get {
+                return ResourceManager.GetString("LabelCheckTabHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checks whether there are missing CSF labels in your map files..
+        /// </summary>
+        public static string LabelCheckTextBlock1 {
+            get {
+                return ResourceManager.GetString("LabelCheckTextBlock1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note: in the generated .ini file, all values of missing labels are replaced with the following text:.
+        /// </summary>
+        public static string LabelCheckTextboxHeader {
+            get {
+                return ResourceManager.GetString("LabelCheckTextboxHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load an upstream string table file (.csf/.ini) ....
+        /// </summary>
+        public static string LabelOverrideButton1 {
+            get {
+                return ResourceManager.GetString("LabelOverrideButton1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load the current string table file (.csf/.ini) ....
+        /// </summary>
+        public static string LabelOverrideButton2 {
+            get {
+                return ResourceManager.GetString("LabelOverrideButton2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as a .csf file ....
+        /// </summary>
+        public static string LabelOverrideButton3 {
+            get {
+                return ResourceManager.GetString("LabelOverrideButton3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as an .ini file ....
+        /// </summary>
+        public static string LabelOverrideButton4 {
+            get {
+                return ResourceManager.GetString("LabelOverrideButton4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Label Override.
+        /// </summary>
+        public static string LabelOverrideTabHeader {
+            get {
+                return ResourceManager.GetString("LabelOverrideTabHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The tool can now support label names containing capital letters. Select an upstream string table file, and your current string table file. The tool will compare each label (ignoring case) and prefer the label from upstream..
+        /// </summary>
+        public static string LabelOverrideTextBlock1 {
+            get {
+                return ResourceManager.GetString("LabelOverrideTextBlock1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable Windows-1252 workaround when loading the .csf file..
+        /// </summary>
+        public static string SettingsCheckbox1 {
+            get {
+                return ResourceManager.GetString("SettingsCheckbox1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable Windows-1252 workaround when writing the .csf file..
+        /// </summary>
+        public static string SettingsCheckbox2 {
+            get {
+                return ResourceManager.GetString("SettingsCheckbox2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encoding 1252 Workaround Options.
+        /// </summary>
+        public static string SettingsGroupboxHeader {
+            get {
+                return ResourceManager.GetString("SettingsGroupboxHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting.
+        /// </summary>
+        public static string SettingsTabHeader {
+            get {
+                return ResourceManager.GetString("SettingsTabHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For code points 128-159 (0x80-0x9F), the original game.fnt file of RA2 mistakenly treats these characters as Windows-1252, instead of Unicode (ISO-8859-1). In some mods and some editors, those characters may be saved as Windows-1252 encoding, which is incorrect. However, users may still need to process these files. You can decide whether to treat 128-159 as Windows-1252 or as Unicode. Checking the two boxes below means the former, which is compatible with some mods and some editors. Un-checking the two boxe [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string SettingsTextBlock1 {
+            get {
+                return ResourceManager.GetString("SettingsTextBlock1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load an upstream string table file (.csf/.ini) ....
+        /// </summary>
+        public static string TranslationNewButton1 {
+            get {
+                return ResourceManager.GetString("TranslationNewButton1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as an .ini file for translation ....
+        /// </summary>
+        public static string TranslationNewButton2 {
+            get {
+                return ResourceManager.GetString("TranslationNewButton2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Translation Helper - New.
+        /// </summary>
+        public static string TranslationNewTabHeader {
+            get {
+                return ResourceManager.GetString("TranslationNewTabHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an upstream string table file, and save an .ini file that is friendly for translation. The .ini file can be converted back to .csf file in the &quot;Format Converter&quot; tab..
+        /// </summary>
+        public static string TranslationNewTextBlock1 {
+            get {
+                return ResourceManager.GetString("TranslationNewTextBlock1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note: in the generated .ini file, all values that needs translation are replaced with the following text:.
+        /// </summary>
+        public static string TranslationNewTextboxHeader {
+            get {
+                return ResourceManager.GetString("TranslationNewTextboxHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load an upstream string table file (.csf/.ini) ....
+        /// </summary>
+        public static string TranslationOverrideButton1 {
+            get {
+                return ResourceManager.GetString("TranslationOverrideButton1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load a translated string table file (.csf/.ini) ....
+        /// </summary>
+        public static string TranslationOverrideButton2 {
+            get {
+                return ResourceManager.GetString("TranslationOverrideButton2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as an .ini file for comparison ....
+        /// </summary>
+        public static string TranslationOverrideButton3 {
+            get {
+                return ResourceManager.GetString("TranslationOverrideButton3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Translation Helper - Override.
+        /// </summary>
+        public static string TranslationOverrideTabHeader {
+            get {
+                return ResourceManager.GetString("TranslationOverrideTabHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an upstream string table file and a translated string label file, and save an .ini file that once a label is shown in the translated file, the value is selected. Otherwise, the label shown in the upstream file is selected. The .ini file can be converted back to .csf file in the &quot;Format Converter&quot; tab..
+        /// </summary>
+        public static string TranslationOverrideTextBlock1 {
+            get {
+                return ResourceManager.GetString("TranslationOverrideTextBlock1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load an upstream string table file (.csf/.ini) ....
+        /// </summary>
+        public static string TranslationTileButton1 {
+            get {
+                return ResourceManager.GetString("TranslationTileButton1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load a translated string table file (.csf/.ini) ....
+        /// </summary>
+        public static string TranslationTileButton2 {
+            get {
+                return ResourceManager.GetString("TranslationTileButton2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as an .ini file for comparison ....
+        /// </summary>
+        public static string TranslationTileButton3 {
+            get {
+                return ResourceManager.GetString("TranslationTileButton3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Translation Helper - Tile.
+        /// </summary>
+        public static string TranslationTileTabHeader {
+            get {
+                return ResourceManager.GetString("TranslationTileTabHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an upstream string table file and a translated string label file, and save an .ini file that is convenient for comparing and checking. The .ini file can be converted back to .csf file in the &quot;Format Converter&quot; tab..
+        /// </summary>
+        public static string TranslationTileTextBlock1 {
+            get {
+                return ResourceManager.GetString("TranslationTileTextBlock1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load an old-version upstream string table file (.csf/.ini) ....
+        /// </summary>
+        public static string TranslationUpdateButton1 {
+            get {
+                return ResourceManager.GetString("TranslationUpdateButton1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load a new-version upstream string table file (.csf/.ini) ....
+        /// </summary>
+        public static string TranslationUpdateButton2 {
+            get {
+                return ResourceManager.GetString("TranslationUpdateButton2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load an old-version translated string table file (.csf/.ini) ....
+        /// </summary>
+        public static string TranslationUpdateButton3 {
+            get {
+                return ResourceManager.GetString("TranslationUpdateButton3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as an .ini file for updating the translation ....
+        /// </summary>
+        public static string TranslationUpdateButton4 {
+            get {
+                return ResourceManager.GetString("TranslationUpdateButton4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load an old-version upstream string table file (.csf/.ini) ....
+        /// </summary>
+        public static string TranslationUpdateCheckButton1 {
+            get {
+                return ResourceManager.GetString("TranslationUpdateCheckButton1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load a new-version upstream string table file (.csf/.ini) ....
+        /// </summary>
+        public static string TranslationUpdateCheckButton2 {
+            get {
+                return ResourceManager.GetString("TranslationUpdateCheckButton2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load an old-version translated string table file (.csf/.ini) ....
+        /// </summary>
+        public static string TranslationUpdateCheckButton3 {
+            get {
+                return ResourceManager.GetString("TranslationUpdateCheckButton3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load a new-version translated string table file (.csf/.ini) ....
+        /// </summary>
+        public static string TranslationUpdateCheckButton4 {
+            get {
+                return ResourceManager.GetString("TranslationUpdateCheckButton4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as an .ini file for updating the translation ....
+        /// </summary>
+        public static string TranslationUpdateCheckButton5 {
+            get {
+                return ResourceManager.GetString("TranslationUpdateCheckButton5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Translation Helper - Update Check.
+        /// </summary>
+        public static string TranslationUpdateCheckTabHeader {
+            get {
+                return ResourceManager.GetString("TranslationUpdateCheckTabHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an old-version upstream string table file, a new-version upstream string table file, an old-version translated string label file, and a new-version translated string label file, and save an .ini file that is checked for whether some labels remain the old version. The .ini file can be converted back to .csf file in the &quot;Format Converter&quot; tab..
+        /// </summary>
+        public static string TranslationUpdateCheckTextBlock1 {
+            get {
+                return ResourceManager.GetString("TranslationUpdateCheckTextBlock1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Translation Helper - Update.
+        /// </summary>
+        public static string TranslationUpdateTabHeader {
+            get {
+                return ResourceManager.GetString("TranslationUpdateTabHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an old-version upstream string table file, a new-version upstream string table file and an old-version translated string label file, and save an .ini file that is convenient for updating the translation. The .ini file can be converted back to .csf file in the &quot;Format Converter&quot; tab..
+        /// </summary>
+        public static string TranslationUpdateTextBlock1 {
+            get {
+                return ResourceManager.GetString("TranslationUpdateTextBlock1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save and Apply.
+        /// </summary>
+        public static string WatchModeButton1 {
+            get {
+                return ResourceManager.GetString("WatchModeButton1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watch Mode.
+        /// </summary>
+        public static string WatchModeTabHeader {
+            get {
+                return ResourceManager.GetString("WatchModeTabHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In the text box below, input the pairs of .ini files to monitor and the corresponding .csf files to generate. Separate each pair with a comma. You can enter multiple pairs by putting each pair on a new line. Once the program starts, it will monitor the .ini files. Whenever an ini file changes, the program will automatically generate the corresponding csf file..
+        /// </summary>
+        public static string WatchModeTextBlock1 {
+            get {
+                return ResourceManager.GetString("WatchModeTextBlock1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Example: C:\path\to\stringtables\ra2.ini, D:\path\to\game\ra2.csf.
+        /// </summary>
+        public static string WatchModeTextBlock2 {
+            get {
+                return ResourceManager.GetString("WatchModeTextBlock2", resourceCulture);
             }
         }
     }
