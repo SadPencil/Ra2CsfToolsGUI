@@ -34,34 +34,60 @@
                 </Grid>
                 <StackPanel>
                     <TextBlock Margin="10,10,10,0" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock1}" />
-                    <StackPanel Orientation="Horizontal" Margin="10,0,10,0">
-                        <ui:SymbolIcon Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
-                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock2}" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="10,0,10,0">
-                        <ui:SymbolIcon Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
-                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock3}" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="10,0,10,10" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}">
-                        <ui:SymbolIcon Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
-                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock4}" />
-                    </StackPanel>
+                    
+                    <Grid Margin="10,0,10,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ui:SymbolIcon Grid.Column="0" Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBlock Grid.Column="1" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock2}" />
+                    </Grid>
+                    
+                    <Grid Margin="10,0,10,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ui:SymbolIcon Grid.Column="0" Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBlock Grid.Column="1" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock3}" />
+                    </Grid>
 
-                    <StackPanel Orientation="Vertical" Margin="10,0,10,10" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
-                            <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock5}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                            <ui:SymbolIcon Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
-                            <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock6}" />
-                        </StackPanel>
-                    </StackPanel>
+                    <Grid Margin="10,0,10,0" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ui:SymbolIcon Grid.Column="0" Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBlock Grid.Column="1" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock4}" />
+                    </Grid>
 
-                    <StackPanel Orientation="Horizontal" Margin="10" VerticalAlignment="Center">
-                        <ui:SymbolIcon Symbol="Forward" VerticalAlignment="Center" Margin="0,0,5,0" />
-                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock7}" />
-                    </StackPanel>
+                    <Grid Margin="10,0,10,0" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ui:SymbolIcon Grid.Column="0" Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBlock Grid.Column="1" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock5}" />
+                    </Grid>
+                    
+                    <Grid Margin="10,0,10,0" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ui:SymbolIcon Grid.Column="0" Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBlock Grid.Column="1" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock6}" />
+                    </Grid>
+
+                    <Grid Margin="10,20,10,0" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ui:SymbolIcon Grid.Column="0" Symbol="Forward" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBlock Grid.Column="1" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock7}" />
+                    </Grid>
                 </StackPanel>
                 <CheckBox Margin="10" FontSize="16" IsChecked="{Binding Path=AdvancedMode, Mode=TwoWay}" Content="{x:Static l10n:TextResources.Xaml_Txt_HomeTabAdvancedMode}"/>
                 <Button Margin="10" Click="SwitchLanguageButton_Click">Switch language / 切换语言</Button>
