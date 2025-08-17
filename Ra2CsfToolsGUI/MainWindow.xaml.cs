@@ -1263,5 +1263,11 @@ namespace Ra2CsfToolsGUI
                 textBox.SelectionLength = 0; // Reset selection to prevent lag from large highlights
             }
         }
+
+        private void ConvertCsfFileContentTextBox_ContextMenuOpening(object sender, System.Windows.Controls.ContextMenuEventArgs e)
+        {
+            // Disable context menu
+            e.Handled = true;
+        }
     }
 }
