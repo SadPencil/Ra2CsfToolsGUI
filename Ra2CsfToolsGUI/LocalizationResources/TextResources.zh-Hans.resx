@@ -136,7 +136,7 @@
     <value>更多功能在“高级模式”中可用……</value>
   </data>
   <data name="Xaml_Txt_HomeTabTextBlock5" xml:space="preserve">
-    <value>将译文文件与上游文件并排显示，方便您对照翻译，而无需手动比较两个文件。</value>
+    <value>将译文文件与上游文件并排显示，方便您对照翻译，简化了翻译过程。</value>
   </data>
   <data name="Xaml_Txt_HomeTabTextBlock6" xml:space="preserve">
     <value>高亮显示新旧版本中的译文更新，让您更高效地进行修改。</value>
@@ -151,7 +151,7 @@
     <value>编码 1252 变通方案选项</value>
   </data>
   <data name="Xaml_Txt_SettingsTextBlock1" xml:space="preserve">
-    <value>原版《红色警戒 2》的 game.fnt 文件将代码点 128-159（0x80-0x9F）错误地视为 Windows-1252 编码，而非 Unicode (ISO-8859-1)。尽管这种处理不正确，但部分模组和编辑器会以 Windows-1252 编码保存这些字符。本工具允许您选择是将这些代码点视为 Windows-1252 还是 Unicode。勾选下方两个复选框将启用 Windows-1252 变通方案，以兼容部分模组和编辑器。取消勾选则使用正确的 Unicode 解释。除了商标符号（™），原版 game.fnt 文件在正确的 Unicode 代码点上都具有正确的字体数据。</value>
+    <value>原版《红色警戒 2》的 game.fnt 文件错误地将代码点 128-159 (0x80-0x9F) 视为 Windows-1252 编码，而不是正确的 Unicode (ISO-8859-1) 编码。尽管这种处理不正确，但部分模组和编辑器会以 Windows-1252 编码保存这些字符。本工具允许您选择是将这些代码点视为 Windows-1252 还是 Unicode。勾选下方两个复选框将启用 Windows-1252 变通方案，以兼容部分模组和编辑器。取消勾选则使用正确的 Unicode 解释。除了商标符号（™），原版 game.fnt 文件在正确的 Unicode 代码点上都具有正确的字体数据。</value>
   </data>
   <data name="Xaml_Txt_SettingsCheckbox1" xml:space="preserve">
     <value>在加载 .csf 文件时启用 Windows-1252 变通方案。</value>
@@ -163,7 +163,7 @@
     <value>格式转换器</value>
   </data>
   <data name="Xaml_Txt_FormatConverterTextBlock1" xml:space="preserve">
-    <value>由于大多数 .csf 编辑器年代久远，《红色警戒 2》的字符串表文件（.csf）不易于编辑。本工具可将 .csf 字符串表文件转换为容易编辑的 .ini 文件，再转换回游戏可识别的 .csf 文件。</value>
+    <value>由于现有工具已是二十年前的产物，编辑《红色警戒 2》的字符串表文件（.csf） 既麻烦又费时。本工具可将 .csf 字符串表文件转换为易于编辑的 .ini 文件，再转换回游戏可识别的 .csf 文件。</value>
   </data>
   <data name="Xaml_Txt_FormatConverterTextBlock2" xml:space="preserve">
     <value>注意：.ini 文件必须采用 UTF-8（无 BOM）编码。</value>
@@ -313,7 +313,7 @@
     <value>监视模式</value>
   </data>
   <data name="Xaml_Txt_WatchModeTextBlock1" xml:space="preserve">
-    <value>在下方文本框中，输入要监视的 .ini 文件及其对应的 .csf 文件，用逗号分隔每对。您可以使用新行来输入多对文件。启动后，本程序将自动监视 .ini 文件，并在检测到更改时自动生成对应的 .csf 文件。</value>
+    <value>在下方文本框中，输入要监视的 .ini 文件及其对应的 .csf 文件，用逗号分隔每对。您可以使用新行来输入多对文件。启动后，本程序将自动监视 .ini 文件，一旦检测到更改，便自动生成对应的 .csf 文件。</value>
   </data>
   <data name="Xaml_Txt_WatchModeTextBlock2" xml:space="preserve">
     <value>示例：C:\path\to\stringtables\ra2.ini, D:\path\to\game\ra2.csf</value>

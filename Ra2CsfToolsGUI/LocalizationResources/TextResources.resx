@@ -163,7 +163,7 @@
     <value>Format Converter</value>
   </data>
   <data name="Xaml_Txt_FormatConverterTextBlock1" xml:space="preserve">
-    <value>Red Alert 2 string tables are stored in .csf files, which are difficult to edit with most older .csf editors. This tool lets you convert a string table from a .csf file to a more editable .ini file and then convert it back to a game-recognized .csf file.</value>
+    <value>Red Alert 2 string tables are stored in .csf files, which can be a hassle to edit with tools that are two decades old. This tool lets you convert a string table from a .csf file to a more editable .ini file and then convert it back to a game-recognized .csf file.</value>
   </data>
   <data name="Xaml_Txt_FormatConverterTextBlock2" xml:space="preserve">
     <value>Note: The .ini file must be encoded as UTF-8 (without BOM).</value>

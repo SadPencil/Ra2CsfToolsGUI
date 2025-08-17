@@ -61,7 +61,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your changes have been saved successfully.
+        ///   Looks up a localized string similar to Your changes have been saved successfully..
         /// </summary>
         public static string Cs_Txt_ChangesSaved {
             get {
@@ -79,7 +79,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only one file is allowed for drag &amp; drop..
+        ///   Looks up a localized string similar to Only one file can be dropped at a time..
         /// </summary>
         public static string Cs_Txt_DragAndDropSingleFile {
             get {
@@ -133,7 +133,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File loaded successfully. This string table file contains {0} labels, with language {1}..
+        ///   Looks up a localized string similar to File loaded successfully. This string table contains {0} labels, with language {1}..
         /// </summary>
         public static string Cs_Txt_FileLoadedSuccessfully {
             get {
@@ -142,7 +142,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File saved successfully. Would you like to open the file in File Explorer?.
+        ///   Looks up a localized string similar to File saved successfully. Would you like to open it in File Explorer?.
         /// </summary>
         public static string Cs_Txt_FileSavedSuccessAndOpenFolder {
             get {
@@ -178,7 +178,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid characters found in label name \&quot;{0}\&quot;..
+        ///   Looks up a localized string similar to Invalid characters found in label name &quot;{0}&quot;..
         /// </summary>
         public static string Cs_Txt_InvalidCharactersInLabelName {
             get {
@@ -349,7 +349,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The string table of Red Alert 2 is presented as a .csf file, which is not friendly for editing as most csf editors were created decades ago. This tool allows users to convert the string table from a .csf file to an .ini file and back to a .csf file that is recognized by the game..
+        ///   Looks up a localized string similar to Red Alert 2 string tables are stored in .csf files, which can be a hassle to edit with tools that are two decades old. This tool lets you convert a string table from a .csf file to a more editable .ini file and then convert it back to a game-recognized .csf file..
         /// </summary>
         public static string Xaml_Txt_FormatConverterTextBlock1 {
             get {
@@ -358,7 +358,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Note: the text encoding of the .ini file must be UTF-8 (without BOM)..
+        ///   Looks up a localized string similar to Note: The .ini file must be encoded as UTF-8 (without BOM)..
         /// </summary>
         public static string Xaml_Txt_FormatConverterTextBlock2 {
             get {
@@ -367,7 +367,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The content of the string table file is shown below for preview. To modify it, save it as an .ini file..
+        ///   Looks up a localized string similar to The string table content is shown below for preview. To modify it, you must save it as an .ini file first..
         /// </summary>
         public static string Xaml_Txt_FormatConverterTextBlock3 {
             get {
@@ -394,7 +394,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This tool helps users process string table files (.csf) that are recognized by Red Alert 2 and Yuri&apos;s Revenge. It allows you to:.
+        ///   Looks up a localized string similar to This tool helps you process string table files (.csf) for Red Alert 2 and Yuri&apos;s Revenge, allowing you to:.
         /// </summary>
         public static string Xaml_Txt_HomeTabTextBlock1 {
             get {
@@ -403,7 +403,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit the .csf file using your favorite text editor by converting it to an .ini file and then back to a .csf file..
+        ///   Looks up a localized string similar to Convert .csf files to .ini format for easy editing in your preferred text editor, then convert them back to .csf..
         /// </summary>
         public static string Xaml_Txt_HomeTabTextBlock2 {
             get {
@@ -412,7 +412,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You don&apos;t need to keep the .csf file. You can just store the .ini file in your Git repository, as it contains everything needed to generate a .csf file..
+        ///   Looks up a localized string similar to You don&apos;t need to save the .csf file. The .ini file contains all the necessary data to generate a .csf file, making it ideal for storage in a Git repository..
         /// </summary>
         public static string Xaml_Txt_HomeTabTextBlock3 {
             get {
@@ -421,7 +421,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to More features available in &quot;Advanced Mode&quot;....
+        ///   Looks up a localized string similar to More features are available in &quot;Advanced Mode&quot;....
         /// </summary>
         public static string Xaml_Txt_HomeTabTextBlock4 {
             get {
@@ -430,7 +430,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tile the translated file with the upstream file, so you can complete the translation without having to compare two files side by side..
+        ///   Looks up a localized string similar to Compare a translated file with the upstream file side-by-side, which simplifies the translation process..
         /// </summary>
         public static string Xaml_Txt_HomeTabTextBlock5 {
             get {
@@ -439,7 +439,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Highlight the translation updates between old and new versions of your old translation, so you can effectively update it..
+        ///   Looks up a localized string similar to Highlight updated translations between old and new versions, making it easier to see and apply changes..
         /// </summary>
         public static string Xaml_Txt_HomeTabTextBlock6 {
             get {
@@ -448,7 +448,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To get started, simply drag &amp; drop a .csf/.ini file here..
+        ///   Looks up a localized string similar to To get started, simply drag and drop a .csf or .ini file here..
         /// </summary>
         public static string Xaml_Txt_HomeTabTextBlock7 {
             get {
@@ -493,7 +493,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Checks whether there are missing CSF labels in your map files..
+        ///   Looks up a localized string similar to Checks for missing .csf labels in your map files..
         /// </summary>
         public static string Xaml_Txt_LabelCheckTextBlock1 {
             get {
@@ -502,7 +502,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Note: in the generated .ini file, all values of missing labels are replaced with the following text:.
+        ///   Looks up a localized string similar to Note: In the generated .ini file, the values for all missing labels will be replaced with the following text:.
         /// </summary>
         public static string Xaml_Txt_LabelCheckTextboxHeader {
             get {
@@ -556,7 +556,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The tool can now support label names containing capital letters. Select an upstream string table file, and your current string table file. The tool will compare each label (ignoring case) and prefer the label from upstream..
+        ///   Looks up a localized string similar to This tool now supports label names with capital letters. Select an upstream string table file and your current file. The tool will compare each label, ignoring case, and use the label from the original file as the preferred one..
         /// </summary>
         public static string Xaml_Txt_LabelOverrideTextBlock1 {
             get {
@@ -601,7 +601,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For code points 128-159 (0x80-0x9F), the original game.fnt file of RA2 mistakenly treats these characters as Windows-1252, instead of Unicode (ISO-8859-1). In some mods and some editors, those characters may be saved as Windows-1252 encoding, which is incorrect. However, users may still need to process these files. You can decide whether to treat 128-159 as Windows-1252 or as Unicode. Checking the two boxes below means the former, which is compatible with some mods and some editors. Un-checking the two boxe [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to The original RA2 `game.fnt` file incorrectly treats code points 128-159 (0x80-0x9F) as Windows-1252 instead of Unicode (ISO-8859-1). While this is incorrect, some mods and editors save these characters with Windows-1252 encoding. This tool allows you to decide whether to treat these code points as Windows-1252 or Unicode. Checking the two boxes below enables the Windows-1252 workaround for compatibility with certain mods and editors. Un-checking them uses the correct Unicode interpretation. The original `ga [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Xaml_Txt_SettingsTextBlock1 {
             get {
@@ -637,7 +637,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select an upstream string table file, and save an .ini file that is friendly for translation. The .ini file can be converted back to .csf file in the &quot;Format Converter&quot; tab..
+        ///   Looks up a localized string similar to Select an upstream string table file and save it as a translation-friendly .ini file. You can convert this .ini file back to a .csf file using the &quot;Format Converter&quot; tab..
         /// </summary>
         public static string Xaml_Txt_TranslationNewTextBlock1 {
             get {
@@ -646,7 +646,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Note: in the generated .ini file, all values that needs translation are replaced with the following text:.
+        ///   Looks up a localized string similar to Note: In the generated .ini file, all values that require translation will be replaced with the following text:.
         /// </summary>
         public static string Xaml_Txt_TranslationNewTextboxHeader {
             get {
@@ -691,7 +691,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select an upstream string table file and a translated string label file, and save an .ini file that once a label is shown in the translated file, the value is selected. Otherwise, the label shown in the upstream file is selected. The .ini file can be converted back to .csf file in the &quot;Format Converter&quot; tab..
+        ///   Looks up a localized string similar to Select an upstream string table file and a translated file. The tool will save an .ini file that uses the translated value if it exists, otherwise it uses the value from the original file. You can convert this .ini file back to a .csf file using the &quot;Format Converter&quot; tab..
         /// </summary>
         public static string Xaml_Txt_TranslationOverrideTextBlock1 {
             get {
@@ -736,7 +736,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select an upstream string table file and a translated string label file, and save an .ini file that is convenient for comparing and checking. The .ini file can be converted back to .csf file in the &quot;Format Converter&quot; tab..
+        ///   Looks up a localized string similar to Select an upstream string table file and a translated file, then save a new .ini file for easy comparison and checking. You can convert this .ini file back to a .csf file using the &quot;Format Converter&quot; tab..
         /// </summary>
         public static string Xaml_Txt_TranslationTileTextBlock1 {
             get {
@@ -835,7 +835,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select an old-version upstream string table file, a new-version upstream string table file, an old-version translated string label file, and a new-version translated string label file, and save an .ini file that is checked for whether some labels remain the old version. The .ini file can be converted back to .csf file in the &quot;Format Converter&quot; tab..
+        ///   Looks up a localized string similar to Select the old upstream file, the new upstream file, the old translated file, and the new translated file. The tool will save a new .ini file that checks if any labels still have the old translation. You can convert this .ini file back to a .csf file using the &quot;Format Converter&quot; tab..
         /// </summary>
         public static string Xaml_Txt_TranslationUpdateCheckTextBlock1 {
             get {
@@ -853,7 +853,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select an old-version upstream string table file, a new-version upstream string table file and an old-version translated string label file, and save an .ini file that is convenient for updating the translation. The .ini file can be converted back to .csf file in the &quot;Format Converter&quot; tab..
+        ///   Looks up a localized string similar to Select an old upstream file, a new upstream file, and your old translated file. The tool will save a new .ini file that is optimized for updating your translation. You can convert this .ini file back to a .csf file using the &quot;Format Converter&quot; tab..
         /// </summary>
         public static string Xaml_Txt_TranslationUpdateTextBlock1 {
             get {
@@ -880,7 +880,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In the text box below, input the pairs of .ini files to monitor and the corresponding .csf files to generate. Separate each pair with a comma. You can enter multiple pairs by putting each pair on a new line. Once the program starts, it will monitor the .ini files. Whenever an ini file changes, the program will automatically generate the corresponding csf file..
+        ///   Looks up a localized string similar to In the text box below, enter pairs of .ini files to monitor and the corresponding .csf files to generate. Separate each pair with a comma, and use a new line for each pair. Once started, the program will monitor the .ini files and automatically generate the corresponding .csf file whenever a change is detected..
         /// </summary>
         public static string Xaml_Txt_WatchModeTextBlock1 {
             get {
