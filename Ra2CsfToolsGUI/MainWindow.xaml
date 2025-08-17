@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:local="clr-namespace:Ra2CsfToolsGUI" xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz" x:Class="Ra2CsfToolsGUI.MainWindow" ui:WindowHelper.UseModernWindowStyle="True" mc:Ignorable="d" Title="{Binding WindowTitle, Mode=OneWay}" Height="550" Width="850" AllowDrop="True" Drop="Window_Drop" ContentRendered="Window_Content_Rendered">
+<Window
+    xmlns:l10n="clr-namespace:Ra2CsfToolsGUI.LocalizationResources"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:local="clr-namespace:Ra2CsfToolsGUI" xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz" x:Class="Ra2CsfToolsGUI.MainWindow" ui:WindowHelper.UseModernWindowStyle="True" mc:Ignorable="d" Title="{Binding WindowTitle, Mode=OneWay}" Height="550" Width="850" AllowDrop="True" Drop="Window_Drop" ContentRendered="Window_Content_Rendered">
     <Window.Resources>
         <local:BooleanToVisibilityConverter  x:Key="BoolToVisConverter" />
         <local:BooleanToVisibilityConverter  x:Key="Not_BoolToVisConverter" True="Collapsed" False="Visible" />
     </Window.Resources>
     <TabControl>
-        <TabItem Header="Home" x:Name="UI_HomeTabItem">
+        <TabItem Header="{x:Static l10n:TextResources.HomeTabHeader}" x:Name="UI_HomeTabItem">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Home" />
             </ui:TabItemHelper.Icon>
@@ -29,35 +31,38 @@
                         <Label Margin="5" VerticalAlignment="Bottom" FontWeight="Light" FontSize="24" Content="{Binding Version, Mode=OneWay}" />
                     </StackPanel>
                 </Grid>
+                <StackPanel>
+                    <TextBlock Margin="10,10,10,0" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.HomeTabTextBlock1}" />
+                    <StackPanel Orientation="Horizontal" Margin="10,0,10,0">
+                        <ui:SymbolIcon Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.HomeTabTextBlock2}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,0,10,0">
+                        <ui:SymbolIcon Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.HomeTabTextBlock3}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,0,10,10" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}">
+                        <ui:SymbolIcon Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.HomeTabTextBlock4}" />
+                    </StackPanel>
 
-                <TextBlock Margin="10,10,10,0" FontSize="16" TextWrapping="Wrap">
-                    This tool helps users process string table files (.csf) that are recognized by Red Alert 2 and Yuri's Revenge. It allows you to:
-                    <LineBreak />
-                    <ui:SymbolIcon Symbol="Accept" />
-                    Edit the .csf file using your favorite text editor by converting it to an .ini file and then back to a .csf file.
-                    <LineBreak />
-                    <ui:SymbolIcon Symbol="Accept" />
-                    You don't need to keep the .csf file. You can just store the .ini file in your Git repository, as it contains everything needed to generate a .csf file.
-                </TextBlock>
-                <TextBlock Margin="10,-15,10,10" FontSize="16" TextWrapping="Wrap" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}">
-                    <LineBreak/>
-                    <ui:SymbolIcon Symbol="Accept"  />
-                    More features available in "Advanced Mode"...
-                </TextBlock>
-                <TextBlock Margin="10,-15,10,10" FontSize="16" TextWrapping="Wrap" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}"> 
-                <LineBreak />
-                    <ui:SymbolIcon Symbol="Accept"  />
-                    Tile the translated file with the upstream file, so you can complete the translation without having to compare two files side by side.
-                    <LineBreak />
-                    <ui:SymbolIcon Symbol="Accept"/>
-                    Highlight the translation updates between old and new versions of your old translation, so you can effectively update it.
-                </TextBlock>
+                    <StackPanel Orientation="Vertical" Margin="10,0,10,10" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+                        <StackPanel Orientation="Horizontal">
+                            <ui:SymbolIcon Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
+                            <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.HomeTabTextBlock5}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <ui:SymbolIcon Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
+                            <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.HomeTabTextBlock6}" />
+                        </StackPanel>
+                    </StackPanel>
 
-                <TextBlock Margin="10" FontSize="16" TextWrapping="Wrap">
-                    <ui:SymbolIcon Symbol="Forward" />
-                    To get started, simply drag &amp; drop a .csf/.ini file here.
-                </TextBlock>
-                <CheckBox Margin="10" FontSize="16" IsChecked="{Binding Path=AdvancedMode, Mode=TwoWay}">Advanced Mode</CheckBox>
+                    <StackPanel Orientation="Horizontal" Margin="10" VerticalAlignment="Center">
+                        <ui:SymbolIcon Symbol="Forward" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBlock FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.HomeTabTextBlock7}" />
+                    </StackPanel>
+                </StackPanel>
+                <CheckBox Margin="10" FontSize="16" IsChecked="{Binding Path=AdvancedMode, Mode=TwoWay}" Content="{x:Static l10n:TextResources.HomeTabAdvancedMode}"/>
             </StackPanel>
         </TabItem>
         <TabItem Header="Setting" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
@@ -143,7 +148,7 @@
                 <Button Content="Save as an .ini file ..." Click="LabelCheck_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-        
+
         <TabItem Header="Translation Helper - New" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
