@@ -126,8 +126,8 @@
                         <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton1_Advanced}" Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
                         <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton2}" Click="Convert_SaveAsIni_Click" />
                         <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton3}" Click="Convert_SaveAsCsf_Click" />
-                        <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton4}" Click="Convert_SaveAsYaml_Click" />
-                        <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton5}" Click="Convert_SaveAsJson_Click" />
+                        <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton4}" Click="Convert_SaveAsYaml_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
+                        <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton5}" Click="Convert_SaveAsJson_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
                     </WrapPanel>
 
                     <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterTextBlock3}" />
