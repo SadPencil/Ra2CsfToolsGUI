@@ -34,7 +34,7 @@
                 </Grid>
                 <StackPanel>
                     <TextBlock Margin="10,10,10,0" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock1}" />
-                    
+
                     <Grid Margin="10,0,10,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -43,7 +43,7 @@
                         <ui:SymbolIcon Grid.Column="0" Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
                         <TextBlock Grid.Column="1" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock2}" />
                     </Grid>
-                    
+
                     <Grid Margin="10,0,10,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -70,7 +70,7 @@
                         <ui:SymbolIcon Grid.Column="0" Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
                         <TextBlock Grid.Column="1" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock5}" />
                     </Grid>
-                    
+
                     <Grid Margin="10,0,10,0" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -121,16 +121,15 @@
                 <ui:SimpleStackPanel Grid.Row="0" Spacing="12" Margin="10">
                     <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterTextBlock1}" />
                     <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterTextBlock2}" />
-                    <ui:SimpleStackPanel Spacing="12" Margin="0" Orientation="Horizontal">
-                        <Button Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton1_Basic}" Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}" />
-                        <Button Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton1_Advanced}" Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
-                        <Button Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton2}" Click="Convert_SaveAsIni_Click" />
-                        <Button Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton3}" Click="Convert_SaveAsCsf_Click" />
-                    </ui:SimpleStackPanel>
-                    <ui:SimpleStackPanel Spacing="12" Margin="0" Orientation="Horizontal" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" >
-                        <Button Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton4}" Click="Convert_SaveAsYaml_Click" />
-                        <Button Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton5}" Click="Convert_SaveAsJson_Click" />
-                    </ui:SimpleStackPanel>
+                    <WrapPanel Orientation="Horizontal" Margin="0" HorizontalAlignment="Left">
+                        <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton1_Basic}" Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}" />
+                        <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton1_Advanced}" Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
+                        <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton2}" Click="Convert_SaveAsIni_Click" />
+                        <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton3}" Click="Convert_SaveAsCsf_Click" />
+                        <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton4}" Click="Convert_SaveAsYaml_Click" />
+                        <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton5}" Click="Convert_SaveAsJson_Click" />
+                    </WrapPanel>
+
                     <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterTextBlock3}" />
 
                 </ui:SimpleStackPanel>
