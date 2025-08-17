@@ -114,7 +114,7 @@
 
                 </ui:SimpleStackPanel>
 
-                <TextBox Margin="10,0,10,0" Grid.Row="1" AcceptsReturn="True" TextWrapping="Wrap" VerticalAlignment="Stretch" IsReadOnly="True" VerticalScrollBarVisibility="Visible" Text="{Binding Convert_CsfFile_Content, Mode=OneWay}" />
+                <TextBox Margin="10,0,10,0" Grid.Row="1" AcceptsReturn="True" TextWrapping="Wrap" VerticalAlignment="Stretch" IsReadOnly="True" VerticalScrollBarVisibility="Visible" Text="{Binding Convert_CsfFile_Content, Mode=OneWay}" IsUndoEnabled="False" SelectionChanged="ConvertCsfFileContentTextBox_SelectionChanged" />
                 <TextBlock Margin="10" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Convert_CsfFile_Tips, Mode=OneWay}" />
             </Grid>
         </TabItem>

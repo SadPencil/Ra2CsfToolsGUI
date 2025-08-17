@@ -1255,5 +1255,13 @@ namespace Ra2CsfToolsGUI
             this.GeneralSaveIniFileGUI(ini, this.LabelCheck_CsfFile_FileName);
         });
 
+        private void ConvertCsfFileContentTextBox_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as System.Windows.Controls.TextBox;
+            if (textBox != null & textBox.SelectionLength > 0)
+            {
+                textBox.SelectionLength = 0; // Reset selection to prevent lag from large highlights
+            }
+        }
     }
 }
