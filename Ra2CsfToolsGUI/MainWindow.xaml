@@ -87,7 +87,7 @@
                         <TextBlock Grid.Column="1" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock6}" />
                     </Grid>
 
-                    <Grid Margin="10,20,10,0" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+                    <Grid Margin="10,20,10,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
