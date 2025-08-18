@@ -139,7 +139,7 @@
     <value>将译文文件与上游文件并排显示，方便您对照翻译，简化了翻译过程。</value>
   </data>
   <data name="Xaml_Txt_HomeTabTextBlock6" xml:space="preserve">
-    <value>高亮显示新旧版本中的译文更新，让您更高效地进行修改。</value>
+    <value>突出显示新旧版本中的译文更新，让您更高效地进行修改。</value>
   </data>
   <data name="Xaml_Txt_HomeTabTextBlock7" xml:space="preserve">
     <value>如需开始，请将 .csf 或 .ini 文件拖放到此处。</value>
