@@ -34,10 +34,11 @@ namespace Ra2CsfToolsGUI
 
             if (arguments.Length >= 2)
             {
-                string filename = arguments[1];
+                string filepath = arguments[1];
                 this.GeneralTryCatchGUI(() =>
                 {
-                    this.Convert_CsfFile = this.GeneralLoadCsfIniFile(filename);
+                    this.Convert_CsfFile = this.GeneralLoadCsfIniFile(filepath);
+                    this.Convert_CsfFile_FileName = GetFileNameWithoutExtensionAndDot(filepath);
                     this.UI_FormatConverterTabItem.IsSelected = true;
                     this.StartedFromCsf = true;
                 });
@@ -210,6 +211,14 @@ namespace Ra2CsfToolsGUI
             (this.Convert_CsfFile, this.Convert_CsfFile_FileName) = this.GeneralLoadCsfIniFileGUI();
         });
 
+        private static string GetFileNameWithoutExtensionAndDot(string filepath)
+        {
+            string filename = Path.GetFileNameWithoutExtension(filepath);
+            // Only preserve substrings before the first dot, if there is a dot
+            filename = filename.Split('.')[0];
+            return filename;
+        }
+
         private CsfFile GeneralLoadCsfIniFile(string filepath)
         {
             string fileext = Path.GetExtension(filepath);
@@ -261,9 +270,7 @@ namespace Ra2CsfToolsGUI
                 // Cs_Txt_Success: Success
                 _ = MessageBox.Show(this, string.Format(LocalizationResources.TextResources.Cs_Txt_FileLoadedSuccessfully, csf.Labels.Count, csf.Language), LocalizationResources.TextResources.Cs_Txt_Success, MessageBoxButton.OK, MessageBoxImage.Information);
 
-                string filename = Path.GetFileNameWithoutExtension(filepath);
-                // Only preserve substrings before the first dot, if there is a dot
-                filename = filename.Split('.')[0];
+                string filename = GetFileNameWithoutExtensionAndDot(filepath);
 
                 return (csf, filename);
             }
