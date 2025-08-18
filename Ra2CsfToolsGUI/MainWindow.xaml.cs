@@ -128,6 +128,7 @@ namespace Ra2CsfToolsGUI
 
         private static IniDataParser GetGeneralIniDataParser() => new(GeneralIniParserConfiguration);
 
+        // Cs_Txt_Error: Error
         private void MessageBoxPanic(Exception ex) => this.Dispatcher.Invoke(() =>
         {
             _ = MessageBox.Show(this, ex.Message, LocalizationResources.TextResources.Cs_Txt_Error + string.Format(" - {0}", this.ApplicationName), MessageBoxButton.OK, MessageBoxImage.Error);
@@ -171,6 +172,7 @@ namespace Ra2CsfToolsGUI
                 if (value != null)
                 {
                     this.Convert_CsfFile_Content = GetIniContentFromCsfFile(value);
+                    // Cs_Txt_FileContainsLabelsAndLanguage: This string table file contains {0} labels, with language {1}.
                     this.Convert_CsfFile_Tips = string.Format(LocalizationResources.TextResources.Cs_Txt_FileContainsLabelsAndLanguage, value.Labels.Count, value.Language);
                 }
                 else
@@ -238,6 +240,7 @@ namespace Ra2CsfToolsGUI
                     }
                 // break;
                 default:
+                    // Cs_Txt_UnexpectedFileExtension: Unexpected file extension. Only .csf, .ini, .yaml, and .json files are accepted.
                     throw new Exception(LocalizationResources.TextResources.Cs_Txt_UnexpectedFileExtension);
             }
         }
@@ -254,6 +257,8 @@ namespace Ra2CsfToolsGUI
                 var csf = this.GeneralLoadCsfIniFile(filepath);
                 Debug.Assert(csf != null);
 
+                // Cs_Txt_FileLoadedSuccessfully: File loaded successfully. This string table contains {0} labels, with language {1}.
+                // Cs_Txt_Success: Success
                 _ = MessageBox.Show(this, string.Format(LocalizationResources.TextResources.Cs_Txt_FileLoadedSuccessfully, csf.Labels.Count, csf.Language), LocalizationResources.TextResources.Cs_Txt_Success, MessageBoxButton.OK, MessageBoxImage.Information);
 
                 string filename = Path.GetFileNameWithoutExtension(filepath);
@@ -292,6 +297,8 @@ namespace Ra2CsfToolsGUI
                 {
                     saveAction.Invoke(fs);
                 }
+                // Cs_Txt_FileSavedSuccessAndOpenFolder: File saved successfully. Would you like to open it in File Explorer?
+                // Cs_Txt_Success: Success
                 if (MessageBox.Show(this, LocalizationResources.TextResources.Cs_Txt_FileSavedSuccessAndOpenFolder, LocalizationResources.TextResources.Cs_Txt_Success, MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                 {
                     var process = new Process();
@@ -308,6 +315,7 @@ namespace Ra2CsfToolsGUI
 
             if (file == null)
             {
+                // Cs_Txt_LoadFileFirst: Please load a string table file first.
                 throw new Exception(LocalizationResources.TextResources.Cs_Txt_LoadFileFirst);
             }
 
@@ -336,6 +344,7 @@ namespace Ra2CsfToolsGUI
                 ".ini" => "SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini",
                 ".yaml" => "SadPencil.Ra2CsfFile.Yaml files (*.yaml)|*.yaml",
                 ".json" => "JSON files (*.json)|*.json",
+                // Cs_Txt_UnexpectedFileExtension: Unexpected file extension. Only .csf, .ini, .yaml, and .json files are accepted.
                 _ => throw new Exception(LocalizationResources.TextResources.Cs_Txt_UnexpectedFileExtension),
             }, defaultFileName);
         }
@@ -402,6 +411,7 @@ namespace Ra2CsfToolsGUI
         {
             if (this.LabelOverride_UpstreamFile == null || this.LabelOverride_CurrentFile == null)
             {
+                // Cs_Txt_LoadFilesFirst: Please load the string table files first.
                 throw new Exception(LocalizationResources.TextResources.Cs_Txt_LoadFilesFirst);
             }
 
@@ -526,6 +536,7 @@ namespace Ra2CsfToolsGUI
         {
             if (this.TranslationNew_File == null)
             {
+                // Cs_Txt_LoadFileFirst: Please load a string table file first.
                 throw new Exception(LocalizationResources.TextResources.Cs_Txt_LoadFileFirst);
             }
 
@@ -561,6 +572,7 @@ namespace Ra2CsfToolsGUI
         {
             if (this.TranslationTile_UpstreamFile == null || this.TranslationTile_TranslatedFile == null)
             {
+                // Cs_Txt_LoadFilesFirst: Please load the string table files first.
                 throw new Exception(LocalizationResources.TextResources.Cs_Txt_LoadFilesFirst);
             }
 
@@ -620,6 +632,7 @@ namespace Ra2CsfToolsGUI
         {
             if (this.TranslationUpdate_OldUpstreamFile == null || this.TranslationUpdate_NewUpstreamFile == null || this.TranslationUpdate_OldTranslatedFile == null)
             {
+                // Cs_Txt_LoadFilesFirst: Please load the string table files first.
                 throw new Exception(LocalizationResources.TextResources.Cs_Txt_LoadFilesFirst);
             }
 
@@ -727,6 +740,7 @@ namespace Ra2CsfToolsGUI
         {
             if (this.TranslationOverride_UpstreamFile == null || this.TranslationOverride_TranslatedFile == null)
             {
+                // Cs_Txt_LoadFilesFirst: Please load the string table files first.
                 throw new Exception(LocalizationResources.TextResources.Cs_Txt_LoadFilesFirst);
             }
 
@@ -796,6 +810,7 @@ namespace Ra2CsfToolsGUI
             this.TranslationUpdateCheck_OldTranslatedFile == null ||
             this.TranslationUpdateCheck_NewTranslatedFile == null)
             {
+                // Cs_Txt_LoadFilesFirst: Please load the string table files first.
                 throw new Exception(LocalizationResources.TextResources.Cs_Txt_LoadFilesFirst);
             }
 
@@ -965,6 +980,8 @@ namespace Ra2CsfToolsGUI
 
             this.ReInitWatches();
 
+            // Cs_Txt_ChangesSaved: Your changes have been saved successfully.
+            // Cs_Txt_Success: Success
             _ = MessageBox.Show(this, LocalizationResources.TextResources.Cs_Txt_ChangesSaved, LocalizationResources.TextResources.Cs_Txt_Success, MessageBoxButton.OK, MessageBoxImage.Information);
 
         });
@@ -1037,6 +1054,7 @@ namespace Ra2CsfToolsGUI
 
                     if (items.Length < 2)
                     {
+                        // Cs_Txt_InvalidWatchConfig: Invalid watch config line: {0}
                         throw new Exception(string.Format(LocalizationResources.TextResources.Cs_Txt_InvalidWatchConfig, line));
                     }
 
@@ -1112,6 +1130,7 @@ namespace Ra2CsfToolsGUI
                 string[] droppedFilePaths = e.Data.GetData(DataFormats.FileDrop, true) as string[];
                 if (droppedFilePaths.Length != 1)
                 {
+                    // Cs_Txt_DragAndDropSingleFile: Only one file can be dropped at a time.
                     throw new Exception(LocalizationResources.TextResources.Cs_Txt_DragAndDropSingleFile);
                 }
                 string filename = droppedFilePaths[0];
@@ -1125,6 +1144,8 @@ namespace Ra2CsfToolsGUI
         {
             if (!string.IsNullOrWhiteSpace(this.WatchConfigStr) && !this.StartedFromCsf)
             {
+                // Cs_Txt_WatchModeConfirm: Watch mode is configured. Do you want to start it?
+                // Cs_Txt_Information: Information
                 var result = MessageBox.Show(this, LocalizationResources.TextResources.Cs_Txt_WatchModeConfirm, LocalizationResources.TextResources.Cs_Txt_Information, MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
@@ -1152,16 +1173,19 @@ namespace Ra2CsfToolsGUI
         {
             if (this.LabelCheck_CsfFile == null)
             {
+                // Cs_Txt_LoadFileFirst: Please load a string table file first.
                 throw new Exception(LocalizationResources.TextResources.Cs_Txt_LoadFileFirst);
             }
 
             if (string.IsNullOrEmpty(this.LabelCheck_MapFolder))
             {
+                // Cs_Txt_SelectMapFolderFirst: Please select the map folder first.
                 throw new Exception(LocalizationResources.TextResources.Cs_Txt_SelectMapFolderFirst);
             }
 
             if (!Directory.Exists(this.LabelCheck_MapFolder))
             {
+                // Cs_Txt_FolderDoesNotExist: Folder {0} does not exist!
                 throw new Exception(string.Format(LocalizationResources.TextResources.Cs_Txt_FolderDoesNotExist, this.LabelCheck_MapFolder));
             }
 
@@ -1195,6 +1219,7 @@ namespace Ra2CsfToolsGUI
                             string labelName = section.Keys["UIName"];
                             if (!CsfFile.ValidateLabelName(labelName))
                             {
+                                // Cs_Txt_InvalidCharactersInLabelName: Invalid characters found in label name "{0}".
                                 throw new Exception(string.Format(LocalizationResources.TextResources.Cs_Txt_InvalidCharactersInLabelName, labelName));
                             }
                             _ = mapLabels.Add(labelName);
@@ -1233,6 +1258,7 @@ namespace Ra2CsfToolsGUI
                                     string labelName = actionParts[i + 2];
                                     if (!CsfFile.ValidateLabelName(labelName))
                                     {
+                                        // Cs_Txt_InvalidCharactersInLabelName: Invalid characters found in label name "{0}".
                                         throw new Exception(string.Format(LocalizationResources.TextResources.Cs_Txt_InvalidCharactersInLabelName, labelName));
                                     }
                                     _ = mapLabels.Add(labelName);
@@ -1252,6 +1278,7 @@ namespace Ra2CsfToolsGUI
                                 string labelName = rankingSection[keyName];
                                 if (!CsfFile.ValidateLabelName(labelName))
                                 {
+                                    // Cs_Txt_InvalidCharactersInLabelName: Invalid characters found in label name "{0}".
                                     throw new Exception(string.Format(LocalizationResources.TextResources.Cs_Txt_InvalidCharactersInLabelName, labelName));
                                 }
                                 _ = mapLabels.Add(labelName);
@@ -1261,6 +1288,8 @@ namespace Ra2CsfToolsGUI
                 }
                 catch (Exception ex)
                 {
+                    // Cs_Txt_FailedToReadMapFile: Failed to read map file {0}: {1}
+                    // Cs_Txt_Error: Error
                     _ = MessageBox.Show(this, string.Format(LocalizationResources.TextResources.Cs_Txt_FailedToReadMapFile, mapFile, ex.Message), LocalizationResources.TextResources.Cs_Txt_Error, MessageBoxButton.OK, MessageBoxImage.Error);
                     Debugger.Break();
                     continue;
@@ -1275,6 +1304,7 @@ namespace Ra2CsfToolsGUI
             {
                 if (!CsfFile.ValidateLabelName(labelName))
                 {
+                    // Cs_Txt_InvalidCharactersInLabelName: Invalid characters found in label name "{0}".
                     throw new Exception(string.Format(LocalizationResources.TextResources.Cs_Txt_InvalidCharactersInLabelName, labelName));
                 }
 
@@ -1285,6 +1315,8 @@ namespace Ra2CsfToolsGUI
                 }
             }
 
+            // Cs_Txt_MissingLabelsResult: {0} labels are missing.
+            // Cs_Txt_Result: Result
             _ = MessageBox.Show(this, string.Format(LocalizationResources.TextResources.Cs_Txt_MissingLabelsResult, missingLabelCount), LocalizationResources.TextResources.Cs_Txt_Result, MessageBoxButton.OK, MessageBoxImage.Information);
 
             // Okay. Save the file.

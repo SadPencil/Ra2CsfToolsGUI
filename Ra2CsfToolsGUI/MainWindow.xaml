@@ -9,6 +9,7 @@
     </Window.Resources>
     <!-- Localization reference (Chinese): https://www.cnblogs.com/wpinfo/p/wpf_localization.html https://web.archive.org/web/20250817155821/https://www.cnblogs.com/wpinfo/p/wpf_localization.html -->
     <TabControl>
+        <!-- Xaml_Txt_HomeTabHeader: Home -->
         <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_HomeTabHeader}" x:Name="UI_HomeTabItem">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Home" />
@@ -33,6 +34,7 @@
                     </StackPanel>
                 </Grid>
                 <StackPanel>
+                    <!-- Xaml_Txt_HomeTabTextBlock1: This tool helps you process string table files (.csf) for Red Alert 2 and Yuri's Revenge, allowing you to: -->
                     <TextBlock Margin="10,10,10,0" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock1}" />
 
                     <Grid Margin="10,0,10,0">
@@ -41,6 +43,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <ui:SymbolIcon Grid.Column="0" Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <!-- Xaml_Txt_HomeTabTextBlock2: Convert .csf files to .ini format for easy editing in your preferred text editor, then convert them back to .csf. -->
                         <TextBlock Grid.Column="1" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock2}" />
                     </Grid>
 
@@ -50,6 +53,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <ui:SymbolIcon Grid.Column="0" Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <!-- Xaml_Txt_HomeTabTextBlock3: You don't need to save the .csf file. The .ini file contains all the necessary data to generate a .csf file, making it ideal for storage in a Git repository. -->
                         <TextBlock Grid.Column="1" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock3}" />
                     </Grid>
 
@@ -59,6 +63,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <ui:SymbolIcon Grid.Column="0" Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <!-- Xaml_Txt_HomeTabTextBlock4: More features are available in "Advanced Mode"... -->
                         <TextBlock Grid.Column="1" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock4}" />
                     </Grid>
 
@@ -68,6 +73,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <ui:SymbolIcon Grid.Column="0" Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <!-- Xaml_Txt_HomeTabTextBlock5: Compare a translated file with the upstream file side-by-side, which simplifies the translation process. -->
                         <TextBlock Grid.Column="1" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock5}" />
                     </Grid>
 
@@ -77,6 +83,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <ui:SymbolIcon Grid.Column="0" Symbol="Accept" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <!-- Xaml_Txt_HomeTabTextBlock6: Highlight updated translations between old and new versions, making it easier to see and apply changes. -->
                         <TextBlock Grid.Column="1" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock6}" />
                     </Grid>
 
@@ -86,27 +93,35 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <ui:SymbolIcon Grid.Column="0" Symbol="Forward" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <!-- Xaml_Txt_HomeTabTextBlock7: To get started, simply drag and drop a .csf or .ini file here. -->
                         <TextBlock Grid.Column="1" FontSize="16" TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_HomeTabTextBlock7}" />
                     </Grid>
                 </StackPanel>
+                <!-- Xaml_Txt_HomeTabAdvancedMode: Advanced Mode -->
                 <CheckBox Margin="10" FontSize="16" IsChecked="{Binding Path=AdvancedMode, Mode=TwoWay}" Content="{x:Static l10n:TextResources.Xaml_Txt_HomeTabAdvancedMode}"/>
                 <Button Margin="10" Click="SwitchLanguageButton_Click">Switch language / 切换语言</Button>
             </StackPanel>
         </TabItem>
+        <!-- Xaml_Txt_SettingsTabHeader: Setting -->
         <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_SettingsTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Setting" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
+                <!-- Xaml_Txt_SettingsGroupboxHeader: Encoding 1252 Workaround Options -->
                 <GroupBox Header="{x:Static l10n:TextResources.Xaml_Txt_SettingsGroupboxHeader}">
                     <ui:SimpleStackPanel Spacing="12">
+                        <!-- Xaml_Txt_SettingsTextBlock1: The original RA2 `game.fnt` file incorrectly treats code points 128-159 (0x80-0x9F) as Windows-1252 instead of Unicode (ISO-8859-1). While this is incorrect, some mods and editors save these characters with Windows-1252 encoding. This tool allows you to decide whether to treat these code points as Windows-1252 or Unicode. Checking the two boxes below enables the Windows-1252 workaround for compatibility with certain mods and editors. Un-checking them uses the correct Unicode interpretation. The original `game.fnt` file contains the correct font data for the correct Unicode code points, except the trademark symbol (™). -->
                         <TextBlock TextWrapping="Wrap" FontSize="16" Text="{x:Static l10n:TextResources.Xaml_Txt_SettingsTextBlock1}"/>
+                        <!-- Xaml_Txt_SettingsCheckbox1: Enable Windows-1252 workaround when loading the .csf file. -->
                         <CheckBox FontSize="16" Content="{x:Static l10n:TextResources.Xaml_Txt_SettingsCheckbox1}" IsChecked="{Binding Encoding1252ReadWorkaround}" />
+                        <!-- Xaml_Txt_SettingsCheckbox2: Enable Windows-1252 workaround when writing the .csf file. -->
                         <CheckBox FontSize="16" Content="{x:Static l10n:TextResources.Xaml_Txt_SettingsCheckbox2}" IsChecked="{Binding Encoding1252WriteWorkaround}" />
                     </ui:SimpleStackPanel>
                 </GroupBox>
             </ui:SimpleStackPanel>
         </TabItem>
+        <!-- Xaml_Txt_FormatConverterTabHeader: Format Converter -->
         <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterTabHeader}" x:Name="UI_FormatConverterTabItem">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Edit" />
@@ -119,17 +134,26 @@
                 </Grid.RowDefinitions>
 
                 <ui:SimpleStackPanel Grid.Row="0" Spacing="12" Margin="10">
+                    <!-- Xaml_Txt_FormatConverterTextBlock1: Red Alert 2 string tables are stored in .csf files, which can be a hassle to edit with tools that are two decades old. This tool lets you convert a string table from a .csf file to a more editable .ini file and then convert it back to a game-recognized .csf file. -->
                     <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterTextBlock1}" />
+                    <!-- Xaml_Txt_FormatConverterTextBlock2: Note: The .ini file must be encoded as UTF-8 (without BOM). -->
                     <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterTextBlock2}" />
                     <WrapPanel Orientation="Horizontal" Margin="0" HorizontalAlignment="Left">
+                        <!-- Xaml_Txt_FormatConverterButton1_Basic: Load a string table file (.csf/.ini) ... -->
                         <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton1_Basic}" Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource Not_BoolToVisConverter}, Path=AdvancedMode}" />
+                        <!-- Xaml_Txt_FormatConverterButton1_Advanced: Load a string table file (.csf/.ini/.yaml/.json) ... -->
                         <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton1_Advanced}" Click="Convert_LoadFile_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
+                        <!-- Xaml_Txt_FormatConverterButton2: Save as an .ini file ... -->
                         <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton2}" Click="Convert_SaveAsIni_Click" />
+                        <!-- Xaml_Txt_FormatConverterButton3: Save as a .csf file ... -->
                         <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton3}" Click="Convert_SaveAsCsf_Click" />
+                        <!-- Xaml_Txt_FormatConverterButton4: Save as a .yaml file ... -->
                         <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton4}" Click="Convert_SaveAsYaml_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
+                        <!-- Xaml_Txt_FormatConverterButton5: Save as a .json file ... -->
                         <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton5}" Click="Convert_SaveAsJson_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
                     </WrapPanel>
 
+                    <!-- Xaml_Txt_FormatConverterTextBlock3: The string table content is shown below for preview. To modify it, you must save it as an .ini file first. -->
                     <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterTextBlock3}" />
 
                 </ui:SimpleStackPanel>
@@ -138,105 +162,152 @@
                 <TextBlock Margin="10" Grid.Row="2" TextWrapping="Wrap" Text="{Binding Convert_CsfFile_Tips, Mode=OneWay}" />
             </Grid>
         </TabItem>
+        <!-- Xaml_Txt_LabelOverrideTabHeader: Label Override -->
         <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_LabelOverrideTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Repair" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
+                <!-- Xaml_Txt_LabelOverrideTextBlock1: This tool now supports label names with capital letters. Select an upstream file and your current file. The tool will compare each label, ignoring case, and use the label from the original file as the preferred one. -->
                 <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_LabelOverrideTextBlock1}" />
+                <!-- Xaml_Txt_LabelOverrideButton1: Load an upstream string table file (.csf/.ini/.yaml/.json) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelOverrideButton1}" Click="LabelOverride_LoadUpstreamFile_Click" />
+                <!-- Xaml_Txt_LabelOverrideButton2: Load the current string table file (.csf/.ini/.yaml/.json) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelOverrideButton2}" Click="LabelOverride_LoadCurrentFile_Click" />
+                <!-- Xaml_Txt_LabelOverrideButton3: Save as a .csf file ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelOverrideButton3}" Click="LabelOverride_SaveCsfFile_Click" />
+                <!-- Xaml_Txt_LabelOverrideButton4: Save as an .ini file ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelOverrideButton4}" Click="LabelOverride_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
 
+        <!-- Xaml_Txt_LabelCheckTabHeader: Label Check -->
         <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_LabelCheckTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Zoom" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
+                <!-- Xaml_Txt_LabelCheckTextBlock1: Checks for missing .csf labels in your map files. -->
                 <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_LabelCheckTextBlock1}" />
+                <!-- Xaml_Txt_LabelCheckButton1: Load the string table file (.csf/.ini/.yaml/.json) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelCheckButton1}" Click="LabelCheck_LoadCsfFile_Click" />
+                <!-- Xaml_Txt_LabelCheckButton2: Select the folder containing map files (.map/.mpr/.yrm) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelCheckButton2}" Click="LabelCheck_SelectMapFolder_Click" />
+                <!-- Xaml_Txt_LabelCheckTextboxHeader: Note: In the generated .ini file, the values for all missing labels will be replaced with the following text: -->
                 <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.Xaml_Txt_LabelCheckTextboxHeader}" Text="{Binding MissingLabelPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <!-- Xaml_Txt_LabelCheckButton3: Save as an .ini file ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelCheckButton3}" Click="LabelCheck_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
 
+        <!-- Xaml_Txt_TranslationNewTabHeader: Translation Helper - New -->
         <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
+                <!-- Xaml_Txt_TranslationNewTextBlock1: Select an upstream file and save it as a translation-friendly .ini file. You can convert this .ini file back to a .csf file using the "Format Converter" tab. -->
                 <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewTextBlock1}" />
+                <!-- Xaml_Txt_TranslationNewTextboxHeader: Note: In the generated .ini file, all values that require translation will be replaced with the following text: -->
                 <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewTextboxHeader}" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <!-- Xaml_Txt_TranslationNewButton1: Load an upstream string table file (.csf/.ini/.yaml/.json) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewButton1}" Click="TranslationNew_LoadFile_Click" />
+                <!-- Xaml_Txt_TranslationNewButton2: Save as an .ini file for translation ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewButton2}" Click="TranslationNew_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
+        <!-- Xaml_Txt_TranslationTileTabHeader: Translation Helper - Tile -->
         <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationTileTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
+                <!-- Xaml_Txt_TranslationTileTextBlock1: Select an upstream file and a translated file, then save a new .ini file for easy comparison and checking. You can convert this .ini file back to a .csf file using the "Format Converter" tab. -->
                 <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_TranslationTileTextBlock1}" />
+                <!-- Xaml_Txt_TranslationNewTextboxHeader: Note: In the generated .ini file, all values that require translation will be replaced with the following text: -->
                 <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewTextboxHeader}" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <!-- Xaml_Txt_TranslationTileButton1: Load an upstream string table file (.csf/.ini/.yaml/.json) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationTileButton1}" Click="TranslationTile_LoadUpstreamFile_Click" />
+                <!-- Xaml_Txt_TranslationTileButton2: Load a translated string table file (.csf/.ini/.yaml/.json) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationTileButton2}" Click="TranslationTile_LoadTranslatedFile_Click" />
+                <!-- Xaml_Txt_TranslationTileButton3: Save as an .ini file for comparison ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationTileButton3}" Click="TranslationTile_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
+        <!-- Xaml_Txt_TranslationOverrideTabHeader: Translation Helper - Override -->
         <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationOverrideTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
 
             <ui:SimpleStackPanel Spacing="12" Margin="10">
+                <!-- Xaml_Txt_TranslationOverrideTextBlock1: Select an upstream file and a translated file. The tool will save an .ini file that uses the translated value if it exists, otherwise it uses the value from the original file. You can convert this .ini file back to a .csf file using the "Format Converter" tab. -->
                 <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_TranslationOverrideTextBlock1}" />
 
+                <!-- Xaml_Txt_TranslationOverrideButton1: Load an upstream string table file (.csf/.ini/.yaml/.json) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationOverrideButton1}" Click="TranslationOverride_LoadUpstreamFile_Click" />
+                <!-- Xaml_Txt_TranslationOverrideButton2: Load a translated string table file (.csf/.ini/.yaml/.json) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationOverrideButton2}" Click="TranslationOverride_LoadTranslatedFile_Click" />
+                <!-- Xaml_Txt_TranslationOverrideButton3: Save as an .ini file for comparison ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationOverrideButton3}" Click="TranslationOverride_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
+        <!-- Xaml_Txt_TranslationUpdateTabHeader: Translation Helper - Update -->
         <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
+                <!-- Xaml_Txt_TranslationUpdateTextBlock1: Select an old upstream file, a new upstream file, and your old translated file. The tool will save a new .ini file that is optimized for updating your translation. You can convert this .ini file back to a .csf file using the "Format Converter" tab. -->
                 <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateTextBlock1}" />
+                <!-- Xaml_Txt_TranslationNewTextboxHeader: Note: In the generated .ini file, all values that require translation will be replaced with the following text: -->
                 <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewTextboxHeader}" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <!-- Xaml_Txt_TranslationUpdateButton1: Load an old-version upstream string table file (.csf/.ini/.yaml/.json) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateButton1}" Click="TranslationUpdate_LoadOldUpstreamFile_Click" />
+                <!-- Xaml_Txt_TranslationUpdateButton2: Load a new-version upstream string table file (.csf/.ini/.yaml/.json) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateButton2}" Click="TranslationUpdate_LoadNewUpstreamFile_Click" />
+                <!-- Xaml_Txt_TranslationUpdateButton3: Load an old-version translated string table file (.csf/.ini/.yaml/.json) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateButton3}" Click="TranslationUpdate_LoadOldTranslatedFile_Click" />
+                <!-- Xaml_Txt_TranslationUpdateButton4: Save as an .ini file for updating the translation ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateButton4}" Click="TranslationUpdate_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
+        <!-- Xaml_Txt_TranslationUpdateCheckTabHeader: Translation Helper - Update Check -->
         <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateCheckTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Comment" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
+                <!-- Xaml_Txt_TranslationUpdateCheckTextBlock1: Select the old upstream file, the new upstream file, the old translated file, and the new translated file. The tool will save a new .ini file that checks if any labels still have the old translation. You can convert this .ini file back to a .csf file using the "Format Converter" tab. -->
                 <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateCheckTextBlock1}" />
+                <!-- Xaml_Txt_TranslationNewTextboxHeader: Note: In the generated .ini file, all values that require translation will be replaced with the following text: -->
                 <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewTextboxHeader}" Text="{Binding TranslationNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
                 <TextBox Text="{Binding TranslationDeleteNeededPlaceholder, Mode=OneWay}" IsReadOnly="True" />
+                <!-- Xaml_Txt_TranslationUpdateCheckButton1: Load an old-version upstream string table file (.csf/.ini/.yaml/.json) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateCheckButton1}" Click="TranslationUpdateCheck_LoadOldUpstreamFile_Click" />
+                <!-- Xaml_Txt_TranslationUpdateCheckButton2: Load a new-version upstream string table file (.csf/.ini/.yaml/.json) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateCheckButton2}" Click="TranslationUpdateCheck_LoadNewUpstreamFile_Click" />
+                <!-- Xaml_Txt_TranslationUpdateCheckButton3: Load an old-version translated string table file (.csf/.ini/.yaml/.json) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateCheckButton3}" Click="TranslationUpdateCheck_LoadOldTranslatedFile_Click" />
+                <!-- Xaml_Txt_TranslationUpdateCheckButton4: Load a new-version translated string table file (.csf/.ini/.yaml/.json) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateCheckButton4}" Click="TranslationUpdateCheck_LoadNewTranslatedFile_Click" />
+                <!-- Xaml_Txt_TranslationUpdateCheckButton5: Save as an .ini file for updating the translation ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_TranslationUpdateCheckButton5}" Click="TranslationUpdateCheck_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
+        <!-- Xaml_Txt_WatchModeTabHeader: Watch Mode -->
         <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_WatchModeTabHeader}" x:Name="UI_WatchModeTabItem" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>
                 <ui:SymbolIcon Symbol="Manage" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
+                <!-- Xaml_Txt_WatchModeTextBlock1: In the text box below, enter pairs of .ini (.ini/.yaml/.json) files to monitor and the corresponding .csf files to generate. Separate each pair with a comma, and use a new line for each pair. Once started, the program will monitor the .ini (.ini/.yaml/.json) files and automatically generate the corresponding .csf file whenever a change is detected. -->
                 <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_WatchModeTextBlock1}" />
+                <!-- Xaml_Txt_WatchModeTextBlock2: Example: C:\path\to\stringtables\ra2.ini, D:\path\to\game\ra2.csf -->
                 <TextBlock Text="{x:Static l10n:TextResources.Xaml_Txt_WatchModeTextBlock2}" />
                 <TextBox AcceptsReturn="True" IsReadOnly="False" Height="200" Text="{Binding WatchConfigStr, Mode=TwoWay}" >
                 </TextBox>
+                <!-- Xaml_Txt_WatchModeButton1: Save and Apply -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_WatchModeButton1}" Click="WatchMode_Confirm_Click"/>
             </ui:SimpleStackPanel>
         </TabItem>
