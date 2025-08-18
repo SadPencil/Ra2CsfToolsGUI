@@ -196,6 +196,24 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Something you should be aware of. There is a label named &quot;0&quot;..
+        /// </summary>
+        public static string Cs_Txt_LabelCheckLabel0Warning {
+            get {
+                return ResourceManager.GetString("Cs_Txt_LabelCheckLabel0Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checked {0} map files. Found a total of {1} unique labels, with {2} of them missing..
+        /// </summary>
+        public static string Cs_Txt_LabelCheckResult {
+            get {
+                return ResourceManager.GetString("Cs_Txt_LabelCheckResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please load a string table file first..
         /// </summary>
         public static string Cs_Txt_LoadFileFirst {
@@ -210,15 +228,6 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         public static string Cs_Txt_LoadFilesFirst {
             get {
                 return ResourceManager.GetString("Cs_Txt_LoadFilesFirst", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} labels are missing..
-        /// </summary>
-        public static string Cs_Txt_MissingLabelsResult {
-            get {
-                return ResourceManager.GetString("Cs_Txt_MissingLabelsResult", resourceCulture);
             }
         }
         

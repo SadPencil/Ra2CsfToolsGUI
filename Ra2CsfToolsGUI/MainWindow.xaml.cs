@@ -1340,9 +1340,17 @@ namespace Ra2CsfToolsGUI
                 }
             }
 
-            // Cs_Txt_MissingLabelsResult: {0} labels are missing.
+            // Cs_Txt_LabelCheckResult: Checked {0} map files. Found a total of {1} unique labels, with {2} of them missing.
+            string outputMessage = string.Format(LocalizationResources.TextResources.Cs_Txt_LabelCheckResult, mapFiles.Count, mapLabels.Count, missingLabelCount);
+
+            if (mapLabels.Contains("0"))
+            {
+                // Cs_Txt_LabelCheckLabel0Warning: Something you should be aware of. There is a label named "0".
+                outputMessage += Environment.NewLine + LocalizationResources.TextResources.Cs_Txt_LabelCheckLabel0Warning;
+            }
+
             // Cs_Txt_Result: Result
-            _ = MessageBox.Show(this, string.Format(LocalizationResources.TextResources.Cs_Txt_MissingLabelsResult, missingLabelCount), LocalizationResources.TextResources.Cs_Txt_Result, MessageBoxButton.OK, MessageBoxImage.Information);
+            _ = MessageBox.Show(this, outputMessage, LocalizationResources.TextResources.Cs_Txt_Result, MessageBoxButton.OK, MessageBoxImage.Information);
 
             // Okay. Save the file.
             var ini = GetNewIniFileFromCsfFile(outputFile);

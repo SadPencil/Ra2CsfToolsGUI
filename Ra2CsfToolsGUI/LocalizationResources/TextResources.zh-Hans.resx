@@ -387,10 +387,13 @@
   <data name="Cs_Txt_FailedToReadMapFile" xml:space="preserve">
     <value>读取地图文件 {0} 失败：{1}</value>
   </data>
-  <data name="Cs_Txt_MissingLabelsResult" xml:space="preserve">
-    <value>缺少 {0} 个标签。</value>
+  <data name="Cs_Txt_LabelCheckResult" xml:space="preserve">
+    <value>已检查 {0} 个地图文件，共找到 {1} 个不同的标签，其中 {2} 个缺失。</value>
   </data>
   <data name="Cs_Txt_Result" xml:space="preserve">
     <value>结果</value>
+  </data>
+  <data name="Cs_Txt_LabelCheckLabel0Warning" xml:space="preserve">
+    <value>有件事您该注意。有一个名为“0”的标签。</value>
   </data>
 </root>

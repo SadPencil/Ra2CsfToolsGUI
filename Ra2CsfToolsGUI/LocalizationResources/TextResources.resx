@@ -387,10 +387,13 @@
   <data name="Cs_Txt_FailedToReadMapFile" xml:space="preserve">
     <value>Failed to read map file {0}: {1}</value>
   </data>
-  <data name="Cs_Txt_MissingLabelsResult" xml:space="preserve">
-    <value>{0} labels are missing.</value>
+  <data name="Cs_Txt_LabelCheckResult" xml:space="preserve">
+    <value>Checked {0} map files. Found a total of {1} unique labels, with {2} of them missing.</value>
   </data>
   <data name="Cs_Txt_Result" xml:space="preserve">
     <value>Result</value>
+  </data>
+  <data name="Cs_Txt_LabelCheckLabel0Warning" xml:space="preserve">
+    <value>Something you should be aware of. There is a label named "0".</value>
   </data>
 </root>
