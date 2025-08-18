@@ -118,8 +118,10 @@ namespace Ra2CsfToolsGUI
         {
             AllowDuplicateKeys = true,
             AllowDuplicateSections = true,
+            AllowKeysWithoutSection = true,
             CaseInsensitive = true,
             AssigmentSpacer = string.Empty,
+            SectionRegex = new Regex("^(\\s*?)\\[{1}\\s*[\\p{L}\\p{P}\\p{M}_\\\"\\'\\{\\}\\#\\+\\;\\*\\%\\(\\)\\=\\?\\&\\$\\^\\<\\>\\`\\^|\\,\\:\\/\\.\\-\\w\\d\\s\\\\\\~]+\\s*\\](\\s*;.*?)?$"), // @"(\s*;.*?)?" allows comments at the end of the section line
         };
 
         private static IniDataParser GetSadPencilCsfToolIniDataParser() => new(SadPencilCsfToolIniParserConfiguration);
