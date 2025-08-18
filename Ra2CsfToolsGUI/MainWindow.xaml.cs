@@ -1228,6 +1228,7 @@ namespace Ra2CsfToolsGUI
                 catch (Exception ex)
                 {
                     _ = MessageBox.Show(this, string.Format(LocalizationResources.TextResources.Cs_Txt_FailedToReadMapFile, mapFile, ex.Message), LocalizationResources.TextResources.Cs_Txt_Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                    Debugger.Break();
                     continue;
                 }
             }
