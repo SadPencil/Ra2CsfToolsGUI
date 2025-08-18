@@ -1224,6 +1224,12 @@ namespace Ra2CsfToolsGUI
                         if (section.Keys.ContainsKey("UIName"))
                         {
                             string labelName = section.Keys["UIName"];
+
+                            if (string.IsNullOrEmpty(labelName))
+                            {
+                                continue;
+                            }
+
                             if (!CsfFile.ValidateLabelName(labelName))
                             {
                                 // Cs_Txt_InvalidCharactersInLabelName: Invalid characters found in label name "{0}".
@@ -1263,6 +1269,12 @@ namespace Ra2CsfToolsGUI
 
                                     // The third element (second parameter) is the label name
                                     string labelName = actionParts[i + 2];
+
+                                    if (string.IsNullOrEmpty(labelName))
+                                    {
+                                        labelName = "0";
+                                    }
+
                                     if (!CsfFile.ValidateLabelName(labelName))
                                     {
                                         // Cs_Txt_InvalidCharactersInLabelName: Invalid characters found in label name "{0}".
