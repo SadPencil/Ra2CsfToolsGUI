@@ -322,7 +322,7 @@
     <value>保存并应用</value>
   </data>
   <data name="Cs_Txt_Error" xml:space="preserve">
-    <value>错误 - {0}</value>
+    <value>错误</value>
   </data>
   <data name="Cs_Txt_FileContainsLabelsAndLanguage" xml:space="preserve">
     <value>此字符串表文件包含 {0} 个标签，语言为 {1}。</value>

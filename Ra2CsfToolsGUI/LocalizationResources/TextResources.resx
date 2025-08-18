@@ -322,7 +322,7 @@
     <value>Save and Apply</value>
   </data>
   <data name="Cs_Txt_Error" xml:space="preserve">
-    <value>Error - {0}</value>
+    <value>Error</value>
   </data>
   <data name="Cs_Txt_FileContainsLabelsAndLanguage" xml:space="preserve">
     <value>This string table file contains {0} labels, with language {1}.</value>

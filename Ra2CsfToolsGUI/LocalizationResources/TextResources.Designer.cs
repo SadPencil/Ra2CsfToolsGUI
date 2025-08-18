@@ -88,7 +88,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error - {0}.
+        ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string Cs_Txt_Error {
             get {
