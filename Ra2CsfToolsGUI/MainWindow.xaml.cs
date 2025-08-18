@@ -1200,8 +1200,9 @@ namespace Ra2CsfToolsGUI
 
                     // 2. Get the [Actions] section. Iterate all key value pairs. For each key pair, the key is ignored, while the value can be treated as a comma-separated list of strings.
                     // The first element is an integer representing how many actions there.
-                    // Then, for each action, there are 8 elements. The first one is an integer representing the action type. We only care about type 11.
-                    // The third element is the label name. Rest elements are ignored.
+                    // Then, for each action, there are 8 elements. The first one is an integer representing the action type. We only care about type 11 or 103.
+                    // The second element (first parameter) must be the integer 4. Otherwise we ignore this line.
+                    // The third element (second parameter) is the label name. We don't care about rest elements.
 
                     if (mapIni.Sections.ContainsSection("Actions"))
                     {
@@ -1213,16 +1214,44 @@ namespace Ra2CsfToolsGUI
                             {
                                 for (int i = 1; i < actionCount * 8; i += 8)
                                 {
-                                    if (i + 1 < actionParts.Length && int.TryParse(actionParts[i], out int actionType) && actionType == 11)
+                                    // We must have at least 3 elements, and the first element must be either 11 or 103
+                                    if (i + 3 >= actionParts.Length || !int.TryParse(actionParts[i], out int actionType) || actionType is not 11 and not 103)
                                     {
-                                        string labelName = actionParts[i + 2];
-                                        if (!CsfFile.ValidateLabelName(labelName))
-                                        {
-                                            throw new Exception(string.Format(LocalizationResources.TextResources.Cs_Txt_InvalidCharactersInLabelName, labelName));
-                                        }
-                                        _ = mapLabels.Add(labelName);
+                                        continue;
                                     }
+
+                                    // The second element (first parameter) must be 4
+                                    if (!int.TryParse(actionParts[i + 1], out int secondElement) || secondElement != 4)
+                                    {
+                                        continue;
+                                    }
+
+                                    // The third element (second parameter) is the label name
+                                    string labelName = actionParts[i + 2];
+                                    if (!CsfFile.ValidateLabelName(labelName))
+                                    {
+                                        throw new Exception(string.Format(LocalizationResources.TextResources.Cs_Txt_InvalidCharactersInLabelName, labelName));
+                                    }
+                                    _ = mapLabels.Add(labelName);
                                 }
+                            }
+                        }
+                    }
+
+                    // 3. Get the [Ranking] section. Add the following values from keys OverParTitle, UnderParTitle, OverParMessage, and UnderParMessage.
+                    if (mapIni.Sections.ContainsSection("Ranking"))
+                    {
+                        var rankingSection = mapIni.Sections["Ranking"];
+                        foreach (string keyName in new List<string>() { "OverParTitle", "UnderParTitle", "OverParMessage", "UnderParMessage" })
+                        {
+                            if (rankingSection.ContainsKey(keyName))
+                            {
+                                string labelName = rankingSection[keyName];
+                                if (!CsfFile.ValidateLabelName(labelName))
+                                {
+                                    throw new Exception(string.Format(LocalizationResources.TextResources.Cs_Txt_InvalidCharactersInLabelName, labelName));
+                                }
+                                _ = mapLabels.Add(labelName);
                             }
                         }
                     }
