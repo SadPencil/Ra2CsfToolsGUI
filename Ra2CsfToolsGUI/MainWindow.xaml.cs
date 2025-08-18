@@ -1168,7 +1168,7 @@ namespace Ra2CsfToolsGUI
                 .ToList();
 
             // Save the labels
-            var mapLabels = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
+            var mapLabels = new SortedSet<string>(StringComparer.InvariantCultureIgnoreCase);
 
             // Treat each map file as an ini file
             foreach (string mapFile in mapFiles)
