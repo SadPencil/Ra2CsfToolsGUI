@@ -29,6 +29,7 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
+	<!-- Warning: there is no source codes, changelogs, and author's confirmation on version 2.5.3. Avoid upgrading to version 2.5.3! -->
     <PackageReference Include="ini-parser-netstandard" Version="2.5.2" />
     <PackageReference Include="ModernWpfUI" Version="0.9.6" />
     <PackageReference Include="SadPencil.Ra2CsfFile" Version="2.2.1" />
