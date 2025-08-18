@@ -1000,16 +1000,22 @@ namespace Ra2CsfToolsGUI
             return string.Empty;
         }
 
+        private void CloseWatches()
+        {
+            foreach (var watched in Watches)
+            {
+                watched.EnableRaisingEvents = false;
+                watched.Dispose();
+            }
+            Watches.Clear();
+
+        }
+
         private void ReInitWatches()
         {
             try
             {
-                foreach (var watched in Watches)
-                {
-                    watched.EnableRaisingEvents = false;
-                    watched.Dispose();
-                }
-                Watches.Clear();
+                this.CloseWatches();
 
                 if (string.IsNullOrWhiteSpace(this.WatchConfigStr))
                 {
@@ -1088,12 +1094,7 @@ namespace Ra2CsfToolsGUI
             }
             catch (Exception ex)
             {
-                foreach (var watched in Watches)
-                {
-                    watched.EnableRaisingEvents = false;
-                    watched.Dispose();
-                }
-                Watches.Clear();
+                this.CloseWatches();
 
                 this.MessageBoxPanic(ex);
             }
@@ -1289,8 +1290,13 @@ namespace Ra2CsfToolsGUI
             var oldWindow = Application.Current.MainWindow;
             var newWindow = new MainWindow();
             Application.Current.MainWindow = newWindow;
-            newWindow.Show();
             oldWindow.Close();
+            newWindow.Show();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            this.CloseWatches();
         }
     }
 }
