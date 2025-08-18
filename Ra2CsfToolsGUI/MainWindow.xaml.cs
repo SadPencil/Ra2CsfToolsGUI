@@ -1004,13 +1004,14 @@ namespace Ra2CsfToolsGUI
 
         private void CloseWatches()
         {
+            Debug.WriteLine("Close watches.");
+
             foreach (var watched in Watches)
             {
                 watched.EnableRaisingEvents = false;
                 watched.Dispose();
             }
             Watches.Clear();
-
         }
 
         private void ReInitWatches()
@@ -1042,6 +1043,8 @@ namespace Ra2CsfToolsGUI
                     string source = items[0].Trim();
                     string target = items[1].Trim();
 
+                    Debug.WriteLine(string.Format("Start a watch on {0} -> {1}.", source, target));
+
                     var sourceFileInfo = new FileInfo(source);
                     var fileSystemWatcher = new FileSystemWatcher
                     {
@@ -1052,7 +1055,7 @@ namespace Ra2CsfToolsGUI
                     Watches.Add(fileSystemWatcher);
                     fileSystemWatcher.Changed += async (s, e) =>
                     {
-                        Debug.WriteLine(string.Format(LocalizationResources.TextResources.Cs_Txt_EventTriggered, source));
+                        Debug.WriteLine(string.Format("Event 'FileSystemWatcher.Changed' triggered. Source: {0}", source));
                         try
                         {
                             int tryCount = 0;

@@ -97,15 +97,6 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Event &apos;FileSystemWatcher.Changed&apos; triggered. Source: {0}.
-        /// </summary>
-        public static string Cs_Txt_EventTriggered {
-            get {
-                return ResourceManager.GetString("Cs_Txt_EventTriggered", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Failed to read map file {0}: {1}.
         /// </summary>
         public static string Cs_Txt_FailedToReadMapFile {

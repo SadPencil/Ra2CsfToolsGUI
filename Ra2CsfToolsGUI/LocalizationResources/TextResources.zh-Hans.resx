@@ -366,9 +366,6 @@
   <data name="Cs_Txt_InvalidWatchConfig" xml:space="preserve">
     <value>无效的监视配置行：{0}</value>
   </data>
-  <data name="Cs_Txt_EventTriggered" xml:space="preserve">
-    <value>事件 'FileSystemWatcher.Changed' 已触发。源：{0}</value>
-  </data>
   <data name="Cs_Txt_DragAndDropSingleFile" xml:space="preserve">
     <value>一次只能拖放一个文件。</value>
   </data>

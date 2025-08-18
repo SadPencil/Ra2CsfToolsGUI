@@ -366,9 +366,6 @@
   <data name="Cs_Txt_InvalidWatchConfig" xml:space="preserve">
     <value>Invalid watch config line: {0}</value>
   </data>
-  <data name="Cs_Txt_EventTriggered" xml:space="preserve">
-    <value>Event 'FileSystemWatcher.Changed' triggered. Source: {0}</value>
-  </data>
   <data name="Cs_Txt_DragAndDropSingleFile" xml:space="preserve">
     <value>Only one file can be dropped at a time.</value>
   </data>
