@@ -457,7 +457,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load the string table file (.csf/.ini) ....
+        ///   Looks up a localized string similar to Load the string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_LabelCheckButton1 {
             get {
@@ -511,7 +511,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load an upstream string table file (.csf/.ini) ....
+        ///   Looks up a localized string similar to Load an upstream string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_LabelOverrideButton1 {
             get {
@@ -520,7 +520,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load the current string table file (.csf/.ini) ....
+        ///   Looks up a localized string similar to Load the current string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_LabelOverrideButton2 {
             get {
@@ -556,7 +556,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This tool now supports label names with capital letters. Select an upstream string table file and your current file. The tool will compare each label, ignoring case, and use the label from the original file as the preferred one..
+        ///   Looks up a localized string similar to This tool now supports label names with capital letters. Select an upstream file and your current file. The tool will compare each label, ignoring case, and use the label from the original file as the preferred one..
         /// </summary>
         public static string Xaml_Txt_LabelOverrideTextBlock1 {
             get {
@@ -610,7 +610,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load an upstream string table file (.csf/.ini) ....
+        ///   Looks up a localized string similar to Load an upstream string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_TranslationNewButton1 {
             get {
@@ -637,7 +637,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select an upstream string table file and save it as a translation-friendly .ini file. You can convert this .ini file back to a .csf file using the &quot;Format Converter&quot; tab..
+        ///   Looks up a localized string similar to Select an upstream file and save it as a translation-friendly .ini file. You can convert this .ini file back to a .csf file using the &quot;Format Converter&quot; tab..
         /// </summary>
         public static string Xaml_Txt_TranslationNewTextBlock1 {
             get {
@@ -655,7 +655,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load an upstream string table file (.csf/.ini) ....
+        ///   Looks up a localized string similar to Load an upstream string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_TranslationOverrideButton1 {
             get {
@@ -664,7 +664,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load a translated string table file (.csf/.ini) ....
+        ///   Looks up a localized string similar to Load a translated string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_TranslationOverrideButton2 {
             get {
@@ -691,7 +691,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select an upstream string table file and a translated file. The tool will save an .ini file that uses the translated value if it exists, otherwise it uses the value from the original file. You can convert this .ini file back to a .csf file using the &quot;Format Converter&quot; tab..
+        ///   Looks up a localized string similar to Select an upstream file and a translated file. The tool will save an .ini file that uses the translated value if it exists, otherwise it uses the value from the original file. You can convert this .ini file back to a .csf file using the &quot;Format Converter&quot; tab..
         /// </summary>
         public static string Xaml_Txt_TranslationOverrideTextBlock1 {
             get {
@@ -700,7 +700,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load an upstream string table file (.csf/.ini) ....
+        ///   Looks up a localized string similar to Load an upstream string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_TranslationTileButton1 {
             get {
@@ -709,7 +709,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load a translated string table file (.csf/.ini) ....
+        ///   Looks up a localized string similar to Load a translated string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_TranslationTileButton2 {
             get {
@@ -736,7 +736,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select an upstream string table file and a translated file, then save a new .ini file for easy comparison and checking. You can convert this .ini file back to a .csf file using the &quot;Format Converter&quot; tab..
+        ///   Looks up a localized string similar to Select an upstream file and a translated file, then save a new .ini file for easy comparison and checking. You can convert this .ini file back to a .csf file using the &quot;Format Converter&quot; tab..
         /// </summary>
         public static string Xaml_Txt_TranslationTileTextBlock1 {
             get {
@@ -745,7 +745,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load an old-version upstream string table file (.csf/.ini) ....
+        ///   Looks up a localized string similar to Load an old-version upstream string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_TranslationUpdateButton1 {
             get {
@@ -754,7 +754,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load a new-version upstream string table file (.csf/.ini) ....
+        ///   Looks up a localized string similar to Load a new-version upstream string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_TranslationUpdateButton2 {
             get {
@@ -763,7 +763,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load an old-version translated string table file (.csf/.ini) ....
+        ///   Looks up a localized string similar to Load an old-version translated string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_TranslationUpdateButton3 {
             get {
@@ -781,7 +781,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load an old-version upstream string table file (.csf/.ini) ....
+        ///   Looks up a localized string similar to Load an old-version upstream string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_TranslationUpdateCheckButton1 {
             get {
@@ -790,7 +790,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load a new-version upstream string table file (.csf/.ini) ....
+        ///   Looks up a localized string similar to Load a new-version upstream string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_TranslationUpdateCheckButton2 {
             get {
@@ -799,7 +799,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load an old-version translated string table file (.csf/.ini) ....
+        ///   Looks up a localized string similar to Load an old-version translated string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_TranslationUpdateCheckButton3 {
             get {
@@ -808,7 +808,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load a new-version translated string table file (.csf/.ini) ....
+        ///   Looks up a localized string similar to Load a new-version translated string table file (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_TranslationUpdateCheckButton4 {
             get {
@@ -880,7 +880,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In the text box below, enter pairs of .ini files to monitor and the corresponding .csf files to generate. Separate each pair with a comma, and use a new line for each pair. Once started, the program will monitor the .ini files and automatically generate the corresponding .csf file whenever a change is detected..
+        ///   Looks up a localized string similar to In the text box below, enter pairs of .ini (.ini/.yaml/.json) files to monitor and the corresponding .csf files to generate. Separate each pair with a comma, and use a new line for each pair. Once started, the program will monitor the .ini (.ini/.yaml/.json) files and automatically generate the corresponding .csf file whenever a change is detected..
         /// </summary>
         public static string Xaml_Txt_WatchModeTextBlock1 {
             get {

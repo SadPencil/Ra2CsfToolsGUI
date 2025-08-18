@@ -193,13 +193,13 @@
     <value>Label Override</value>
   </data>
   <data name="Xaml_Txt_LabelOverrideTextBlock1" xml:space="preserve">
-    <value>This tool now supports label names with capital letters. Select an upstream string table file and your current file. The tool will compare each label, ignoring case, and use the label from the original file as the preferred one.</value>
+    <value>This tool now supports label names with capital letters. Select an upstream file and your current file. The tool will compare each label, ignoring case, and use the label from the original file as the preferred one.</value>
   </data>
   <data name="Xaml_Txt_LabelOverrideButton1" xml:space="preserve">
-    <value>Load an upstream string table file (.csf/.ini) ...</value>
+    <value>Load an upstream string table file (.csf/.ini/.yaml/.json) ...</value>
   </data>
   <data name="Xaml_Txt_LabelOverrideButton2" xml:space="preserve">
-    <value>Load the current string table file (.csf/.ini) ...</value>
+    <value>Load the current string table file (.csf/.ini/.yaml/.json) ...</value>
   </data>
   <data name="Xaml_Txt_LabelOverrideButton3" xml:space="preserve">
     <value>Save as a .csf file ...</value>
@@ -214,7 +214,7 @@
     <value>Checks for missing .csf labels in your map files.</value>
   </data>
   <data name="Xaml_Txt_LabelCheckButton1" xml:space="preserve">
-    <value>Load the string table file (.csf/.ini) ...</value>
+    <value>Load the string table file (.csf/.ini/.yaml/.json) ...</value>
   </data>
   <data name="Xaml_Txt_LabelCheckButton2" xml:space="preserve">
     <value>Select the folder containing map files (.map/.mpr/.yrm) ...</value>
@@ -229,13 +229,13 @@
     <value>Translation Helper - New</value>
   </data>
   <data name="Xaml_Txt_TranslationNewTextBlock1" xml:space="preserve">
-    <value>Select an upstream string table file and save it as a translation-friendly .ini file. You can convert this .ini file back to a .csf file using the "Format Converter" tab.</value>
+    <value>Select an upstream file and save it as a translation-friendly .ini file. You can convert this .ini file back to a .csf file using the "Format Converter" tab.</value>
   </data>
   <data name="Xaml_Txt_TranslationNewTextboxHeader" xml:space="preserve">
     <value>Note: In the generated .ini file, all values that require translation will be replaced with the following text:</value>
   </data>
   <data name="Xaml_Txt_TranslationNewButton1" xml:space="preserve">
-    <value>Load an upstream string table file (.csf/.ini) ...</value>
+    <value>Load an upstream string table file (.csf/.ini/.yaml/.json) ...</value>
   </data>
   <data name="Xaml_Txt_TranslationNewButton2" xml:space="preserve">
     <value>Save as an .ini file for translation ...</value>
@@ -244,13 +244,13 @@
     <value>Translation Helper - Tile</value>
   </data>
   <data name="Xaml_Txt_TranslationTileTextBlock1" xml:space="preserve">
-    <value>Select an upstream string table file and a translated file, then save a new .ini file for easy comparison and checking. You can convert this .ini file back to a .csf file using the "Format Converter" tab.</value>
+    <value>Select an upstream file and a translated file, then save a new .ini file for easy comparison and checking. You can convert this .ini file back to a .csf file using the "Format Converter" tab.</value>
   </data>
   <data name="Xaml_Txt_TranslationTileButton1" xml:space="preserve">
-    <value>Load an upstream string table file (.csf/.ini) ...</value>
+    <value>Load an upstream string table file (.csf/.ini/.yaml/.json) ...</value>
   </data>
   <data name="Xaml_Txt_TranslationTileButton2" xml:space="preserve">
-    <value>Load a translated string table file (.csf/.ini) ...</value>
+    <value>Load a translated string table file (.csf/.ini/.yaml/.json) ...</value>
   </data>
   <data name="Xaml_Txt_TranslationTileButton3" xml:space="preserve">
     <value>Save as an .ini file for comparison ...</value>
@@ -259,13 +259,13 @@
     <value>Translation Helper - Override</value>
   </data>
   <data name="Xaml_Txt_TranslationOverrideTextBlock1" xml:space="preserve">
-    <value>Select an upstream string table file and a translated file. The tool will save an .ini file that uses the translated value if it exists, otherwise it uses the value from the original file. You can convert this .ini file back to a .csf file using the "Format Converter" tab.</value>
+    <value>Select an upstream file and a translated file. The tool will save an .ini file that uses the translated value if it exists, otherwise it uses the value from the original file. You can convert this .ini file back to a .csf file using the "Format Converter" tab.</value>
   </data>
   <data name="Xaml_Txt_TranslationOverrideButton1" xml:space="preserve">
-    <value>Load an upstream string table file (.csf/.ini) ...</value>
+    <value>Load an upstream string table file (.csf/.ini/.yaml/.json) ...</value>
   </data>
   <data name="Xaml_Txt_TranslationOverrideButton2" xml:space="preserve">
-    <value>Load a translated string table file (.csf/.ini) ...</value>
+    <value>Load a translated string table file (.csf/.ini/.yaml/.json) ...</value>
   </data>
   <data name="Xaml_Txt_TranslationOverrideButton3" xml:space="preserve">
     <value>Save as an .ini file for comparison ...</value>
@@ -277,13 +277,13 @@
     <value>Select an old upstream file, a new upstream file, and your old translated file. The tool will save a new .ini file that is optimized for updating your translation. You can convert this .ini file back to a .csf file using the "Format Converter" tab.</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateButton1" xml:space="preserve">
-    <value>Load an old-version upstream string table file (.csf/.ini) ...</value>
+    <value>Load an old-version upstream string table file (.csf/.ini/.yaml/.json) ...</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateButton2" xml:space="preserve">
-    <value>Load a new-version upstream string table file (.csf/.ini) ...</value>
+    <value>Load a new-version upstream string table file (.csf/.ini/.yaml/.json) ...</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateButton3" xml:space="preserve">
-    <value>Load an old-version translated string table file (.csf/.ini) ...</value>
+    <value>Load an old-version translated string table file (.csf/.ini/.yaml/.json) ...</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateButton4" xml:space="preserve">
     <value>Save as an .ini file for updating the translation ...</value>
@@ -295,16 +295,16 @@
     <value>Select the old upstream file, the new upstream file, the old translated file, and the new translated file. The tool will save a new .ini file that checks if any labels still have the old translation. You can convert this .ini file back to a .csf file using the "Format Converter" tab.</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateCheckButton1" xml:space="preserve">
-    <value>Load an old-version upstream string table file (.csf/.ini) ...</value>
+    <value>Load an old-version upstream string table file (.csf/.ini/.yaml/.json) ...</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateCheckButton2" xml:space="preserve">
-    <value>Load a new-version upstream string table file (.csf/.ini) ...</value>
+    <value>Load a new-version upstream string table file (.csf/.ini/.yaml/.json) ...</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateCheckButton3" xml:space="preserve">
-    <value>Load an old-version translated string table file (.csf/.ini) ...</value>
+    <value>Load an old-version translated string table file (.csf/.ini/.yaml/.json) ...</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateCheckButton4" xml:space="preserve">
-    <value>Load a new-version translated string table file (.csf/.ini) ...</value>
+    <value>Load a new-version translated string table file (.csf/.ini/.yaml/.json) ...</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateCheckButton5" xml:space="preserve">
     <value>Save as an .ini file for updating the translation ...</value>
@@ -313,7 +313,7 @@
     <value>Watch Mode</value>
   </data>
   <data name="Xaml_Txt_WatchModeTextBlock1" xml:space="preserve">
-    <value>In the text box below, enter pairs of .ini files to monitor and the corresponding .csf files to generate. Separate each pair with a comma, and use a new line for each pair. Once started, the program will monitor the .ini files and automatically generate the corresponding .csf file whenever a change is detected.</value>
+    <value>In the text box below, enter pairs of .ini (.ini/.yaml/.json) files to monitor and the corresponding .csf files to generate. Separate each pair with a comma, and use a new line for each pair. Once started, the program will monitor the .ini (.ini/.yaml/.json) files and automatically generate the corresponding .csf file whenever a change is detected.</value>
   </data>
   <data name="Xaml_Txt_WatchModeTextBlock2" xml:space="preserve">
     <value>Example: C:\path\to\stringtables\ra2.ini, D:\path\to\game\ra2.csf</value>

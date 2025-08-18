@@ -127,7 +127,7 @@
     <value>本工具用于处理《红色警戒 2》及《尤里的复仇》可识别的字符串表文件（.csf），您可以：</value>
   </data>
   <data name="Xaml_Txt_HomeTabTextBlock2" xml:space="preserve">
-    <value>将 .csf 文件转换为 .ini 格式，以便您使用常用文本编辑器进行编辑，然后再转换回 .csf 文件。</value>
+    <value>将 .csf 文件转换为 .ini 格式，以便使用您常用的文本编辑器进行编辑，然后再转换回 .csf 文件。</value>
   </data>
   <data name="Xaml_Txt_HomeTabTextBlock3" xml:space="preserve">
     <value>您无需保留 .csf 文件。因为 .ini 文件已包含生成 .csf 文件所需的所有数据，您只需将其存储在 Git 仓库中即可。</value>
@@ -148,7 +148,7 @@
     <value>设置</value>
   </data>
   <data name="Xaml_Txt_SettingsGroupboxHeader" xml:space="preserve">
-    <value>编码 1252 变通方案选项</value>
+    <value>1252 编码变通方案选项</value>
   </data>
   <data name="Xaml_Txt_SettingsTextBlock1" xml:space="preserve">
     <value>原版《红色警戒 2》的 game.fnt 文件错误地将代码点 128-159 (0x80-0x9F) 视为 Windows-1252 编码，而不是正确的 Unicode (ISO-8859-1) 编码。尽管这种处理不正确，但部分 Mod 和编辑器会以 Windows-1252 编码保存这些字符。本工具允许您选择是将这些代码点视为 Windows-1252 还是 Unicode。勾选下方两个复选框将启用 Windows-1252 变通方案，以兼容部分 Mod 和编辑器。取消勾选则使用正确的 Unicode 解释。除了商标符号（™），原版 game.fnt 文件在正确的 Unicode 代码点上都具有正确的字体数据。</value>
@@ -196,10 +196,10 @@
     <value>本工具现已支持包含大写字母的标签名称。选择一个上游文件和您的当前文件，本工具将忽略大小写比较每个标签，并优先使用来自上游文件的标签。</value>
   </data>
   <data name="Xaml_Txt_LabelOverrideButton1" xml:space="preserve">
-    <value>加载上游字符串表文件（.csf/.ini）...</value>
+    <value>加载上游字符串表文件（.csf/.ini/.yaml/.json）...</value>
   </data>
   <data name="Xaml_Txt_LabelOverrideButton2" xml:space="preserve">
-    <value>加载当前字符串表文件（.csf/.ini）...</value>
+    <value>加载当前字符串表文件（.csf/.ini/.yaml/.json）...</value>
   </data>
   <data name="Xaml_Txt_LabelOverrideButton3" xml:space="preserve">
     <value>保存为 .csf 文件...</value>
@@ -214,7 +214,7 @@
     <value>检查您的地图文件中是否缺少 .csf 标签。</value>
   </data>
   <data name="Xaml_Txt_LabelCheckButton1" xml:space="preserve">
-    <value>加载字符串表文件（.csf/.ini）...</value>
+    <value>加载字符串表文件（.csf/.ini/.yaml/.json）...</value>
   </data>
   <data name="Xaml_Txt_LabelCheckButton2" xml:space="preserve">
     <value>选择包含地图文件（.map/.mpr/.yrm）的文件夹...</value>
@@ -235,7 +235,7 @@
     <value>注意：在生成的 .ini 文件中，所有需要翻译的值都将替换为以下文本：</value>
   </data>
   <data name="Xaml_Txt_TranslationNewButton1" xml:space="preserve">
-    <value>加载上游字符串表文件（.csf/.ini）...</value>
+    <value>加载上游字符串表文件（.csf/.ini/.yaml/.json）...</value>
   </data>
   <data name="Xaml_Txt_TranslationNewButton2" xml:space="preserve">
     <value>保存为 .ini 文件以供翻译...</value>
@@ -247,10 +247,10 @@
     <value>选择一个上游文件和一个译文文件，然后保存一个便于比较和检查的新 .ini 文件。您可以在“格式转换器”选项卡中将此 .ini 文件转换回 .csf 文件。</value>
   </data>
   <data name="Xaml_Txt_TranslationTileButton1" xml:space="preserve">
-    <value>加载上游字符串表文件（.csf/.ini）...</value>
+    <value>加载上游字符串表文件（.csf/.ini/.yaml/.json）...</value>
   </data>
   <data name="Xaml_Txt_TranslationTileButton2" xml:space="preserve">
-    <value>加载译文的字符串表文件（.csf/.ini）...</value>
+    <value>加载译文的字符串表文件（.csf/.ini/.yaml/.json）...</value>
   </data>
   <data name="Xaml_Txt_TranslationTileButton3" xml:space="preserve">
     <value>保存为 .ini 文件以供比较...</value>
@@ -262,10 +262,10 @@
     <value>选择一个上游文件和一个译文文件。本工具将保存一个 .ini 文件，该文件将优先使用译文文件中的值，否则将使用上游文件中的值。您可以在“格式转换器”选项卡中将此 .ini 文件转换回 .csf 文件。</value>
   </data>
   <data name="Xaml_Txt_TranslationOverrideButton1" xml:space="preserve">
-    <value>加载上游字符串表文件（.csf/.ini）...</value>
+    <value>加载上游字符串表文件（.csf/.ini/.yaml/.json）...</value>
   </data>
   <data name="Xaml_Txt_TranslationOverrideButton2" xml:space="preserve">
-    <value>加载译文的字符串表文件（.csf/.ini）...</value>
+    <value>加载译文的字符串表文件（.csf/.ini/.yaml/.json）...</value>
   </data>
   <data name="Xaml_Txt_TranslationOverrideButton3" xml:space="preserve">
     <value>保存为 .ini 文件以供比较...</value>
@@ -274,16 +274,16 @@
     <value>翻译助手 - 更新</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateTextBlock1" xml:space="preserve">
-    <value>选择旧版上游文件、新版上游文件和旧版译文文件。本工具将保存一个已优化用于更新译文的新 .ini 文件。您可以在“格式转换器”选项卡中将此 .ini 文件转换回 .csf 文件。</value>
+    <value>选择旧版上游文件、新版上游文件和旧版译文文件。本工具将保存一个方便您更新译文的新 .ini 文件。您可以在“格式转换器”选项卡中将此 .ini 文件转换回 .csf 文件。</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateButton1" xml:space="preserve">
-    <value>加载旧版上游字符串表文件（.csf/.ini）...</value>
+    <value>加载旧版上游字符串表文件（.csf/.ini/.yaml/.json）...</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateButton2" xml:space="preserve">
-    <value>加载新版上游字符串表文件（.csf/.ini）...</value>
+    <value>加载新版上游字符串表文件（.csf/.ini/.yaml/.json）...</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateButton3" xml:space="preserve">
-    <value>加载旧版译文的字符串表文件（.csf/.ini）...</value>
+    <value>加载旧版译文的字符串表文件（.csf/.ini/.yaml/.json）...</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateButton4" xml:space="preserve">
     <value>保存为 .ini 文件以供更新译文...</value>
@@ -295,16 +295,16 @@
     <value>选择旧版上游文件、新版上游文件、旧版译文文件和新版译文文件。本工具将保存一个新 .ini 文件，用于检查是否有标签仍保留旧的翻译。您可以在“格式转换器”选项卡中将此 .ini 文件转换回 .csf 文件。</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateCheckButton1" xml:space="preserve">
-    <value>加载旧版上游字符串表文件（.csf/.ini）...</value>
+    <value>加载旧版上游字符串表文件（.csf/.ini/.yaml/.json）...</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateCheckButton2" xml:space="preserve">
-    <value>加载新版上游字符串表文件（.csf/.ini）...</value>
+    <value>加载新版上游字符串表文件（.csf/.ini/.yaml/.json）...</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateCheckButton3" xml:space="preserve">
-    <value>加载旧版译文的字符串表文件（.csf/.ini）...</value>
+    <value>加载旧版译文的字符串表文件（.csf/.ini/.yaml/.json）...</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateCheckButton4" xml:space="preserve">
-    <value>加载新版译文的字符串表文件（.csf/.ini）...</value>
+    <value>加载新版译文的字符串表文件（.csf/.ini/.yaml/.json）...</value>
   </data>
   <data name="Xaml_Txt_TranslationUpdateCheckButton5" xml:space="preserve">
     <value>保存为 .ini 文件以供更新译文...</value>
@@ -313,7 +313,7 @@
     <value>监视模式</value>
   </data>
   <data name="Xaml_Txt_WatchModeTextBlock1" xml:space="preserve">
-    <value>在下方文本框中，输入要监视的 .ini 文件及其对应的 .csf 文件，用逗号分隔每对。您可以使用新行来输入多对文件。启动后，本程序将自动监视 .ini 文件，一旦检测到更改，便自动生成对应的 .csf 文件。</value>
+    <value>在下方文本框中，输入要监视的 .ini (.ini/.yaml/.json) 文件及其对应的 .csf 文件，两者之间用逗号分隔。每一行对应一对文件。启动后，本程序将自动监视 .ini (.ini/.yaml/.json) 文件，一旦检测到更改，便自动生成对应的 .csf 文件。</value>
   </data>
   <data name="Xaml_Txt_WatchModeTextBlock2" xml:space="preserve">
     <value>示例：C:\path\to\stringtables\ra2.ini, D:\path\to\game\ra2.csf</value>
