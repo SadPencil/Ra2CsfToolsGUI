@@ -1283,6 +1283,12 @@ namespace Ra2CsfToolsGUI
                             if (rankingSection.ContainsKey(keyName))
                             {
                                 string labelName = rankingSection[keyName];
+
+                                if (string.IsNullOrEmpty(labelName))
+                                {
+                                    continue;
+                                }
+
                                 if (!CsfFile.ValidateLabelName(labelName))
                                 {
                                     // Cs_Txt_InvalidCharactersInLabelName: Invalid characters found in label name "{0}".
