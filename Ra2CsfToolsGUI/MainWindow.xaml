@@ -108,6 +108,11 @@
                 <ui:SymbolIcon Symbol="Setting" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
+                <GroupBox Header="Label orders">
+                    <ui:SimpleStackPanel Spacing="12">
+                        <CheckBox FontSize="16" Content="Order by key" IsChecked="{Binding OrderByKey}" />
+                    </ui:SimpleStackPanel>
+                </GroupBox>
                 <!-- Xaml_Txt_SettingsGroupboxHeader: Encoding 1252 Workaround Options -->
                 <GroupBox Header="{x:Static l10n:TextResources.Xaml_Txt_SettingsGroupboxHeader}">
                     <ui:SimpleStackPanel Spacing="12">

@@ -67,6 +67,17 @@ namespace Ra2CsfToolsGUI
             }
         }
 
+        private bool _SortedByKeys = false;
+        public bool OrderByKey
+        {
+            get => this._SortedByKeys;
+            set
+            {
+                this._SortedByKeys = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
         public string TranslationNeededPlaceholder { get; } = "TODO_Translation_Needed";
         public string TranslationDeleteNeededPlaceholder { get; } = "TODO_Translation_Delete_Needed";
         public string MissingLabelPlaceholder { get; } = "TODO_Missing_Label";
@@ -102,6 +113,7 @@ namespace Ra2CsfToolsGUI
         {
             Encoding1252ReadWorkaround = this.Encoding1252ReadWorkaround,
             Encoding1252WriteWorkaround = this.Encoding1252WriteWorkaround,
+            OrderByKey = this.OrderByKey,
         };
 
         private static IniParserConfiguration SadPencilCsfToolIniParserConfiguration { get; } = new IniParserConfiguration()
