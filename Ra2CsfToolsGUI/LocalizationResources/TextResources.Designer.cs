@@ -567,27 +567,54 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         /// <summary>
         ///   Looks up a localized string similar to Enable Windows-1252 workaround when loading the .csf file..
         /// </summary>
-        public static string Xaml_Txt_SettingsCheckbox1 {
+        public static string Xaml_Txt_SettingsEncoding1252Checkbox1 {
             get {
-                return ResourceManager.GetString("Xaml_Txt_SettingsCheckbox1", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_SettingsEncoding1252Checkbox1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Enable Windows-1252 workaround when writing the .csf file..
         /// </summary>
-        public static string Xaml_Txt_SettingsCheckbox2 {
+        public static string Xaml_Txt_SettingsEncoding1252Checkbox2 {
             get {
-                return ResourceManager.GetString("Xaml_Txt_SettingsCheckbox2", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_SettingsEncoding1252Checkbox2", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Encoding 1252 Workaround Options.
         /// </summary>
-        public static string Xaml_Txt_SettingsGroupboxHeader {
+        public static string Xaml_Txt_SettingsEncoding1252GroupboxHeader {
             get {
-                return ResourceManager.GetString("Xaml_Txt_SettingsGroupboxHeader", resourceCulture);
+                return ResourceManager.GetString("Xaml_Txt_SettingsEncoding1252GroupboxHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The original RA2 `game.fnt` file incorrectly treats code points 128-159 (0x80-0x9F) as Windows-1252 instead of Unicode (ISO-8859-1). While this is incorrect, some mods and editors save these characters with Windows-1252 encoding. This tool allows you to decide whether to treat these code points as Windows-1252 or Unicode. Checking the two boxes below enables the Windows-1252 workaround for compatibility with certain mods and editors. Un-checking them uses the correct Unicode interpretation. The original `ga [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Xaml_Txt_SettingsEncoding1252TextBlock1 {
+            get {
+                return ResourceManager.GetString("Xaml_Txt_SettingsEncoding1252TextBlock1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order by key.
+        /// </summary>
+        public static string Xaml_Txt_SettingsLabelOrderCheckbox1 {
+            get {
+                return ResourceManager.GetString("Xaml_Txt_SettingsLabelOrderCheckbox1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Label orders.
+        /// </summary>
+        public static string Xaml_Txt_SettingsLabelOrderGroupboxHeader {
+            get {
+                return ResourceManager.GetString("Xaml_Txt_SettingsLabelOrderGroupboxHeader", resourceCulture);
             }
         }
         
@@ -597,15 +624,6 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         public static string Xaml_Txt_SettingsTabHeader {
             get {
                 return ResourceManager.GetString("Xaml_Txt_SettingsTabHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The original RA2 `game.fnt` file incorrectly treats code points 128-159 (0x80-0x9F) as Windows-1252 instead of Unicode (ISO-8859-1). While this is incorrect, some mods and editors save these characters with Windows-1252 encoding. This tool allows you to decide whether to treat these code points as Windows-1252 or Unicode. Checking the two boxes below enables the Windows-1252 workaround for compatibility with certain mods and editors. Un-checking them uses the correct Unicode interpretation. The original `ga [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string Xaml_Txt_SettingsTextBlock1 {
-            get {
-                return ResourceManager.GetString("Xaml_Txt_SettingsTextBlock1", resourceCulture);
             }
         }
         

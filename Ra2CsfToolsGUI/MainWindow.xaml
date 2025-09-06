@@ -108,24 +108,27 @@
                 <ui:SymbolIcon Symbol="Setting" />
             </ui:TabItemHelper.Icon>
             <ui:SimpleStackPanel Spacing="12" Margin="10">
-                <GroupBox Header="Label orders">
+                <!-- Xaml_Txt_SettingsLabelOrderGroupboxHeader: Label orders -->
+                <GroupBox Header="{x:Static l10n:TextResources.Xaml_Txt_SettingsLabelOrderGroupboxHeader}">
                     <ui:SimpleStackPanel Spacing="12">
-                        <CheckBox FontSize="16" Content="Order by key" IsChecked="{Binding OrderByKey}" />
+                        <!-- Xaml_Txt_SettingsLabelOrderCheckbox1: Order by key -->
+                        <CheckBox FontSize="16" Content="{x:Static l10n:TextResources.Xaml_Txt_SettingsLabelOrderCheckbox1}" IsChecked="{Binding OrderByKey}" />
                     </ui:SimpleStackPanel>
                 </GroupBox>
-                <!-- Xaml_Txt_SettingsGroupboxHeader: Encoding 1252 Workaround Options -->
-                <GroupBox Header="{x:Static l10n:TextResources.Xaml_Txt_SettingsGroupboxHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+                <!-- Xaml_Txt_SettingsEncoding1252GroupboxHeader: Encoding 1252 Workaround Options -->
+                <GroupBox Header="{x:Static l10n:TextResources.Xaml_Txt_SettingsEncoding1252GroupboxHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
                     <ui:SimpleStackPanel Spacing="12">
-                        <!-- Xaml_Txt_SettingsTextBlock1: The original RA2 `game.fnt` file incorrectly treats code points 128-159 (0x80-0x9F) as Windows-1252 instead of Unicode (ISO-8859-1). While this is incorrect, some mods and editors save these characters with Windows-1252 encoding. This tool allows you to decide whether to treat these code points as Windows-1252 or Unicode. Checking the two boxes below enables the Windows-1252 workaround for compatibility with certain mods and editors. Un-checking them uses the correct Unicode interpretation. The original `game.fnt` file contains the correct font data for the correct Unicode code points, except the trademark symbol (™). -->
-                        <TextBlock TextWrapping="Wrap" FontSize="16" Text="{x:Static l10n:TextResources.Xaml_Txt_SettingsTextBlock1}"/>
-                        <!-- Xaml_Txt_SettingsCheckbox1: Enable Windows-1252 workaround when loading the .csf file. -->
-                        <CheckBox FontSize="16" Content="{x:Static l10n:TextResources.Xaml_Txt_SettingsCheckbox1}" IsChecked="{Binding Encoding1252ReadWorkaround}" />
-                        <!-- Xaml_Txt_SettingsCheckbox2: Enable Windows-1252 workaround when writing the .csf file. -->
-                        <CheckBox FontSize="16" Content="{x:Static l10n:TextResources.Xaml_Txt_SettingsCheckbox2}" IsChecked="{Binding Encoding1252WriteWorkaround}" />
+                        <!-- Xaml_Txt_SettingsEncoding1252TextBlock1: The original RA2 `game.fnt` file incorrectly treats code points 128-159 (0x80-0x9F) as Windows-1252 instead of Unicode (ISO-8859-1). While this is incorrect, some mods and editors save these characters with Windows-1252 encoding. This tool allows you to decide whether to treat these code points as Windows-1252 or Unicode. Checking the two boxes below enables the Windows-1252 workaround for compatibility with certain mods and editors. Un-checking them uses the correct Unicode interpretation. The original `game.fnt` file contains the correct font data for the correct Unicode code points, except the trademark symbol (™). -->
+                        <TextBlock TextWrapping="Wrap" FontSize="16" Text="{x:Static l10n:TextResources.Xaml_Txt_SettingsEncoding1252TextBlock1}"/>
+                        <!-- Xaml_Txt_SettingsEncoding1252Checkbox1: Enable Windows-1252 workaround when loading the .csf file. -->
+                        <CheckBox FontSize="16" Content="{x:Static l10n:TextResources.Xaml_Txt_SettingsEncoding1252Checkbox1}" IsChecked="{Binding Encoding1252ReadWorkaround}" />
+                        <!-- Xaml_Txt_SettingsEncoding1252Checkbox2: Enable Windows-1252 workaround when writing the .csf file. -->
+                        <CheckBox FontSize="16" Content="{x:Static l10n:TextResources.Xaml_Txt_SettingsEncoding1252Checkbox2}" IsChecked="{Binding Encoding1252WriteWorkaround}" />
                     </ui:SimpleStackPanel>
                 </GroupBox>
             </ui:SimpleStackPanel>
         </TabItem>
+
         <!-- Xaml_Txt_FormatConverterTabHeader: Format Converter -->
         <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterTabHeader}" x:Name="UI_FormatConverterTabItem">
             <ui:TabItemHelper.Icon>

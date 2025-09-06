@@ -147,16 +147,16 @@
   <data name="Xaml_Txt_SettingsTabHeader" xml:space="preserve">
     <value>Setting</value>
   </data>
-  <data name="Xaml_Txt_SettingsGroupboxHeader" xml:space="preserve">
+  <data name="Xaml_Txt_SettingsEncoding1252GroupboxHeader" xml:space="preserve">
     <value>Encoding 1252 Workaround Options</value>
   </data>
-  <data name="Xaml_Txt_SettingsTextBlock1" xml:space="preserve">
+  <data name="Xaml_Txt_SettingsEncoding1252TextBlock1" xml:space="preserve">
     <value>The original RA2 `game.fnt` file incorrectly treats code points 128-159 (0x80-0x9F) as Windows-1252 instead of Unicode (ISO-8859-1). While this is incorrect, some mods and editors save these characters with Windows-1252 encoding. This tool allows you to decide whether to treat these code points as Windows-1252 or Unicode. Checking the two boxes below enables the Windows-1252 workaround for compatibility with certain mods and editors. Un-checking them uses the correct Unicode interpretation. The original `game.fnt` file contains the correct font data for the correct Unicode code points, except the trademark symbol (™).</value>
   </data>
-  <data name="Xaml_Txt_SettingsCheckbox1" xml:space="preserve">
+  <data name="Xaml_Txt_SettingsEncoding1252Checkbox1" xml:space="preserve">
     <value>Enable Windows-1252 workaround when loading the .csf file.</value>
   </data>
-  <data name="Xaml_Txt_SettingsCheckbox2" xml:space="preserve">
+  <data name="Xaml_Txt_SettingsEncoding1252Checkbox2" xml:space="preserve">
     <value>Enable Windows-1252 workaround when writing the .csf file.</value>
   </data>
   <data name="Xaml_Txt_FormatConverterTabHeader" xml:space="preserve">
@@ -395,5 +395,11 @@
   </data>
   <data name="Cs_Txt_LabelCheckLabel0Warning" xml:space="preserve">
     <value>Something you should be aware of. There is a label named "0".</value>
+  </data>
+  <data name="Xaml_Txt_SettingsLabelOrderCheckbox1" xml:space="preserve">
+    <value>Order by key</value>
+  </data>
+  <data name="Xaml_Txt_SettingsLabelOrderGroupboxHeader" xml:space="preserve">
+    <value>Label orders</value>
   </data>
 </root>
