@@ -1152,9 +1152,11 @@ namespace Ra2CsfToolsGUI
                     // Cs_Txt_DragAndDropSingleFile: Only one file can be dropped at a time.
                     throw new Exception(LocalizationResources.TextResources.Cs_Txt_DragAndDropSingleFile);
                 }
-                string filename = droppedFilePaths[0];
+                string filepath = droppedFilePaths[0];
+                string filename = GetFileNameWithoutExtensionAndDot(filepath);
 
-                this.Convert_CsfFile = this.GeneralLoadCsfIniFile(filename);
+                this.Convert_CsfFile_FileName = filename;
+                this.Convert_CsfFile = this.GeneralLoadCsfIniFile(filepath);
                 this.UI_FormatConverterTabItem.IsSelected = true;
             }
         });
