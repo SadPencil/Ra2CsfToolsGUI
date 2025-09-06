@@ -32,7 +32,7 @@
     <!-- Warning: there are no source codes, changelogs, or author's confirmation on version 2.5.3. Avoid upgrading to version 2.5.3! -->
     <PackageReference Include="ini-parser-netstandard" Version="2.5.2" />
     <PackageReference Include="ModernWpfUI" Version="0.9.6" />
-    <PackageReference Include="SadPencil.Ra2CsfFile" Version="2.2.2" />
+    <PackageReference Include="SadPencil.Ra2CsfFile" Version="2.2.3" />
     <PackageReference Include="System.Text.Json" Version="9.0.8" />
     <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
     <PackageReference Include="YamlDotNet" Version="16.3.0" />
