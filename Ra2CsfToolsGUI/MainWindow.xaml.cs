@@ -6,6 +6,7 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using Ra2CsfToolsGUI.JsonExtensions;
 using Ra2CsfToolsGUI.YamlExtensions;
 using SadPencil.Ra2CsfFile;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
@@ -1282,15 +1283,19 @@ namespace Ra2CsfToolsGUI
                     file.EndsWith(".yrm", StringComparison.InvariantCultureIgnoreCase))
                 .ToList();
 
-            // Save the labels
-            var mapLabels = new SortedSet<string>(StringComparer.InvariantCultureIgnoreCase);
+            // Save the labels in a thread-safe collection
+            var mapLabels = new ConcurrentDictionary<string, byte>(StringComparer.InvariantCultureIgnoreCase);
+
+            // Collect exceptions in a thread-safe collection
+            var exceptions = new ConcurrentBag<(string MapFile, Exception Exception)>();
 
             // Special case for label key "0"
             bool isLabel0Found = false;
             string label0Location = string.Empty;
+            object label0Lock = new();
 
-            // Treat each map file as an ini file
-            foreach (string mapFile in mapFiles)
+            // Process map files in parallel
+            _ = Parallel.ForEach(mapFiles.AsParallel(), mapFile =>
             {
                 try
                 {
@@ -1319,13 +1324,19 @@ namespace Ra2CsfToolsGUI
                                 throw new Exception(string.Format(LocalizationResources.TextResources.Cs_Txt_InvalidCharactersInLabelName, labelName));
                             }
 
-                            if (!isLabel0Found && labelName.Equals("0", StringComparison.InvariantCultureIgnoreCase))
+                            if (labelName.Equals("0", StringComparison.InvariantCultureIgnoreCase))
                             {
-                                isLabel0Found = true;
-                                label0Location = string.Format("File: {0}. Section: [{1}]. Key: {2}.", mapFile, section.SectionName, "UIName");
+                                lock (label0Lock)
+                                {
+                                    if (!isLabel0Found)
+                                    {
+                                        isLabel0Found = true;
+                                        label0Location = string.Format("File: {0}. Section: [{1}]. Key: {2}.", mapFile, section.SectionName, "UIName");
+                                    }
+                                }
                             }
 
-                            _ = mapLabels.Add(labelName);
+                            _ = mapLabels.TryAdd(labelName, 0);
                         }
                     }
 
@@ -1334,7 +1345,6 @@ namespace Ra2CsfToolsGUI
                     // Then, for each action, there are 8 elements. The first one is an integer representing the action type. We only care about type 11 or 103.
                     // The second element (first parameter) must be the integer 4. Otherwise we ignore this line.
                     // The third element (second parameter) is the label name. We don't care about rest elements.
-
                     if (mapIni.Sections.ContainsSection("Actions"))
                     {
                         var actionsSection = mapIni.Sections["Actions"];
@@ -1371,13 +1381,19 @@ namespace Ra2CsfToolsGUI
                                         throw new Exception(string.Format(LocalizationResources.TextResources.Cs_Txt_InvalidCharactersInLabelName, labelName));
                                     }
 
-                                    if (!isLabel0Found && labelName.Equals("0", StringComparison.InvariantCultureIgnoreCase))
+                                    if (labelName.Equals("0", StringComparison.InvariantCultureIgnoreCase))
                                     {
-                                        isLabel0Found = true;
-                                        label0Location = string.Format("File: {0}. Section: [{1}]. Key: {2}.", mapFile, "Actions", key.KeyName);
+                                        lock (label0Lock)
+                                        {
+                                            if (!isLabel0Found)
+                                            {
+                                                isLabel0Found = true;
+                                                label0Location = string.Format("File: {0}. Section: [{1}]. Key: {2}.", mapFile, "Actions", key.KeyName);
+                                            }
+                                        }
                                     }
 
-                                    _ = mapLabels.Add(labelName);
+                                    _ = mapLabels.TryAdd(labelName, 0);
                                 }
                             }
                         }
@@ -1404,32 +1420,47 @@ namespace Ra2CsfToolsGUI
                                     throw new Exception(string.Format(LocalizationResources.TextResources.Cs_Txt_InvalidCharactersInLabelName, labelName));
                                 }
 
-                                if (!isLabel0Found && labelName.Equals("0", StringComparison.InvariantCultureIgnoreCase))
+                                if (labelName.Equals("0", StringComparison.InvariantCultureIgnoreCase))
                                 {
-                                    isLabel0Found = true;
-                                    label0Location = string.Format("File: {0}. Section: [{1}]. Key: {2}.", mapFile, "Ranking", keyName);
+                                    lock (label0Lock)
+                                    {
+                                        if (!isLabel0Found)
+                                        {
+                                            isLabel0Found = true;
+                                            label0Location = string.Format("File: {0}. Section: [{1}]. Key: {2}.", mapFile, "Ranking", keyName);
+                                        }
+                                    }
                                 }
 
-                                _ = mapLabels.Add(labelName);
+                                _ = mapLabels.TryAdd(labelName, 0);
                             }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Cs_Txt_FailedToReadMapFile: Failed to read map file {0}: {1}
-                    // Cs_Txt_Error: Error
-                    _ = MessageBox.Show(this, string.Format(LocalizationResources.TextResources.Cs_Txt_FailedToReadMapFile, mapFile, ex.Message), LocalizationResources.TextResources.Cs_Txt_Error, MessageBoxButton.OK, MessageBoxImage.Error);
-                    Debugger.Break();
-                    continue;
+                    exceptions.Add((mapFile, ex));
                 }
+            });
+
+            // Display all exceptions at the end
+            if (!exceptions.IsEmpty)
+            {
+                // Cs_Txt_FailedToReadMapFile: Failed to read map file {0}: {1}
+                string errorMessage = string.Join(Environment.NewLine, exceptions.Select(ex =>
+                    string.Format(LocalizationResources.TextResources.Cs_Txt_FailedToReadMapFile, ex.MapFile, ex.Exception.Message)));
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    // Cs_Txt_Error: Error
+                    _ = MessageBox.Show(this, errorMessage, LocalizationResources.TextResources.Cs_Txt_Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                });
             }
 
             var outputFile = MergeCsfFiles(this.LabelCheck_CsfFiles);
 
             // For each CSF label read from map files, if it's missing in the output file, add it with a placeholder value.
             int missingLabelCount = 0;
-            foreach (string labelName in mapLabels)
+            foreach (string labelName in mapLabels.Keys)
             {
                 if (!CsfFile.ValidateLabelName(labelName))
                 {
@@ -1447,7 +1478,7 @@ namespace Ra2CsfToolsGUI
             // Cs_Txt_LabelCheckResult: Checked {0} map files. Found a total of {1} unique labels, with {2} of them missing.
             string outputMessage = string.Format(LocalizationResources.TextResources.Cs_Txt_LabelCheckResult, mapFiles.Count, mapLabels.Count, missingLabelCount);
 
-            Debug.Assert(mapLabels.Contains("0") == isLabel0Found, "Label 0 should be found in the map files if and only if it's found in the map labels.");
+            Debug.Assert(mapLabels.ContainsKey("0") == isLabel0Found, "Label 0 should be found in the map files if and only if it's found in the map labels.");
             if (isLabel0Found)
             {
                 // Cs_Txt_LabelCheckLabel0Warning: Something you should be aware of. There is a label named "0".
@@ -1460,7 +1491,7 @@ namespace Ra2CsfToolsGUI
 
             // Okay. Save the file.
             var ini = GetNewIniFileFromCsfFile(outputFile);
-            this.GeneralSaveIniFileGUI(ini);
+            this.GeneralSaveIniFileGUI(ini, "CheckResult");
         });
 
         private void ConvertCsfFileContentTextBox_SelectionChanged(object sender, RoutedEventArgs e)
