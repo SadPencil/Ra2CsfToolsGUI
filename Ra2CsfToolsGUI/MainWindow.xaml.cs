@@ -1483,7 +1483,7 @@ namespace Ra2CsfToolsGUI
             {
                 // Cs_Txt_LabelCheckLabel0Warning: Something you should be aware of. There is a label named "0".
                 outputMessage += Environment.NewLine + LocalizationResources.TextResources.Cs_Txt_LabelCheckLabel0Warning;
-                outputMessage += label0Location;
+                outputMessage += " " + label0Location;
             }
 
             // Cs_Txt_Result: Result
