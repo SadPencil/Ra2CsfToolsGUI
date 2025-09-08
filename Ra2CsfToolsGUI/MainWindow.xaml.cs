@@ -1,4 +1,4 @@
-﻿using IniParser.Model;
+using IniParser.Model;
 using IniParser.Model.Configuration;
 using IniParser.Parser;
 using Microsoft.Win32;
@@ -277,7 +277,7 @@ namespace Ra2CsfToolsGUI
             {
                 string filepath = openFileDialog.FileName;
                 var csf = this.GeneralLoadCsfIniFile(filepath);
-                Debug.Assert(csf != null);
+                Debug.Assert(csf != null, "GeneralLoadCsfIniFile should return a non-null CsfFile instance.");
 
                 // Cs_Txt_FileLoadedSuccessfully: File loaded successfully. This string table contains {0} labels, with language {1}.
                 // Cs_Txt_Success: Success
@@ -307,7 +307,7 @@ namespace Ra2CsfToolsGUI
                 foreach (string filepath in openFileDialog.FileNames.OrderByNatural())
                 {
                     var csf = this.GeneralLoadCsfIniFile(filepath);
-                    Debug.Assert(csf != null);
+                    Debug.Assert(csf != null, "GeneralLoadCsfIniFile should return a non-null CsfFile instance.");
 
                     csfFiles.Add(csf);
 
@@ -366,7 +366,7 @@ namespace Ra2CsfToolsGUI
 
         private void GeneralSaveCsfIniFileGUI(CsfFile file, string defaultExtension = ".ini", string defaultFileName = null)
         {
-            Debug.Assert(new List<string>() { ".ini", ".csf", ".yaml", ".json" }.Contains(defaultExtension));
+            Debug.Assert(new List<string>() { ".ini", ".csf", ".yaml", ".json" }.Contains(defaultExtension), "Unsupported file extension.");
 
             if (file == null)
             {
@@ -485,13 +485,13 @@ namespace Ra2CsfToolsGUI
                 string value = currentFile.Labels[label];
 
                 string newLabel = upstreamFile.Labels.Keys.FirstOrDefault(k => string.Equals(k, label, StringComparison.InvariantCultureIgnoreCase));
-                Debug.Assert(!string.IsNullOrEmpty(newLabel));
+                Debug.Assert(!string.IsNullOrEmpty(newLabel), "A matching label should have been found.");
 
                 bool existed = currentFile.RemoveLabel(label);
-                Debug.Assert(existed);
+                Debug.Assert(existed, "The label should have existed before removal.");
 
                 existed = currentFile.AddLabel(newLabel, value);
-                Debug.Assert(!existed);
+                Debug.Assert(!existed, "The new label should not have existed before adding.");
             }
 
             return currentFile;
@@ -601,7 +601,7 @@ namespace Ra2CsfToolsGUI
                 foreach ((int iLine, string value) in upstream[labelName])
                 {
                     _ = key.AddKey(GetIniLabelCustomKeyName("Upstream", iLine), value);
-                    Debug.Assert(key.ContainsKey(GetIniLabelValueKeyName(iLine)));
+                    Debug.Assert(key.ContainsKey(GetIniLabelValueKeyName(iLine)), "Key should exist.");
                     key[GetIniLabelValueKeyName(iLine)] = this.TranslationNeededPlaceholder;
                 }
             });
@@ -766,7 +766,7 @@ namespace Ra2CsfToolsGUI
                             _ = labelSection.AddKey(GetIniLabelValueKeyName(iLine), this.TranslationNeededPlaceholder);
                         }
                     }
-                    Debug.Assert(labelSection.ContainsKey(GetIniLabelValueKeyName(1)));
+                    Debug.Assert(labelSection.ContainsKey(GetIniLabelValueKeyName(1)), "The value key should exist.");
                 }
 
             }
@@ -821,7 +821,7 @@ namespace Ra2CsfToolsGUI
                 else
                 {
                     found = oldDict.TryGetValue(labelName, out string oldValue);
-                    Debug.Assert(found);
+                    Debug.Assert(found, "Label should be found in old dictionary if not in new one.");
                     value = oldValue;
                 }
 
@@ -996,7 +996,7 @@ namespace Ra2CsfToolsGUI
 
                 if (transOld.ContainsKey(labelName))
                 {
-                    Debug.Assert(transOld.ContainsKey(labelName));
+                    Debug.Assert(transOld.ContainsKey(labelName), "Translation should exist in the old file.");
                     foreach ((int iLine, string value) in transOld[labelName])
                     {
                         _ = labelSection.AddKey(GetIniLabelCustomKeyName("TranslationOld", iLine), value);
