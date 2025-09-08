@@ -1220,6 +1220,10 @@ namespace Ra2CsfToolsGUI
             // Save the labels
             var mapLabels = new SortedSet<string>(StringComparer.InvariantCultureIgnoreCase);
 
+            // Special case for label key "0"
+            bool isLabel0Found = false;
+            string label0Location = string.Empty;
+
             // Treat each map file as an ini file
             foreach (string mapFile in mapFiles)
             {
@@ -1249,6 +1253,13 @@ namespace Ra2CsfToolsGUI
                                 // Cs_Txt_InvalidCharactersInLabelName: Invalid characters found in label name "{0}".
                                 throw new Exception(string.Format(LocalizationResources.TextResources.Cs_Txt_InvalidCharactersInLabelName, labelName));
                             }
+
+                            if (!isLabel0Found && labelName.Equals("0", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                isLabel0Found = true;
+                                label0Location = string.Format("File: {0}. Section: [{1}]. Key: {2}.", mapFile, section.SectionName, "UIName");
+                            }
+
                             _ = mapLabels.Add(labelName);
                         }
                     }
@@ -1294,6 +1305,13 @@ namespace Ra2CsfToolsGUI
                                         // Cs_Txt_InvalidCharactersInLabelName: Invalid characters found in label name "{0}".
                                         throw new Exception(string.Format(LocalizationResources.TextResources.Cs_Txt_InvalidCharactersInLabelName, labelName));
                                     }
+
+                                    if (!isLabel0Found && labelName.Equals("0", StringComparison.InvariantCultureIgnoreCase))
+                                    {
+                                        isLabel0Found = true;
+                                        label0Location = string.Format("File: {0}. Section: [{1}]. Key: {2}.", mapFile, "Actions", key.KeyName);
+                                    }
+
                                     _ = mapLabels.Add(labelName);
                                 }
                             }
@@ -1320,6 +1338,13 @@ namespace Ra2CsfToolsGUI
                                     // Cs_Txt_InvalidCharactersInLabelName: Invalid characters found in label name "{0}".
                                     throw new Exception(string.Format(LocalizationResources.TextResources.Cs_Txt_InvalidCharactersInLabelName, labelName));
                                 }
+
+                                if (!isLabel0Found && labelName.Equals("0", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    isLabel0Found = true;
+                                    label0Location = string.Format("File: {0}. Section: [{1}]. Key: {2}.", mapFile, "Ranking", keyName);
+                                }
+
                                 _ = mapLabels.Add(labelName);
                             }
                         }
@@ -1357,10 +1382,12 @@ namespace Ra2CsfToolsGUI
             // Cs_Txt_LabelCheckResult: Checked {0} map files. Found a total of {1} unique labels, with {2} of them missing.
             string outputMessage = string.Format(LocalizationResources.TextResources.Cs_Txt_LabelCheckResult, mapFiles.Count, mapLabels.Count, missingLabelCount);
 
-            if (mapLabels.Contains("0"))
+            Debug.Assert(mapLabels.Contains("0") == isLabel0Found, "Label 0 should be found in the map files if and only if it's found in the map labels.");
+            if (isLabel0Found)
             {
                 // Cs_Txt_LabelCheckLabel0Warning: Something you should be aware of. There is a label named "0".
                 outputMessage += Environment.NewLine + LocalizationResources.TextResources.Cs_Txt_LabelCheckLabel0Warning;
+                outputMessage += label0Location;
             }
 
             // Cs_Txt_Result: Result
