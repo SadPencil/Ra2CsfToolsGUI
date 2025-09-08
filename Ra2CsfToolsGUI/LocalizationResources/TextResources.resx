@@ -214,7 +214,7 @@
     <value>Checks for missing .csf labels in your map files.</value>
   </data>
   <data name="Xaml_Txt_LabelCheckButton1" xml:space="preserve">
-    <value>Load the string table file (.csf/.ini/.yaml/.json) ...</value>
+    <value>Load one or more string table files (.csf/.ini/.yaml/.json) ...</value>
   </data>
   <data name="Xaml_Txt_LabelCheckButton2" xml:space="preserve">
     <value>Select the folder containing map files (.map/.mpr/.yrm) ...</value>

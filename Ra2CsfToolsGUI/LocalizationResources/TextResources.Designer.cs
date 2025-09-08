@@ -457,7 +457,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load the string table file (.csf/.ini/.yaml/.json) ....
+        ///   Looks up a localized string similar to Load one or more string table files (.csf/.ini/.yaml/.json) ....
         /// </summary>
         public static string Xaml_Txt_LabelCheckButton1 {
             get {

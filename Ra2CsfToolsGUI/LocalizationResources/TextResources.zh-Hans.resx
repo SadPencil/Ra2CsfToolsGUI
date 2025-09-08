@@ -214,7 +214,7 @@
     <value>检查您的地图文件中是否缺少 .csf 标签。</value>
   </data>
   <data name="Xaml_Txt_LabelCheckButton1" xml:space="preserve">
-    <value>加载字符串表文件（.csf/.ini/.yaml/.json）...</value>
+    <value>加载一个或多个字符串表文件（.csf/.ini/.yaml/.json）...</value>
   </data>
   <data name="Xaml_Txt_LabelCheckButton2" xml:space="preserve">
     <value>选择包含地图文件（.map/.mpr/.yrm）的文件夹...</value>

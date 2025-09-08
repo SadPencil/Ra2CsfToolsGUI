@@ -290,6 +290,41 @@ namespace Ra2CsfToolsGUI
             return (null, null);
         }
 
+        private List<CsfFile> GeneralLoadMultipleCsfIniFileGUI()
+        {
+            var openFileDialog = new OpenFileDialog
+            {
+                Filter = "String table files (*.csf;*.ini;*.yaml;*.json)|*.csf;*.ini;*.yaml;*.json|Westwood RA2 string table files (*.csf)|*.csf|SadPencil.Ra2CsfFile.Ini files (*.ini)|*.ini|SadPencil.Ra2CsfFile.Yaml files (*.yaml)|*.yaml|JSON files (*.json)|*.json",
+                Multiselect = true,
+            };
+
+            if (openFileDialog.ShowDialog(this).GetValueOrDefault() && openFileDialog.FileNames.Length > 0)
+            {
+                List<CsfFile> csfFiles = [];
+                var sb = new StringBuilder();
+
+                foreach (string filepath in openFileDialog.FileNames.OrderByNatural())
+                {
+                    var csf = this.GeneralLoadCsfIniFile(filepath);
+                    Debug.Assert(csf != null);
+
+                    csfFiles.Add(csf);
+
+                    // Cs_Txt_FileLoadedSuccessfully: File loaded successfully. This string table contains {0} labels, with language {1}.
+                    string message = string.Format(LocalizationResources.TextResources.Cs_Txt_FileLoadedSuccessfully, csf.Labels.Count, csf.Language);
+                    string filename = GetFileNameWithoutExtensionAndDot(filepath);
+                    _ = sb.AppendLine($"{filename}: {message}");
+                }
+
+                // Cs_Txt_Success: Success
+                _ = MessageBox.Show(this, sb.ToString(), LocalizationResources.TextResources.Cs_Txt_Success, MessageBoxButton.OK, MessageBoxImage.Information);
+
+                return csfFiles;
+            }
+
+            return [];
+        }
+
         private string OpenFolderGUI()
         {
             // https://stackoverflow.com/a/1922230
@@ -1177,11 +1212,41 @@ namespace Ra2CsfToolsGUI
             }
         }
 
-        private CsfFile LabelCheck_CsfFile = null;
-        private string LabelCheck_CsfFile_FileName = null;
+        // TODO: move this method into Ra2CsfFile library
+        private static CsfFile MergeCsfFiles(CsfFile csfFileA, CsfFile csfFileB, bool throwOnDuplicate = false)
+        {
+            var retCsfFile = csfFileA.Clone() as CsfFile;
+            foreach (string key in csfFileB.Labels.Keys)
+            {
+                if (!retCsfFile.Labels.ContainsKey(key))
+                {
+                    _ = retCsfFile.AddLabel(key, csfFileB.Labels[key]);
+                }
+                else
+                {
+                    if (throwOnDuplicate)
+                    {
+                        throw new Exception(string.Format("Duplicate key: {0}", key));
+                    }
+                }
+            }
+            return retCsfFile;
+        }
+
+        private static CsfFile MergeCsfFiles(IEnumerable<CsfFile> csfFiles, bool throwOnDuplicate = false)
+        {
+            var retCsfFile = new CsfFile();
+            foreach (var csfFile in csfFiles)
+            {
+                retCsfFile = MergeCsfFiles(retCsfFile, csfFile);
+            }
+            return retCsfFile;
+        }
+
+        private IReadOnlyList<CsfFile> LabelCheck_CsfFiles = null;
         private void LabelCheck_LoadCsfFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            (this.LabelCheck_CsfFile, this.LabelCheck_CsfFile_FileName) = this.GeneralLoadCsfIniFileGUI();
+            this.LabelCheck_CsfFiles = this.GeneralLoadMultipleCsfIniFileGUI();
         });
 
         private string LabelCheck_MapFolder = null;
@@ -1192,7 +1257,7 @@ namespace Ra2CsfToolsGUI
 
         private void LabelCheck_SaveIniFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            if (this.LabelCheck_CsfFile == null)
+            if ((this.LabelCheck_CsfFiles?.Count ?? 0) == 0)
             {
                 // Cs_Txt_LoadFileFirst: Please load a string table file first.
                 throw new Exception(LocalizationResources.TextResources.Cs_Txt_LoadFileFirst);
@@ -1360,7 +1425,7 @@ namespace Ra2CsfToolsGUI
                 }
             }
 
-            var outputFile = this.LabelCheck_CsfFile.Clone() as CsfFile;
+            var outputFile = MergeCsfFiles(this.LabelCheck_CsfFiles);
 
             // For each CSF label read from map files, if it's missing in the output file, add it with a placeholder value.
             int missingLabelCount = 0;
@@ -1395,7 +1460,7 @@ namespace Ra2CsfToolsGUI
 
             // Okay. Save the file.
             var ini = GetNewIniFileFromCsfFile(outputFile);
-            this.GeneralSaveIniFileGUI(ini, this.LabelCheck_CsfFile_FileName);
+            this.GeneralSaveIniFileGUI(ini);
         });
 
         private void ConvertCsfFileContentTextBox_SelectionChanged(object sender, RoutedEventArgs e)

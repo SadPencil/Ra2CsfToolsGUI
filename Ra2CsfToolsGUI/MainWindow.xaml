@@ -197,7 +197,7 @@
             <ui:SimpleStackPanel Spacing="12" Margin="10">
                 <!-- Xaml_Txt_LabelCheckTextBlock1: Checks for missing .csf labels in your map files. -->
                 <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_LabelCheckTextBlock1}" />
-                <!-- Xaml_Txt_LabelCheckButton1: Load the string table file (.csf/.ini/.yaml/.json) ... -->
+                <!-- Xaml_Txt_LabelCheckButton1: Load one or more string table files (.csf/.ini/.yaml/.json) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelCheckButton1}" Click="LabelCheck_LoadCsfFile_Click" />
                 <!-- Xaml_Txt_LabelCheckButton2: Select the folder containing map files (.map/.mpr/.yrm) ... -->
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelCheckButton2}" Click="LabelCheck_SelectMapFolder_Click" />
