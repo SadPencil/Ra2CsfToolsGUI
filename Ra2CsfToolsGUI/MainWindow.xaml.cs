@@ -304,7 +304,7 @@ namespace Ra2CsfToolsGUI
                 List<CsfFile> csfFiles = [];
                 var sb = new StringBuilder();
 
-                foreach (string filepath in openFileDialog.FileNames.OrderByNatural())
+                foreach (string filepath in openFileDialog.FileNames.OrderBy(str => str, NaturalStringComparer.InvariantCultureIgnoreCase))
                 {
                     var csf = this.GeneralLoadCsfIniFile(filepath);
                     Debug.Assert(csf != null, "GeneralLoadCsfIniFile should return a non-null CsfFile instance.");
