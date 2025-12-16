@@ -402,4 +402,31 @@
   <data name="Xaml_Txt_SettingsLabelOrderGroupboxHeader" xml:space="preserve">
     <value>Label orders</value>
   </data>
+  <data name="Xaml_Txt_SetOperationsTabHeader" xml:space="preserve">
+    <value>Set Operations</value>
+  </data>
+  <data name="Xaml_Txt_SetOperationsTextBlock1" xml:space="preserve">
+    <value>Perform set operations on string table files by comparing keys. Load two files A and B, then generate union, intersection, or differences.</value>
+  </data>
+  <data name="Xaml_Txt_SetOperationsButton1" xml:space="preserve">
+    <value>Load file A (.csf/.ini/.yaml/.json) ...</value>
+  </data>
+  <data name="Xaml_Txt_SetOperationsButton2" xml:space="preserve">
+    <value>Load file B (.csf/.ini/.yaml/.json) ...</value>
+  </data>
+  <data name="Xaml_Txt_SetOperationsButton3" xml:space="preserve">
+    <value>Save A union B ...</value>
+  </data>
+  <data name="Xaml_Txt_SetOperationsButton4" xml:space="preserve">
+    <value>Save A intersection B ...</value>
+  </data>
+  <data name="Xaml_Txt_SetOperationsButton5" xml:space="preserve">
+    <value>Save A minus B ...</value>
+  </data>
+  <data name="Xaml_Txt_SetOperationsButton6" xml:space="preserve">
+    <value>Save B minus A as .csf ...</value>
+  </data>
+  <data name="Xaml_Txt_SetOperationsDifferentValuePlaceholderHeader" xml:space="preserve">
+    <value>Note: In the generated .ini file, labels that exist in both A and B but have different values will use the following placeholder text:</value>
+  </data>
 </root>

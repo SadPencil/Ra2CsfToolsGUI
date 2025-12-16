@@ -402,4 +402,31 @@
   <data name="Xaml_Txt_SettingsLabelOrderGroupboxHeader" xml:space="preserve">
     <value>标签排序</value>
   </data>
+  <data name="Xaml_Txt_SetOperationsTabHeader" xml:space="preserve">
+    <value>集合操作</value>
+  </data>
+  <data name="Xaml_Txt_SetOperationsTextBlock1" xml:space="preserve">
+    <value>对字符串表文件以键为单位执行集合操作。加载两个文件 A 和 B，然后生成并集、交集或差集。</value>
+  </data>
+  <data name="Xaml_Txt_SetOperationsButton1" xml:space="preserve">
+    <value>加载文件 A（.csf/.ini/.yaml/.json）...</value>
+  </data>
+  <data name="Xaml_Txt_SetOperationsButton2" xml:space="preserve">
+    <value>加载文件 B（.csf/.ini/.yaml/.json）...</value>
+  </data>
+  <data name="Xaml_Txt_SetOperationsButton3" xml:space="preserve">
+    <value>保存 A 并 B...</value>
+  </data>
+  <data name="Xaml_Txt_SetOperationsButton4" xml:space="preserve">
+    <value>保存 A 交 B...</value>
+  </data>
+  <data name="Xaml_Txt_SetOperationsButton5" xml:space="preserve">
+    <value>保存 A 差 B...</value>
+  </data>
+  <data name="Xaml_Txt_SetOperationsButton6" xml:space="preserve">
+    <value>保存 B 差 A...</value>
+  </data>
+  <data name="Xaml_Txt_SetOperationsDifferentValuePlaceholderHeader" xml:space="preserve">
+    <value>注意：在生成的 .ini 文件中，既存在于 A 又存在于 B 但其值不同的标签将使用以下占位符文本：</value>
+  </data>
 </root>

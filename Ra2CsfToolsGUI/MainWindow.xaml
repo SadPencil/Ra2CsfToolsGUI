@@ -207,7 +207,30 @@
                 <Button Content="{x:Static l10n:TextResources.Xaml_Txt_LabelCheckButton3}" Click="LabelCheck_SaveIniFile_Click" />
             </ui:SimpleStackPanel>
         </TabItem>
-
+        <!-- Xaml_Txt_SetOperationsTabHeader: Set Operations -->
+        <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_SetOperationsTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
+            <ui:TabItemHelper.Icon>
+                <ui:SymbolIcon Symbol="Add" />
+            </ui:TabItemHelper.Icon>
+            <ui:SimpleStackPanel Spacing="12" Margin="10">
+                <!-- Xaml_Txt_SetOperationsTextBlock1: Perform set operations on string table files. Load two files A and B, then generate union, intersection, or differences. -->
+                <TextBlock TextWrapping="Wrap" Text="{x:Static l10n:TextResources.Xaml_Txt_SetOperationsTextBlock1}" />
+                <!-- Xaml_Txt_SetOperationsButton1: Load file A (.csf/.ini/.yaml/.json) ... -->
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_SetOperationsButton1}" Click="SetOperations_LoadAFile_Click" />
+                <!-- Xaml_Txt_SetOperationsButton2: Load file B (.csf/.ini/.yaml/.json) ... -->
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_SetOperationsButton2}" Click="SetOperations_LoadBFile_Click" />
+                <!-- Xaml_Txt_SetOperationsDifferentValuePlaceholderHeader: Note: In the generated .ini file, labels that exist in both A and B but have different values will use the following placeholder text: -->
+                <TextBox ui:ControlHelper.Header="{x:Static l10n:TextResources.Xaml_Txt_SetOperationsDifferentValuePlaceholderHeader}" Text="{x:Static local:MainWindow.SetOperations_DifferentValuePlaceholder}" IsReadOnly="True" />
+                <!-- Xaml_Txt_SetOperationsButton3: Save A union B as .csf ... -->
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_SetOperationsButton3}" Click="SetOperations_SaveUnion_Click" />
+                <!-- Xaml_Txt_SetOperationsButton4: Save A intersection B as .csf ... -->
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_SetOperationsButton4}" Click="SetOperations_SaveIntersection_Click" />
+                <!-- Xaml_Txt_SetOperationsButton5: Save A minus B as .csf ... -->
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_SetOperationsButton5}" Click="SetOperations_SaveAMinusB_Click" />
+                <!-- Xaml_Txt_SetOperationsButton6: Save B minus A as .csf ... -->
+                <Button Content="{x:Static l10n:TextResources.Xaml_Txt_SetOperationsButton6}" Click="SetOperations_SaveBMinusA_Click" />
+            </ui:SimpleStackPanel>
+        </TabItem>
         <!-- Xaml_Txt_TranslationNewTabHeader: Translation Helper - New -->
         <TabItem Header="{x:Static l10n:TextResources.Xaml_Txt_TranslationNewTabHeader}" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}">
             <ui:TabItemHelper.Icon>

@@ -19,7 +19,7 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class TextResources {
@@ -561,6 +561,87 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         public static string Xaml_Txt_LabelOverrideTextBlock1 {
             get {
                 return ResourceManager.GetString("Xaml_Txt_LabelOverrideTextBlock1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load file A (.csf/.ini/.yaml/.json) ....
+        /// </summary>
+        public static string Xaml_Txt_SetOperationsButton1 {
+            get {
+                return ResourceManager.GetString("Xaml_Txt_SetOperationsButton1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load file B (.csf/.ini/.yaml/.json) ....
+        /// </summary>
+        public static string Xaml_Txt_SetOperationsButton2 {
+            get {
+                return ResourceManager.GetString("Xaml_Txt_SetOperationsButton2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save A union B ....
+        /// </summary>
+        public static string Xaml_Txt_SetOperationsButton3 {
+            get {
+                return ResourceManager.GetString("Xaml_Txt_SetOperationsButton3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save A intersection B ....
+        /// </summary>
+        public static string Xaml_Txt_SetOperationsButton4 {
+            get {
+                return ResourceManager.GetString("Xaml_Txt_SetOperationsButton4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save A minus B ....
+        /// </summary>
+        public static string Xaml_Txt_SetOperationsButton5 {
+            get {
+                return ResourceManager.GetString("Xaml_Txt_SetOperationsButton5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save B minus A as .csf ....
+        /// </summary>
+        public static string Xaml_Txt_SetOperationsButton6 {
+            get {
+                return ResourceManager.GetString("Xaml_Txt_SetOperationsButton6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note: In the generated .ini file, labels that exist in both A and B but have different values will use the following placeholder text:.
+        /// </summary>
+        public static string Xaml_Txt_SetOperationsDifferentValuePlaceholderHeader {
+            get {
+                return ResourceManager.GetString("Xaml_Txt_SetOperationsDifferentValuePlaceholderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set Operations.
+        /// </summary>
+        public static string Xaml_Txt_SetOperationsTabHeader {
+            get {
+                return ResourceManager.GetString("Xaml_Txt_SetOperationsTabHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Perform set operations on string table files by comparing keys. Load two files A and B, then generate union, intersection, or differences..
+        /// </summary>
+        public static string Xaml_Txt_SetOperationsTextBlock1 {
+            get {
+                return ResourceManager.GetString("Xaml_Txt_SetOperationsTextBlock1", resourceCulture);
             }
         }
         

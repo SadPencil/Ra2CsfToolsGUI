@@ -1,4 +1,4 @@
-﻿using IniParser.Model;
+using IniParser.Model;
 using IniParser.Model.Configuration;
 using IniParser.Parser;
 using Microsoft.Win32;
@@ -1237,7 +1237,6 @@ namespace Ra2CsfToolsGUI
             }
         }
 
-        // TODO: move this method into Ra2CsfFile library
         private static CsfFile MergeCsfFiles(CsfFile csfFileA, CsfFile csfFileB, bool throwOnDuplicate = false)
         {
             var retCsfFile = csfFileA.Clone() as CsfFile;
@@ -1532,6 +1531,174 @@ namespace Ra2CsfToolsGUI
             // Disable context menu
             e.Handled = true;
         }
+
+        // Set operations
+        private string SetOperations_CsfFileA_FileName = null;
+        private CsfFile SetOperations_CsfFileA = null;
+        private string SetOperations_CsfFileB_FileName = null;
+        private CsfFile SetOperations_CsfFileB = null;
+
+        public const string SetOperations_DifferentValuePlaceholder = "TODO_Different_Value";
+
+        private void SetOperations_LoadAFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            (this.SetOperations_CsfFileA, this.SetOperations_CsfFileA_FileName) = this.GeneralLoadCsfIniFileGUI();
+        });
+
+        private void SetOperations_LoadBFile_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            (this.SetOperations_CsfFileB, this.SetOperations_CsfFileB_FileName) = this.GeneralLoadCsfIniFileGUI();
+        });
+        private void SetOperations_SaveUnion_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            if (this.SetOperations_CsfFileA == null || this.SetOperations_CsfFileB == null)
+            {
+                // Cs_Txt_LoadFilesFirst: Please load the string table files first.
+                throw new Exception(LocalizationResources.TextResources.Cs_Txt_LoadFilesFirst);
+            }
+
+            CsfFile outputFile;
+            {
+                var newCsf = new CsfFile(this.GetCsfFileOptions())
+                {
+                    Language = this.SetOperations_CsfFileA.Language,
+                    Version = this.SetOperations_CsfFileA.Version,
+                };
+
+                var keysA = this.SetOperations_CsfFileA.Labels.Keys.ToList();
+                var keysB = this.SetOperations_CsfFileB.Labels.Keys.ToList();
+
+                var intersectionKeys = keysA.Intersect(keysB).ToList();
+
+                foreach (string key in intersectionKeys)
+                {
+                    string valueA = this.SetOperations_CsfFileA.Labels[key];
+                    string valueB = this.SetOperations_CsfFileB.Labels[key];
+                    _ = valueA == valueB ? newCsf.AddLabel(key, valueA) : newCsf.AddLabel(key, SetOperations_DifferentValuePlaceholder);
+                }
+
+                var onlyInAKeys = keysA.Except(intersectionKeys).ToList();
+                foreach (string key in onlyInAKeys)
+                {
+                    string valueA = this.SetOperations_CsfFileA.Labels[key];
+                    _ = newCsf.AddLabel(key, valueA);
+                }
+
+                var onlyInBKeys = keysB.Except(intersectionKeys).ToList();
+                foreach (string key in onlyInBKeys)
+                {
+                    string valueB = this.SetOperations_CsfFileB.Labels[key];
+                    _ = newCsf.AddLabel(key, valueB);
+                }
+
+                outputFile = newCsf;
+            }
+
+            this.GeneralSaveCsfIniFileGUI(outputFile, ".ini", this.SetOperations_CsfFileA_FileName + "_union_" + this.SetOperations_CsfFileB_FileName);
+        });
+
+        private void SetOperations_SaveIntersection_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            if (this.SetOperations_CsfFileA == null || this.SetOperations_CsfFileB == null)
+            {
+                // Cs_Txt_LoadFilesFirst: Please load the string table files first.
+                throw new Exception(LocalizationResources.TextResources.Cs_Txt_LoadFilesFirst);
+            }
+
+            CsfFile outputFile;
+            {
+                var newCsf = new CsfFile(this.GetCsfFileOptions())
+                {
+                    Language = this.SetOperations_CsfFileA.Language,
+                    Version = this.SetOperations_CsfFileA.Version,
+                };
+
+                var keysA = this.SetOperations_CsfFileA.Labels.Keys.ToList();
+                var keysB = this.SetOperations_CsfFileB.Labels.Keys.ToList();
+
+                var intersectionKeys = keysA.Intersect(keysB).ToList();
+
+                foreach (string key in intersectionKeys)
+                {
+                    string valueA = this.SetOperations_CsfFileA.Labels[key];
+                    string valueB = this.SetOperations_CsfFileB.Labels[key];
+                    _ = valueA == valueB ? newCsf.AddLabel(key, valueA) : newCsf.AddLabel(key, SetOperations_DifferentValuePlaceholder);
+                }
+
+                outputFile = newCsf;
+            }
+
+            this.GeneralSaveCsfIniFileGUI(outputFile, ".ini", this.SetOperations_CsfFileA_FileName + "_intersection_" + this.SetOperations_CsfFileB_FileName);
+        });
+
+        private void SetOperations_SaveAMinusB_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            if (this.SetOperations_CsfFileA == null || this.SetOperations_CsfFileB == null)
+            {
+                // Cs_Txt_LoadFilesFirst: Please load the string table files first.
+                throw new Exception(LocalizationResources.TextResources.Cs_Txt_LoadFilesFirst);
+            }
+
+            CsfFile outputFile;
+            {
+                var newCsf = new CsfFile(this.GetCsfFileOptions())
+                {
+                    Language = this.SetOperations_CsfFileA.Language,
+                    Version = this.SetOperations_CsfFileA.Version,
+                };
+
+                var keysA = this.SetOperations_CsfFileA.Labels.Keys.ToList();
+                var keysB = this.SetOperations_CsfFileB.Labels.Keys.ToList();
+
+                var intersectionKeys = keysA.Intersect(keysB).ToList();
+                var onlyInAKeys = keysA.Except(intersectionKeys).ToList();
+
+                foreach (string key in onlyInAKeys)
+                {
+                    string valueA = this.SetOperations_CsfFileA.Labels[key];
+                    _ = newCsf.AddLabel(key, valueA);
+                }
+
+                outputFile = newCsf;
+            }
+
+            this.GeneralSaveCsfIniFileGUI(outputFile, ".ini", this.SetOperations_CsfFileA_FileName + "_minus_" + this.SetOperations_CsfFileB_FileName);
+        });
+
+        private void SetOperations_SaveBMinusA_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            if (this.SetOperations_CsfFileA == null || this.SetOperations_CsfFileB == null)
+            {
+                // Cs_Txt_LoadFilesFirst: Please load the string table files first.
+                throw new Exception(LocalizationResources.TextResources.Cs_Txt_LoadFilesFirst);
+            }
+
+            CsfFile outputFile;
+
+            {
+                var newCsf = new CsfFile(this.GetCsfFileOptions())
+                {
+                    Language = this.SetOperations_CsfFileA.Language,
+                    Version = this.SetOperations_CsfFileA.Version,
+                };
+
+                var keysA = this.SetOperations_CsfFileA.Labels.Keys.ToList();
+                var keysB = this.SetOperations_CsfFileB.Labels.Keys.ToList();
+
+                var intersectionKeys = keysA.Intersect(keysB).ToList();
+                var onlyInBKeys = keysB.Except(intersectionKeys).ToList();
+
+                foreach (string key in onlyInBKeys)
+                {
+                    string valueB = this.SetOperations_CsfFileB.Labels[key];
+                    _ = newCsf.AddLabel(key, valueB);
+                }
+
+                outputFile = newCsf;
+            }
+
+            this.GeneralSaveCsfIniFileGUI(outputFile, ".ini", this.SetOperations_CsfFileB_FileName + "_minus_" + this.SetOperations_CsfFileA_FileName);
+        });
 
         private void SwitchLanguageButton_Click(object sender, RoutedEventArgs e)
         {
