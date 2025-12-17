@@ -1,4 +1,4 @@
-using IniParser.Model;
+﻿using IniParser.Model;
 using IniParser.Model.Configuration;
 using IniParser.Parser;
 using Microsoft.Win32;
@@ -68,13 +68,13 @@ namespace Ra2CsfToolsGUI
             }
         }
 
-        private bool _SortedByKeys = false;
+        private bool _OrderByKey = false;
         public bool OrderByKey
         {
-            get => this._SortedByKeys;
+            get => this._OrderByKey;
             set
             {
-                this._SortedByKeys = value;
+                this._OrderByKey = value;
                 this.NotifyPropertyChanged();
             }
         }
