@@ -1531,6 +1531,19 @@ namespace Ra2CsfToolsGUI
             // Disable context menu
             e.Handled = true;
         }
+        private void CopyAllContent_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            string content = this.Convert_CsfFile_Content;
+            if (string.IsNullOrEmpty(content))
+            {
+                throw new Exception(LocalizationResources.TextResources.Cs_Txt_LoadFileFirst);
+            }
+            Clipboard.SetText(content);
+            MessageBox.Show(this,
+                LocalizationResources.TextResources.Cs_Txt_CopyAllSuccess,
+                LocalizationResources.TextResources.Cs_Txt_Success,
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        });
 
         // Set operations
         private string SetOperations_CsfFileA_FileName = null;
