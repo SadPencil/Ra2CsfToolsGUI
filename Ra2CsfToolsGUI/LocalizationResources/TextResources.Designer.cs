@@ -70,6 +70,15 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All content has been copied to the clipboard..
+        /// </summary>
+        public static string Cs_Txt_CopyAllSuccess {
+            get {
+                return ResourceManager.GetString("Cs_Txt_CopyAllSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Westwood RA2 string table files (*.csf)|*.csf.
         /// </summary>
         public static string Cs_Txt_CsfFilter {
@@ -336,6 +345,15 @@ namespace Ra2CsfToolsGUI.LocalizationResources {
         public static string Xaml_Txt_FormatConverterButton5 {
             get {
                 return ResourceManager.GetString("Xaml_Txt_FormatConverterButton5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy all.
+        /// </summary>
+        public static string Xaml_Txt_FormatConverterButtonCopyAll {
+            get {
+                return ResourceManager.GetString("Xaml_Txt_FormatConverterButtonCopyAll", resourceCulture);
             }
         }
         

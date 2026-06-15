@@ -159,6 +159,8 @@
                         <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton4}" Click="Convert_SaveAsYaml_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
                         <!-- Xaml_Txt_FormatConverterButton5: Save as a .json file ... -->
                         <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButton5}" Click="Convert_SaveAsJson_Click" Visibility="{Binding Converter={StaticResource BoolToVisConverter}, Path=AdvancedMode}" />
+                        <!-- Xaml_Txt_FormatConverterButtonCopyAll: Copy all -->
+                        <Button Margin="0,0,12,12" Content="{x:Static l10n:TextResources.Xaml_Txt_FormatConverterButtonCopyAll}" Click="CopyAllContent_Click" />
                     </WrapPanel>
 
                     <!-- Xaml_Txt_FormatConverterTextBlock3: The string table content is shown below for preview. To modify it, you must save it as an .ini file first. -->

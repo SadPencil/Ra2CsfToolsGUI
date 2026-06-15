@@ -186,6 +186,12 @@
   <data name="Xaml_Txt_FormatConverterButton5" xml:space="preserve">
     <value>保存为 .json 文件...</value>
   </data>
+  <data name="Xaml_Txt_FormatConverterButtonCopyAll" xml:space="preserve">
+    <value>全部复制</value>
+  </data>
+  <data name="Cs_Txt_CopyAllSuccess" xml:space="preserve">
+    <value>全部内容已复制到剪贴板。</value>
+  </data>
   <data name="Xaml_Txt_FormatConverterTextBlock3" xml:space="preserve">
     <value>下方预览框显示了字符串表内容。如需修改，请先将其保存为 .ini 文件。</value>
   </data>

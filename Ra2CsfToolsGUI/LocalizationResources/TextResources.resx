@@ -186,6 +186,12 @@
   <data name="Xaml_Txt_FormatConverterButton5" xml:space="preserve">
     <value>Save as a .json file ...</value>
   </data>
+  <data name="Xaml_Txt_FormatConverterButtonCopyAll" xml:space="preserve">
+    <value>Copy all</value>
+  </data>
+  <data name="Cs_Txt_CopyAllSuccess" xml:space="preserve">
+    <value>All content has been copied to the clipboard.</value>
+  </data>
   <data name="Xaml_Txt_FormatConverterTextBlock3" xml:space="preserve">
     <value>The string table content is shown below for preview. To modify it, you must save it as an .ini file first.</value>
   </data>
