@@ -1241,6 +1241,7 @@ namespace Ra2CsfToolsGUI
             {
                 e.Effects = DragDropEffects.None;
             }
+
             e.Handled = true;
         }
 
