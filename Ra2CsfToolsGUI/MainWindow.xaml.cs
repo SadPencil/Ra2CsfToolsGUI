@@ -1531,6 +1531,7 @@ namespace Ra2CsfToolsGUI
             // Disable context menu
             e.Handled = true;
         }
+
         private void CopyAllContent_Click(object sender, RoutedEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
             string content = this.Convert_CsfFile_Content;
@@ -1539,6 +1540,7 @@ namespace Ra2CsfToolsGUI
                 throw new Exception(LocalizationResources.TextResources.Cs_Txt_LoadFileFirst);
             }
             Clipboard.SetText(content);
+
             MessageBox.Show(this,
                 LocalizationResources.TextResources.Cs_Txt_CopyAllSuccess,
                 LocalizationResources.TextResources.Cs_Txt_Success,
