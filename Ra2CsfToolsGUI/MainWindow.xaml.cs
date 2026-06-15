@@ -1261,7 +1261,7 @@ namespace Ra2CsfToolsGUI
 
         private void ConvertCsfFileContentTextBox_PreviewDrop(object sender, DragEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
-            //this.HandleFileDrop(e);
+            this.HandleFileDrop(e);
         });
 
         private void Window_Content_Rendered(object sender, EventArgs e)
