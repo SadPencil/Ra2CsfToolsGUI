@@ -1539,8 +1539,8 @@ namespace Ra2CsfToolsGUI
             {
                 throw new Exception(LocalizationResources.TextResources.Cs_Txt_LoadFileFirst);
             }
-            Clipboard.SetText(content);
 
+            Clipboard.SetText(content);
             MessageBox.Show(this,
                 LocalizationResources.TextResources.Cs_Txt_CopyAllSuccess,
                 LocalizationResources.TextResources.Cs_Txt_Success,
