@@ -1202,7 +1202,7 @@ namespace Ra2CsfToolsGUI
             }
         }
 
-        private void Window_Drop(object sender, DragEventArgs e) => this.GeneralTryCatchGUI(() =>
+        private void HandleFileDrop(DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
             {
@@ -1219,6 +1219,34 @@ namespace Ra2CsfToolsGUI
                 this.Convert_CsfFile = this.GeneralLoadCsfIniFile(filepath);
                 this.UI_FormatConverterTabItem.IsSelected = true;
             }
+        }
+
+        private void Window_Drop(object sender, DragEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            this.HandleFileDrop(e);
+        });
+
+        private void ConvertCsfFileContentTextBox_Drop(object sender, DragEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            this.HandleFileDrop(e);
+        });
+
+        private void ConvertCsfFileContentTextBox_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
+            {
+                e.Effects = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+            e.Handled = true;
+        }
+
+        private void ConvertCsfFileContentTextBox_PreviewDrop(object sender, DragEventArgs e) => this.GeneralTryCatchGUI(() =>
+        {
+            this.HandleFileDrop(e);
         });
 
         private void Window_Content_Rendered(object sender, EventArgs e)
