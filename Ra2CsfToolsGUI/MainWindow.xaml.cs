@@ -1226,6 +1226,20 @@ namespace Ra2CsfToolsGUI
             this.HandleFileDrop(e);
         });
 
+        private void Window_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, true))
+            {
+                e.Effects = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+
+            e.Handled = true;
+        }
+
         private void ConvertCsfFileContentTextBox_Drop(object sender, DragEventArgs e) => this.GeneralTryCatchGUI(() =>
         {
             this.HandleFileDrop(e);
