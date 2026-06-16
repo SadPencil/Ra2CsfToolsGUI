@@ -423,7 +423,6 @@ namespace Ra2CsfToolsGUI
             }
             catch (Exception ex)
             {
-                Debugger.Break();
                 this.MessageBoxPanic(ex);
             }
 #endif
