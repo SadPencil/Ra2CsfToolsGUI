@@ -1254,10 +1254,10 @@ namespace Ra2CsfToolsGUI
             e.Handled = true;
         }
 
-        private void ConvertCsfFileContentTextBox_PreviewDrop(object sender, DragEventArgs e) => this.GeneralTryCatchGUI(() =>
+        private void ConvertCsfFileContentTextBox_PreviewDrop(object sender, DragEventArgs e)
         {
-            this.HandleFileDrop(e);
-        });
+            // Do nothing. Window_Drop will handle the file drop event.
+        }
 
         private void Window_Content_Rendered(object sender, EventArgs e)
         {
