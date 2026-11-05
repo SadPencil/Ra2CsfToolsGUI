@@ -124,7 +124,6 @@ namespace Ra2CsfToolsGUI
             AllowKeysWithoutSection = false,
             CommentRegex = new Regex("a^"), // match nothing
             CaseInsensitive = true,
-            AssigmentSpacer = string.Empty,
             SectionRegex = new Regex("^(\\s*?)\\[{1}\\s*[\\p{L}\\p{P}\\p{M}_\\\"\\'\\{\\}\\#\\+\\;\\*\\%\\(\\)\\=\\?\\&\\$\\^\\<\\>\\`\\^|\\,\\:\\/\\.\\-\\w\\d\\s\\\\\\~]+\\s*\\](\\s*?)$"),
         };
 
@@ -134,7 +133,6 @@ namespace Ra2CsfToolsGUI
             AllowDuplicateSections = true,
             AllowKeysWithoutSection = true,
             CaseInsensitive = true,
-            AssigmentSpacer = string.Empty,
             SectionRegex = new Regex("^(\\s*?)\\[{1}\\s*[\\p{L}\\p{P}\\p{M}_\\\"\\'\\{\\}\\#\\+\\;\\*\\%\\(\\)\\=\\?\\&\\$\\^\\<\\>\\`\\^|\\,\\:\\/\\.\\-\\w\\d\\s\\\\\\~]+\\s*\\](\\s*;.*?)?$"), // @"(\s*;.*?)?" allows comments at the end of the section line
         };
 
@@ -691,7 +689,6 @@ namespace Ra2CsfToolsGUI
             }
 
             var diffDict = new Dictionary<string, (string oldValue, string newValue)>(StringComparer.InvariantCultureIgnoreCase);
-            var diffIsWhiteSpaceOnlyDiffDict = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
 
             var oldDict = this.TranslationUpdate_OldUpstreamFile.Labels;
             var newDict = this.TranslationUpdate_NewUpstreamFile.Labels;
@@ -713,11 +710,6 @@ namespace Ra2CsfToolsGUI
                 if (oldValue != newValue)
                 {
                     diffDict[labelName] = (oldValue, newValue);
-
-                    if (CsfFileIniHelper.TrimMultiLine(oldValue) == CsfFileIniHelper.TrimMultiLine(newValue))
-                    {
-                        _ = diffIsWhiteSpaceOnlyDiffDict.Add(labelName);
-                    }
                 }
             }
 
@@ -767,11 +759,6 @@ namespace Ra2CsfToolsGUI
                     }
                     foreach ((int iLine, string value) in upstreamNew[labelName])
                     {
-                        if (diffIsWhiteSpaceOnlyDiffDict.Contains(labelName))
-                        {
-                            _ = labelSection.AddKey("DifferenceNote", "This is a white-space only difference.");
-                        }
-
                         if (!translationExist)
                         {
                             _ = labelSection.AddKey(GetIniLabelValueKeyName(iLine), this.TranslationNeededPlaceholder);
@@ -903,11 +890,6 @@ namespace Ra2CsfToolsGUI
                 if (oldValue != newValue)
                 {
                     diffDict[labelName] = (oldValue, newValue);
-
-                    if (CsfFileIniHelper.TrimMultiLine(oldValue) == CsfFileIniHelper.TrimMultiLine(newValue))
-                    {
-                        _ = diffIsWhiteSpaceOnlyDiffDict.Add(labelName);
-                    }
                 }
             }
 
