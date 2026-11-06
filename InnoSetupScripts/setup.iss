@@ -1,7 +1,7 @@
 ; Inno Setup Compiler 7.0.2
 
 #define MyAppName "Ra2CsfToolsGUI"
-#define MyAppVersion "1.6.0-nightly-20261106B"
+#define MyAppVersion "1.6.0-nightly-20261106"
 #define MyAppPublisher "SadPencil"
 #define MyAppURL "https://github.com/SadPencil/Ra2CsfToolsGUI"
 #define MyAppExeName "Ra2CsfToolsGUI.exe"
