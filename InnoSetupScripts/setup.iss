@@ -64,6 +64,10 @@ Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 
+[InstallDelete]
+; The bundled ini parser is now SadPencil.Ra2CsfFile.IniParser.dll.
+Type: files; Name: "{app}\INIFileParser.dll"
+
 [Files]
 Source: "{#WorkingDir}\bin\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
