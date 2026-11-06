@@ -93,7 +93,7 @@ namespace Ra2CsfToolsGUI
                 this.NotifyPropertyChanged();
             }
         }
-        private bool _Encoding1252WriteWorkaround = false;
+        private bool _Encoding1252WriteWorkaround = true;
         public bool Encoding1252WriteWorkaround
         {
             get => this._Encoding1252WriteWorkaround;
