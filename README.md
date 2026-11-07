@@ -10,6 +10,11 @@ This is a tool helping users process with string table files (.csf) that is reco
 - Tile the translated file with the upstream file, so you may finish the translation without searching for the needle between two files.
 - Highlight the translation update between old version and new versions for your old-version translation, so you may update the translation effectively.
 
+## See Also
+
+- [SadPencil/Ra2CsfFileCLI](https://github.com/SadPencil/Ra2CsfFileCLI): The CLI tool that converts .csf file to .ini file and back.
+- [SadPencil/Ra2CsfFile](https://github.com/SadPencil/Ra2CsfFile): The underlying library that reads and writes .csf and .ini files.
+
 ## License
 
 This project is licensed under the terms of the GPLv3 license.
